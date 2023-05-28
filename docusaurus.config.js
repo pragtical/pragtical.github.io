@@ -150,9 +150,20 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['lua'],
       },
+
+      imageZoom: {
+        // Optional medium-zoom options
+        // see: https://www.npmjs.com/package/medium-zoom#options
+        options: {
+          background: 'transparent',
+        },
+      },
     }),
 
-    plugins: [require.resolve('docusaurus-lunr-search')],
+    plugins: [
+      require.resolve('docusaurus-lunr-search'),
+      require.resolve('plugin-image-zoom')
+    ],
 };
 
 module.exports = config;
