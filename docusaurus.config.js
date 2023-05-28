@@ -44,6 +44,8 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/pragtical/pragtical.github.io/tree/main/packages/create-docusaurus/templates/shared/',
+          // Style up key bindings declared as ++binding++
+          remarkPlugins: [require("remark-kbd-plus")],
         },
         blog: {
           showReadingTime: true,
