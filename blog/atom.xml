@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pragtical.github.io/blog</id>
+    <title>Pragtical Blog</title>
+    <updated>2023-05-28T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://pragtical.github.io/blog"/>
+    <subtitle>Pragtical Blog</subtitle>
+    <icon>https://pragtical.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[First Blog Post]]></title>
+        <id>https://pragtical.github.io/blog/first-blog-post</id>
+        <link href="https://pragtical.github.io/blog/first-blog-post"/>
+        <updated>2023-05-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The website is still a work in progress but things seem to be getting in order]]></summary>
+        <content type="html"><![CDATA[<p>The website is still a work in progress but things seem to be getting in order
+with <a href="https://docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a> :)</p>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
+</feed>
