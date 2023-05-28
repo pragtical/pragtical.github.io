@@ -1,0 +1,24 @@
+.downloads {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.osSvg {
+  height: 150px;
+  width: 150px;
+  fill: #fff;
+}
+
+.li {
+  list-style: none;
+}
+
+[data-theme='light'] .osSvg {
+  fill: #000;
+}
+
+[data-theme='dark'] .osSvg {
+  fill: #fff;
+}
