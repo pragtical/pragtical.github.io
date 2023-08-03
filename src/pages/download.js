@@ -20,9 +20,7 @@ export default function Download() {
   return (
     <Layout title="Downloads" description="Get Pragtical code editor.">
       <DownloadHeader />
-      <main>
-        <GetPragtical />
-      </main>
+			<GetPragtical />
     </Layout>
   );
 }
