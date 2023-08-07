@@ -9,14 +9,14 @@ const ReleaseList = [
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/Pragtical-v3.1.0-x86_64.AppImage'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/Pragtical-v3.1.1-x86_64.AppImage'>
             AppImage
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-linux-x86_64-portable.tar.gz'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-linux-x86_64-portable.tar.gz'>
             Portable ZIP
           </a>
           &nbsp;
@@ -31,28 +31,28 @@ const ReleaseList = [
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/Pragtical-v3.1.0-x86_64-setup.exe'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/Pragtical-v3.1.1-x86_64-setup.exe'>
             Installer
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-windows-x86_64.zip'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-windows-x86_64.zip'>
             Portable ZIP
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/Pragtical-v3.1.0-i686-setup.exe'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/Pragtical-v3.1.1-i686-setup.exe'>
             Installer
           </a>
           &nbsp;
           <code>32 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-windows-i686.zip'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-windows-i686.zip'>
             Portable ZIP
           </a>
           &nbsp;
@@ -67,21 +67,21 @@ const ReleaseList = [
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-macos-universal.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-macos-universal.dmg'>
             DMG
           </a>
           &nbsp;
           <code>Universal</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-macos-x86_64.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-macos-x86_64.dmg'>
             DMG
           </a>
           &nbsp;
           <code>Intel</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.0/pragtical-v3.1.0-macos-arm64.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/v3.1.1/pragtical-v3.1.1-macos-arm64.dmg'>
             DMG
           </a>
           &nbsp;
@@ -201,7 +201,7 @@ export default function GetPragtical() {
     <main>
       <section className={styles.downloads}>
         <div className="container">
-          <h1 style={{textAlign:"center"}}>v3.1.0 Builds</h1>
+          <h1 style={{textAlign:"center"}}>v3.1.1 Builds</h1>
           <p style={{textAlign:"center"}}>
             The newest stable version
           </p>
