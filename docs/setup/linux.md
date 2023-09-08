@@ -38,6 +38,17 @@ makepkg -si
 
 Alternatively, install it via an AUR helper such as [yay][7].
 
+### Fedora
+
+Pragtical stable and nightly releases can be installed on Fedora using Copr.
+To install it, enable the [`sentry/pragtical` Copr][8] and install the appropriate
+package, for example:
+
+```bash
+dnf copr enable sentry/pragtical
+dnf install pragtical-nightly
+```
+
 ## 32-bit support
 
 Unfortunately, Pragtical does not provide binary packages for 32-bit systems.
@@ -86,7 +97,7 @@ config.borderless = true
   <TabItem value="settings-ui" label="Settings UI">
 
 Toggle the "Borderless" checkbox under _Core_ > _User Interface_.
-![screenshot indicating the borderless checkbox][8]
+![screenshot indicating the borderless checkbox][9]
 
   </TabItem>
 </Tabs>
@@ -99,4 +110,5 @@ Toggle the "Borderless" checkbox under _Core_ > _User Interface_.
 [5]: https://aur.archlinux.org/packages/pragtical-git
 [6]: https://aur.archlinux.org/pragtical.git
 [7]: https://github.com/Jguer/yay
-[8]: /img/user-guide/settings/borderless.png
+[8]: https://copr.fedorainfracloud.org/coprs/sentry/pragtical/
+[9]: /img/user-guide/settings/borderless.png
