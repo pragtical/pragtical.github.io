@@ -26,8 +26,8 @@ config.indent_size = 4   -- 4 spaces
 
 #### How to enable line wrapping?
 
-Since [v2.1.0], you can enable line wrapping by pressing F10.
-Before v2.1.0, only hard wrapping is supported via [autowrap].
+You can enable line wrapping by pressing F10, alternatively hard wrapping is
+supported via [autowrap] plugin.
 
 #### How to bind commands to keys?
 
@@ -67,7 +67,6 @@ You need to [vibe].
 You can get more info in [Features].
 
 
-[v2.1.0]:               https://github.com/pragtical/pragtical/releases/tag/v2.1.0
 [lsp]:                  https://github.com/pragtical/lsp
 [pragtical-terminal]:   https://github.com/benjcollins/lite-xl-terminal
 [pragtical-tmt]:        https://github.com/ColonelPhantom/lite-xl-tmt
