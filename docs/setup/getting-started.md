@@ -9,9 +9,6 @@ Setting up Pragtical is easy.
 Pragtical comes in `.zip` or `.tar.gz` packages and installers
 depending on the platform.
 
-Pragtical packages marked with `addons` provide extra plugins
-that improve the out-of-the-box experience.
-
 ## Install
 
 Installing Pragtical is usually as simple as downloading the package and extracting it.
@@ -56,10 +53,8 @@ Here are common plugins that most users install:
 | [bracketmatch]       | Highlight matching brackets
 | [editorconfig]       | EditorConfig support for Pragtical
 | [ephemeral_tabs]     | Ephemeral tabs (previewing files without creating multiple tabs)
-| [gitdiff_highlight]  | Git diff gutter
 | [indentguide]        | Indent guides
 | [lint+]              | Linter support
-| [litepresence]       | Discord rich presence
 | [lsp]                | Language Server support for Pragtical
 | [minimap]            | Minimap
 | [selectionhighlight] | Highlight code that matches the selection
@@ -83,7 +78,6 @@ These are advanced topics that are useful for power users or plugin developers:
 - [Child processes] — A guide on how to start and manage child processes.
 
 
-
 [Windows]:              windows.md
 [Linux]:                linux.md
 [macOS]:                macos.md
@@ -93,10 +87,8 @@ These are advanced topics that are useful for power users or plugin developers:
 [bracketmatch]:         https://github.com/pragtical/plugins/blob/master/plugins/bracketmatch.lua?raw=1
 [editorconfig]:         https://github.com/pragtical/plugins/blob/master/plugins/editorconfig
 [ephemeral_tabs]:       https://github.com/pragtical/plugins/blob/master/plugins/ephemeral_tabs.lua?raw=1
-[gitdiff_highlight]:    https://github.com/vincens2005/pragtical-gitdiff-highlight
 [indentguide]:          https://github.com/pragtical/plugins/blob/master/plugins/indentguide.lua?raw=1
 [lint+]:                https://github.com/liquid600pgm/lintplus
-[litepresence]:         https://github.com/TorchedSammy/Litepresence
 [lsp]:                  https://github.com/pragtical/lsp
 [lspkind]:              https://github.com/TorchedSammy/pragtical-lspkind
 [minimap]:              https://github.com/pragtical/plugins/blob/master/plugins/minimap.lua?raw=1

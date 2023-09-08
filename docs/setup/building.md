@@ -15,9 +15,19 @@ The following libraries are required:
 - SDL2
 - freetype2
 - pcre2
+- uchardet
 
 If they are not found, they will be downloaded and compiled by Meson.
 Otherwise, if they are present, they will be used to compile Pragtical.
+
+:::note Lua Meson subproject preferred over currently installed system Lua.
+Due to the discrepancies of the Lua version shipped by the various Linux
+distributions, we adapted the build system to make use of the Meson Lua
+subproject by default to prevent incompatibility issues.
+
+If you are sure the Lua version installed on your system is compatible
+use the setup flag: `-Duse_system_lua=true`
+:::
 
 ## Build Script
 
@@ -65,7 +75,7 @@ using the following commands:
 
 ```bash
 # To install the required libraries:
-sudo apt install libfreetype6-dev libsdl2-dev libpcre2-dev liblua5.4-dev
+sudo apt install libfreetype6-dev libsdl2-dev libpcre2-dev libuchardet-dev
 
 # To install Meson:
 sudo apt install meson
