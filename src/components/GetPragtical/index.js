@@ -92,21 +92,21 @@ const ReleaseList = [
   },
 ];
 
-const LatestList = [
+const RollingList = [
   {
     title: 'Linux',
     Svg: require('@mdi/svg/svg/linux.svg').default,
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-x86_64.AppImage'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64.AppImage'>
             AppImage
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-linux-x86_64-portable.tar.gz'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-linux-x86_64-portable.tar.gz'>
             Portable ZIP
           </a>
           &nbsp;
@@ -121,28 +121,28 @@ const LatestList = [
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-x86_64-setup.exe'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe'>
             Installer
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-windows-x86_64.zip'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip'>
             Portable ZIP
           </a>
           &nbsp;
           <code>64 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-i686-setup.exe'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-i686-setup.exe'>
             Installer
           </a>
           &nbsp;
           <code>32 bit</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-windows-i686.zip'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-i686.zip'>
             Portable ZIP
           </a>
           &nbsp;
@@ -157,21 +157,21 @@ const LatestList = [
     description: (
       <nav>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-macos-universal.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-universal.dmg'>
             DMG
           </a>
           &nbsp;
           <code>Universal</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-macos-x86_64.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-x86_64.dmg'>
             DMG
           </a>
           &nbsp;
           <code>Intel</code>
         </li>
         <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-macos-arm64.dmg'>
+          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-arm64.dmg'>
             DMG
           </a>
           &nbsp;
@@ -214,12 +214,12 @@ export default function GetPragtical() {
       </section>
       <section className={clsx('hero hero--primary-dark', styles.heroBanner)}>
         <div className="container">
-          <h1 style={{textAlign:"center"}}>Latest Builds</h1>
+          <h1 style={{textAlign:"center"}}>Rolling Builds</h1>
           <p style={{textAlign:"center"}}>
             Most recent changes with debugging symbols enabled
           </p>
           <div className="row">
-            {LatestList.map((props, idx) => (
+            {RollingList.map((props, idx) => (
               <Download key={idx} {...props} />
             ))}
           </div>
