@@ -38,7 +38,7 @@ compile on a 32-bit system. This does not mean that Pragtical may run correctly.
 
 
 [1]: https://github.com/pragtical/pragtical/releases
-[2]: https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-x86_64-setup.exe
-[3]: https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-windows-x86_64.zip
-[4]: https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-i686-setup.exe
-[5]: https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-windows-i686.zip
+[2]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe
+[3]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip
+[4]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-i686-setup.exe
+[5]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-i686.zip

@@ -103,8 +103,8 @@ Toggle the "Borderless" checkbox under _Core_ > _User Interface_.
 </Tabs>
 
 
-[1]: https://github.com/pragtical/pragtical/releases/download/latest/Pragtical-latest-x86_64.AppImage
-[2]: https://github.com/pragtical/pragtical/releases/download/latest/pragtical-latest-linux-x86_64-portable.tar.gz
+[1]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64.AppImage
+[2]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-linux-x86_64-portable.tar.gz
 [3]: https://repology.org/project/pragtical/versions
 [4]: https://aur.archlinux.org/packages/pragtical
 [5]: https://aur.archlinux.org/packages/pragtical-git
