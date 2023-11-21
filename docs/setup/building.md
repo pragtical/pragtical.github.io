@@ -134,8 +134,14 @@ sudo apt install meson
 ### macOS
 
 On macOS you can install a package manager such as [brew](https://brew.sh/) to
-install all the required dependencies (if desired). Otherwise you can skip
-this and just use the already mentioned `--wrap-mode=forcefallback` flag.
+install all the required dependencies.
+
+```bash
+brew intall meson freetype sdl2 pcre2 uchardet
+```
+
+Otherwise you can skip this and just use the already mentioned 
+`--wrap-mode=forcefallback` flag.
 
 ### Windows MSYS2
 
