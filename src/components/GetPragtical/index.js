@@ -2,185 +2,104 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-const ReleaseList = [
-  {
-    title: 'Linux',
-    Svg: require('@mdi/svg/svg/linux.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/Pragtical-v3.2.1-x86_64.AppImage'>
-            AppImage
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-linux-x86_64-portable.tar.gz'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-      </nav>
-    ),
-  },
-  {
-    title: 'Windows',
-    Svg: require('@mdi/svg/svg/microsoft-windows.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/Pragtical-v3.2.1-x86_64-setup.exe'>
-            Installer
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-windows-x86_64.zip'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/Pragtical-v3.2.1-i686-setup.exe'>
-            Installer
-          </a>
-          &nbsp;
-          <code>32 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-windows-i686.zip'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>32 bit</code>
-        </li>
-      </nav>
-    ),
-  },
-  {
-    title: 'macOS',
-    Svg: require('@mdi/svg/svg/apple.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-macos-universal.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Universal</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-macos-x86_64.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Intel</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/v3.2.1/pragtical-v3.2.1-macos-arm64.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Arm</code>
-        </li>
-      </nav>
-    ),
-  },
-];
+// Get latest release tag name
+let LATEST = ""
+let request = await fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
+if(request.ok) {
+  LATEST = JSON.parse(await request.text()).tag_name;
+}
 
-const RollingList = [
-  {
-    title: 'Linux',
-    Svg: require('@mdi/svg/svg/linux.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64.AppImage'>
-            AppImage
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-linux-x86_64-portable.tar.gz'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-      </nav>
-    ),
-  },
-  {
-    title: 'Windows',
-    Svg: require('@mdi/svg/svg/microsoft-windows.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe'>
-            Installer
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>64 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-i686-setup.exe'>
-            Installer
-          </a>
-          &nbsp;
-          <code>32 bit</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-i686.zip'>
-            Portable ZIP
-          </a>
-          &nbsp;
-          <code>32 bit</code>
-        </li>
-      </nav>
-    ),
-  },
-  {
-    title: 'macOS',
-    Svg: require('@mdi/svg/svg/apple.svg').default,
-    description: (
-      <nav>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-universal.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Universal</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-x86_64.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Intel</code>
-        </li>
-        <li className={styles.li}>
-          <a href='https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-macos-arm64.dmg'>
-            DMG
-          </a>
-          &nbsp;
-          <code>Arm</code>
-        </li>
-      </nav>
-    ),
-  },
-];
+function GetDownloadsMap(version) {
+  return [
+    {
+      title: 'Linux',
+      Svg: require('@mdi/svg/svg/linux.svg').default,
+      description: (
+        <nav>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-x86_64.AppImage`}>
+              AppImage
+            </a>
+            &nbsp;
+            <code>64 bit</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-linux-x86_64-portable.tar.gz`}>
+              Portable ZIP
+            </a>
+            &nbsp;
+            <code>64 bit</code>
+          </li>
+        </nav>
+      ),
+    },
+    {
+      title: 'Windows',
+      Svg: require('@mdi/svg/svg/microsoft-windows.svg').default,
+      description: (
+        <nav>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-x86_64-setup.exe`}>
+              Installer
+            </a>
+            &nbsp;
+            <code>64 bit</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-windows-x86_64.zip`}>
+              Portable ZIP
+            </a>
+            &nbsp;
+            <code>64 bit</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-i686-setup.exe`}>
+              Installer
+            </a>
+            &nbsp;
+            <code>32 bit</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-windows-i686.zip`}>
+              Portable ZIP
+            </a>
+            &nbsp;
+            <code>32 bit</code>
+          </li>
+        </nav>
+      ),
+    },
+    {
+      title: 'macOS',
+      Svg: require('@mdi/svg/svg/apple.svg').default,
+      description: (
+        <nav>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-universal.dmg`}>
+              DMG
+            </a>
+            &nbsp;
+            <code>Universal</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-x86_64.dmg`}>
+              DMG
+            </a>
+            &nbsp;
+            <code>Intel</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-arm64.dmg`}>
+              DMG
+            </a>
+            &nbsp;
+            <code>Arm</code>
+          </li>
+        </nav>
+      ),
+    },
+  ];
+}
 
 function Download({Svg, title, description}) {
   return (
@@ -197,8 +116,10 @@ function Download({Svg, title, description}) {
 }
 
 export default function GetPragtical() {
-  return (
-    <main>
+  // Generate download section for stable
+  let stable = "";
+  if(LATEST != ""){
+    stable = (
       <section className={styles.downloads}>
         <div className="container">
           <h1 style={{textAlign:"center"}}>v3.2.1 Builds</h1>
@@ -206,12 +127,17 @@ export default function GetPragtical() {
             The newest stable version
           </p>
           <div className="row">
-            {ReleaseList.map((props, idx) => (
+            {GetDownloadsMap(LATEST).map((props, idx) => (
               <Download key={idx} {...props} />
             ))}
           </div>
         </div>
       </section>
+    );
+  }
+  return (
+    <main>
+      {stable}
       <section className={clsx('hero hero--primary-dark', styles.heroBanner)}>
         <div className="container">
           <h1 style={{textAlign:"center"}}>Rolling Builds</h1>
@@ -219,7 +145,7 @@ export default function GetPragtical() {
             Most recent changes with debugging symbols enabled
           </p>
           <div className="row">
-            {RollingList.map((props, idx) => (
+            {GetDownloadsMap("rolling").map((props, idx) => (
               <Download key={idx} {...props} />
             ))}
           </div>
