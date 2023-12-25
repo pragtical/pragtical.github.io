@@ -2,11 +2,13 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-// Get latest release tag name
-let LATEST = ""
-let request = await fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
-if(request.ok) {
-  LATEST = JSON.parse(await request.text()).tag_name;
+async function GetLatestRelease() {
+  let latest = ""
+  let request = await fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
+  if(request.ok) {
+    latest = JSON.parse(await request.text()).tag_name;
+  }
+  return latest
 }
 
 function GetDownloadsMap(version) {
@@ -117,8 +119,9 @@ function Download({Svg, title, description}) {
 
 export default function GetPragtical() {
   // Generate download section for stable
+  let latest = GetLatestRelease();
   let stable = "";
-  if(LATEST != ""){
+  if(latest != ""){
     stable = (
       <section className={styles.downloads}>
         <div className="container">
@@ -127,7 +130,7 @@ export default function GetPragtical() {
             The newest stable version
           </p>
           <div className="row">
-            {GetDownloadsMap(LATEST).map((props, idx) => (
+            {GetDownloadsMap(latest).map((props, idx) => (
               <Download key={idx} {...props} />
             ))}
           </div>
