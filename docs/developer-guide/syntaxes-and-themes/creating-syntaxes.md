@@ -533,7 +533,7 @@ To change the font style of a token,
 add a Font to `style.syntax_fonts[token_type]`.
 
 For example:
-```
+```lua
 -- will ensure every "fancysyntax_fancy_token" is italic
 style.syntax_fonts["fancysyntax_fancy_token"] = renderer.font.load("myfont.ttf", 14 * SCALE, { italic = true })
 ```

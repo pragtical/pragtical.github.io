@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -43,15 +44,13 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pragtical/pragtical.github.io/tree/main/packages/create-docusaurus/templates/shared/',
-          // Style up key bindings declared as ++binding++
-          remarkPlugins: [require("remark-kbd-plus")],
+            'https://github.com/pragtical/pragtical.github.io/tree/main/',
         },
         blog: {
           showReadingTime: true,
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pragtical/pragtical.github.io/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/pragtical/pragtical.github.io/tree/main/',
         },
         theme: {
           customCss: [
@@ -150,7 +149,7 @@ const config = {
       prism: {
         theme: darkCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['lua'],
+        additionalLanguages: ['bash', 'diff', 'json', 'lua'],
       },
 
       imageZoom: {
