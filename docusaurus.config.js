@@ -44,13 +44,13 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pragtical/pragtical.github.io/tree/main/',
+            'https://github.com/pragtical/pragtical.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pragtical/pragtical.github.io/tree/main/',
+            'https://github.com/pragtical/pragtical.github.io/edit/main/',
         },
         theme: {
           customCss: [
