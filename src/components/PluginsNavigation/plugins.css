@@ -233,6 +233,7 @@ page { width: 100%; }
 .plugin-details .button {
   text-align: right;
   margin-top: 20px;
+  padding: 0;
 }
 
 .plugin-details .button a {
@@ -240,12 +241,18 @@ page { width: 100%; }
   align-items: center;
   text-align: center;
   justify-content: center;
-  max-width: 120px;
+  max-width: 100%;
   margin-left: auto;
 }
 
 .plugin-details .readme {
   margin-top: 20px;
+}
+
+@media all and (max-width: 725px) {
+  #plugins .search {
+    max-width: 100%;
+  }
 }
 
 @media all and (max-width: 680px) {
@@ -275,14 +282,10 @@ page { width: 100%; }
   }
 }
 
-@media all and (max-width: 420px) {
+@media all and (max-width: 459px) {
   #plugins .container .plugin {
     max-width: 100%;
     flex-grow: 1;
-  }
-
-  #plugins .search {
-    max-width: 100%;
   }
 
   #plugins .container .plugin .title {
@@ -291,9 +294,5 @@ page { width: 100%; }
 
   .plugin-details .details .install .command {
     min-width: auto;
-  }
-
-  .plugin-details .button a {
-    max-width: 100%;
   }
 }
