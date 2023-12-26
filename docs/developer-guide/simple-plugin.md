@@ -31,10 +31,10 @@ of the code in the file does.
 ### The code
 
 ```lua
--- mod-version:2 -- pragtical 2.0
+-- mod-version:3
 
 -- you MUST put mod-version:x on the first line of your plugin
--- mod-version usually maps to pragtical releases (eg. mod-version: 2 == pragtical 2.0)
+-- mod-version usually maps to pragtical releases (eg. mod-version: 3 == pragtical 3.0)
 -- pragtical won't load the plugin if the mod-version mismatches
 
 -----------------------------------------------------------------------
@@ -174,10 +174,12 @@ command.add(nil, {
    --    * a function that takes the "input" as its argument
    -- (NOTE: here the variable we are reading input into is `text`)
    ["simple:setshow"] = function()
-      core.command_view:enter("Test to display", function(text)
-         config.plugins.simple.hw_message = text
-         config.plugins.simple.show_my_message = true
-      end)
+      core.command_view:enter("Test to display", {
+         submit = function(text)
+            config.plugins.simple.hw_message = text
+            config.plugins.simple.show_my_message = true
+         end
+      })
    end
 }
 -----------------------------------------------------------------------
