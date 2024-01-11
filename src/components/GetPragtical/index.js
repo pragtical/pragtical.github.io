@@ -1,15 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import styles from './styles.module.css';
-
-async function GetLatestRelease() {
-  let latest = ""
-  let request = await fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
-  if(request.ok) {
-    latest = JSON.parse(await request.text()).tag_name;
-  }
-  return latest
-}
 
 function GetDownloadsMap(version) {
   return [
@@ -119,25 +110,32 @@ function Download({Svg, title, description}) {
 
 export default function GetPragtical() {
   // Generate download section for stable
-  let latest = GetLatestRelease();
-  let stable = "";
-  if(latest != ""){
-    stable = (
-      <section className={styles.downloads}>
-        <div className="container">
-          <h1 style={{textAlign:"center"}}>v3.2.1 Builds</h1>
-          <p style={{textAlign:"center"}}>
-            The newest stable version
-          </p>
-          <div className="row">
-            {GetDownloadsMap(latest).map((props, idx) => (
-              <Download key={idx} {...props} />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const [stable, setStable] = useState("");
+  useEffect(() => {
+    fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
+      .then((response) => response.json())
+      .then((data) => {
+        let latest = data.tag_name;
+        setStable((
+          <section className={styles.downloads}>
+            <div className="container">
+              <h1 style={{textAlign:"center"}}>{latest} Builds</h1>
+              <p style={{textAlign:"center"}}>
+                The newest stable version
+              </p>
+              <div className="row">
+                {GetDownloadsMap(latest).map((props, idx) => (
+                  <Download key={idx} {...props} />
+                ))}
+              </div>
+            </div>
+          </section>
+        ));
+      })
+      .catch((error) => console.log(error))
+    ;
+  });
+
   return (
     <main>
       {stable}
