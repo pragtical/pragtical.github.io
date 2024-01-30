@@ -4,10 +4,84 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Tue, 19 Dec 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 30 Jan 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.2.2 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v322-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v322-release</guid>
+            <pubDate>Tue, 30 Jan 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Some of the changes for this release include: drops findfileimproved plugin]]></description>
+            <content:encoded><![CDATA[<p>Some of the changes for this release include: drops findfileimproved plugin
+merging the threading functionality directly into findfile plugin, introduces
+code that respects <code>config.file_size_limit</code> on various components of the editor
+and updates SDL2 meson wrap to latest.</p>
+<p>It also incorporates various bug fixes both from upstream and our side.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.2.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v322-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix project module sometimes not loading. (<a href="https://github.com/pragtical/pragtical/pull/54" target="_blank" rel="noopener noreferrer">#54</a>)</p>
+</li>
+<li>
+<p>Correct the runtime environment variable (<a href="https://github.com/pragtical/pragtical/pull/55" target="_blank" rel="noopener noreferrer">#55</a>)</p>
+</li>
+<li>
+<p>Use unique GUID for the inno setup installer (<a href="https://github.com/pragtical/pragtical/pull/58" target="_blank" rel="noopener noreferrer">#58</a>)</p>
+</li>
+<li>
+<p>Null check file_info on core.open_doc (<a href="https://github.com/pragtical/pragtical/commit/4418bb6cae81e30f53ed54e97138c48dd7ee81d5" target="_blank" rel="noopener noreferrer">4418bb6c</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v322-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Merge findfileimproved into findfile plugin and made the loading text update smoother. (<a href="https://github.com/pragtical/pragtical/pull/53" target="_blank" rel="noopener noreferrer">#53</a>)</p>
+</li>
+<li>
+<p>Update thread initialization code to match main (<a href="https://github.com/pragtical/pragtical/pull/56" target="_blank" rel="noopener noreferrer">#56</a>)</p>
+</li>
+<li>
+<p>Update macOS icons to be more close to apple guidelines (<a href="https://github.com/pragtical/pragtical/pull/57" target="_blank" rel="noopener noreferrer">#57</a>)</p>
+</li>
+<li>
+<p>Limit max bytes read when detecting file encoding (<a href="https://github.com/pragtical/pragtical/pull/59" target="_blank" rel="noopener noreferrer">#59</a>)</p>
+</li>
+<li>
+<p>Respect config.file_size_limit on some components (<a href="https://github.com/pragtical/pragtical/pull/60" target="_blank" rel="noopener noreferrer">#60</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v322-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>Fix doc<!-- -->:create-cursor-previous<!-- -->/next-line with tabs (<a href="https://github.com/lite-xl/lite-xl/pull/1697" target="_blank" rel="noopener noreferrer">#1697</a>)</p>
+</li>
+<li>
+<p>Memory fixes (<a href="https://github.com/lite-xl/lite-xl/pull/1705" target="_blank" rel="noopener noreferrer">#1705</a>)</p>
+</li>
+<li>
+<p>Improve number highlighting for python syntax highlighting (<a href="https://github.com/lite-xl/lite-xl/pull/1704" target="_blank" rel="noopener noreferrer">#1704</a>)</p>
+</li>
+<li>
+<p>reorder nagview options on doc<!-- -->:save<!-- --> error to be more consistent with other nagview confirmations (<a href="https://github.com/lite-xl/lite-xl/pull/1696" target="_blank" rel="noopener noreferrer">#1696</a>)</p>
+</li>
+<li>
+<p>autoreload docs only if their filename matches an actual file (<a href="https://github.com/lite-xl/lite-xl/pull/1698" target="_blank" rel="noopener noreferrer">#1698</a>)</p>
+</li>
+<li>
+<p>language_js: support binary and octal representation (<a href="https://github.com/lite-xl/lite-xl/pull/1710" target="_blank" rel="noopener noreferrer">#1710</a>)</p>
+</li>
+<li>
+<p>process: style changes (<a href="https://github.com/lite-xl/lite-xl/pull/1709" target="_blank" rel="noopener noreferrer">#1709</a>)</p>
+</li>
+<li>
+<p>Add system.setenv (<a href="https://github.com/lite-xl/lite-xl/pull/1706" target="_blank" rel="noopener noreferrer">#1706</a>)</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.2.1...v3.2.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.2.1...v3.2.2</a></p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.2.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v321-release</link>
