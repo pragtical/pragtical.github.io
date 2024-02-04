@@ -19,7 +19,7 @@ two words that properly define our development approach as follows:
 
 As a result we belief that new features introduced through pull requests should
 be evaluated taking a practical approach, without going into lenghty idealistic
-discussions that slowdown progress and merging code when logical.
+discussions that slowdown progress, merging code when logical.
 
 ## Goals
 
@@ -63,6 +63,12 @@ other editors because it is pragtical.
 * **IPC** - shared memory functionality is part of the core and IPC plugin
 shipped by default to allow opening files and tab dragging between currently
 opened instances.
+
+* **CLI** - Integrated command line interface API that can be extended by
+plugins to provide new CLI flags.
+
+* **Search/Replace** - Project-wide search and replace support, better user
+interface for both documents and project search/replace.
 
 [Lite XL]:              https://github.com/lite-xl/lite-xl
 [lite]:                 https://github.com/rxi/lite
