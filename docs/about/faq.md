@@ -11,9 +11,9 @@ Check out the [lsp] plugin.
 
 #### Where is the integrated terminal?
 
-Work is being done on [pragtical-terminal] and [pragtical-tmt].
-Both plugins have their own supported features and bugs,
-so you should try both out and see which one works for you.
+Work is being done on the [terminal] plugin which is the most feature complete
+terminal plugin at the moment and you can install directly from within
+the plugin manager of the editor.
 
 #### Tabs and indent size?
 
@@ -68,8 +68,7 @@ You can get more info in [Features].
 
 
 [lsp]:                  https://github.com/pragtical/lsp
-[pragtical-terminal]:   https://github.com/benjcollins/lite-xl-terminal
-[pragtical-tmt]:        https://github.com/ColonelPhantom/lite-xl-tmt
+[terminal]:             https://github.com/pragtical/terminal
 [autowrap]:             https://github.com/pragtical/plugins/blob/master/plugins/autowrap.lua?raw=1
 [vibe]:                 https://github.com/eugenpt/lite-xl-vibe
 [plugin repository]:    https://github.com/pragtical/plugins
