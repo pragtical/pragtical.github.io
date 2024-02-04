@@ -8,19 +8,19 @@ import TabItem from '@theme/TabItem';
 
 # Plugins
 
-Pragtical implements many features as plugins.
-By default, Pragtical bundles a few plugins to provide some features
-editors would usually have.
-There is also a `addons` package which comes with all plugins.
+Pragtical implements many features as plugins. By default official releases
+bundle all language and color plugins for convenience.
 
-Extra plugins can be found at [the plugin repository][pragtical/pragtical-plugins].
+Extra plugins can be found on the github [plugins repository] or this website
+[Plugins] section, which implements a convenient graphical interface to the
+plugins repository.
 
 :::note These plugins are contributed by the community.
 :::
 
 ## Location
 
-Plugins that come bundled with Pragtical is usually stored in
+Plugins that come bundled with Pragtical are usually stored in
 `DATADIR/plugins`.
 
 On macOS, `DATADIR` is always the application resources directory.
@@ -40,14 +40,14 @@ Recently, we've standardized various aspects of the plugin
 repository so that plugin managers can be built to install
 and manage plugins.
 
-Currently, there are two plugin managers made for Pragtical —
-[ppm] and [Miq].
+Currently, there are two plugin managers made for Pragtical:
 
-ppm is a plugin manager more akin to distro package managers
-such as `apt` and `dnf`.
-It also provides a GUI for installing plugins.
-Miq is a declarative plugin manager that allows user to declare
-plugins and install/update them all at once.
+1. [ppm] - a plugin manager more akin to distro package managers such as `apt`
+and `dnf`. ppm is currently shipped on pragtical official releases and a
+GUI for installing plugins is shipped as part of the editor, also it is
+accessible from the command line interface by invoking `pragtical pm`.
+2. [Miq] - a declarative plugin manager that allows user to declare plugins and
+install/update them all at once.
 
 These two plugin managers use vastly different ways of
 plugin management, so please consult the main page for
@@ -59,11 +59,9 @@ To install a plugin, simply drag the related plugin file into
 `USERDIR/plugins`.
 
 :::caution For plugins that comes in a folder, please consult specific instructions for each plugin.
-Historically, Pragtical does not enforce a specific file structure
-for these types of plugins.
-Old plugins may not have a `init.lua` file, which is used by
-Lua to find a plugin.
-In this case, you need to follow their install instructions.
+Historically, Pragtical does not enforce a specific file structure for these
+types of plugins. Old plugins may not have a `init.lua` file, which is used by
+Lua to find a plugin. In this case, you need to follow their install instructions.
 :::
 
 <Tabs groupId="package-manager">
@@ -74,6 +72,8 @@ For example, to install lsp, run:
 
 ```bash
 $ ppm plugin install lsp
+or
+$ pragtical pm plugin install lsp
 ```
 
 This will install/update the lsp plugin.
@@ -120,6 +120,8 @@ To update plugins with ppm, run `ppm upgrade`.
 
 ```bash
 $ ppm upgrade
+or
+$ pragtical pm upgrade
 ```
 
 This will update all the plugins to their latest versions.
@@ -144,6 +146,8 @@ For instance, to uninstall lsp, run:
 
 ```bash
 $ ppm plugin uninstall lsp
+or
+$ pragtical pm plugin uninstall lsp
 ```
 
 Uninstalling themes and libraries can be done with
@@ -158,6 +162,7 @@ Uninstalling themes and libraries can be done with
 </Tabs>
 
 
-[pragtical/plugins]: https://github.com/pragtical/plugins
-[ppm]:               https://github.com/pragtical/plugin-manager
-[Miq]:               https://github.com/TorchedSammy/Miq
+[plugins repository]: https://github.com/pragtical/plugins
+[Plugins]:            /plugins
+[ppm]:                https://github.com/pragtical/plugin-manager
+[Miq]:                https://github.com/TorchedSammy/Miq
