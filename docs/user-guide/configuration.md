@@ -162,7 +162,7 @@ To add keyboard shortcuts, you can use `keymap.add()`.
 <Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
 
-For example, to bind ++ctrl+m++ to move the cursor backwards
+For example, to bind <kbd>ctrl+m</kbd> to move the cursor backwards
 and then upwards, do:
 
 ```lua
@@ -192,7 +192,7 @@ keymap.add({
 ```
 
 This will cause Pragtical to only run
-`core:move-to-previous-line` when ++ctrl+m++ is pressed.
+`core:move-to-previous-line` when <kbd>ctrl+m</kbd> is pressed.
 
   </TabItem>
   <TabItem value="settings-ui" label="Settings UI">
@@ -231,7 +231,7 @@ To remove an existing keyboard shortcut, you can use
 <Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
 
-In this example, we will unbind ++ctrl+m++.
+In this example, we will unbind <kbd>ctrl+m</kbd>.
 
 ```lua
 local keymap = require "core.keymap"
@@ -239,9 +239,9 @@ keymap.unbind("ctrl+m", "doc:move-to-previous-line")
 keymap.unbind("ctrl+m", "doc:move-to-previous-char")
 ```
 
-This will unbind the two commands from ++ctrl+m++.
+This will unbind the two commands from <kbd>ctrl+m</kbd>.
 
-Alternatively, to unbind all commands from ++ctrl+m++,
+Alternatively, to unbind all commands from <kbd>ctrl+m</kbd>,
 you can omit the second parameter to `keymap.unbind()`.
 
 ```lua
