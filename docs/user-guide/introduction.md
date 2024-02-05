@@ -66,41 +66,44 @@ or <kbd>ctrl+shift+down</kbd>.
 
 ## Find and replace
 
+As any other editor Pragtical has built-in support for search and replace.
+The following features are supported:
+
+* Case-sensitivity (<kbd>ctrl+i</kbd>)
+* Whole word matching (<kbd>ctrl+shift+w</kbd>)
+* Lua patterns matching
+* Regex matching (<kbd>ctrl+shift+i</kbd>)
+* Replace in selection (<kbd>ctrl+alt+i</kbd>)
+
 To find a certain word, you can use <kbd>ctrl+f</kbd>.
 This will open a prompt where you can find text in the document.
 After entering the text, you can press enter to find the first
-match.
-The matched text will be selected.
-To find the next match, press <kbd>f3</kbd>
+match. The matched text will be selected. To find the next match,
+press <kbd>f3</kbd> or <kbd>enter</kbd>, going to the previous match can
+be performed by pressing <kbd>shift+f3</kbd> or <kbd>shift+enter</kbd>.
 
-By default, Pragtical uses case-insensitive search.
-Input such as `Test` will match either `Test` or `test`.
-To toggle case-sensitive search, press <kbd>ctrl+i</kbd>.
-
-Pragtical also supports searching with regular expressions.
-This feature can be enabled by pressing <kbd>ctrl+shift+i</kbd>.
-This mode can be used in conjunction with case-sensitive search.
-
-To find and replace text, press <kbd>ctrl+r</kbd>.
-Pragtical will prompt you for text to replace and the replacement
-text. Afterwards, it will replace all occurrences of the text.
+To find and replace text on currently opened text document, press
+<kbd>ctrl+r</kbd>. Pragtical will prompt you for text to replace and the
+replacement text.
 
 ![The find text prompt][1]
 
-## Project search
+## Project search and replace
 
 Finding text across multiple files can be useful.
 To do this in Pragtical, press <kbd>ctrl+shift+f</kbd>.
-You can then enter the text to find and press enter.
 Pragtical will open a new tab to display all the search results.
-To open the file containing the match, you can click the entries.
+To open the file containing the match, you can click the entries or navigate
+them using the keyboard keys: <kbd>up</kbd>, <kbd>down</kbd>,
+<kbd>left</kbd>, <kbd>right</kbd> and <kbd>enter</kbd>.
 
-Project search also supports case-sensitive search and
-regular expressions with the same keyboard shortcuts.
-`project-search:fuzzy-find` allows you to search the project
-for similar words.
+You can optionally specify a subproject path to limit the search scope.
 
-Pragtical does not support find and replace text across a project.
+In contrast to it's ancestors that do not support project-wide search and
+replace, Pragtical does supports it and is accessible by also pressing
+<kbd>ctrl+shift+f</kbd>. You will be able to select the results that will
+be replaced by toggling the checkbox next to them using the mouse or pressing
+the <kbd>space</kbd> key.
 
 ![Project search result tab][2]
 
