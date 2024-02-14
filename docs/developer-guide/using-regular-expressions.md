@@ -194,10 +194,11 @@ If a capture is empty, its offset will be returned.
 
 Both functions return `nil` if no match was found.
 
-!!! note
-    There are no functions that return the start and end indices of captured
-    strings.
-    Use `regex.find_offsets()` for that.
+:::note
+There are no functions that return the start and end indices of captured
+strings.
+Use `regex.find_offsets()` for that.
+:::
 
 **Example:**
 

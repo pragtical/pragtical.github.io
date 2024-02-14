@@ -12,7 +12,7 @@ Check out the [lsp] plugin.
 #### Where is the integrated terminal?
 
 Work is being done on the [terminal] plugin which is the most feature complete
-terminal plugin at the moment and you can install directly from within
+terminal plugin at the moment. You can install it directly from within
 the plugin manager of the editor.
 
 #### Tabs and indent size?

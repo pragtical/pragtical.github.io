@@ -181,7 +181,7 @@ command.add(nil, {
          end
       })
    end
-}
+})
 -----------------------------------------------------------------------
 -- Just for fun, let's assign our commands their own keybindings.
 -- Here, we assign the keybinding the same string(its name) as the one
@@ -192,14 +192,7 @@ keymap.add {
 }
 ```
 
-### Further reading
-
-- [Lite: An Implementation Overview][3],
-  an excellent post by rxi that stays mostly relevant to Pragtical.
-- [API overview][4], where some APIs are explained.
-
 
 [1]: https://devhints.io/lua
 [2]: https://www.lua.org/pil
 [3]: https://rxi.github.io/lite_an_implementation_overview.html
-[4]: /en/tutorials/api-overview

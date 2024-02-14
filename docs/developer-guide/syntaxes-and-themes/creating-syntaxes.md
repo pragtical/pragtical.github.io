@@ -42,7 +42,7 @@ This is a small, simple example of a syntax definition.
 It's intended to highlight SSH Config files and looks like this:
 
 ```lua
--- mod-version:2 -- pragtical 2.0
+-- mod-version:3
 local syntax = require "core.syntax"
 
 syntax.add {
@@ -84,7 +84,7 @@ which version this plugin requires.
 The second imports the `core.syntax` module to allow us to declare a new syntax:
 
 ```lua
--- mod-version:2 -- pragtical 2.0
+-- mod-version:3
 local syntax = require "core.syntax"
 ```
 
@@ -133,7 +133,7 @@ it will assign that token type to it and move on.
 Patterns are tested in the order that they are written in the syntax definition,
 so the first match will win.
 
-Patterns are based on Lua patterns or PCRE (Version 2).
+Patterns are based on Lua patterns or PCRE2.
 
 You may find detailed information on Lua patterns in the [Lua Reference Manual].
 For PCRE, there are various [regex tester websites] that provide documentation.

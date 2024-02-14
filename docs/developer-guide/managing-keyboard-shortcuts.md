@@ -17,7 +17,8 @@ and a map of commands to key combinations (`keymap.reverse_map`).
 
 The string is split into parts delimited by `+` and
 each part of the split string is treated as a key.
-For the list of valid keys, check out [SDL's documentation][8].
+For the list of valid keys, check out [SDL's documentation][1] (the "Key Name" column).
+
 For mouse buttons, the format is as follows:
 
 `[nclicks][type]click`
@@ -28,7 +29,8 @@ These letters correspond to left, right middle, mouse 4 and
 mouse 5.
 By default, `type` is set to `l`.
 
-Pragtical does not support consecutive keystrokes, such as `ctrl+k ctrl+b`.
+:::note Pragtical does not support consecutive keystrokes, such as `ctrl+k ctrl+b`.
+:::
 
 **Examples:**
 
@@ -160,12 +162,13 @@ handled and will not be propagated further.
 You must handle this condition if you decide to override
 any of these functions.
 
-??? warning "Since v2.1.0, text composition events (IME) should be taken into consideration."
-    In recent versions of Pragtical, text composition/input events
-    has been added to support IMEs.
-    When text input is enabled, you may receive a key down event
-    and a text input event.
-    You need to consider how to handle these new events too.
+:::warning Since v2.1.0, text composition events (IME) should be taken into consideration.
+In recent versions of Pragtical, text composition/input events
+has been added to support IMEs.
+When text input is enabled, you may receive a key down event
+and a text input event.
+You need to consider how to handle these new events too.
+:::
 
 **Example:**
 
@@ -193,3 +196,5 @@ function keymap.on_key_pressed(key, ...)
   print(key, "Pressed!")
 end
 ```
+
+[1]: https://wiki.libsdl.org/SDL2/SDL_Keycode

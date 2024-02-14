@@ -9,7 +9,7 @@ description: An introduction about Pragtical's concepts
 Pragtical has little functionalities without plugins —
 anything that can be implemented as plugins can and _will_ be implemented as one.
 
-Pragtical is mostly written in Lua 5.4.
+Pragtical is mostly written in Lua.
 If you want to write plugins, you need to know how to write Lua.
 There are various resources such as the [Lua 5.4 Reference Manual][1],
 [Programming in Lua][2], [Learn Lua in 15 Minutes][3],
@@ -18,7 +18,8 @@ There are various resources such as the [Lua 5.4 Reference Manual][1],
 You will also need general programming knowledge and some experience with
 object-oriented programming.
 
-!!! note "Some of these tutorials target older versions of Lua and may be less relevant."
+:::note Some of these tutorials target older versions of Lua and may be less relevant.
+:::
 
 ## Overview
 
@@ -33,34 +34,6 @@ There are a few types of plugins.
 Syntaxes and colors are considered as subset of plugins.
 These subsets of plugins only interact with the syntax highlighter
 and the `style` table respectively.
-
-## More resources
-
-Here are more resources on how to create syntaxes, themes
-and other plugins for Pragtical.
-
-**Syntaxes and Themes**:
-
-- [Creating Syntaxes] — Learn how to create syntaxes
-                        for highlighting various types of files.
-- [Creating Themes]   — Learn to create themes for Pragtical.
-
-**Others**:
-
-- [Simple Plugin]               — Learn to write a simple plugin that draws text
-                                  in the top right corner of the editor window.
-- [Commands]                    — Learn how to create and call commands programmatically.
-- [Managing Keyboard Shortcuts] — Learn how to manage keyboard shortcuts.
-- [Classes and Objects]         — Learn how to extend Pragtical with
-                                  classes and objects.
-- [Using Regular Expressions]   — Learn how to use
-                                  regular expressions in Pragtical.
-- [Interacting with the OS]     — Learn how to interact with the OS, such
-                                  as reading and writing to the clipboard,
-                                  setting window properties and getting
-                                  high-resolution time.
-- [Child Processes]             — Learn how to use the Process API
-                                  to start and manage child processes.
 
 ## Tips and tricks
 
@@ -83,7 +56,10 @@ In this case, the stack trace in `error.txt` is more complete and
 should be referred.
 This is a bug and will be fixed in future versions of Pragtical.
 
-### `print()` function does not work in Windows
+### `print()` function many not work in Windows
+
+:::note Since v3.2.0, console output works on Windows without the instructions below.
+:::
 
 On Windows, we compile Pragtical using the GUI subsystem by default.
 This causes Pragtical to close the stdout.
