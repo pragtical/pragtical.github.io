@@ -4,10 +4,94 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Tue, 30 Jan 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 26 Feb 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.3.0 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v330-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v330-release</guid>
+            <pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Prominent changes on this release include: adaptive sizing of autocomplete box,]]></description>
+            <content:encoded><![CDATA[<p>Prominent changes on this release include: adaptive sizing of autocomplete box,
+TreeView horizontal scrollbar support, TreeList widget and performance
+improvements.</p>
+<p><strong>TreeList Widget for LSP Symbols</strong></p>
+<p><img loading="lazy" src="https://github.com/pragtical/lsp/assets/1702572/ebccab31-3995-4922-9557-b4d98025da65" alt="symbols-treeview" class="img_ev3q"></p>
+<p><strong>Adaptive Sizing Autocomplete</strong></p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/pragtical/pragtical/assets/1702572/09e69438-c765-4d31-a9b0-8e7bc1756057"></video>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.3.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v330-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api">API<a href="https://pragtical.dev/blog/pragtical-v330-release#api" class="hash-link" aria-label="Direct link to API" title="Direct link to API">​</a></h3>
+<ul>
+<li>
+<p>Expose renderer.font.get_metadata() as a method, documented it, etc...
+(<a href="https://github.com/pragtical/pragtical/pull/64" target="_blank" rel="noopener noreferrer">#64</a>)</p>
+</li>
+<li>
+<p>Expose get_partial_symbol on autocomplete plugin (for LSP)
+(<a href="https://github.com/pragtical/pragtical/pull/66" target="_blank" rel="noopener noreferrer">#66</a>)</p>
+</li>
+<li>
+<p>Increase mod version from 3.3.1 to 3.4.0 (also because of new system.setenv)
+(<a href="https://github.com/pragtical/pragtical/pull/68" target="_blank" rel="noopener noreferrer">#68</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v330-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>Fix modversion matching to align with semver
+(<a href="https://github.com/pragtical/pragtical/pull/71" target="_blank" rel="noopener noreferrer">#71</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v330-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Enable horizontal scrollbar on treeview plugin
+(<a href="https://github.com/pragtical/pragtical/pull/63" target="_blank" rel="noopener noreferrer">#63</a>)</p>
+</li>
+<li>
+<p>Added adaptive sizing to autocomplete plugin
+(<a href="https://github.com/pragtical/pragtical/pull/67" target="_blank" rel="noopener noreferrer">#67</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v330-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>Removed no longer needed microtar subproject
+(<a href="https://github.com/pragtical/pragtical/pull/70" target="_blank" rel="noopener noreferrer">#70</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v330-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
+<ul>
+<li>
+<p>Optimize SearchReplaceList collapse/uncollapse
+(<a href="https://github.com/pragtical/widget/pull/4" target="_blank" rel="noopener noreferrer">#4</a>)</p>
+</li>
+<li>
+<p>FontDialog: use the font metadata preview text if available
+(<a href="https://github.com/pragtical/widget/pull/5" target="_blank" rel="noopener noreferrer">#5</a>)</p>
+</li>
+<li>
+<p>Added new TreeList widget
+(<a href="https://github.com/pragtical/widget/pull/6" target="_blank" rel="noopener noreferrer">#6</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v330-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
+<ul>
+<li>Merged: glyphset loading optimization for faster font loading
+(<a href="https://github.com/lite-xl/lite-xl/pull/1543" target="_blank" rel="noopener noreferrer">#1543</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v330-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>process: fix unitialized variables
+(<a href="https://github.com/lite-xl/lite-xl/pull/1719" target="_blank" rel="noopener noreferrer">#1719</a>)</p>
+</li>
+<li>
+<p>Added .pyi extension to python.
+(<a href="https://github.com/lite-xl/lite-xl/pull/1728" target="_blank" rel="noopener noreferrer">#1728</a>)</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.2.2...v3.3.0" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.2.2...v3.3.0</a></p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.2.2 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v322-release</link>
@@ -20,6 +104,7 @@ code that respects <code>config.file_size_limit</code> on various components of 
 and updates SDL2 meson wrap to latest.</p>
 <p>It also incorporates various bug fixes both from upstream and our side.</p>
 <p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.2.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v322-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v322-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
 <ul>
 <li>
@@ -92,6 +177,7 @@ and updates SDL2 meson wrap to latest.</p>
 <p><img loading="lazy" src="https://github.com/pragtical/pragtical/assets/1702572/d157442b-a09f-4e21-b9aa-8db580c054ae" alt="project-search-replace" class="img_ev3q"></p>
 <p>It also incorporates various bug fixes both from upstream and our side.</p>
 <p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.2.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v321-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v321-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
 <ul>
 <li>
@@ -188,6 +274,7 @@ and updates SDL2 meson wrap to latest.</p>
 <p><img loading="lazy" src="https://github.com/pragtical/pragtical/assets/1702572/0cca8ae5-46a8-4002-a902-b70180af86cf" alt="pragtical-cli" class="img_ev3q"></p>
 <p>It also incorporates various bug fixes both from upstream and our side.</p>
 <p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.2.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v320-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v320-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
 <ul>
 <li>
@@ -343,6 +430,7 @@ and updates SDL2 meson wrap to latest.</p>
 <p>It also features compatibility changes to properly work with the terminal
 plugin, and includes the accumulated bug fixes listed below as new color schemes.</p>
 <p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.1.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v312-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v312-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
 <ul>
 <li>
@@ -486,6 +574,7 @@ The new meson setup options are <code>extra_colors</code> and <code>extra_langua
 set to true by default and will allow downloading additional languages and
 color schemes to be included on the <code>meson install</code> step.</p>
 <p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.1.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v311-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v311-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
 <ul>
 <li>
