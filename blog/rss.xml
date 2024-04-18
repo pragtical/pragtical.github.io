@@ -4,10 +4,112 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Mon, 26 Feb 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 18 Apr 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.3.1 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v331-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v331-release</guid>
+            <pubDate>Thu, 18 Apr 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release consist mostly of editor and build system bug fixes with some]]></description>
+            <content:encoded><![CDATA[<p>This release consist mostly of editor and build system bug fixes with some
+minor new features and enhancements.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.3.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v331-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v331-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>settings ui: added max_visible_commands config
+(<a href="https://github.com/pragtical/pragtical/pull/79" target="_blank" rel="noopener noreferrer">#79</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v331-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fixes to autocomplete re-sizing code
+(<a href="https://github.com/pragtical/pragtical/pull/76" target="_blank" rel="noopener noreferrer">#76</a>)</p>
+</li>
+<li>
+<p>Fix conflicting goto jump on tokenizer which was introduced by the skipping
+of patterns matching nothing code.
+(<a href="https://github.com/pragtical/pragtical/commit/b2d03264046e4f1afa7360c1cd738b44bc824af3" target="_blank" rel="noopener noreferrer">b2d03264</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v331-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Renamed numpad insert key from 'ins' to 'insert' and empty 5 to 'clear'
+(<a href="https://github.com/pragtical/pragtical/pull/73" target="_blank" rel="noopener noreferrer">#73</a>)</p>
+</li>
+<li>
+<p>Added TextEditor category on linux
+(<a href="https://github.com/pragtical/pragtical/pull/77" target="_blank" rel="noopener noreferrer">#77</a>)</p>
+</li>
+<li>
+<p>plugin language_lua: added unescaped [=string=] support
+(<a href="https://github.com/pragtical/pragtical/pull/78" target="_blank" rel="noopener noreferrer">#78</a>)</p>
+</li>
+<li>
+<p>Alert by default of file changes in autoreload plugin
+(<a href="https://github.com/pragtical/pragtical/pull/82" target="_blank" rel="noopener noreferrer">#82</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v331-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Build the plugin manager statically for msys
+(<a href="https://github.com/pragtical/pragtical/pull/80" target="_blank" rel="noopener noreferrer">#80</a>)</p>
+</li>
+<li>
+<p>Fix for mbedtls2 detection on ppm subproject
+(<a href="https://github.com/pragtical/pragtical/commit/abc2d93f880633aa966a6c762ede2e3b3d86a9d0" target="_blank" rel="noopener noreferrer">abc2d93f</a>)</p>
+</li>
+<li>
+<p>Meson subproject updates
+(<a href="https://github.com/pragtical/pragtical/commit/6f5ab1212f02e10219723a72df6abe54acb54cac" target="_blank" rel="noopener noreferrer">6f5ab121</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v331-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>Improve autocomplete scroll behavior
+(<a href="https://github.com/lite-xl/lite-xl/pull/1732" target="_blank" rel="noopener noreferrer">#1732</a>)</p>
+</li>
+<li>
+<p>Fix language_js regex/comment distinction
+(<a href="https://github.com/lite-xl/lite-xl/pull/1731" target="_blank" rel="noopener noreferrer">#1731</a>)</p>
+</li>
+<li>
+<p>scripts: not hardcode MSYSTEM
+(<a href="https://github.com/lite-xl/lite-xl/pull/1739" target="_blank" rel="noopener noreferrer">#1739</a>)</p>
+</li>
+<li>
+<p>Add SerenityOS platform support
+(<a href="https://github.com/lite-xl/lite-xl/pull/1745" target="_blank" rel="noopener noreferrer">#1745</a>)</p>
+</li>
+<li>
+<p>Limit language_js regex avoidance to numbers, and fix starting /* comments
+(<a href="https://github.com/lite-xl/lite-xl/pull/1744" target="_blank" rel="noopener noreferrer">#1744</a>)</p>
+</li>
+<li>
+<p>Fixed some typos in core.init
+(<a href="https://github.com/lite-xl/lite-xl/pull/1755" target="_blank" rel="noopener noreferrer">#1755</a>)</p>
+</li>
+<li>
+<p>Added Arduino syntax highlighting support alongside C++.
+(<a href="https://github.com/lite-xl/lite-xl/pull/1767" target="_blank" rel="noopener noreferrer">#1767</a>)</p>
+</li>
+<li>
+<p>Fix BufferSize in g_read for Windows
+(<a href="https://github.com/lite-xl/lite-xl/pull/1722" target="_blank" rel="noopener noreferrer">#1722</a>)</p>
+</li>
+<li>
+<p>Skip patterns matching nothing in tokenizer
+(<a href="https://github.com/lite-xl/lite-xl/pull/1743" target="_blank" rel="noopener noreferrer">#1743</a>)</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1</a></p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.3.0 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v330-release</link>
