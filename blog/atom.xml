@@ -50,7 +50,7 @@ plugins will be necessary for a smooth transition:</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v340-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
 <ul>
 <li>Basic doc/docview cache for better performance
-(<a href="https://github.com/pragtical/pragtical/pull/110" target="_blank" rel="noopener noreferrer">#110</a>)</li>
+(<a href="https://github.com/pragtical/pragtical/pull/105" target="_blank" rel="noopener noreferrer">#105</a>)</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v340-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
 <ul>
