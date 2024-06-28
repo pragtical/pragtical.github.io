@@ -4,10 +4,60 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Tue, 25 Jun 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 28 Jun 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.4.1 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v341-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v341-release</guid>
+            <pubDate>Fri, 28 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[This quick minor release introduces some more enhancements and fixes for]]></description>
+            <content:encoded><![CDATA[<p>This quick minor release introduces some more enhancements and fixes for
+annoyances found while testing other stuff, most of them are triggered in some
+edge cases but still, they were causing an itch 😄</p>
+<p>Some nice additions are: better restoration of window size on startup which
+was causing me headaches on wayland, support for autocompletion of preprocessor
+symbols on C/C++ and fallback detection of UTF-16/32 when no encoding was detected.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v341-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v341-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>If no surface return on font_render_glyph
+(<a href="https://github.com/pragtical/pragtical/pull/114" target="_blank" rel="noopener noreferrer">#114</a>)</p>
+</li>
+<li>
+<p>Restore support for tokenizer empty matches with subsyntax
+(<a href="https://github.com/pragtical/pragtical/pull/112" target="_blank" rel="noopener noreferrer">#111</a>)</p>
+</li>
+<li>
+<p>If encoding detect fails check if UTF-16/32 LE/BE
+(<a href="https://github.com/pragtical/pragtical/pull/115" target="_blank" rel="noopener noreferrer">#115</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v341-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Better matching of placeholder chars (_) on lua
+(<a href="https://github.com/pragtical/pragtical/pull/112" target="_blank" rel="noopener noreferrer">#112</a>)</p>
+</li>
+<li>
+<p>Better restore of window mode/size on startup
+(<a href="https://github.com/pragtical/pragtical/pull/113" target="_blank" rel="noopener noreferrer">#113</a>)</p>
+</li>
+<li>
+<p>Added custom symbols pattern to language c and cpp
+(<a href="https://github.com/pragtical/pragtical/pull/116" target="_blank" rel="noopener noreferrer">#116</a>)</p>
+</li>
+<li>
+<p>autocomplete: strip punctuations from partials
+(<a href="https://github.com/pragtical/pragtical/pull/117" target="_blank" rel="noopener noreferrer">#117</a>)</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1</a></p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.4.0 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v340-release</link>
