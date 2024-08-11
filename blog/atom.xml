@@ -2,11 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2024-06-28T00:00:00.000Z</updated>
+    <updated>2024-08-11T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.4.2 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v342-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v342-release"/>
+        <updated>2024-08-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This release includes the accumulated dose of fixes, some performance]]></summary>
+        <content type="html"><![CDATA[<p>This release includes the accumulated dose of fixes, some performance
+improvements and enhacements as listed on the changes log.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v342-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v342-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
+<ul>
+<li>
+<p>Revert previous optimized glyphset loading lite-xl/lite-xl#1543
+and rebased/merged new implementation which is even faster
+(<a href="https://github.com/lite-xl/lite-xl/pull/1845" target="_blank" rel="noopener noreferrer">lite-xl/lite-xl#1845</a>)</p>
+</li>
+<li>
+<p>Port rest of regex functions from Lua to C
+(<a href="https://github.com/pragtical/pragtical/pull/120" target="_blank" rel="noopener noreferrer">#120</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v342-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Enable utf8 module for Lua &lt; 5.3 using utf8extra
+(<a href="https://github.com/pragtical/pragtical/pull/119" target="_blank" rel="noopener noreferrer">#119</a>)</p>
+</li>
+<li>
+<p>Use core.warn on autocomplete plugin
+(<a href="https://github.com/pragtical/pragtical/commit/89d24eb45e82a2bd49ce0a8ed56e313169c17693" target="_blank" rel="noopener noreferrer">89d24eb4</a>)</p>
+</li>
+<li>
+<p>Improvements to c/c++ language plugins
+(<a href="https://github.com/pragtical/pragtical/pull/128" target="_blank" rel="noopener noreferrer">#128</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v342-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix thread initialization on non macOS bundle
+(<a href="https://github.com/pragtical/pragtical/pull/118" target="_blank" rel="noopener noreferrer">#118</a>)</p>
+</li>
+<li>
+<p>Fix use of no longer valid core.add_project_directory
+(<a href="https://github.com/pragtical/pragtical/pull/121" target="_blank" rel="noopener noreferrer">#121</a>)</p>
+</li>
+<li>
+<p>Fix for IPC plugin to properly open a relative path
+(<a href="https://github.com/pragtical/pragtical/pull/125" target="_blank" rel="noopener noreferrer">#125</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v342-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Fix PPM build on msys
+(<a href="https://github.com/pragtical/pragtical/pull/126" target="_blank" rel="noopener noreferrer">#126</a>)</p>
+</li>
+<li>
+<p>Update sdl2 wrap to v2.30.6 which fixes an initialization
+issue on hyprland. Also updated other wrap components.
+(<a href="https://github.com/pragtical/pragtical/pull/127" target="_blank" rel="noopener noreferrer">#127</a>)</p>
+</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2</a></p>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.4.1 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v341-release</id>
