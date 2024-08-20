@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
+const LATEST='v3.4.2';
+
 function GetDownloadsMap(version) {
   return [
     {
@@ -109,36 +111,21 @@ function Download({Svg, title, description}) {
 }
 
 export default function GetPragtical() {
-  // Generate download section for stable
-  const [stable, setStable] = useState("");
-  useEffect(() => {
-    fetch("https://api.github.com/repos/pragtical/pragtical/releases/latest")
-      .then((response) => response.json())
-      .then((data) => {
-        let latest = data.tag_name;
-        setStable((
-          <section className={styles.downloads}>
-            <div className="container">
-              <h1 style={{textAlign:"center"}}>{latest} Builds</h1>
-              <p style={{textAlign:"center"}}>
-                The newest stable version
-              </p>
-              <div className="row">
-                {GetDownloadsMap(latest).map((props, idx) => (
-                  <Download key={idx} {...props} />
-                ))}
-              </div>
-            </div>
-          </section>
-        ));
-      })
-      .catch((error) => console.log(error))
-    ;
-  });
-
   return (
     <main>
-      {stable}
+      <section className={styles.downloads}>
+        <div className="container">
+          <h1 style={{textAlign:"center"}}>{LATEST} Builds</h1>
+          <p style={{textAlign:"center"}}>
+            The newest stable version
+          </p>
+          <div className="row">
+            {GetDownloadsMap(LATEST).map((props, idx) => (
+              <Download key={idx} {...props} />
+            ))}
+          </div>
+        </div>
+      </section>
       <section className={clsx('hero hero--primary-dark', styles.heroBanner)}>
         <div className="container">
           <h1 style={{textAlign:"center"}}>Rolling Builds</h1>
