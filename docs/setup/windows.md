@@ -36,9 +36,19 @@ Due to a lack of testers, we've only been able to test whether the code can
 compile on a 32-bit system. This does not mean that Pragtical may run correctly.
 :::
 
+## Third-party Installation Methods
+
+### Scoop
+
+[Scoop][6] is a command-line installer for Windows. To install using scoop run:
+
+```sh
+scoop install pragtical
+```
 
 [1]: https://github.com/pragtical/pragtical/releases
 [2]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe
 [3]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip
 [4]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-i686-setup.exe
 [5]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-i686.zip
+[6]: https://scoop.sh/
