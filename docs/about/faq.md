@@ -60,28 +60,10 @@ should also compile with latest versions of Lua 5.4
 
 #### Vim mode?
 
-You need to [vibe].
-
-#### Where's feature X? How about Y?
-
-You can get more info in [Features].
+You need the [vibe] plugin.
 
 
 [lsp]:                  https://github.com/pragtical/lsp
 [terminal]:             https://github.com/pragtical/terminal
 [autowrap]:             https://github.com/pragtical/plugins/blob/master/plugins/autowrap.lua?raw=1
-[vibe]:                 https://github.com/eugenpt/lite-xl-vibe
-[plugin repository]:    https://github.com/pragtical/plugins
-[align_carets]:         https://github.com/pragtical/plugins/blob/master/plugins/align_carets.lua?raw=1
-[autoinsert]:           https://github.com/pragtical/plugins/blob/master/plugins/autoinsert.lua?raw=1
-[autosave]:             https://github.com/pragtical/plugins/blob/master/plugins/autosave.lua?raw=1
-[bracketmatch]:         https://github.com/pragtical/plugins/blob/master/plugins/bracketmatch.lua?raw=1
-[editorconfig]:         https://github.com/pragtical/plugins/blob/master/plugins/editorconfig
-[ephemeral_tabs]:       https://github.com/pragtical/plugins/blob/master/plugins/ephemeral_tabs.lua?raw=1
-[fontconfig]:           https://github.com/pragtical/plugins/blob/master/plugins/fontconfig.lua?raw=1
-[gitdiff_highlight]:    https://github.com/vincens2005/lite-xl-gitdiff-highlight
-[indentguide]:          https://github.com/pragtical/plugins/blob/master/plugins/indentguide.lua?raw=1
-[lint+]:                https://github.com/liquid600pgm/lintplus
-[litepresence]:         https://github.com/TorchedSammy/Litepresence
-[selectionhighlight]:   https://github.com/pragtical/plugins/blob/master/plugins/selectionhighlight.lua?raw=1
-[Features]:             /about/features
+[vibe]:                 https://github.com/pragtical/vibe
