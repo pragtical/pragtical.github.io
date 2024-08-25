@@ -40,9 +40,13 @@ compile on a 32-bit system. This does not mean that Pragtical may run correctly.
 
 ### Scoop
 
-[Scoop][6] is a command-line installer for Windows. To install using scoop run:
+[Scoop][6] is a command-line installer for Windows. To install using scoop:
 
 ```sh
+# First, enable the extras bucket if not done yet:
+scoop bucket add extras
+
+# Afterwards you should be able to install pragtical:
 scoop install pragtical
 ```
 
