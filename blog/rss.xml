@@ -4,10 +4,95 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Sun, 11 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 26 Aug 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.4.3 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v343-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v343-release</guid>
+            <pubDate>Mon, 26 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release fixes various issues reported on GitHub, and introduces]]></description>
+            <content:encoded><![CDATA[<p>This release fixes various issues reported on GitHub, and introduces
+some new features and enhacements. The big ticket for this release is overall
+better scaling behaviour. macOS builds now default to the plain software
+renderer which is faster. This is possible because various releases ago (almost
+a year?) we introduced functionality to detect the display scale at runtime,
+meaning that scaling should be properly performed Lua side instead of relying
+on the renderer. The SDL Renderer (aka "hardware renderer") is still available
+but since the <strong>glyph loading optimizations</strong>, it needs some adjustments to
+better handle the positions and sizes of fonts when the scale is &gt;= 2.</p>
+<p>So, this release improves upon previous scaling code work and fixes some related
+issues. Finally, widgets now behave better when the scale changes.</p>
+<p>Thanks to everyone who reported issues and helped with testing!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.3" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v343-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v343-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Add cli flag to allow forking editor to background
+(<a href="https://github.com/pragtical/pragtical/pull/132" target="_blank" rel="noopener noreferrer">#132</a>)</p>
+</li>
+<li>
+<p>Scale plugin: added commands and bindings to allow zooming/scaling the code
+independently of the user interface.
+(<a href="https://github.com/pragtical/pragtical/pull/150" target="_blank" rel="noopener noreferrer">#150</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v343-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
+<ul>
+<li>Widgets: moved most calculations out of <code>update</code> to specialized
+<code>update_size_position</code> function that gets called mostly only when neccesary.
+Also improved widgets size/position calculations for better scaling.
+(<a href="https://github.com/pragtical/widget/pull/9" target="_blank" rel="noopener noreferrer">#9</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v343-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Patched some luajit functions to support unicode file names
+and strings on windows
+(<a href="https://github.com/pragtical/pragtical/pull/138" target="_blank" rel="noopener noreferrer">#138</a>)</p>
+</li>
+<li>
+<p>Always select first result on findfile plugin
+(<a href="https://github.com/pragtical/pragtical/pull/141" target="_blank" rel="noopener noreferrer">#141</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v343-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Use PRAGTICAL_USERDIR instead of HOME on <code>scripts/run-local</code> because
+XDG_CONFIG_HOME been set has priority over HOME.
+(<a href="https://github.com/pragtical/pragtical/pull/133" target="_blank" rel="noopener noreferrer">#133</a>)</p>
+</li>
+<li>
+<p>Fix scaling logic regressions, now macOS builds are configure by default
+with the software renderer since current display scale is detected at startup
+and applied on the whole interface, also the plain software renderer is faster.
+(<a href="https://github.com/pragtical/pragtical/pull/134" target="_blank" rel="noopener noreferrer">#134</a>)</p>
+</li>
+<li>
+<p>Return actual scale on <code>system.get_scale()</code> for macOS too
+(<a href="https://github.com/pragtical/pragtical/pull/143" target="_blank" rel="noopener noreferrer">#143</a>)</p>
+</li>
+<li>
+<p>Minor correction on search_ui replace button position
+(<a href="https://github.com/pragtical/pragtical/pull/149" target="_blank" rel="noopener noreferrer">#149</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v343-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Fix rolling builds staying as draft
+(<a href="https://github.com/pragtical/pragtical/commit/a0d062f5e9017f2f1878daf42dd197a007ff45b6" target="_blank" rel="noopener noreferrer">a0d062f5</a>)</p>
+</li>
+<li>
+<p>Remove widget submodule in favor of subproject
+(<a href="https://github.com/pragtical/pragtical/pull/148" target="_blank" rel="noopener noreferrer">#148</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.4.2 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v342-release</link>
