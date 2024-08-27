@@ -4,10 +4,55 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Mon, 26 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 27 Aug 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.4.4 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v344-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v344-release</guid>
+            <pubDate>Tue, 27 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[This is a SCALE bug fix release! Release explanation slightly adapted from]]></description>
+            <content:encoded><![CDATA[<p>This is a <strong>SCALE bug fix</strong> release! Release explanation slightly adapted from
+<a href="https://github.com/pragtical/pragtical/pull/152" target="_blank" rel="noopener noreferrer">#152</a></p>
+<p>Since new renwindow api (that allows initializing windows directly in Lua) the
+main window creation was moved to core.init but, the scale detection code was
+still been performed before. This meant that loading the default system style
+was using the incorrect scale causing issues that would only be resolved by
+manually re-scaling the interface.</p>
+<p>Previously, tried to wrongly fix the issue by delegating the responsibility to
+the scale plugin but that wasn't the correct solution (didn't notice what
+explained on first paragraph until later 😓). Now we defer style loading until
+main window is created and the default system scale properly detected, this
+ensures that the correct scale is set before performing any style calculations
+that rely on it.</p>
+<p>Now besides updating scale on the displaychanged event it also updates it when
+the window is resized, but we limited the amount of scale checks on resize to
+prevent crashes on X11.</p>
+<p>Hopefully these changes finally tackle the scale issues 😄</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.4" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v344-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v344-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Adjust scale retrieveal on startup
+(<a href="https://github.com/pragtical/pragtical/pull/152" target="_blank" rel="noopener noreferrer">#152</a>)</p>
+</li>
+<li>
+<p>When scale changes rescale item sizes on LogView
+(<a href="https://github.com/pragtical/pragtical/pull/154" target="_blank" rel="noopener noreferrer">#154</a>)</p>
+</li>
+<li>
+<p>Updated widgets to latest with smaller rescale fix
+(<a href="https://github.com/pragtical/pragtical/pull/155" target="_blank" rel="noopener noreferrer">#155</a>)</p>
+</li>
+<li>
+<p>Rescale the EmptyView icons font on instantiation
+(<a href="https://github.com/pragtical/pragtical/pull/156" target="_blank" rel="noopener noreferrer">#156</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.4.3 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v343-release</link>
