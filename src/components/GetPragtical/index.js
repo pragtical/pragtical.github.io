@@ -16,14 +16,28 @@ function GetDownloadsMap(version) {
               AppImage
             </a>
             &nbsp;
-            <code>64 bit</code>
+            <code>x86_64</code>
           </li>
           <li className={styles.li}>
             <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-linux-x86_64-portable.tar.gz`}>
               Portable ZIP
             </a>
             &nbsp;
-            <code>64 bit</code>
+            <code>x86_64</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-aarch64.AppImage`}>
+              AppImage
+            </a>
+            &nbsp;
+            <code>AArch64</code>
+          </li>
+          <li className={styles.li}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-linux-aarch64-portable.tar.gz`}>
+              Portable ZIP
+            </a>
+            &nbsp;
+            <code>AArch64</code>
           </li>
         </nav>
       ),
