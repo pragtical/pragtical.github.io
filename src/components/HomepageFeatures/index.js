@@ -18,7 +18,7 @@ const FeatureList = [
     Svg: require('@mdi/svg/svg/lightning-bolt.svg').default,
     description: (
       <>
-        Syntax highlighting, mulitple cursors, command palette and many more.
+        Syntax highlighting, multiple cursors, command palette and many more.
         LSP and other features are available as plugins.
       </>
     ),
