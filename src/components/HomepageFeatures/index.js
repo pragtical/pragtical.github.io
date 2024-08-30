@@ -8,7 +8,7 @@ const FeatureList = [
     Svg: require('@mdi/svg/svg/feather.svg').default,
     description: (
       <>
-        30 MB of RAM, 5 MB of disk space. Pragtical runs on many devices
+        ~50 MB of RAM, ~10 MB of disk space. Pragtical runs on many devices
         without performance issues.
       </>
     ),
