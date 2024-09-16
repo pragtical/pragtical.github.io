@@ -88,6 +88,11 @@ const config = {
           {to: '/download', label: 'Get', position: 'left'},
           {to: '/docs/category/about-pragtical', label: 'About', position: 'right'},
           {
+            href: 'https://discord.gg/RC9ZHY8y',
+            label: 'Discord',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/pragtical',
             label: 'GitHub',
             position: 'right',
@@ -112,6 +117,10 @@ const config = {
                 label: 'Developer Guide',
                 to: '/docs/category/developer-guide',
               },
+              {
+                label: 'Faq',
+                to: '/docs/about/faq'
+              },
             ],
           },
           {
@@ -128,10 +137,13 @@ const config = {
             ],
           },
           {
-            title: 'More',
+            title: 'Community',
             items: [
               {label: 'Contributors', to: '/docs/about/contributors'},
-              {label: 'Faq', to: '/docs/about/faq'},
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/RC9ZHY8y',
+              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/pragtical',
