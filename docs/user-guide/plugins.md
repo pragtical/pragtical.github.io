@@ -36,22 +36,28 @@ User plugins should be installed into `USERDIR/plugins`.
 
 ## Plugin managers
 
-Recently, we've standardized various aspects of the plugin
-repository so that plugin managers can be built to install
-and manage plugins.
+Recently, we've standardized various aspects of the plugin repository so that
+plugin managers can be built to install and manage plugins.
 
-Currently, there are two plugin managers made for Pragtical:
+Currently, there are two plugin managers made for Pragtical. These two plugin
+managers use vastly different ways of plugin management, so make sure to
+consult the main page on each of them for exact instructions.
 
-1. [ppm] - a plugin manager more akin to distro package managers such as `apt`
-and `dnf`. ppm is currently shipped on pragtical official releases and a
-GUI for installing plugins is shipped as part of the editor, also it is
-accessible from the command line interface by invoking `pragtical pm`.
-2. [Miq] - a declarative plugin manager that allows user to declare plugins and
+### PPM
+
+[ppm] is more akin to distro package managers such as `apt` and `dnf`. ppm is
+currently shipped on pragtical official releases and a GUI for installing
+plugins is shipped as part of the editor, also it is accessible from the command
+line interface by invoking `pragtical pm`.
+
+<video autoplay muted loop style={{width: '100%'}} controls>
+  <source src="/videos/user-guide/plugin-manager.mp4"/>
+</video>
+
+### Miq
+
+[Miq] is a declarative plugin manager that allows user to declare plugins and
 install/update them all at once.
-
-These two plugin managers use vastly different ways of
-plugin management, so please consult the main page for
-each plugin manager for exact instructions.
 
 ## Installing plugins
 
