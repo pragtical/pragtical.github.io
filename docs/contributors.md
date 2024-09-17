@@ -33,7 +33,30 @@ or indirectly. You can get the contributors for a particular release on the
 | [Robert Štojs]      | Continuous integration configuration.
 | [Aqil Contractor]   | Text rendering enhancement, bug hunter and tester.
 
+## Contributors Graph
 
+All contributions matter, special thanks to all our contributors!
+
+### Core
+[![core-contrib-image]][core-contrib]
+
+### Plugins
+[![plugins-contrib-image]][plugins-contrib]
+
+### Colors
+[![colors-contrib-image]][colors-contrib]
+
+---
+
+Made with [contrib.rocks](https://contrib.rocks).
+
+
+[core-contrib]:       https://github.com/pragtical/pragtical/graphs/contributors
+[core-contrib-image]: https://contrib.rocks/image?repo=pragtical/pragtical
+[plugins-contrib]:       https://github.com/pragtical/plugins/graphs/contributors
+[plugins-contrib-image]: https://contrib.rocks/image?repo=pragtical/plugins
+[colors-contrib]:       https://github.com/pragtical/colors/graphs/contributors
+[colors-contrib-image]: https://contrib.rocks/image?repo=pragtical/colors
 [releases page]:      https://github.com/pragtical/pragtical/releases
 [rxi]:                https://github.com/rxi
 [Francesco]:          https://github.com/franko
