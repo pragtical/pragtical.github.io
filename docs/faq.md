@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 6
 description: A list of frequently-asked questions.
 ---
 

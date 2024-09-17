@@ -79,14 +79,26 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left'
+          },
           {
             to: '/plugins',
             label: 'Plugins',
             position: 'left'
           },
-          {to: '/download', label: 'Get', position: 'left'},
-          {to: '/docs/category/about-pragtical', label: 'About', position: 'right'},
+          {
+            to: '/download',
+            label: 'Get',
+            position: 'left'
+          },
+          {
+            to: '/docs/intro',
+            label: 'About',
+            position: 'right'
+          },
           {
             href: 'https://discord.gg/RC9ZHY8y',
             label: 'Discord',
@@ -119,7 +131,7 @@ const config = {
               },
               {
                 label: 'Faq',
-                to: '/docs/about/faq'
+                to: '/docs/faq'
               },
             ],
           },
@@ -139,7 +151,10 @@ const config = {
           {
             title: 'Community',
             items: [
-              {label: 'Contributors', to: '/docs/about/contributors'},
+              {
+                label: 'Contributors',
+                to: '/docs/contributors'
+              },
               {
                 label: 'Discord',
                 href: 'https://discord.gg/RC9ZHY8y',

@@ -9,9 +9,38 @@ description: Welcome to Pragtical!
 
 ![screenshot](/img/gallery/1.png)
 
-**Pragtical** is a code editor which was forked from [Lite XL] (also a fork of [lite])
-written mostly in **Lua** with a focus on been practical rather than minimalist.
-The name of the editor is a mixture of the words `pragmatic` and `practical`,
+Pragtical is a cross-platform code editor with a modern graphical interface
+developed using C and Lua(JIT), which utilizes SDL for input management and
+user interface rendering. It is a lighter alternative to web-based editors like
+VSCode and can be easily extended or themed with plugins written in Lua.
+Currently, it has syntax support for various programming languages (contributed
+by the community), adding new ones is straightforward. Some of its core
+features include: auto-completion, easy graphical configuration or advanced
+configuration with Lua, support for multiple file encodings, multi-threaded
+project-wide find and replace, a command palette for a keyboard-focused workflow,
+graphical and keyboard-driven file navigation, customizability of key bindings,
+and more. Other features shipped as plugins include:
+
+- [LSP](/plugins?plugin=lsp) (implementing Language Server Protocol support for intellisense)
+- [EditorConfig](/plugins?plugin=editorconfig)
+- [Integrated Terminal](/plugins?plugin=terminal)
+- [TreeSitter](/plugins?plugin=evergreen)
+- [Code Formatters](/plugins?plugin=formatter)
+- [Source Control Management](/plugins?plugin=scm) (Git and Fossil)
+- and more (https://github.com/pragtical/plugins)...
+
+## History
+
+Originally, **Pragtical** was forked from [Lite XL] (which is also a fork of [lite])
+with a focus on being practical rather than minimalist. Over time, it has gained
+its own identity with various features and improvements not available in its
+predecessors. If you're interested, some of the reasons for the fork are explained
+[here](https://github.com/pragtical/pragtical/issues/6#issuecomment-1581650875).
+
+## Name
+
+The name was chosen as a counter-response to the approach taken by its
+immediate predecessor. It is a mixture of the words `pragmatic` and `practical`,
 two words that properly define our development approach as follows:
 
 * governed through practice or action, rather than theory, speculation or idealism

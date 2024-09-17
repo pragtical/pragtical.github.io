@@ -45,9 +45,8 @@ function HomepageHeader() {
 
 function HomeGallery() {
   return (
-    <section className={clsx('hero hero--primary-dark', styles.heroBanner)}>
+    <section className={styles.heroBanner}>
       <div className="container">
-        <h1>Gallery</h1>
         <ImageGallery items={images} />
       </div>
     </section>
@@ -70,8 +69,8 @@ export default function Home() {
       description={`${siteConfig.tagline}`}>
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
         <HomeGallery />
+        <HomepageFeatures />
       </main>
     </Layout>
   );

@@ -81,7 +81,7 @@ function Feature({Svg, title, description}) {
 
 export default function HomepageFeatures() {
   return (
-    <section className={styles.features}>
+    <section className={clsx('hero hero--primary-dark', styles.features)}>
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
