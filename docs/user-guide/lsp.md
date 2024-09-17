@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-description: Configuring Language Servers for Intellisense in Pragtical
+description: Configuring Language Servers for Intellisense in Pragtical.
 ---
 
 import Tabs from '@theme/Tabs';
