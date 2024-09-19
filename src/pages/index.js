@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import ImageGallery from 'react-image-gallery';
@@ -14,14 +15,17 @@ const images = [
   {
     original: '/img/gallery/1.png',
     thumbnail: '/img/gallery/1-small.png',
+    description: 'Code completion with LSP'
   },
   {
     original: '/img/gallery/2.png',
     thumbnail: '/img/gallery/2-small.png',
+    description: 'Easily configure the editor'
   },
   {
     original: '/img/gallery/3.png',
     thumbnail: '/img/gallery/3-small.png',
+    description: 'Quickly find project files'
   },
 ];
 
@@ -47,7 +51,7 @@ function HomeGallery() {
   return (
     <section className={styles.heroBanner}>
       <div className="container">
-        <ImageGallery items={images} />
+        <ImageGallery items={images} autoPlay={true} />
       </div>
     </section>
   );
@@ -67,6 +71,9 @@ export default function Home() {
     <Layout
       title="Home"
       description={`${siteConfig.tagline}`}>
+      <Head>
+        <title>Pragtical Code Editor</title>
+      </Head>
       <HomepageHeader />
       <main>
         <HomeGallery />
