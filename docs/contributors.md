@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 description: A list of contributors that contributed to Pragtical.
 ---
 
