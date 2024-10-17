@@ -50,6 +50,12 @@ scoop bucket add extras
 scoop install pragtical
 ```
 
+:::note Issues when installing plugins using ppm and pragtical installed from scoop?
+Make sure to check the [plugins -> troubleshooting] section for an
+explanation and solution to this issue.
+:::
+
+[plugins -> troubleshooting]: /docs/user-guide/plugins#ppm-installed-from-scoop-fails-to-install-plugins
 [1]: https://github.com/pragtical/pragtical/releases
 [2]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe
 [3]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip

@@ -181,6 +181,42 @@ To fix you can try the following steps:
 3. Re-open the editor, launch the plugin manager and try again.
 4. If this doesn't solves the problem open a [plugin manager issue].
 
+### PPM Installed from Scoop Fails to Install Plugins
+
+If you installed `ppm` and `pragtical` from Scoop and receive an error message
+when trying to install plugins, such as `can't find dependency`, it indicates
+that `ppm` was unable to locate the installation data files for `pragtical`.
+
+Scoop adds the following directories to the environment variable `PATH`:
+
+* `C:\ProgramData\scoop\shims` (for globally installed apps)
+* `C:\Users\<YourUsername>\scoop\shims` (for user-installed apps)
+
+It installs wrapper executables in these directories that redirect to the
+actual application installation paths, which can be:
+
+* `C:\ProgramData\scoop\apps\pragtical\current` (globally installed)
+* `C:\Users\<YourUsername>\scoop\apps\pragtical\current` (user installed)
+
+This strategy of using redirector executable wrappers can cause the plugin
+manager to fail when searching for the data files. The `pragtical.exe`
+redirector binary located in `C:\ProgramData\scoop\shims` or
+`C:\Users\<YourUsername>\scoop\shims` does not reside alongside the core Lua
+runtime files.
+
+To successfully install plugins that have explicit dependencies on core plugins,
+you can use the `--datadir` option to specify the installation path of
+`pragtical` data files. For example, to install `lsp_quicklintjs`, which depends
+on the core plugin `language_js`, you can run:
+
+```sh
+ppm install lsp_quicklintjs --datadir='C:\ProgramData\scoop\apps\pragtical\current\data'
+```
+
+Another workaround is to prepend `C:\ProgramData\scoop\apps\pragtical\current`
+or `C:\Users\<YourUsername>\scoop\apps\pragtical\current` to the PATH environment
+variable. This allows the plugin manager to properly locate the data directory,
+so you won't need to specify `--datadir` each time you call `ppm`.
 
 [plugin manager issue]: https://github.com/pragtical/plugin-manager
 [plugins repository]: https://github.com/pragtical/plugins
