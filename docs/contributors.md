@@ -16,6 +16,7 @@ or indirectly. You can get the contributors for a particular release on the
 | [jgmdev]            | Pragtical maintainer, LSP, Settings/Widget toolkit, EditorConfig, SCM, performance improvements and many other contributions.
 | [juliardi]          | Pragtical advocate and plugin developer.
 | [k8ieone]           | Pragtical plugin manager packager for ArchLinux.
+| [AmerM137]          | Pragtical tester and issue reporter.
 | [Adam]              | Lite XL maintainer, terminal, plugin manager, renderer enhancements, multi-language syntax highlighting and many other improvements.
 | [Guldoman]          | Lite XL maintainer, IME support, various bug fixes and performance improvements.
 | [Takase]            | Lite XL maintainer, Documentation, Font API optimizations, NagView, Process API improvements and various bug fixes for Windows.
@@ -63,6 +64,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 [jgmdev]:             https://github.com/jgmdev
 [juliardi]:           https://github.com/juliardi
 [k8ieone]:            https://github.com/k8ieone
+[AmerM137]:           https://github.com/AmerM137
 [Adam]:               https://github.com/adamharrison
 [Guldoman]:           https://github.com/guldoman
 [Takase]:             https://github.com/takase1121
