@@ -4,10 +4,175 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Wed, 09 Oct 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 14 Mar 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.5.2 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v352-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v352-release</guid>
+            <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Some fixes, build system corrections, and some new features!]]></description>
+            <content:encoded><![CDATA[<p>Some fixes, build system corrections, and some new features!</p>
+<p>This release consists mostly of fixes with some minor new additions. One
+of the relevant changes is proper handling of BOM on opened documents with
+a new status bar indicator, which lets you know if the current document has a
+BOM as shown on the screenshot:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/93226cf1-dd91-4019-bf9a-8acd010b2ef7" alt="bom-statusbar" class="img_ev3q"></p>
+<p>Another notable change is the addition of an <code>Advanced</code> settings pane that lets
+you modify the garbage collector behaviour. Modifying these values lets you
+choose between a more responsive text editor or a more memory efficient one:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/9de6ea72-6678-4260-b172-67883f47e235" alt="gc-settings" class="img_ev3q"></p>
+<p>Also, more syntax annotation types where added in order to offer more
+flexibility when providing doc comments highlighting support on language files.
+This is the case of <code>language_php</code> which is now making use of them:</p>
+<p><img loading="lazy" alt="language-php-annotations" src="https://pragtical.dev/assets/images/language-php-annotations-9f291537bc9cf80e845ffcae36617dc8.png" width="1082" height="497" class="img_ev3q"></p>
+<p>Finally, this release incorporates various upstream changes, the most notable
+of them being tab stops support!</p>
+<p><img loading="lazy" alt="tab-stops" src="https://pragtical.dev/assets/images/tab-stops-c3afdfca37a619555e4a9a8c233bdec6.png" width="773" height="146" class="img_ev3q"></p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.5.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v352-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v352-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Respect multi-byte sequences on SHIFT_JIS ¥ handling
+(<a href="https://github.com/pragtical/pragtical/pull/202" target="_blank" rel="noopener noreferrer">#202</a>)</p>
+</li>
+<li>
+<p>Explicitly include limits.h on utf8 lib
+(<a href="https://github.com/pragtical/pragtical/pull/207" target="_blank" rel="noopener noreferrer">#207</a>)</p>
+</li>
+<li>
+<p>Fix treeview new dir/folder path suggestions
+(<a href="https://github.com/pragtical/pragtical/pull/208" target="_blank" rel="noopener noreferrer">#208</a>)</p>
+</li>
+<li>
+<p>Explicitly added missing headers
+(<a href="https://github.com/pragtical/pragtical/pull/209" target="_blank" rel="noopener noreferrer">#209</a>)</p>
+</li>
+<li>
+<p>Also redirect stdin to console on windows
+(<a href="https://github.com/pragtical/pragtical/pull/206" target="_blank" rel="noopener noreferrer">#206</a>)</p>
+</li>
+<li>
+<p>Fix handling of documents Bytes Order Mark (BOM)
+(<a href="https://github.com/pragtical/pragtical/pull/218" target="_blank" rel="noopener noreferrer">#218</a>)</p>
+</li>
+<li>
+<p>Silence shmem API compiler warnings
+(<a href="https://github.com/pragtical/pragtical/pull/223" target="_blank" rel="noopener noreferrer">#223</a>)</p>
+</li>
+<li>
+<p>Fix invalid size given to _wgetcwd
+(<a href="https://github.com/pragtical/pragtical/pull/227" target="_blank" rel="noopener noreferrer">#227</a>)</p>
+</li>
+<li>
+<p>Disable a compatibility io overwrite on LuaJIT
+(<a href="https://github.com/pragtical/pragtical/pull/229" target="_blank" rel="noopener noreferrer">#229</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v352-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Bump minimum required meson version
+(<a href="https://github.com/pragtical/pragtical/pull/217" target="_blank" rel="noopener noreferrer">#217</a>)</p>
+</li>
+<li>
+<p>Disabled addition of open_ext plugin on CI
+(<a href="https://github.com/pragtical/pragtical/pull/219" target="_blank" rel="noopener noreferrer">#219</a>)</p>
+</li>
+<li>
+<p>Fix msys CI build
+(<a href="https://github.com/pragtical/pragtical/pull/221" target="_blank" rel="noopener noreferrer">#221</a>)</p>
+</li>
+<li>
+<p>Perform Lua unicode patching directly on Meson
+(<a href="https://github.com/pragtical/pragtical/pull/225" target="_blank" rel="noopener noreferrer">#225</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v352-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Added more annotation subtypes
+(<a href="https://github.com/pragtical/pragtical/pull/220" target="_blank" rel="noopener noreferrer">#220</a>)</p>
+</li>
+<li>
+<p>Sync lua-compat-5.3 with upstream
+(<a href="https://github.com/pragtical/pragtical/pull/224" target="_blank" rel="noopener noreferrer">#224</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="https://pragtical.dev/blog/pragtical-v352-release#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<ul>
+<li>Perform collectgarbage step instead of collect
+(<a href="https://github.com/pragtical/pragtical/pull/226" target="_blank" rel="noopener noreferrer">#226</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v352-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>Implement logic for tracking target window
+(<a href="https://github.com/lite-xl/lite-xl/pull/1891" target="_blank" rel="noopener noreferrer">#1891</a>)</p>
+</li>
+<li>
+<p>allocator: add arena_allocator</p>
+</li>
+<li>
+<p>utfconv: add functions that use arena_allocator</p>
+</li>
+<li>
+<p>process: migrate arg validation and checking to Lua</p>
+</li>
+<li>
+<p>Additional small fixes for windows as part of the process API move to lua.</p>
+</li>
+<li>
+<p>Add support for relative requires
+(<a href="https://github.com/lite-xl/lite-xl/pull/1634" target="_blank" rel="noopener noreferrer">#1634</a>)</p>
+</li>
+<li>
+<p>Fix multi-type usage in delimited patterns
+(<a href="https://github.com/lite-xl/lite-xl/pull/1740" target="_blank" rel="noopener noreferrer">#1740</a>)</p>
+</li>
+<li>
+<p>Add inclusive parameter to Doc<!-- -->:get_text<!-- -->
+(<a href="https://github.com/lite-xl/lite-xl/pull/1586" target="_blank" rel="noopener noreferrer">#1586</a>)</p>
+</li>
+<li>
+<p>Add minimum_thumb_size and {contracted,expanded}_scrollbar_margin to <code>Scrollbar</code>
+(<a href="https://github.com/lite-xl/lite-xl/pull/1589" target="_blank" rel="noopener noreferrer">#1589</a>)</p>
+</li>
+<li>
+<p>Format renderer font scale code to be actually readable</p>
+</li>
+<li>
+<p>check item type before creating input text
+(<a href="https://github.com/lite-xl/lite-xl/pull/1904" target="_blank" rel="noopener noreferrer">#1904</a>)</p>
+</li>
+<li>
+<p>docview: prevent overscroll when DocView size is less than lh * 2
+(<a href="https://github.com/lite-xl/lite-xl/pull/1971" target="_blank" rel="noopener noreferrer">#1971</a>)</p>
+</li>
+<li>
+<p>process: do not return nil until process exited
+(<a href="https://github.com/lite-xl/lite-xl/pull/1973" target="_blank" rel="noopener noreferrer">#1973</a>)</p>
+</li>
+<li>
+<p>process: call poll_process when getting returncode</p>
+</li>
+<li>
+<p>feat: add support for tab stops
+(<a href="https://github.com/lite-xl/lite-xl/pull/1945" target="_blank" rel="noopener noreferrer">#1945</a>)</p>
+</li>
+<li>
+<p>Update CSS plugin to support more units
+(<a href="https://github.com/lite-xl/lite-xl/pull/2010" target="_blank" rel="noopener noreferrer">#2010</a>)</p>
+</li>
+<li>
+<p>Added in stdlib
+(<a href="https://github.com/lite-xl/lite-xl/pull/2017" target="_blank" rel="noopener noreferrer">#2017</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.5.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v351-release</link>
