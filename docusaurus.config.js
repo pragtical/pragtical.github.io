@@ -100,7 +100,7 @@ const config = {
             position: 'right'
           },
           {
-            href: 'https://discord.gg/jAAqT7eYEN',
+            href: 'https://discord.gg/8V2yJtn3Fc',
             label: 'Discord',
             position: 'right',
           },
@@ -157,7 +157,7 @@ const config = {
               },
               {
                 label: 'Discord',
-                href: 'https://discord.gg/jAAqT7eYEN',
+                href: 'https://discord.gg/8V2yJtn3Fc',
               },
               {
                 label: 'GitHub',
