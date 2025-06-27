@@ -1,5 +1,5 @@
 ---
-sidebar_position: 20
+sidebar_position: 21
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -172,11 +172,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.contextmenu:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -199,7 +197,7 @@ Hides the context menu and performs the command if an item is selected.
 Draws the context menu.
 
 This wraps `ContextMenu:draw_context_menu()`.
-See: \[core.contextmenu.draw_context_menu\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/contextmenu.lua#268#9)
+See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#270#9)
 
 ---
 

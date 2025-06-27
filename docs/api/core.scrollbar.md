@@ -1,5 +1,5 @@
 ---
-sidebar_position: 32
+sidebar_position: 34
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -38,6 +38,16 @@ local scrollbar = require "core.scrollbar"
 ```
 
 Start or End (left to right, top to bottom)
+
+---
+
+## contracted_margin
+
+```lua
+(field) contracted_margin: number?
+```
+
+Override the default value specified by `style.contracted_scrollbar_margin`
 
 ---
 
@@ -91,6 +101,16 @@ Private. Used to keep track of animations
 
 ---
 
+## expanded_margin
+
+```lua
+(field) expanded_margin: number?
+```
+
+Override the default value specified by `style.expanded_scrollbar_margin`
+
+---
+
 ## expanded_size
 
 ```lua
@@ -118,6 +138,16 @@ Force the scrollbar status
 ```
 
 What is currently being hovered. `thumb` implies` track`
+
+---
+
+## minimum_thumb_size
+
+```lua
+(field) minimum_thumb_size: number?
+```
+
+Override the default value specified by `style.minimum_thumb_size`
 
 ---
 
@@ -169,6 +199,16 @@ Start or End (left to right, top to bottom)
 
 ---
 
+### contracted_margin
+
+```lua
+(field) contracted_margin: number?
+```
+
+Override the default value specified by `style.contracted_scrollbar_margin`
+
+---
+
 ### contracted_size
 
 ```lua
@@ -186,6 +226,16 @@ Override the default value specified by `style.scrollbar_size`
 ```
 
 Vertical or Horizontal
+
+---
+
+### expanded_margin
+
+```lua
+(field) expanded_margin: number?
+```
+
+Override the default value specified by `style.expanded_scrollbar_margin`
 
 ---
 
@@ -209,6 +259,16 @@ Force the scrollbar status
 
 ---
 
+### minimum_thumb_size
+
+```lua
+(field) minimum_thumb_size: number?
+```
+
+Override the default value specified by `style.minimum_thumb_size`
+
+---
+
 ## __call
 
 ```lua
@@ -223,11 +283,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.scrollbar:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -236,9 +294,9 @@ Metamethod to get a string representation of an object.
 ```lua
 (method) core.scrollbar:_get_thumb_rect_normal()
   -> number
-  2. integer
+  2. number
   3. number
-  4. integer
+  4. number
 ```
 
 ---

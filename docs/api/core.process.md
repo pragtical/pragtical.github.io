@@ -1,5 +1,5 @@
 ---
-sidebar_position: 29
+sidebar_position: 31
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -75,7 +75,7 @@ that allows you to read and write data easily.
 ### fd
 
 ```lua
-(field) fd: process.streamtype
+(field) fd: `process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT`
 ```
 
 ---
@@ -94,12 +94,15 @@ that allows you to read and write data easily.
 (field) process: process
 ```
 
+Functionality that allows you to launch subprocesses and read
+or write to them in a non-blocking fashion.
+
 ---
 
 ### new
 
 ```lua
-function process.stream.new(proc: process, fd: process.streamtype)
+function process.stream.new(proc: process, fd: `process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT`)
   -> process.stream
 ```
 
@@ -108,6 +111,13 @@ Creates a stream from a process.
 @*param* `proc` — The process to wrap.
 
 @*param* `fd` — The standard stream of the process to wrap.
+
+```lua
+fd:
+    | `process.STREAM_STDIN`
+    | `process.STREAM_STDOUT`
+    | `process.STREAM_STDERR`
+```
 
 ---
 
@@ -222,7 +232,7 @@ The number of seconds to yield in a coroutine. Defaults to `1/config.fps`.
 ## process.start
 
 ```lua
-function process.start(...any)
+function process.start(command: any, options: any)
   -> table
 ```
 
@@ -241,7 +251,7 @@ Closes the stream and its underlying resources.
 ## process.stream.new
 
 ```lua
-function process.stream.new(proc: process, fd: process.streamtype)
+function process.stream.new(proc: process, fd: `process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT`)
   -> process.stream
 ```
 
@@ -250,6 +260,13 @@ Creates a stream from a process.
 @*param* `proc` — The process to wrap.
 
 @*param* `fd` — The standard stream of the process to wrap.
+
+```lua
+fd:
+    | `process.STREAM_STDIN`
+    | `process.STREAM_STDOUT`
+    | `process.STREAM_STDERR`
+```
 
 ---
 

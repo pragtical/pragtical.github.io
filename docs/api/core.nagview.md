@@ -1,5 +1,5 @@
 ---
-sidebar_position: 26
+sidebar_position: 28
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -255,11 +255,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.nagview:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -344,7 +342,7 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.nagview:get_buttons_height()
-  -> unknown
+  -> number
 ```
 
 Buttons height without padding
@@ -397,7 +395,7 @@ The two methods below are duplicated from DocView
 
 ```lua
 (method) core.nagview:get_line_text_y_offset()
-  -> unknown
+  -> number
 ```
 
 ---

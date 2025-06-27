@@ -1,5 +1,5 @@
 ---
-sidebar_position: 15
+sidebar_position: 16
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -49,6 +49,26 @@ Application version
 ```
 
 List of registered commands
+
+---
+
+## last_command
+
+```lua
+(field) last_command: string
+```
+
+The command that was executed on last parse.
+
+---
+
+## unhandled_arguments
+
+```lua
+(field) unhandled_arguments: table<integer, string>
+```
+
+List of arguments that weren't handled on last parse.
 
 ---
 
@@ -146,6 +166,16 @@ The minimum amount of arguments required for the command
 
 ---
 
+### skip_arguments_check
+
+```lua
+(field) skip_arguments_check: boolean?
+```
+
+Do not perform invalid arguments checking for this command.
+
+---
+
 ### subcommands
 
 ```lua
@@ -217,6 +247,26 @@ Data type of the flag if an argument/value can be given to it
 ```
 
 Value assigned to the flag
+
+---
+
+## core.cli.sortedcommand
+
+### data
+
+```lua
+(field) data: core.cli.command
+```
+
+Representation of a command line subcommand.
+
+---
+
+### name
+
+```lua
+(field) name: string
+```
 
 ---
 

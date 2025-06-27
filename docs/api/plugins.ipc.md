@@ -1,5 +1,5 @@
 ---
-sidebar_position: 42
+sidebar_position: 44
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -127,6 +127,8 @@ local ipc = require "plugins.ipc"
 ```lua
 (field) shmem: shmem?
 ```
+
+Functionality that allows to share data between processes.
 
 ---
 

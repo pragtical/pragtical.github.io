@@ -1,5 +1,5 @@
 ---
-sidebar_position: 16
+sidebar_position: 17
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -58,8 +58,8 @@ The function accepts a table containing a list of commands
 and their functions. 
 If a command already exists, it will be replaced.
 See:
-  * \[core.command.predicate\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#28#10)
-  * \[core.command.command_name\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#35#10)
+  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
+  * \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
 
 ---
 
@@ -86,7 +86,8 @@ that is internally used to dispatch and execute commands.
 This function should not be called manually.
 
 @*param* `predicate` — If nil, the predicate always evaluates to true.
-See: \[core.command.predicate\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#28#10)
+
+See: \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
 
 ---
 
@@ -129,9 +130,10 @@ Otherwise, the arguments passed into this function are passed directly
 to the command.
 
 @*return* — true if the command is performed successfully.
+
 See:
-  * \[core.command.predicate\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#28#10)
-  * \[core.command.predicate_function\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#12#10)
+  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
+  * \[core.command.predicate_function\](file:///usr/share/pragtical/core/command.lua#12#10)
 
 ---
 
@@ -146,7 +148,7 @@ Prettifies the command name.
 
 This function adds a space between the colon and the command name,
 replaces dashes with spaces and capitalizes the command appropriately.
-See: \[core.command.command_name\](file:///home/jgm/Development/GitHub/pragtical/pragtical/data/core/command.lua#35#10)
+See: \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
 
 ---
 

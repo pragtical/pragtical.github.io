@@ -1,5 +1,5 @@
 ---
-sidebar_position: 19
+sidebar_position: 20
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -77,6 +77,19 @@ Defaults to false.
 
 ---
 
+## dirmonitor_backend
+
+```lua
+(field) dirmonitor_backend: unknown
+```
+
+Specifies the dirmonitor backend to be used or nil
+to use the first available one.
+
+Defaults to nil
+
+---
+
 ## disable_blink
 
 ```lua
@@ -149,6 +162,18 @@ Note that setting this value to the screen's refresh rate
 does not eliminate screen tearing.
 
 Defaults to 60.
+
+---
+
+## hide_tabs
+
+```lua
+(field) hide_tabs: boolean
+```
+
+Always hide tabs even if multiple documents are open.
+
+The default is false.
 
 ---
 
@@ -248,6 +273,20 @@ allowed on a per frame iteration basis. Enable only when troubleshooting
 performance issues, since enabling this may degrade performance.
 
 Defaults to false.
+
+---
+
+## lower_input_latency
+
+```lua
+(field) lower_input_latency: boolean
+```
+
+When enabled, background tasks are processed more aggressively by waiting
+less for system events when events are received. Disable this option to
+reduce CPU usage.
+
+Defaults to true.
 
 ---
 

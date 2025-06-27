@@ -1,5 +1,5 @@
 ---
-sidebar_position: 39
+sidebar_position: 40
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -162,6 +162,8 @@ Which symbols to show on the suggestions list: global, local, related, none
 (field) color: string|renderer.color
 ```
 
+Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ### font
@@ -251,8 +253,6 @@ An optional callback called once when the symbol is hovered.
 ```lua
 (field) onselect: (fun(idx: integer, item: plugins.autocomplete.symbolinfo):boolean)?
 ```
-
-An optional callback called when the symbol is selected.
 
 ---
 

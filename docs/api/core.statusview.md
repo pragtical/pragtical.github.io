@@ -1,5 +1,5 @@
 ---
-sidebar_position: 33
+sidebar_position: 35
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -368,6 +368,8 @@ Flag to tell the item should be aligned on right side of status bar.
 (field) background_color: renderer.color|nil
 ```
 
+Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ### background_color_hover
@@ -375,6 +377,8 @@ Flag to tell the item should be aligned on right side of status bar.
 ```lua
 (field) background_color_hover: renderer.color|nil
 ```
+
+Array of bytes that represents a color used by the rendering functions.
 
 ---
 
@@ -503,11 +507,9 @@ Metamethod to allow using the object call as a constructor.
 ### __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.statusview.item:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -735,11 +737,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.statusview:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 

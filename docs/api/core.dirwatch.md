@@ -1,5 +1,5 @@
 ---
-sidebar_position: 21
+sidebar_position: 22
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -16,6 +16,14 @@ If a file or directory had changed, the callback is called with the correspondin
 ```lua
 local dirwatch = require "core.dirwatch"
 ```
+
+## last_modified
+
+```lua
+(field) last_modified: table
+```
+
+---
 
 ## monitor
 

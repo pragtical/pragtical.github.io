@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 12
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -7,6 +7,17 @@ sidebar_position: 11
 # system
 
 Utilites for managing current window, files and more.
+
+## get_time
+
+```lua
+(field) get_time: function|unknown
+```
+
+Get amount of iterations since the application was launched
+also known as SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency()
+
+---
 
 ## system.fileinfo
 
@@ -43,7 +54,7 @@ The directory is a symlink. This field is only set on Linux and on directories.
 ### type
 
 ```lua
-(field) type: "dir"|"file"
+(field) type: "dir"|"file"|nil
 ```
 
 Type of file
@@ -343,7 +354,7 @@ creates the directories on the given path.
 ## path_compare
 
 ```lua
-function system.path_compare(path1: string, type1: "dir"|"file", path2: string, type2: "dir"|"file")
+function system.path_compare(path1: string, type1: "dir"|"file"|nil, path2: string, type2: "dir"|"file"|nil)
   -> compare_result: boolean
 ```
 

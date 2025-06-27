@@ -1,5 +1,5 @@
 ---
-sidebar_position: 27
+sidebar_position: 29
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -168,11 +168,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.node:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -327,7 +325,7 @@ Check if the object inherits from the given type.
   2. number
   3. number
   4. number
-  5. unknown
+  5. number
 ```
 
 ---
@@ -376,11 +374,11 @@ Return two values for x and y axis and each of them is either falsy or a number.
 
 ```lua
 (method) core.node:get_scroll_button_rect(index: any)
-  -> unknown
+  -> number
   2. integer
-  3. unknown
-  4. unknown
-  5. unknown
+  3. number
+  4. number
+  5. number
 ```
 
 ---
@@ -410,7 +408,7 @@ Return two values for x and y axis and each of them is either falsy or a number.
   -> number
   2. integer
   3. number
-  4. unknown
+  4. number
   5. number
 ```
 

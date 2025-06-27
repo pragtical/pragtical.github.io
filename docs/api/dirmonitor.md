@@ -10,14 +10,27 @@ Functionality that allows to monitor a directory or file for changes
 using the native facilities provided by the current operating system
 for better efficiency and performance.
 
+## backends
+
+```lua
+function dirmonitor.backends()
+  -> table.
+```
+
+List all available dirmonitor backends
+
+---
+
 ## new
 
 ```lua
-function dirmonitor.new()
+function dirmonitor.new(backend?: string)
   -> dirmonitor
 ```
 
 Creates a new dirmonitor object.
+
+@*param* `backend` — Name of the dirmonitor backend to be used
 
 ---
 

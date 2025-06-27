@@ -1,5 +1,5 @@
 ---
-sidebar_position: 31
+sidebar_position: 33
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -256,11 +256,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.rootview:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -450,7 +448,8 @@ button:
     | 'left'
     | 'right'
 ```
-See: ~RootView~ ungrab_mouse
+
+See: ~RootView~ :ungrab_mouse
 
 ---
 
@@ -725,7 +724,8 @@ button:
     | 'left'
     | 'right'
 ```
-See: ~RootView~ grab_mouse
+
+See: ~RootView~ :grab_mouse
 
 ---
 

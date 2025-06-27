@@ -97,6 +97,14 @@ This is set to true if pragtical was compiled with luajit.
 
 ---
 
+## LUA_VERSION
+
+```lua
+global LUA_VERSION: number?
+```
+
+---
+
 ## MOD_VERSION_MAJOR
 
 ```lua
@@ -229,6 +237,17 @@ Utilities for encoding detection and conversion.
 
 ---
 
+## get_current_require_path
+
+```lua
+global get_current_require_path: function
+```
+
+Returns the current `require` path.
+See: \[require\](file:///tmp/lua-language-server-1000/instance.AxkW/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
+
+---
+
 ## global
 
 ```lua
@@ -321,14 +340,6 @@ global thread: thread
 Provides threading capabilities.
 
 [\[View Library\]](/docs/api/thread)
-
----
-
-## utf8
-
-```lua
-global utf8: table
-```
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 44
+sidebar_position: 46
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -70,7 +70,7 @@ Requires tokenization
 (field) width_override: (number|function)?
 ```
 
-):number
+():number
 
 ---
 

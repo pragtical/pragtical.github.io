@@ -13,7 +13,7 @@ Utilities for encoding detection and conversion.
 ### handle_from_bom
 
 ```lua
-(field) handle_from_bom: boolean
+(field) handle_from_bom: boolean?
 ```
 
 If applicable strips the byte order marks.
@@ -23,7 +23,7 @@ If applicable strips the byte order marks.
 ### handle_to_bom
 
 ```lua
-(field) handle_to_bom: boolean
+(field) handle_to_bom: boolean?
 ```
 
 If applicable adds the byte order marks.
@@ -33,7 +33,7 @@ If applicable adds the byte order marks.
 ### strict
 
 ```lua
-(field) strict: boolean
+(field) strict: boolean?
 ```
 
 When true fail if errors found.
@@ -44,8 +44,8 @@ When true fail if errors found.
 
 ```lua
 function encoding.convert(tocharset: "ARMSCII-8"|"BIG5"|"BIG5-HKSCS"|"CP866"|"CP932"...(+57), fromcharset: "ARMSCII-8"|"BIG5"|"BIG5-HKSCS"|"CP866"|"CP932"...(+57), text: string, options?: encoding.convert_options)
-  -> converted_text: string|nil
-  2. errmsg: string
+  -> converted_text: string?
+  2. errmsg: string?
 ```
 
 Converts the given text from one encoding into another.
@@ -186,8 +186,9 @@ fromcharset:
 
 ```lua
 function encoding.detect(filename: string)
-  -> charset: string|nil
-  2. errmsg: string
+  -> charset: string?
+  2. bom: string?
+  3. errmsg: string?
 ```
 
 Try and detect the encoding to best of capabilities for given file given or
@@ -199,8 +200,9 @@ returns nil and error message on failure.
 
 ```lua
 function encoding.detect_string(text: string)
-  -> charset: string|nil
-  2. errmsg: string
+  -> charset: string?
+  2. bom: string?
+  3. errmsg: string?
 ```
 
 Same as encoding.detect() but for strings.
@@ -211,7 +213,7 @@ Same as encoding.detect() but for strings.
 
 ```lua
 function encoding.get_charset_bom(charset: "ARMSCII-8"|"BIG5"|"BIG5-HKSCS"|"CP866"|"CP932"...(+57))
-  -> bom: string
+  -> bom: string?
 ```
 
 Get the byte order marks for the given charset if applicable.
@@ -289,6 +291,7 @@ charset:
 ```lua
 function encoding.strip_bom(text: string, charset?: "ARMSCII-8"|"BIG5"|"BIG5-HKSCS"|"CP866"|"CP932"...(+57))
   -> cleaned_text: string
+  2. bom: string?
 ```
 
 Remove the byte order marks from the given text.
@@ -296,6 +299,10 @@ Remove the byte order marks from the given text.
 @*param* `text` — A string that may contain a byte order marks.
 
 @*param* `charset` — Charset to scan, if nil scan all charsets with bom.
+
+@*return* `cleaned_text`
+
+@*return* `bom` — The stripped bytes order mark.
 
 ```lua
 charset:

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -173,6 +173,17 @@ Instruct process:wait() to wait until the process ends.
 
 ---
 
+## stream
+
+```lua
+(field) stream: process.stream
+```
+
+An abstraction over the standard input and outputs of a process
+that allows you to read and write data easily.
+
+---
+
 ## process.options
 
 Options that can be passed to process.start()
@@ -260,6 +271,15 @@ function process.strerror(code: integer)
 ```
 
 Translates an error code into a useful text message
+
+---
+
+## __index
+
+```lua
+(method) process:__index(k: any)
+  -> function|unknown
+```
 
 ---
 

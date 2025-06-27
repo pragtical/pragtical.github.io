@@ -1,5 +1,5 @@
 ---
-sidebar_position: 49
+sidebar_position: 51
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -37,7 +37,7 @@ local toolbarview = require "plugins.toolbarview"
 ## toolbar_font
 
 ```lua
-(field) toolbar_font: unknown
+(field) toolbar_font: renderer.font
 ```
 
 ---
@@ -54,6 +54,15 @@ local toolbarview = require "plugins.toolbarview"
 
 ```lua
 (field) visible: boolean
+```
+
+---
+
+## __tostring
+
+```lua
+(method) plugins.toolbarview:__tostring()
+  -> string
 ```
 
 ---

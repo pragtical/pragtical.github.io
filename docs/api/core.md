@@ -1,5 +1,5 @@
 ---
-sidebar_position: 14
+sidebar_position: 15
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -31,7 +31,7 @@ local core = require "core"
 ## blink_start
 
 ```lua
-(field) blink_start: unknown
+(field) blink_start: number|unknown
 ```
 
 ---
@@ -39,7 +39,7 @@ local core = require "core"
 ## blink_timer
 
 ```lua
-(field) blink_timer: unknown
+(field) blink_timer: number|unknown
 ```
 
 ---
@@ -124,7 +124,7 @@ The actual maximum frames per second that can be rendered.
 ## frame_start
 
 ```lua
-(field) frame_start: integer|unknown
+(field) frame_start: number|unknown
 ```
 
 ---
@@ -132,7 +132,7 @@ The actual maximum frames per second that can be rendered.
 ## init_working_dir
 
 ```lua
-(field) init_working_dir: unknown
+(field) init_working_dir: string
 ```
 
 ---
@@ -288,8 +288,10 @@ A status bar implementation, check core.status_view.
 ## window
 
 ```lua
-(field) window: unknown
+(field) window: renwindow
 ```
+
+Functionality to create and manage windows.
 
 ---
 

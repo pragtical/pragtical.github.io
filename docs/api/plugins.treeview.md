@@ -1,5 +1,5 @@
 ---
-sidebar_position: 50
+sidebar_position: 52
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -53,7 +53,7 @@ local treeview = require "plugins.treeview"
 ## item_icon_width
 
 ```lua
-(field) item_icon_width: integer
+(field) item_icon_width: number
 ```
 
 ---
@@ -61,7 +61,7 @@ local treeview = require "plugins.treeview"
 ## item_text_spacing
 
 ```lua
-(field) item_text_spacing: integer
+(field) item_text_spacing: number
 ```
 
 ---
@@ -238,6 +238,15 @@ Default treeview width.
 
 ---
 
+## __tostring
+
+```lua
+(method) plugins.treeview:__tostring()
+  -> string
+```
+
+---
+
 ## draw
 
 ```lua
@@ -291,7 +300,7 @@ Default treeview width.
 
 ```lua
 (method) plugins.treeview:draw_item_icon(item: any, active: any, hovered: any, x: any, y: any, w: any, h: any)
-  -> integer
+  -> number
 ```
 
 ---
@@ -360,7 +369,7 @@ Default treeview width.
 
 ```lua
 (method) plugins.treeview:get_item_height()
-  -> unknown
+  -> number
 ```
 
 ---
@@ -370,7 +379,7 @@ Default treeview width.
 ```lua
 (method) plugins.treeview:get_item_icon(item: any, active: any, hovered: any)
   -> string
-  2. unknown
+  2. renderer.font
   3. unknown
 ```
 
@@ -381,7 +390,7 @@ Default treeview width.
 ```lua
 (method) plugins.treeview:get_item_text(item: any, active: any, hovered: any)
   -> unknown
-  2. unknown
+  2. renderer.font
   3. unknown
 ```
 
@@ -456,7 +465,7 @@ Default treeview width.
 (method) plugins.treeview:get_text_bounding_box(item: any, x: any, y: any, w: any, h: any)
   -> unknown
   2. unknown
-  3. unknown
+  3. number
   4. unknown
 ```
 

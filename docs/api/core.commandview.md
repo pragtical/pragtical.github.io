@@ -1,5 +1,5 @@
 ---
-sidebar_position: 17
+sidebar_position: 18
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -390,6 +390,14 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
+### bom
+
+```lua
+(field) bom: string?
+```
+
+---
+
 ### cache
 
 ```lua
@@ -414,14 +422,6 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
-### convert
-
-```lua
-(field) convert: boolean
-```
-
----
-
 ### crlf
 
 ```lua
@@ -433,7 +433,7 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ### encoding
 
 ```lua
-(field) encoding: string
+(field) encoding: string?
 ```
 
 ---
@@ -540,11 +540,9 @@ Metamethod to allow using the object call as a constructor.
 ### __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.commandview.input:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
@@ -640,7 +638,7 @@ Check if the object inherits from the given type.
 ### get_indent_string
 
 ```lua
-(method) core.doc:get_indent_string()
+(method) core.doc:get_indent_string(col: any)
   -> string
 ```
 
@@ -763,9 +761,17 @@ Get the lua pattern used to match symbols taking into account current subsyntax.
 ### get_text
 
 ```lua
-(method) core.doc:get_text(line1: any, col1: any, line2: any, col2: any)
+(method) core.doc:get_text(line1: integer, col1: integer, line2: integer, col2: integer, inclusive?: boolean)
   -> string
 ```
+
+Returns the content of the doc between two positions. 
+The positions will be sanitized and sorted. 
+The character at the "end" position is not included by default.
+
+@*param* `inclusive` — Whether or not to return the character at the last position
+
+See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#401#9)
 
 ---
 
@@ -907,6 +913,15 @@ Check if the parameter inherits from the object.
 
 ```lua
 (method) core.doc:move_to_cursor(idx: any, ...any)
+```
+
+---
+
+### needs_encoding_conversion
+
+```lua
+(method) core.doc:needs_encoding_conversion()
+  -> boolean
 ```
 
 ---
@@ -1199,11 +1214,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.commandview:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 

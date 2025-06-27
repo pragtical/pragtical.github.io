@@ -1,5 +1,5 @@
 ---
-sidebar_position: 30
+sidebar_position: 32
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -143,6 +143,7 @@ Compute a file's info entry completed with "filename" to be used
 in project scan or false if it shouldn't appear in the list.
 
 ```lua
+-- 
 return #1:
     | false
 ```

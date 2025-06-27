@@ -1,5 +1,5 @@
 ---
-sidebar_position: 35
+sidebar_position: 37
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -164,11 +164,9 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.object:__tostring()
+(method) core.titleview:__tostring()
   -> string
 ```
-
-Metamethod to get a string representation of an object.
 
 ---
 
