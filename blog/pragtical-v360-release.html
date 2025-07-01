@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.1">
+<title data-rh="true">Pragtical v3.6.0 Release | Pragtical</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" property="og:url" content="https://pragtical.dev/blog/pragtical-v360-release"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Pragtical v3.6.0 Release | Pragtical"><meta data-rh="true" name="description" content="Many Enhancements, Fixes, and New Features!"><meta data-rh="true" property="og:description" content="Many Enhancements, Fixes, and New Features!"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-07-30T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/jgmdev"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pragtical.dev/blog/pragtical-v360-release"><link data-rh="true" rel="alternate" href="https://pragtical.dev/blog/pragtical-v360-release" hreflang="en"><link data-rh="true" rel="alternate" href="https://pragtical.dev/blog/pragtical-v360-release" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Pragtical RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Pragtical Atom Feed"><link rel="stylesheet" href="/assets/css/styles.6c60b8ba.css">
+<script src="/assets/js/runtime~main.e3bdd239.js" defer="defer"></script>
+<script src="/assets/js/main.6dbd210b.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Pragtical Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="Pragtical Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Pragtical</b></a><a class="navbar__item navbar__link" href="/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/plugins">Plugins</a><a class="navbar__item navbar__link" href="/download">Get</a></div><div class="navbar__items navbar__items--right"><a class="navbar__item navbar__link" href="/docs/intro">About</a><a href="https://discord.gg/8V2yJtn3Fc" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/pragtical" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_pO2u margin-bottom--md">Recent posts</div><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/blog/pragtical-v360-release">Pragtical v3.6.0 Release</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/pragtical-v352-release">Pragtical v3.5.2 Release</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/pragtical-v351-release">Pragtical v3.5.1 Release</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/pragtical-v350-release">Pragtical v3.5.0 Release</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/pragtical-v344-release">Pragtical v3.4.4 Release</a></li></ul></nav></aside><main class="col col--7" itemscope="" itemtype="https://schema.org/Blog"><article itemprop="blogPost" itemscope="" itemtype="https://schema.org/BlogPosting"><meta itemprop="description" content="Many Enhancements, Fixes, and New Features!"><header><h1 class="title_f1Hy" itemprop="headline">Pragtical v3.6.0 Release</h1><div class="container_mt6G margin-vert--md"><time datetime="2025-07-30T00:00:00.000Z" itemprop="datePublished">July 30, 2025</time> · <!-- -->6 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--6 authorCol_Hf19"><div class="avatar margin-bottom--sm"><a href="https://github.com/jgmdev" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo" src="https://github.com/jgmdev.png" alt="Jefferson Gonzalez" itemprop="image"></a><div class="avatar__intro" itemprop="author" itemscope="" itemtype="https://schema.org/Person"><div class="avatar__name"><a href="https://github.com/jgmdev" target="_blank" rel="noopener noreferrer" itemprop="url"><span itemprop="name">Jefferson Gonzalez</span></a></div><small class="avatar__subtitle" itemprop="description">Contributor of Pragtical</small></div></div></div></div></header><div id="__blog-post-container" class="markdown" itemprop="articleBody"><p>Many Enhancements, Fixes, and New Features!</p>
+<p>This release includes so many changes that it&#x27;s a bit hard to summarize — but
+here we go, so lock your seat belts and enjoy the ride!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-a-fresh-look">🎨 A Fresh Look<a href="#-a-fresh-look" class="hash-link" aria-label="Direct link to 🎨 A Fresh Look" title="Direct link to 🎨 A Fresh Look">​</a></h2>
+<p>First of all, this is the <strong>first release</strong> to ship with a new default color
+scheme, moving away from the one used by our ancestors to further distinguish
+our identity:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/0013f353-c60b-47ec-bf9a-d4a1782cec87" alt="new-default-scheme" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/f26a7346-ac52-4709-bdb9-841e050e834b" alt="new-default-scheme-syntax" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-more-icons">🧩 More Icons<a href="#-more-icons" class="hash-link" aria-label="Direct link to 🧩 More Icons" title="Direct link to 🧩 More Icons">​</a></h2>
+<p>We&#x27;ve added several new icons to our icon font distribution:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/0566ec90-6ee6-4632-bf4d-38547f79d726" alt="new-icons" class="img_ev3q"></p>
+<p>These are now used in places like the Empty View and the Settings UI:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/e3d9ded0-af24-4906-8325-a2b27a1a51de" alt="emptyview" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/bc3a7482-d4e6-421c-8924-db7b6a5deef4" alt="settings" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-better-search-uis">🔍 Better Search UIs<a href="#-better-search-uis" class="hash-link" aria-label="Direct link to 🔍 Better Search UIs" title="Direct link to 🔍 Better Search UIs">​</a></h2>
+<p>The new icons inspired updates to the <strong>document and project-wide search/replace
+interfaces</strong>, making them more ergonomic (yes, we still care about ergonomics 😉):</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/baa63826-b5a1-47a3-8c9a-ed00fecdba92"></video>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/cc1ac94c-2586-47ff-a5ce-2bc72906e24e" alt="search-ui-changes" class="img_ev3q"></p>
+<p>The document search UI also got a minimalist redesign, using less horizontal
+space in top and bottom modes:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/69aa1839-3079-4f2a-9b43-51fbf279badc"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-improved-settings-ui">⚙️ Improved Settings UI<a href="#️-improved-settings-ui" class="hash-link" aria-label="Direct link to ⚙️ Improved Settings UI" title="Direct link to ⚙️ Improved Settings UI">​</a></h2>
+<p>In addition to the new icons, the Settings GUI now includes <strong>color filtering</strong>:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/265a7675-c419-4a14-80d5-f60a63a38412" alt="settings-filter-colors" class="img_ev3q"></p>
+<p>Also, labels in the settings view now <strong>support word wrapping</strong>, making long
+descriptions much easier to read:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/eafcec88-405e-466b-a7fb-9d836f6cc3a8"></video>
+<p>Another UI addition: you can now <strong>hide tabs</strong> by using
+the <code>Core: Toggle Tabs</code> or new config option, for a cleaner more
+zen-like editing experience, especially useful when paired with the <code>centerdoc</code>
+plugin.</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/da833c46-5e64-4cf8-a3ac-c5acf6149c67" alt="centerdoc-zenmode" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-smarter-search-replacements">🧠 Smarter Search Replacements<a href="#-smarter-search-replacements" class="hash-link" aria-label="Direct link to 🧠 Smarter Search Replacements" title="Direct link to 🧠 Smarter Search Replacements">​</a></h2>
+<p>Alongside the visual updates, many <strong>functional improvements</strong> were made to
+document and project-wide search/replace. One prominent one is capture groups
+can now be used in replacement text:</p>
+<ul>
+<li>For <strong>regex</strong>, use <code>$[0-9]</code></li>
+<li>For <strong>Lua patterns</strong>, use <code>%[0-9]</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-core-improvements">🧱 Core Improvements<a href="#-core-improvements" class="hash-link" aria-label="Direct link to 🧱 Core Improvements" title="Direct link to 🧱 Core Improvements">​</a></h2>
+<p>Thanks to <a href="https://github.com/Jan200101" target="_blank" rel="noopener noreferrer">Jan</a>, we&#x27;ve added:</p>
+<ul>
+<li>Proper <strong>slight hinting of fonts</strong> (with a pending PR to fetch user font
+settings directly from the system via <strong>Fontconfig</strong> (Linux-only))</li>
+<li>Skip sorting of command view items when no predicate is provided</li>
+<li>Support for <strong>dynamically switching</strong> the directory monitoring backend
+which also adds the settings GUI:</li>
+</ul>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/c440bdd7-4dbf-4201-9ed7-dda831c9c37b" alt="dirmonitor-dynamic-backend" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-repl-and-run-command">🧪 New REPL and Run Command<a href="#-new-repl-and-run-command" class="hash-link" aria-label="Direct link to 🧪 New REPL and Run Command" title="Direct link to 🧪 New REPL and Run Command">​</a></h2>
+<p>Here come the <strong>new features!</strong> A basic <strong>REPL</strong> and <strong>Run command</strong> were
+added, making it easier to test Lua snippets directly against the Pragtical
+runtime:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/085d16c3-8286-482e-8fbf-faa5716fbec2"></video>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/c1f2b998-b37f-45d1-bf03-c0405180fe89" alt="run-command" class="img_ev3q"></p>
+<p>These additions should be especially helpful when developing plugins for the editor.
+In the future we plan to use the new <code>run</code> command to provide Profile Guided
+Optimized builds of the editor.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-cli-improvements">🖥️ CLI Improvements<a href="#️-cli-improvements" class="hash-link" aria-label="Direct link to 🖥️ CLI Improvements" title="Direct link to 🖥️ CLI Improvements">​</a></h2>
+<p>The CLI also received improvements:</p>
+<ul>
+<li>Better <strong>help output formatting</strong></li>
+<li><strong>Auto-detection of terminal width</strong> for smarter padding and line wrapping</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<p>Thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>, the following bugs were fixed:</p>
+<ul>
+<li><code>language_python</code> was broken in the previous update — now corrected</li>
+<li>Line highlighting now defaults to <code>&quot;no_selection&quot;</code></li>
+<li><code>language_xml</code> had a fix where escape sequences were incorrectly defined in strings</li>
+</ul>
+<p>There are even more changes that we’ve forgotten to mention — be sure to
+check the changelog below! Hope you enjoy this release!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.6.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>Add REPL and run commands to the CLI
+(<a href="https://github.com/pragtical/pragtical/pull/280" target="_blank" rel="noopener noreferrer">#280</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix crash on out of window mouse events
+(<a href="https://github.com/pragtical/pragtical/pull/231" target="_blank" rel="noopener noreferrer">#231</a>)</p>
+</li>
+<li>
+<p>Fix possible on doc close crash when highlighting
+(<a href="https://github.com/pragtical/pragtical/pull/232" target="_blank" rel="noopener noreferrer">#232</a>)</p>
+</li>
+<li>
+<p>Properly saves a cleared binding from settings ui
+(<a href="https://github.com/pragtical/pragtical/pull/240" target="_blank" rel="noopener noreferrer">#240</a>)</p>
+</li>
+<li>
+<p>Doc search fixes and types documentation.
+(<a href="https://github.com/pragtical/pragtical/pull/243" target="_blank" rel="noopener noreferrer">#243</a>)</p>
+</li>
+<li>
+<p>Fix regex find_offsets not substracting offset
+(<a href="https://github.com/pragtical/pragtical/pull/245" target="_blank" rel="noopener noreferrer">#245</a>)</p>
+</li>
+<li>
+<p>&quot;Properly&quot; handle whole line matches on doc search
+(<a href="https://github.com/pragtical/pragtical/pull/246" target="_blank" rel="noopener noreferrer">#246</a>)</p>
+</li>
+<li>
+<p>Return single value on command.prettify_name
+(<a href="https://github.com/pragtical/pragtical/pull/247" target="_blank" rel="noopener noreferrer">#247</a>)</p>
+</li>
+<li>
+<p>Node: skip hidden tab events
+(<a href="https://github.com/pragtical/pragtical/pull/256" target="_blank" rel="noopener noreferrer">#256</a>)</p>
+</li>
+<li>
+<p>Corrections to language_python
+(<a href="https://github.com/pragtical/pragtical/pull/278" target="_blank" rel="noopener noreferrer">#278</a>)</p>
+</li>
+<li>
+<p>Avoid process thread leak on LuaJIT and better solution to call
+process __gc on LuaJIT
+(<a href="https://github.com/pragtical/pragtical/commit/7c4c1f2c8eb7bdaf33ee97b7df030bc26371ed50" target="_blank" rel="noopener noreferrer">7c4c1f2c</a>)</p>
+</li>
+<li>
+<p>language_xml: remove escape chars from strings (#286)
+(<a href="https://github.com/pragtical/pragtical/pull/286" target="_blank" rel="noopener noreferrer">#286</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Bump CI ubuntu containers
+(<a href="https://github.com/pragtical/pragtical/pull/233" target="_blank" rel="noopener noreferrer">#233</a>)</p>
+</li>
+<li>
+<p>CI: Polyfill GLIBC for backward compatibility
+(<a href="https://github.com/pragtical/pragtical/pull/234" target="_blank" rel="noopener noreferrer">#234</a>)</p>
+</li>
+<li>
+<p>Include &#x27;user&#x27; directory on portable installs
+(<a href="https://github.com/pragtical/pragtical/pull/250" target="_blank" rel="noopener noreferrer">#250</a>)</p>
+</li>
+<li>
+<p>CI: update Windows to more recent version
+(<a href="https://github.com/pragtical/pragtical/pull/252" target="_blank" rel="noopener noreferrer">#252</a>)</p>
+</li>
+<li>
+<p>Updates for latest plugin manager changes
+(<a href="https://github.com/pragtical/pragtical/pull/255" target="_blank" rel="noopener noreferrer">#255</a>)</p>
+</li>
+<li>
+<p>Silence thirdparty library compiler warnings
+(<a href="https://github.com/pragtical/pragtical/pull/271" target="_blank" rel="noopener noreferrer">#271</a>)</p>
+</li>
+<li>
+<p>Update SDL2 to latest fixes from master
+(<a href="https://github.com/pragtical/pragtical/pull/282" target="_blank" rel="noopener noreferrer">#282</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Include additional glyphs on icons.ttf
+(<a href="https://github.com/pragtical/pragtical/pull/236" target="_blank" rel="noopener noreferrer">#236</a>)</p>
+</li>
+<li>
+<p>Capture replacements on regex/patterns search ui
+(<a href="https://github.com/pragtical/pragtical/pull/244" target="_blank" rel="noopener noreferrer">#244</a>)</p>
+</li>
+<li>
+<p>Allow spaces in plugins mod-version
+(<a href="https://github.com/pragtical/pragtical/pull/253" target="_blank" rel="noopener noreferrer">#253</a>)</p>
+</li>
+<li>
+<p>projectsearch: add open tab command
+(<a href="https://github.com/pragtical/pragtical/pull/258" target="_blank" rel="noopener noreferrer">#258</a>)</p>
+</li>
+<li>
+<p>restore light lcd filter for slight hinting
+(<a href="https://github.com/pragtical/pragtical/pull/265" target="_blank" rel="noopener noreferrer">#265</a>)</p>
+</li>
+<li>
+<p>align soft indention to indention size
+(<a href="https://github.com/pragtical/pragtical/pull/267" target="_blank" rel="noopener noreferrer">#267</a>)</p>
+</li>
+<li>
+<p>rework dirmonitors to be able to support multiple backends
+(<a href="https://github.com/pragtical/pragtical/pull/266" target="_blank" rel="noopener noreferrer">#266</a>)</p>
+</li>
+<li>
+<p>projectsearch: find current doc selection
+(<a href="https://github.com/pragtical/pragtical/pull/268" target="_blank" rel="noopener noreferrer">#268</a>)</p>
+</li>
+<li>
+<p>projectsearch: on hide focus previous docview
+(<a href="https://github.com/pragtical/pragtical/pull/275" target="_blank" rel="noopener noreferrer">#275</a>)</p>
+</li>
+<li>
+<p>Do not sort fuzzy results on empty needle
+(<a href="https://github.com/pragtical/pragtical/pull/276" target="_blank" rel="noopener noreferrer">#276</a>)</p>
+</li>
+<li>
+<p>Lua doc comment improvements for better API reference generation
+(<a href="https://github.com/pragtical/pragtical/pull/185" target="_blank" rel="noopener noreferrer">#185</a>)</p>
+</li>
+<li>
+<p>cli: always display commands sorted by name
+(<a href="https://github.com/pragtical/pragtical/pull/279" target="_blank" rel="noopener noreferrer">#279</a>)</p>
+</li>
+<li>
+<p>autocomplete: keep previous items on re-trigger
+(<a href="https://github.com/pragtical/pragtical/pull/283" target="_blank" rel="noopener noreferrer">#283</a>)</p>
+</li>
+<li>
+<p>highlight_current_line &quot;no_selection&quot; now default
+(<a href="https://github.com/pragtical/pragtical/pull/284" target="_blank" rel="noopener noreferrer">#284</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gui-and-widgets">GUI and Widgets<a href="#gui-and-widgets" class="hash-link" aria-label="Direct link to GUI and Widgets" title="Direct link to GUI and Widgets">​</a></h3>
+<ul>
+<li>
+<p>Updated default color scheme.
+(<a href="https://github.com/pragtical/pragtical/pull/237" target="_blank" rel="noopener noreferrer">#237</a>)</p>
+</li>
+<li>
+<p>Settings: allow filtering colors
+(<a href="https://github.com/pragtical/pragtical/pull/238" target="_blank" rel="noopener noreferrer">#238</a>)</p>
+</li>
+<li>
+<p>Search UI fixes and usage of new icons
+(<a href="https://github.com/pragtical/pragtical/pull/239" target="_blank" rel="noopener noreferrer">#239</a>)</p>
+</li>
+<li>
+<p>Enabled word wrap on settings ui labels
+(<a href="https://github.com/pragtical/pragtical/pull/241" target="_blank" rel="noopener noreferrer">#241</a>)</p>
+</li>
+<li>
+<p>Allow always hiding tabs, great for zen mode!
+(<a href="https://github.com/pragtical/pragtical/pull/242" target="_blank" rel="noopener noreferrer">#242</a>)</p>
+</li>
+<li>
+<p>Show bindings on search ui and empty view tooltips
+(<a href="https://github.com/pragtical/pragtical/pull/248" target="_blank" rel="noopener noreferrer">#248</a>)</p>
+</li>
+<li>
+<p>projectsearch: added built-in controls
+(<a href="https://github.com/pragtical/pragtical/pull/257" target="_blank" rel="noopener noreferrer">#257</a>)</p>
+</li>
+<li>
+<p>settings gui: option to select dirmonitor backend
+(<a href="https://github.com/pragtical/pragtical/pull/270" target="_blank" rel="noopener noreferrer">#270</a>)</p>
+</li>
+<li>
+<p>search_ui: hide replace by default, add toggle
+(<a href="https://github.com/pragtical/pragtical/pull/285" target="_blank" rel="noopener noreferrer">#285</a>)</p>
+</li>
+<li>
+<p>foldingbook: keep tabs updated</p>
+</li>
+<li>
+<p>textbox: added customized highlighter without coroutine</p>
+</li>
+<li>
+<p>colorpicker: update sliders color on every update</p>
+</li>
+<li>
+<p>Fix show animation on strange Node size changes</p>
+</li>
+<li>
+<p>Set textview name same as parent</p>
+</li>
+<li>
+<p>SearchReplaceList: add regex replacing support</p>
+</li>
+<li>
+<p>Allow showing a command binding on tooltip</p>
+</li>
+<li>
+<p>Improved FoldingBook expand calculations</p>
+</li>
+<li>
+<p>Add word wrap support to Label widget</p>
+</li>
+<li>
+<p>Fix on draw_styled_text elements checking</p>
+</li>
+<li>
+<p>Added ToggleButton widget</p>
+</li>
+<li>
+<p>Use new pragtical icons on various widgets</p>
+</li>
+<li>
+<p>Allow customization of line widget color</p>
+</li>
+<li>
+<p>Fix possible endless loop on animations</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<ul>
+<li>Wait thread avg time when it exceeds max time
+(<a href="https://github.com/pragtical/pragtical/pull/264" target="_blank" rel="noopener noreferrer">#264</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>add a __tostring method to every object
+(<a href="https://github.com/lite-xl/lite-xl/pull/1534" target="_blank" rel="noopener noreferrer">#1534</a>)</p>
+</li>
+<li>
+<p>Better wasm support again
+(<a href="https://github.com/lite-xl/lite-xl/pull/1779" target="_blank" rel="noopener noreferrer">#1779</a>)</p>
+</li>
+<li>
+<p>renderer: defer bitmap rendering when possible
+(<a href="https://github.com/lite-xl/lite-xl/pull/1856" target="_blank" rel="noopener noreferrer">#1856</a>)</p>
+</li>
+<li>
+<p>renderer: pass errors via SDL_SetError
+(<a href="https://github.com/lite-xl/lite-xl/pull/1919" target="_blank" rel="noopener noreferrer">#1919</a>)</p>
+</li>
+<li>
+<p>fix: use current char to determine col in DocView<!-- -->:get_x_offset_col<!-- -->
+(<a href="https://github.com/lite-xl/lite-xl/pull/1946" target="_blank" rel="noopener noreferrer">#1946</a>)</p>
+</li>
+<li>
+<p>common: allow / and \ as PATHSEP on Windows when fuzzy matching files
+(<a href="https://github.com/lite-xl/lite-xl/pull/1992" target="_blank" rel="noopener noreferrer">#1992</a>)</p>
+</li>
+<li>
+<p>fix: use correct charmap and glyphmap sizes
+(<a href="https://github.com/lite-xl/lite-xl/pull/1999" target="_blank" rel="noopener noreferrer">#1999</a>)</p>
+</li>
+<li>
+<p>language_cpp: add back digit separators
+(<a href="https://github.com/lite-xl/lite-xl/pull/2026" target="_blank" rel="noopener noreferrer">#2026</a>)</p>
+</li>
+<li>
+<p>syntax: warn against malformed patterns and disable them
+(<a href="https://github.com/lite-xl/lite-xl/pull/2029" target="_blank" rel="noopener noreferrer">#2029</a>)</p>
+</li>
+<li>
+<p>balance computed directory list, remove recursive function invocation
+(<a href="https://github.com/lite-xl/lite-xl/pull/1991" target="_blank" rel="noopener noreferrer">#1991</a>)</p>
+</li>
+<li>
+<p>language_lua: add files with rockspec extenstion
+(<a href="https://github.com/lite-xl/lite-xl/pull/2083" target="_blank" rel="noopener noreferrer">#2083</a>)</p>
+</li>
+<li>
+<p>Make DATADIR and USERDIR fonts path portable
+(<a href="https://github.com/lite-xl/lite-xl/pull/249" target="_blank" rel="noopener noreferrer">#249</a>)</p>
+</li>
+<li>
+<p>Coroutine Process Fix
+(<a href="https://github.com/lite-xl/lite-xl/pull/2099" target="_blank" rel="noopener noreferrer">#2099</a>)</p>
+</li>
+</ul></div><footer class="row docusaurus-mt-lg blogPostFooterDetailsFull_mRVl"><div class="col margin-top--sm"><a href="https://github.com/pragtical/pragtical.github.io/edit/main/blog/2025-07-30-v360-release.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--next" href="/blog/pragtical-v352-release"><div class="pagination-nav__sublabel">Older Post</div><div class="pagination-nav__label">Pragtical v3.5.2 Release</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#-a-fresh-look" class="table-of-contents__link toc-highlight">🎨 A Fresh Look</a></li><li><a href="#-more-icons" class="table-of-contents__link toc-highlight">🧩 More Icons</a></li><li><a href="#-better-search-uis" class="table-of-contents__link toc-highlight">🔍 Better Search UIs</a></li><li><a href="#️-improved-settings-ui" class="table-of-contents__link toc-highlight">⚙️ Improved Settings UI</a></li><li><a href="#-smarter-search-replacements" class="table-of-contents__link toc-highlight">🧠 Smarter Search Replacements</a></li><li><a href="#-core-improvements" class="table-of-contents__link toc-highlight">🧱 Core Improvements</a></li><li><a href="#-new-repl-and-run-command" class="table-of-contents__link toc-highlight">🧪 New REPL and Run Command</a></li><li><a href="#️-cli-improvements" class="table-of-contents__link toc-highlight">🖥️ CLI Improvements</a></li><li><a href="#-bug-fixes" class="table-of-contents__link toc-highlight">🐛 Bug Fixes</a></li><li><a href="#changes-log" class="table-of-contents__link toc-highlight">Changes Log</a><ul><li><a href="#new-features" class="table-of-contents__link toc-highlight">New Features</a></li><li><a href="#fixes" class="table-of-contents__link toc-highlight">Fixes</a></li><li><a href="#build-system" class="table-of-contents__link toc-highlight">Build System</a></li><li><a href="#enhancements" class="table-of-contents__link toc-highlight">Enhancements</a></li><li><a href="#gui-and-widgets" class="table-of-contents__link toc-highlight">GUI and Widgets</a></li><li><a href="#performance" class="table-of-contents__link toc-highlight">Performance</a></li><li><a href="#lite-xl-inherited-changes" class="table-of-contents__link toc-highlight">Lite XL Inherited Changes</a></li></ul></li></ul></div></div></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/category/set-up">Setup</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/category/user-guide">User Guide</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/category/developer-guide">Developer Guide</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/faq">Faq</a></li></ul></div><div class="col footer__col"><div class="footer__title">Customization</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/pragtical/colors" target="_blank" rel="noopener noreferrer" class="footer__link-item">Themes<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/plugins">Plugins</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/contributors">Contributors</a></li><li class="footer__item"><a href="https://discord.gg/8V2yJtn3Fc" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/pragtical" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Pragtical. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

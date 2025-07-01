@@ -2,11 +2,384 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2025-03-14T00:00:00.000Z</updated>
+    <updated>2025-07-30T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.6.0 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v360-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v360-release"/>
+        <updated>2025-07-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Many Enhancements, Fixes, and New Features!]]></summary>
+        <content type="html"><![CDATA[<p>Many Enhancements, Fixes, and New Features!</p>
+<p>This release includes so many changes that it's a bit hard to summarize — but
+here we go, so lock your seat belts and enjoy the ride!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-a-fresh-look">🎨 A Fresh Look<a href="https://pragtical.dev/blog/pragtical-v360-release#-a-fresh-look" class="hash-link" aria-label="Direct link to 🎨 A Fresh Look" title="Direct link to 🎨 A Fresh Look">​</a></h2>
+<p>First of all, this is the <strong>first release</strong> to ship with a new default color
+scheme, moving away from the one used by our ancestors to further distinguish
+our identity:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/0013f353-c60b-47ec-bf9a-d4a1782cec87" alt="new-default-scheme" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/f26a7346-ac52-4709-bdb9-841e050e834b" alt="new-default-scheme-syntax" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-more-icons">🧩 More Icons<a href="https://pragtical.dev/blog/pragtical-v360-release#-more-icons" class="hash-link" aria-label="Direct link to 🧩 More Icons" title="Direct link to 🧩 More Icons">​</a></h2>
+<p>We've added several new icons to our icon font distribution:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/0566ec90-6ee6-4632-bf4d-38547f79d726" alt="new-icons" class="img_ev3q"></p>
+<p>These are now used in places like the Empty View and the Settings UI:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/e3d9ded0-af24-4906-8325-a2b27a1a51de" alt="emptyview" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/bc3a7482-d4e6-421c-8924-db7b6a5deef4" alt="settings" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-better-search-uis">🔍 Better Search UIs<a href="https://pragtical.dev/blog/pragtical-v360-release#-better-search-uis" class="hash-link" aria-label="Direct link to 🔍 Better Search UIs" title="Direct link to 🔍 Better Search UIs">​</a></h2>
+<p>The new icons inspired updates to the <strong>document and project-wide search/replace
+interfaces</strong>, making them more ergonomic (yes, we still care about ergonomics 😉):</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/baa63826-b5a1-47a3-8c9a-ed00fecdba92"></video>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/cc1ac94c-2586-47ff-a5ce-2bc72906e24e" alt="search-ui-changes" class="img_ev3q"></p>
+<p>The document search UI also got a minimalist redesign, using less horizontal
+space in top and bottom modes:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/69aa1839-3079-4f2a-9b43-51fbf279badc"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-improved-settings-ui">⚙️ Improved Settings UI<a href="https://pragtical.dev/blog/pragtical-v360-release#%EF%B8%8F-improved-settings-ui" class="hash-link" aria-label="Direct link to ⚙️ Improved Settings UI" title="Direct link to ⚙️ Improved Settings UI">​</a></h2>
+<p>In addition to the new icons, the Settings GUI now includes <strong>color filtering</strong>:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/265a7675-c419-4a14-80d5-f60a63a38412" alt="settings-filter-colors" class="img_ev3q"></p>
+<p>Also, labels in the settings view now <strong>support word wrapping</strong>, making long
+descriptions much easier to read:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/eafcec88-405e-466b-a7fb-9d836f6cc3a8"></video>
+<p>Another UI addition: you can now <strong>hide tabs</strong> by using
+the <code>Core: Toggle Tabs</code> or new config option, for a cleaner more
+zen-like editing experience, especially useful when paired with the <code>centerdoc</code>
+plugin.</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/da833c46-5e64-4cf8-a3ac-c5acf6149c67" alt="centerdoc-zenmode" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-smarter-search-replacements">🧠 Smarter Search Replacements<a href="https://pragtical.dev/blog/pragtical-v360-release#-smarter-search-replacements" class="hash-link" aria-label="Direct link to 🧠 Smarter Search Replacements" title="Direct link to 🧠 Smarter Search Replacements">​</a></h2>
+<p>Alongside the visual updates, many <strong>functional improvements</strong> were made to
+document and project-wide search/replace. One prominent one is capture groups
+can now be used in replacement text:</p>
+<ul>
+<li>For <strong>regex</strong>, use <code>$[0-9]</code></li>
+<li>For <strong>Lua patterns</strong>, use <code>%[0-9]</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-core-improvements">🧱 Core Improvements<a href="https://pragtical.dev/blog/pragtical-v360-release#-core-improvements" class="hash-link" aria-label="Direct link to 🧱 Core Improvements" title="Direct link to 🧱 Core Improvements">​</a></h2>
+<p>Thanks to <a href="https://github.com/Jan200101" target="_blank" rel="noopener noreferrer">Jan</a>, we've added:</p>
+<ul>
+<li>Proper <strong>slight hinting of fonts</strong> (with a pending PR to fetch user font
+settings directly from the system via <strong>Fontconfig</strong> (Linux-only))</li>
+<li>Skip sorting of command view items when no predicate is provided</li>
+<li>Support for <strong>dynamically switching</strong> the directory monitoring backend
+which also adds the settings GUI:</li>
+</ul>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/c440bdd7-4dbf-4201-9ed7-dda831c9c37b" alt="dirmonitor-dynamic-backend" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-new-repl-and-run-command">🧪 New REPL and Run Command<a href="https://pragtical.dev/blog/pragtical-v360-release#-new-repl-and-run-command" class="hash-link" aria-label="Direct link to 🧪 New REPL and Run Command" title="Direct link to 🧪 New REPL and Run Command">​</a></h2>
+<p>Here come the <strong>new features!</strong> A basic <strong>REPL</strong> and <strong>Run command</strong> were
+added, making it easier to test Lua snippets directly against the Pragtical
+runtime:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/085d16c3-8286-482e-8fbf-faa5716fbec2"></video>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/c1f2b998-b37f-45d1-bf03-c0405180fe89" alt="run-command" class="img_ev3q"></p>
+<p>These additions should be especially helpful when developing plugins for the editor.
+In the future we plan to use the new <code>run</code> command to provide Profile Guided
+Optimized builds of the editor.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️-cli-improvements">🖥️ CLI Improvements<a href="https://pragtical.dev/blog/pragtical-v360-release#%EF%B8%8F-cli-improvements" class="hash-link" aria-label="Direct link to 🖥️ CLI Improvements" title="Direct link to 🖥️ CLI Improvements">​</a></h2>
+<p>The CLI also received improvements:</p>
+<ul>
+<li>Better <strong>help output formatting</strong></li>
+<li><strong>Auto-detection of terminal width</strong> for smarter padding and line wrapping</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-bug-fixes">🐛 Bug Fixes<a href="https://pragtical.dev/blog/pragtical-v360-release#-bug-fixes" class="hash-link" aria-label="Direct link to 🐛 Bug Fixes" title="Direct link to 🐛 Bug Fixes">​</a></h2>
+<p>Thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>, the following bugs were fixed:</p>
+<ul>
+<li><code>language_python</code> was broken in the previous update — now corrected</li>
+<li>Line highlighting now defaults to <code>"no_selection"</code></li>
+<li><code>language_xml</code> had a fix where escape sequences were incorrectly defined in strings</li>
+</ul>
+<p>There are even more changes that we’ve forgotten to mention — be sure to
+check the changelog below! Hope you enjoy this release!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.6.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v360-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v360-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>Add REPL and run commands to the CLI
+(<a href="https://github.com/pragtical/pragtical/pull/280" target="_blank" rel="noopener noreferrer">#280</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v360-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix crash on out of window mouse events
+(<a href="https://github.com/pragtical/pragtical/pull/231" target="_blank" rel="noopener noreferrer">#231</a>)</p>
+</li>
+<li>
+<p>Fix possible on doc close crash when highlighting
+(<a href="https://github.com/pragtical/pragtical/pull/232" target="_blank" rel="noopener noreferrer">#232</a>)</p>
+</li>
+<li>
+<p>Properly saves a cleared binding from settings ui
+(<a href="https://github.com/pragtical/pragtical/pull/240" target="_blank" rel="noopener noreferrer">#240</a>)</p>
+</li>
+<li>
+<p>Doc search fixes and types documentation.
+(<a href="https://github.com/pragtical/pragtical/pull/243" target="_blank" rel="noopener noreferrer">#243</a>)</p>
+</li>
+<li>
+<p>Fix regex find_offsets not substracting offset
+(<a href="https://github.com/pragtical/pragtical/pull/245" target="_blank" rel="noopener noreferrer">#245</a>)</p>
+</li>
+<li>
+<p>"Properly" handle whole line matches on doc search
+(<a href="https://github.com/pragtical/pragtical/pull/246" target="_blank" rel="noopener noreferrer">#246</a>)</p>
+</li>
+<li>
+<p>Return single value on command.prettify_name
+(<a href="https://github.com/pragtical/pragtical/pull/247" target="_blank" rel="noopener noreferrer">#247</a>)</p>
+</li>
+<li>
+<p>Node: skip hidden tab events
+(<a href="https://github.com/pragtical/pragtical/pull/256" target="_blank" rel="noopener noreferrer">#256</a>)</p>
+</li>
+<li>
+<p>Corrections to language_python
+(<a href="https://github.com/pragtical/pragtical/pull/278" target="_blank" rel="noopener noreferrer">#278</a>)</p>
+</li>
+<li>
+<p>Avoid process thread leak on LuaJIT and better solution to call
+process __gc on LuaJIT
+(<a href="https://github.com/pragtical/pragtical/commit/7c4c1f2c8eb7bdaf33ee97b7df030bc26371ed50" target="_blank" rel="noopener noreferrer">7c4c1f2c</a>)</p>
+</li>
+<li>
+<p>language_xml: remove escape chars from strings (#286)
+(<a href="https://github.com/pragtical/pragtical/pull/286" target="_blank" rel="noopener noreferrer">#286</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v360-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Bump CI ubuntu containers
+(<a href="https://github.com/pragtical/pragtical/pull/233" target="_blank" rel="noopener noreferrer">#233</a>)</p>
+</li>
+<li>
+<p>CI: Polyfill GLIBC for backward compatibility
+(<a href="https://github.com/pragtical/pragtical/pull/234" target="_blank" rel="noopener noreferrer">#234</a>)</p>
+</li>
+<li>
+<p>Include 'user' directory on portable installs
+(<a href="https://github.com/pragtical/pragtical/pull/250" target="_blank" rel="noopener noreferrer">#250</a>)</p>
+</li>
+<li>
+<p>CI: update Windows to more recent version
+(<a href="https://github.com/pragtical/pragtical/pull/252" target="_blank" rel="noopener noreferrer">#252</a>)</p>
+</li>
+<li>
+<p>Updates for latest plugin manager changes
+(<a href="https://github.com/pragtical/pragtical/pull/255" target="_blank" rel="noopener noreferrer">#255</a>)</p>
+</li>
+<li>
+<p>Silence thirdparty library compiler warnings
+(<a href="https://github.com/pragtical/pragtical/pull/271" target="_blank" rel="noopener noreferrer">#271</a>)</p>
+</li>
+<li>
+<p>Update SDL2 to latest fixes from master
+(<a href="https://github.com/pragtical/pragtical/pull/282" target="_blank" rel="noopener noreferrer">#282</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v360-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Include additional glyphs on icons.ttf
+(<a href="https://github.com/pragtical/pragtical/pull/236" target="_blank" rel="noopener noreferrer">#236</a>)</p>
+</li>
+<li>
+<p>Capture replacements on regex/patterns search ui
+(<a href="https://github.com/pragtical/pragtical/pull/244" target="_blank" rel="noopener noreferrer">#244</a>)</p>
+</li>
+<li>
+<p>Allow spaces in plugins mod-version
+(<a href="https://github.com/pragtical/pragtical/pull/253" target="_blank" rel="noopener noreferrer">#253</a>)</p>
+</li>
+<li>
+<p>projectsearch: add open tab command
+(<a href="https://github.com/pragtical/pragtical/pull/258" target="_blank" rel="noopener noreferrer">#258</a>)</p>
+</li>
+<li>
+<p>restore light lcd filter for slight hinting
+(<a href="https://github.com/pragtical/pragtical/pull/265" target="_blank" rel="noopener noreferrer">#265</a>)</p>
+</li>
+<li>
+<p>align soft indention to indention size
+(<a href="https://github.com/pragtical/pragtical/pull/267" target="_blank" rel="noopener noreferrer">#267</a>)</p>
+</li>
+<li>
+<p>rework dirmonitors to be able to support multiple backends
+(<a href="https://github.com/pragtical/pragtical/pull/266" target="_blank" rel="noopener noreferrer">#266</a>)</p>
+</li>
+<li>
+<p>projectsearch: find current doc selection
+(<a href="https://github.com/pragtical/pragtical/pull/268" target="_blank" rel="noopener noreferrer">#268</a>)</p>
+</li>
+<li>
+<p>projectsearch: on hide focus previous docview
+(<a href="https://github.com/pragtical/pragtical/pull/275" target="_blank" rel="noopener noreferrer">#275</a>)</p>
+</li>
+<li>
+<p>Do not sort fuzzy results on empty needle
+(<a href="https://github.com/pragtical/pragtical/pull/276" target="_blank" rel="noopener noreferrer">#276</a>)</p>
+</li>
+<li>
+<p>Lua doc comment improvements for better API reference generation
+(<a href="https://github.com/pragtical/pragtical/pull/185" target="_blank" rel="noopener noreferrer">#185</a>)</p>
+</li>
+<li>
+<p>cli: always display commands sorted by name
+(<a href="https://github.com/pragtical/pragtical/pull/279" target="_blank" rel="noopener noreferrer">#279</a>)</p>
+</li>
+<li>
+<p>autocomplete: keep previous items on re-trigger
+(<a href="https://github.com/pragtical/pragtical/pull/283" target="_blank" rel="noopener noreferrer">#283</a>)</p>
+</li>
+<li>
+<p>highlight_current_line "no_selection" now default
+(<a href="https://github.com/pragtical/pragtical/pull/284" target="_blank" rel="noopener noreferrer">#284</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="gui-and-widgets">GUI and Widgets<a href="https://pragtical.dev/blog/pragtical-v360-release#gui-and-widgets" class="hash-link" aria-label="Direct link to GUI and Widgets" title="Direct link to GUI and Widgets">​</a></h3>
+<ul>
+<li>
+<p>Updated default color scheme.
+(<a href="https://github.com/pragtical/pragtical/pull/237" target="_blank" rel="noopener noreferrer">#237</a>)</p>
+</li>
+<li>
+<p>Settings: allow filtering colors
+(<a href="https://github.com/pragtical/pragtical/pull/238" target="_blank" rel="noopener noreferrer">#238</a>)</p>
+</li>
+<li>
+<p>Search UI fixes and usage of new icons
+(<a href="https://github.com/pragtical/pragtical/pull/239" target="_blank" rel="noopener noreferrer">#239</a>)</p>
+</li>
+<li>
+<p>Enabled word wrap on settings ui labels
+(<a href="https://github.com/pragtical/pragtical/pull/241" target="_blank" rel="noopener noreferrer">#241</a>)</p>
+</li>
+<li>
+<p>Allow always hiding tabs, great for zen mode!
+(<a href="https://github.com/pragtical/pragtical/pull/242" target="_blank" rel="noopener noreferrer">#242</a>)</p>
+</li>
+<li>
+<p>Show bindings on search ui and empty view tooltips
+(<a href="https://github.com/pragtical/pragtical/pull/248" target="_blank" rel="noopener noreferrer">#248</a>)</p>
+</li>
+<li>
+<p>projectsearch: added built-in controls
+(<a href="https://github.com/pragtical/pragtical/pull/257" target="_blank" rel="noopener noreferrer">#257</a>)</p>
+</li>
+<li>
+<p>settings gui: option to select dirmonitor backend
+(<a href="https://github.com/pragtical/pragtical/pull/270" target="_blank" rel="noopener noreferrer">#270</a>)</p>
+</li>
+<li>
+<p>search_ui: hide replace by default, add toggle
+(<a href="https://github.com/pragtical/pragtical/pull/285" target="_blank" rel="noopener noreferrer">#285</a>)</p>
+</li>
+<li>
+<p>foldingbook: keep tabs updated</p>
+</li>
+<li>
+<p>textbox: added customized highlighter without coroutine</p>
+</li>
+<li>
+<p>colorpicker: update sliders color on every update</p>
+</li>
+<li>
+<p>Fix show animation on strange Node size changes</p>
+</li>
+<li>
+<p>Set textview name same as parent</p>
+</li>
+<li>
+<p>SearchReplaceList: add regex replacing support</p>
+</li>
+<li>
+<p>Allow showing a command binding on tooltip</p>
+</li>
+<li>
+<p>Improved FoldingBook expand calculations</p>
+</li>
+<li>
+<p>Add word wrap support to Label widget</p>
+</li>
+<li>
+<p>Fix on draw_styled_text elements checking</p>
+</li>
+<li>
+<p>Added ToggleButton widget</p>
+</li>
+<li>
+<p>Use new pragtical icons on various widgets</p>
+</li>
+<li>
+<p>Allow customization of line widget color</p>
+</li>
+<li>
+<p>Fix possible endless loop on animations</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="https://pragtical.dev/blog/pragtical-v360-release#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<ul>
+<li>Wait thread avg time when it exceeds max time
+(<a href="https://github.com/pragtical/pragtical/pull/264" target="_blank" rel="noopener noreferrer">#264</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v360-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
+<ul>
+<li>
+<p>add a __tostring method to every object
+(<a href="https://github.com/lite-xl/lite-xl/pull/1534" target="_blank" rel="noopener noreferrer">#1534</a>)</p>
+</li>
+<li>
+<p>Better wasm support again
+(<a href="https://github.com/lite-xl/lite-xl/pull/1779" target="_blank" rel="noopener noreferrer">#1779</a>)</p>
+</li>
+<li>
+<p>renderer: defer bitmap rendering when possible
+(<a href="https://github.com/lite-xl/lite-xl/pull/1856" target="_blank" rel="noopener noreferrer">#1856</a>)</p>
+</li>
+<li>
+<p>renderer: pass errors via SDL_SetError
+(<a href="https://github.com/lite-xl/lite-xl/pull/1919" target="_blank" rel="noopener noreferrer">#1919</a>)</p>
+</li>
+<li>
+<p>fix: use current char to determine col in DocView<!-- -->:get_x_offset_col<!-- -->
+(<a href="https://github.com/lite-xl/lite-xl/pull/1946" target="_blank" rel="noopener noreferrer">#1946</a>)</p>
+</li>
+<li>
+<p>common: allow / and \ as PATHSEP on Windows when fuzzy matching files
+(<a href="https://github.com/lite-xl/lite-xl/pull/1992" target="_blank" rel="noopener noreferrer">#1992</a>)</p>
+</li>
+<li>
+<p>fix: use correct charmap and glyphmap sizes
+(<a href="https://github.com/lite-xl/lite-xl/pull/1999" target="_blank" rel="noopener noreferrer">#1999</a>)</p>
+</li>
+<li>
+<p>language_cpp: add back digit separators
+(<a href="https://github.com/lite-xl/lite-xl/pull/2026" target="_blank" rel="noopener noreferrer">#2026</a>)</p>
+</li>
+<li>
+<p>syntax: warn against malformed patterns and disable them
+(<a href="https://github.com/lite-xl/lite-xl/pull/2029" target="_blank" rel="noopener noreferrer">#2029</a>)</p>
+</li>
+<li>
+<p>balance computed directory list, remove recursive function invocation
+(<a href="https://github.com/lite-xl/lite-xl/pull/1991" target="_blank" rel="noopener noreferrer">#1991</a>)</p>
+</li>
+<li>
+<p>language_lua: add files with rockspec extenstion
+(<a href="https://github.com/lite-xl/lite-xl/pull/2083" target="_blank" rel="noopener noreferrer">#2083</a>)</p>
+</li>
+<li>
+<p>Make DATADIR and USERDIR fonts path portable
+(<a href="https://github.com/lite-xl/lite-xl/pull/249" target="_blank" rel="noopener noreferrer">#249</a>)</p>
+</li>
+<li>
+<p>Coroutine Process Fix
+(<a href="https://github.com/lite-xl/lite-xl/pull/2099" target="_blank" rel="noopener noreferrer">#2099</a>)</p>
+</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.5.2 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v352-release</id>
