@@ -186,6 +186,10 @@ process __gc on LuaJIT
 (<a href="https://github.com/pragtical/pragtical/pull/244" target="_blank" rel="noopener noreferrer">#244</a>)</p>
 </li>
 <li>
+<p>Make DATADIR and USERDIR fonts path portable
+(<a href="https://github.com/pragtical/pragtical/pull/249" target="_blank" rel="noopener noreferrer">#249</a>)</p>
+</li>
+<li>
 <p>Allow spaces in plugins mod-version
 (<a href="https://github.com/pragtical/pragtical/pull/253" target="_blank" rel="noopener noreferrer">#253</a>)</p>
 </li>
@@ -365,10 +369,6 @@ process __gc on LuaJIT
 <li>
 <p>language_lua: add files with rockspec extenstion
 (<a href="https://github.com/lite-xl/lite-xl/pull/2083" target="_blank" rel="noopener noreferrer">#2083</a>)</p>
-</li>
-<li>
-<p>Make DATADIR and USERDIR fonts path portable
-(<a href="https://github.com/lite-xl/lite-xl/pull/249" target="_blank" rel="noopener noreferrer">#249</a>)</p>
 </li>
 <li>
 <p>Coroutine Process Fix
