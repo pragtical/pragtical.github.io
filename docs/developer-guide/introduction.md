@@ -39,6 +39,29 @@ and the `style` table respectively.
 
 Here are some tips for plugin developers.
 
+### The repl and run commands
+
+Pragtical has a built-in [REPL][9] that you can access directly from the
+terminal. It becomes really handy when you want to test bits of code, it has
+back history and completion support to make it more convenient.
+
+<video autoplay muted loop style={{width: '100%'}} controls>
+  <source src="https://github.com/user-attachments/assets/ec9491b9-3f80-4d14-9f1e-29544942e2b0"/>
+</video>
+
+You can also quickly run lua files against the pragtical runtime by using the
+`run` command:
+
+```sh
+pragtical run my_lua_file.lua
+```
+
+Or directly evaluate a lua snippet:
+
+```sh
+pragtical run -e 'print "hello world!"'
+```
+
 ### Interactive debugging
 
 Other than using GDB to debug the C part of Pragtical,
@@ -87,6 +110,7 @@ On `cmd.exe`:
 [6]: https://github.com/rxi/lite
 [7]: https://rxi.github.io/lite_an_implementation_overview.html
 [8]: https://github.com/pragtical/plugins/blob/master/plugins/lite-debugger.lua?raw=1
+[9]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
 [Creating Syntaxes]:           syntaxes-and-themes/creating-syntaxes.md
 [Creating Themes]:             syntaxes-and-themes/creating-themes.md
 [Simple Plugin]:               simple-plugin.md

@@ -33,7 +33,6 @@ Examples of functionality added as plugins:
 - [LSP] (implementing Language Server Protocol support for intellisense)
 - [EditorConfig]
 - [Integrated Terminal]
-- [TreeSitter]
 - [Code Formatters]
 - [Source Control Management] (Git and Fossil)
 - and more (https://github.com/pragtical/plugins)...
@@ -111,18 +110,18 @@ other editors because it is pragtical.
 shipped by default to allow opening files and tab dragging between currently
 opened instances.
 
-* **CLI** - Integrated command line interface API that can be extended by
+* **[CLI]** - Integrated command line interface API that can be extended by
 plugins to provide new CLI flags.
 
 * **Search/Replace** - Project-wide search and replace support, better user
 interface for both documents and project search/replace.
 
 
+[CLI]:                       /docs/user-guide/cli
 [SDL]:                       https://www.libsdl.org/
 [LSP]:                       /plugins?plugin=lsp
 [EditorConfig]:              /plugins?plugin=editorconfig
 [Integrated Terminal]:       /plugins?plugin=terminal
-[TreeSitter]:                /plugins?plugin=evergreen
 [Code Formatters]:           /plugins?plugin=formatter
 [Source Control Management]: /plugins?plugin=scm
 [Lite XL]:                   https://github.com/lite-xl/lite-xl

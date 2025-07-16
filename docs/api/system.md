@@ -1,5 +1,5 @@
 ---
-sidebar_position: 12
+sidebar_position: 13
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -16,6 +16,14 @@ Utilites for managing current window, files and more.
 
 Get amount of iterations since the application was launched
 also known as SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency()
+
+---
+
+## get_time_lua
+
+```lua
+(field) get_time_lua: function|unknown
+```
 
 ---
 
@@ -247,6 +255,14 @@ function system.get_time()
 
 Get amount of iterations since the application was launched
 also known as SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency()
+
+---
+
+## get_wait_event_lua
+
+```lua
+function
+```
 
 ---
 
@@ -619,6 +635,14 @@ function system.sleep(seconds: number)
 Sleep for the given amount of seconds.
 
 @*param* `seconds` — Also supports fractions of a second, eg: 0.01
+
+---
+
+## sleep_lua
+
+```lua
+function
+```
 
 ---
 

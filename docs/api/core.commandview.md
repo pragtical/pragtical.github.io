@@ -1,5 +1,5 @@
 ---
-sidebar_position: 18
+sidebar_position: 19
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -1482,6 +1482,28 @@ Check if the object inherits from the given type.
 ```lua
 (method) core.commandview:get_text()
 ```
+
+---
+
+## get_visible_cols_range
+
+```lua
+(method) core.docview:get_visible_cols_range(line: integer, extra_cols?: integer)
+  -> col1: integer
+  2. col2: integer
+  3. ucol1: integer
+  4. ucol2: integer
+```
+
+Get an estimated range of visible columns. It is an estimate because fonts
+and their fallbacks may not be monospaced or may differ in size. This
+function provides a way of optimization on really long lines for plugins
+that perform drawing operations on them.
+
+It is good practice to set the `extra_cols` parameter to a value that leaves
+room for the differences in font sizes.
+
+@*param* `extra_cols` — Amount of columns to deduce on col1 and include on col2 (default: 100)
 
 ---
 

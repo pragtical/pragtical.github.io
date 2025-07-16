@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 description: Learn to write a simple plugin that draws text
               in the top right corner of the editor window.
 ---

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 20
+sidebar_position: 21
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -113,6 +113,21 @@ These values are overriden by `config.transitions`.
 
 ---
 
+## draw_stats
+
+```lua
+(field) draw_stats: boolean|"uncapped"
+```
+
+Draw the current FPS, the average frame time, and the maximum time that
+coroutines have to run per frame without affecting the rendering process
+plus the total amount of running coroutines. If set to 'uncapped' the system
+will draw at the maximum speed per second for benchmarking purposes.
+
+Defaults to false.
+
+---
+
 ## draw_whitespace
 
 ```lua
@@ -185,7 +200,7 @@ The default is false.
 
 Highlights the current line.
 
-The default is true.
+The default is "no_selection".
 
 ---
 
@@ -286,7 +301,7 @@ When enabled, background tasks are processed more aggressively by waiting
 less for system events when events are received. Disable this option to
 reduce CPU usage.
 
-Defaults to true.
+Defaults to false.
 
 ---
 

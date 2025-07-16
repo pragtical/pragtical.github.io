@@ -1,5 +1,5 @@
 ---
-sidebar_position: 57
+sidebar_position: 60
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -32,6 +32,32 @@ Indicates on a widget.styledtext that a new line follows.
 
 ```lua
 (field) alpha: number
+```
+
+---
+
+## alpha_color
+
+```lua
+(field) alpha_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## alpha_mouse_down
+
+```lua
+(field) alpha_mouse_down: boolean
+```
+
+---
+
+## alpha_pos
+
+```lua
+(field) alpha_pos: number
 ```
 
 ---
@@ -831,6 +857,16 @@ Used internally when dragging is activated.
 
 ---
 
+## draw_alpha
+
+```lua
+(method) widget.colorpicker:draw_alpha(x: number, y: number, w: number, h: number)
+```
+
+Draw a transparency color bar at given location and size.
+
+---
+
 ## draw_background
 
 ```lua
@@ -962,6 +998,17 @@ the future.
 name:
     | "mouse_released"
 ```
+
+---
+
+## get_alpha_color
+
+```lua
+(method) widget.colorpicker:get_alpha_color()
+  -> renderer.color
+```
+
+Gets the currently selected color on the transparency bar.
 
 ---
 

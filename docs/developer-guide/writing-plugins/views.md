@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 3
 description: Learn about Views, one of the core concepts for building UIs in Pragtical.
 ---
 
@@ -90,7 +90,7 @@ Following our analogy, these values represent where to place the stencil.
 In reality, these values are rarely used directly as values
 returned by `View:get_content_offset()` is more useful.
 
-If a View is scrollable, you should set `View.scrollable` to `true` 
+If a View is scrollable, you should set `View.scrollable` to `true`
 and override `View:get_scrollable_size()`
 and `View:get_h_scrollable_size()`.
 You should also call `View:draw_scrollbar()` in your draw method
@@ -174,7 +174,7 @@ We're going to draw something in the next section.
 
 ## Rendering
 
-The most important method of a view is `View:render()`. 
+The most important method of a view is `View:render()`.
 This function is called when Pragtical wants to render something.
 
 As mentioned before, you can draw anywhere on the screen,
@@ -529,7 +529,7 @@ The text can now be dragged around.
 
 ### Text Input
 
-To receive text input events, you must override `View:supports_text_input()` 
+To receive text input events, you must override `View:supports_text_input()`
 and return `true`, then override `View:on_text_input()` and handle events.
 
 Additionally, if you wish to handle IME composition events as well, you can
@@ -600,18 +600,18 @@ function HelloView:on_mouse_moved(px, py, dx, dy)
   if HelloView.super.on_mouse_moved(self, px, py, dx, dy) then return true end
   -- If we're not holding down mouse we should ignore the event
   if not self.hold then return end
-  
+
   -- Correct the mouse position to behave as if the cursor was placed on the
   -- top-left corner of the caption.
   -- Without this, the caption will "jump" towards the cursor.
   px, py = px - self.cursor_offset.x, py - self.cursor_offset.y
-  
+
   -- Calculate the bounding rectangle of the Viee
   local x1, y1 = self:get_content_offset()
   -- Here, the bounding rectangle is shrunk by the size of the caption.
   -- This prevents the caption from clipping out of the view.
   local x2, y2 = self.size.x - self.caption_w, self.size.y - style.font:get_height()
-  
+
   -- Set the position of the caption relative to the view.
   self.caption_pos.x, self.caption_pos.y = common.clamp(px - x1, 0, x2), common.clamp(py - y1, 0, y2)
   return true
@@ -620,12 +620,12 @@ end
 function HelloView:on_mouse_pressed(button, px, py, clicks)
   -- If the super method handled the event we should skip our own handler.
   if HelloView.super.on_mouse_pressed(self, button, px, py, clicks) then return true end
-  
+
   -- the bounding box of the caption
   local x1, y1 = self:get_content_offset()
   x1, y1 = x1 + self.caption_pos.x, y1 + self.caption_pos.y
   local x2, y2 = x1 + self.caption_w, y1 + style.font:get_height()
-  
+
   if px >= x1 and py >= y1 and px <= x2 and py <= y2 then
     -- Save the cursor position relative to the caption
     self.cursor_offset.x, self.cursor_offset.y = px - x1, py - y1
@@ -659,7 +659,7 @@ function HelloView:update()
   -- You should do state management in this method.
   -- If you override this method, you must call the super method.
   HelloView.super.update(self)
-  
+
   if self.composition.text ~= "" then
     -- We need to tell the system where to put the IME window.
     -- Get the bounding box of the selected composition text
@@ -691,7 +691,7 @@ function HelloView:draw()
   self.caption,
   x, y,
   style.text)
-  
+
   local caret_pos = x
   if self.composition.text ~= "" then
     -- Draw the composition text

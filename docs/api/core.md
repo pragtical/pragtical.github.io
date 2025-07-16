@@ -1,5 +1,5 @@
 ---
-sidebar_position: 15
+sidebar_position: 16
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -727,7 +727,7 @@ function core.show_title_bar(show: any)
 ## step
 
 ```lua
-function core.step()
+function core.step(next_frame_time: any)
   -> boolean
 ```
 

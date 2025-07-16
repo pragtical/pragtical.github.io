@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 3
 description: Learn how to use the Process API
               to start and manage child processes.
 ---

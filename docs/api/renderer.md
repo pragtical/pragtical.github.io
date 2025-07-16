@@ -345,6 +345,14 @@ Tell the rendering system that we want to build a new frame to render.
 
 ---
 
+## begin_frame_lua
+
+```lua
+function
+```
+
+---
+
 ## draw_rect
 
 ```lua
@@ -352,6 +360,14 @@ function renderer.draw_rect(x: number, y: number, width: number, height: number,
 ```
 
 Draw a rectangle.
+
+---
+
+## draw_rect_lua
+
+```lua
+function
+```
 
 ---
 
@@ -366,6 +382,14 @@ Draw text and return the x coordinate where the text finished drawing.
 
 ---
 
+## draw_text_lua
+
+```lua
+function
+```
+
+---
+
 ## end_frame
 
 ```lua
@@ -373,6 +397,14 @@ function renderer.end_frame()
 ```
 
 Tell the rendering system that we finished building the frame.
+
+---
+
+## end_frame_lua
+
+```lua
+function
+```
 
 ---
 
@@ -395,6 +427,14 @@ function renderer.set_clip_rect(x: number, y: number, width: number, height: num
 ```
 
 Set the region of the screen where draw operations will take effect.
+
+---
+
+## set_clip_rect_lua
+
+```lua
+function
+```
 
 ---
 

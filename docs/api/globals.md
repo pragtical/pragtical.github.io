@@ -244,7 +244,7 @@ global get_current_require_path: function
 ```
 
 Returns the current `require` path.
-See: \[require\](file:///tmp/lua-language-server-1000/instance.AxkW/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
+See: \[require\](file:///usr/share/pragtical/core/start.lua#90#9) for details and caveats
 
 ---
 
@@ -304,6 +304,33 @@ global renwindow: renwindow
 Functionality to create and manage windows.
 
 [\[View Library\]](/docs/api/renwindow)
+
+---
+
+## repl
+
+```lua
+global repl: repl
+```
+
+Cross-platform readline like functionality.
+
+Usage Example:
+```lua
+local line, err = repl.input(prompt)
+while line do
+  if #line \> 0 then
+    repl.add_history(line)
+    repl.save_history(history) -- save every new line
+  end
+  line, err = repl.input(prompt)
+end
+if err then
+  print('An error occurred: ' .. err)
+end
+```
+
+[\[View Library\]](/docs/api/repl)
 
 ---
 

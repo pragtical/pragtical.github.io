@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 2
 description: Learn how to interact with the OS, such
               as reading and writing to the clipboard,
               setting window properties and getting

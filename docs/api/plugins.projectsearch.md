@@ -1,5 +1,5 @@
 ---
-sidebar_position: 47
+sidebar_position: 50
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -1364,11 +1364,8 @@ button:
 ### on_scale_change
 
 ```lua
-(method) widget:on_scale_change(new_scale: number, prev_scale: number)
+(method) plugins.projectsearch.resultsview:on_scale_change(new_scale: number, prev_scale: number)
 ```
-
-Can be overriden by widgets to listen for scale change events to apply
-any neccesary changes in sizes, padding, etc...
 
 ---
 

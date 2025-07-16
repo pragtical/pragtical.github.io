@@ -9,8 +9,13 @@ import TabItem from '@theme/TabItem';
 # Command Line Interface
 
 The CLI provides an interface for interacting with Pragtical from the terminal,
-allowing you to execute commands, manage plugins, and even extend it with
-plugins to add new functionality not provided out of the box.
+allowing you to:
+
+* Execute commands like `run`
+* Manage plugins (If the plugin manager plugin is installed)
+* Extend it with plugins to add new functionality not provided out of the box
+* Access a nice REPL (sinve v3.6.0) that you can use to play around with
+  the editor internals when creating your own plugins!
 
 ![Command Line Interface][1]
 
@@ -40,9 +45,12 @@ pragtical --fork /path/to/project
 
 ## Available Commands
 
+* `edit`: Explicitly open files for editing on a new instance skipping the IPC system.
 * `list`: Display a list of available commands within the Pragtical CLI.
 * `help`: Display help information for the application or a specific command.
 * `pm`: Access the plugin manager to install, update, or manage plugins for Pragtical.
+* `repl`: Starts a basic Read–Eval–Print Loop.
+  `run`: Run a Lua script against the Pragtical runtime.
 
 If available, you can view more detailed usage of a specific command by running:
 

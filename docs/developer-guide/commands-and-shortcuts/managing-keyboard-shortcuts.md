@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 description: Learn in detail how to add and manage keyboard shortcuts
               in Pragtical.
 ---

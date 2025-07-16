@@ -1,5 +1,5 @@
 ---
-sidebar_position: 52
+sidebar_position: 55
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -491,6 +491,14 @@ Default treeview width.
 
 ```lua
 (method) plugins.treeview:on_mouse_moved(px: any, py: any, ...any)
+```
+
+---
+
+## on_scale_change
+
+```lua
+(method) plugins.treeview:on_scale_change(new_scale: any, prev_scale: any)
 ```
 
 ---

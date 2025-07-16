@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 1
 description: Learn to use regular expressions in your configurations
               or plugins.
 ---

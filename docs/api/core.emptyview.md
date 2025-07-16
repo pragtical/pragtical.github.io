@@ -1,5 +1,5 @@
 ---
-sidebar_position: 27
+sidebar_position: 28
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -61,6 +61,14 @@ Represents the border of a widget.
 ```
 
 Widget that captured mouse events
+
+---
+
+## center_container
+
+```lua
+(field) center_container: widget.container
+```
 
 ---
 
@@ -162,14 +170,6 @@ A base widget
 
 ---
 
-## first_update
-
-```lua
-(field) first_update: boolean
-```
-
----
-
 ## font
 
 ```lua
@@ -184,14 +184,6 @@ Represents a reference to a font stored elsewhere.
 
 ```lua
 (field) force_events: table
-```
-
----
-
-## force_update
-
-```lua
-(field) force_update: boolean
 ```
 
 ---
@@ -250,6 +242,14 @@ Array of bytes that represents a color used by the rendering functions.
 
 ```lua
 (field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+```
+
+---
+
+## logo_width
+
+```lua
+(field) logo_width: number|unknown
 ```
 
 ---
@@ -510,6 +510,14 @@ A base widget
 
 ---
 
+## top_container
+
+```lua
+(field) top_container: widget.container
+```
+
+---
+
 ## type_name
 
 ```lua
@@ -706,7 +714,6 @@ Used internally when dragging is activated.
 
 ```lua
 (method) core.emptyview:draw()
-  -> boolean
 ```
 
 ---
@@ -1434,7 +1441,6 @@ Toggle visibility of widget.
 
 ```lua
 (method) core.emptyview:update()
-  -> boolean
 ```
 
 ---

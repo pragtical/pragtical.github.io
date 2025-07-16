@@ -1,5 +1,5 @@
 ---
-sidebar_position: 50
+sidebar_position: 53
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -175,7 +175,7 @@ Title displayed to the user eg: "My Option"
 (field) max: number
 ```
 
-Used for NUMBER to indiciate the maximum number allowed
+Used for NUMBER to indicate the maximum number allowed
 
 ---
 
@@ -233,7 +233,7 @@ Optional function that is used to manipulate the saved value on save.
 (field) step: number
 ```
 
-Used for NUMBER to indiciate the increment/decrement amount
+Used for NUMBER to indicate the increment/decrement amount
 
 ---
 
@@ -1715,8 +1715,10 @@ Toggle visibility of widget.
 ### try_close
 
 ```lua
-(method) core.view:try_close(do_close: any)
+(method) settings.ui:try_close(do_close: any)
 ```
+
+Hide the widget when the node is removed.
 
 ---
 

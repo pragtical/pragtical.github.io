@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 2
 description: Learn about how to operate on files opened in Pragtical.
 ---
 
@@ -82,7 +82,7 @@ The function should return the transformed position.
 ```lua
 -- skip 2 bytes starting from line 1 col 1
 -- if line 1 has 2 characters, then 2, 1 will be returned.
--- assuming each character takes 1 byte, yada yada 
+-- assuming each character takes 1 byte, yada yada
 local x, y = doc:position_offset(1, 1, 2)
 
 -- skip 2 lines and 3 cols
@@ -245,7 +245,7 @@ Sometimes operations involving multiline editing can cause inconsistent
 and duplicated selections. To fix this, you can call `Doc:merge_cursors()`.
 
 This function takes an optional number `idx`, which will make the function
-merge selections adjacent to `idx`. 
+merge selections adjacent to `idx`.
 If `idx` is not provided, the function attempts to merge all the selections.
 
 ## Indentation

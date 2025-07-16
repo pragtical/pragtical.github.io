@@ -1,5 +1,5 @@
 ---
-sidebar_position: 54
+sidebar_position: 57
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -544,6 +544,26 @@ Represents a reference to a font stored elsewhere.
 
 ```lua
 (field) name: string
+```
+
+---
+
+## widget.padding
+
+Represents a padding attribute.
+
+### x
+
+```lua
+(field) x: number
+```
+
+---
+
+### y
+
+```lua
+(field) y: number
 ```
 
 ---
