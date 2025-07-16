@@ -140,7 +140,7 @@ process __gc on LuaJIT
 (<a href="https://github.com/pragtical/pragtical/commit/7c4c1f2c8eb7bdaf33ee97b7df030bc26371ed50" target="_blank" rel="noopener noreferrer">7c4c1f2c</a>)</p>
 </li>
 <li>
-<p>language_xml: remove escape chars from strings (#286)
+<p>language_xml: remove escape chars from strings
 (<a href="https://github.com/pragtical/pragtical/pull/286" target="_blank" rel="noopener noreferrer">#286</a>)</p>
 </li>
 </ul>
