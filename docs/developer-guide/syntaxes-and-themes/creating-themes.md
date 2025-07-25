@@ -37,6 +37,18 @@ style.line_number2 = { common.color "#f8f8f0" }
 style.line_highlight = { common.color "#313442" }
 style.scrollbar = { common.color "#44475a" }
 style.scrollbar2 = { common.color "#ff79c6" }
+style.search_selection = { common.color "#16171d" }
+style.search_selection_text = { common.color "#e1f50a" }
+
+-- set the diff viewer colors
+style.diff_delete = { common.color "rgba(200, 84, 84, 1)" }
+style.diff_insert = { common.color "rgba(77, 127, 73, 1)" }
+style.diff_modify = { common.color "rgba(202, 173, 85, 1)" }
+style.diff_delete_background = { common.color "rgba(200, 84, 84, 0.30)" }
+style.diff_insert_background = { common.color "rgba(77, 127, 73, 0.30)" }
+style.diff_modify_background = { common.color "rgba(202, 173, 85, 0.30)" }
+style.diff_delete_inline = { common.color "rgba(200, 84, 84, 0.40)" }
+style.diff_insert_inline = { common.color "rgba(77, 127, 73, 0.40)" }
 
 -- set syntax highlighting colors
 style.syntax["normal"] = { common.color "#f8f8f2" }
@@ -84,25 +96,44 @@ These colors make up the majority of Pragtical's user interface.
 
 ![Base Colors][1]
 
-| Name                   | Description
-| ----                   | -----------
-| `style.background`     | The background color of the editor (DocView).
-| `style.background2`    | The background color of the file browser (TreeView)
-| `style.background3`    | The background color of the command palette (CommandView)
-| `style.text`           | The default text color.
-| `style.accent`         | The color for primary (highlighted) text.
-| `style.dim`            | The color for secondary (dimmed) text.
-| `style.divider`        | The color for dividers between views.
-| `style.selection`      | The background color of selected text.
-| `style.line_number`    | The color of the line numbers.
-| `style.line_number2`   | The line number color of the current line (where the caret resides).
-| `style.line_highlight` | The background color of the current line (where the caret resides).
+| Name                          | Description
+| ----                          | -----------
+| `style.background`            | The background color of the editor (DocView).
+| `style.background2`           | The background color of the file browser (TreeView)
+| `style.background3`           | The background color of the command palette (CommandView)
+| `style.text`                  | The default text color.
+| `style.accent`                | The color for primary (highlighted) text.
+| `style.dim`                   | The color for secondary (dimmed) text.
+| `style.divider`               | The color for dividers between views.
+| `style.selection`             | The background color of selected text.
+| `style.line_number`           | The color of the line numbers.
+| `style.line_number2`          | The line number color of the current line (where the caret resides).
+| `style.line_highlight`        | The background color of the current line (where the caret resides).
+| `style.search_selection`      | The background color of a matching search result.
+| `style.search_selection_text` | The foreground color of a matching search result.
+
+### Diff Colors
+
+The colors used by the built-in diff viewer.
+
+![Diff Viewer Colors][2]
+
+| Name                           | Description
+| ----                           | -----------
+| `style.diff_delete`            | The fully opaque color for deletes.
+| `style.diff_insert`            | The fully opaque color for inserts.
+| `style.diff_modify`            | The fully opaque color for modifications.
+| `style.diff_delete_background` | Usually a semi-transparent color used on deleted lines.
+| `style.diff_insert_background` | Usually a semi-transparent color used on inserted lines.
+| `style.diff_modify_background` | Usually a semi-transparent color used on modified lines.
+| `style.diff_delete_inline`     | Indicates deletions on a modified line.
+| `style.diff_insert_inline`     | Indicates insertions on a modified line.
 
 ### Scrollbar
 
 These colors makes up the scrollbar in Pragtical.
 
-![Scrollbar Colors][2]
+![Scrollbar Colors][3]
 
 | Name                    | Description
 | ----                    | -----------
@@ -116,7 +147,7 @@ The Nagbar is a dialog interfaced used in Pragtical to convey important choices,
 such as saving or discarding files when exiting.
 These colors control the appearance of the Nagbar.
 
-![Nagbar Colors][3]
+![Nagbar Colors][4]
 
 | Name                | Description
 | ----                | -----------
@@ -151,8 +182,8 @@ which is used to implement syntax highlighting.
 These tokens are dependent on the syntax files for the particular language,
 and are intentionally loosely defined.
 
-| Name                             | Description
-| ----                             | -----------
+| Name                       | Description
+| ----                       | -----------
 | `style.syntax["normal"]`   | Used for highlighting normal (plain) text.
 | `style.syntax["symbol"]`   | Used for highlighting variables.
 | `style.syntax["comment"]`  | Used for highlighting comments.
@@ -251,5 +282,6 @@ It's not recommended changing these values unless you know what you're doing.
 
 [colors]: https://github.com/pragtical/colors/blob/master/colors/dracula.lua
 [1]:      /img/developer-guide/syntaxes-and-themes/basic-layout.png
-[2]:      /img/developer-guide/syntaxes-and-themes/scrollbar.png
-[3]:      /img/developer-guide/syntaxes-and-themes/nagbar.png
+[2]:      /img/developer-guide/syntaxes-and-themes/diff-viewer.png
+[3]:      /img/developer-guide/syntaxes-and-themes/scrollbar.png
+[4]:      /img/developer-guide/syntaxes-and-themes/nagbar.png
