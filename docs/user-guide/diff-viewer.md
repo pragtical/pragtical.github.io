@@ -58,7 +58,7 @@ There are different ways to open the Diff Viewer:
 
 3. **Right-click Selected Text**:
    In a document, right-click a text selection and select `Select Text for Compare`.
-   Then right click another file and select `Compare Text with Selected`
+   Then right click another text selection and select `Compare Text with Selected`
 
 4. **Source Control Manager**:
    With SCM installed, click on any changed file to compare it against the
