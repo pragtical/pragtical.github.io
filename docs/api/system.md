@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 14
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -94,7 +94,7 @@ This function raises an error if the path doesn't exists.
 ## clear_ime
 
 ```lua
-function system.clear_ime()
+function system.clear_ime(window: renwindow)
 ```
 
 Clears any ongoing composition on the IME
@@ -509,7 +509,7 @@ Set the content of the primary selection.
 ## set_text_input_rect
 
 ```lua
-function system.set_text_input_rect(x: number, y: number, width: number, height: number)
+function system.set_text_input_rect(window: renwindow, x: number, y: number, width: number, height: number)
 ```
 
 Sets the position of the IME composition window.
@@ -519,7 +519,7 @@ Sets the position of the IME composition window.
 ## set_window_bordered
 
 ```lua
-function system.set_window_bordered(bordered: boolean)
+function system.set_window_bordered(window: renwindow, bordered: boolean)
 ```
 
 Toggle between bordered and borderless.
@@ -529,7 +529,7 @@ Toggle between bordered and borderless.
 ## set_window_hit_test
 
 ```lua
-function system.set_window_hit_test(title_height?: number, controls_width?: number, resize_border?: number)
+function system.set_window_hit_test(window: renwindow, title_height?: number, controls_width?: number, resize_border?: number)
 ```
 
 When then window is run borderless (without system decorations), this
@@ -537,6 +537,8 @@ function allows to set the size of the different regions that allow
 for custom window management.
 To disable custom window management, call this function without any
 arguments
+
+@*param* `window` — Target window
 
 @*param* `title_height` — Height of the window decoration
 
@@ -643,6 +645,16 @@ Sleep for the given amount of seconds.
 ```lua
 function
 ```
+
+---
+
+## text_input
+
+```lua
+function system.text_input(window: renwindow, enabled: boolean)
+```
+
+Enables or disables text input.
 
 ---
 

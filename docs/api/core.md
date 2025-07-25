@@ -1,5 +1,5 @@
 ---
-sidebar_position: 16
+sidebar_position: 17
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -265,14 +265,6 @@ A status bar implementation, check core.status_view.
 
 ```lua
 (field) title_view: core.titleview
-```
-
----
-
-## updating_scale
-
-```lua
-(field) updating_scale: boolean
 ```
 
 ---

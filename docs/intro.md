@@ -55,7 +55,7 @@ two words that properly define our development approach as follows:
 * willing to see things as they really are and deal with them sensibly
 
 As a result we belief that new features introduced through pull requests should
-be evaluated taking a practical approach, without going into lenghty idealistic
+be evaluated taking a practical approach, without going into lengthy idealistic
 discussions that slowdown progress, merging code when logical.
 
 ## Goals
@@ -116,8 +116,14 @@ plugins to provide new CLI flags.
 * **Search/Replace** - Project-wide search and replace support, better user
 interface for both documents and project search/replace.
 
+* **Built-in [Diff Viewer]** - A file or strings diff viewer that lets
+easily navigate and synchronize the differences. The functionality is
+expanded by the [Source Control Management] where it will let you compare
+your current checkout file to an older version on the commit history.
+
 
 [CLI]:                       /docs/user-guide/cli
+[Diff Viewer]:               /docs/user-guide/diff-viewer
 [SDL]:                       https://www.libsdl.org/
 [LSP]:                       /plugins?plugin=lsp
 [EditorConfig]:              /plugins?plugin=editorconfig

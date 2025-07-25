@@ -1,5 +1,5 @@
 ---
-sidebar_position: 84
+sidebar_position: 86
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -628,6 +628,14 @@ A base widget
 
 ---
 
+### search_selections
+
+```lua
+(field) search_selections: table
+```
+
+---
+
 ### selections
 
 ```lua
@@ -680,6 +688,14 @@ Metamethod to allow using the object call as a constructor.
 
 ---
 
+### add_search_selection
+
+```lua
+(method) core.doc:add_search_selection(line1: any, col1: any, line2: any, col2: any)
+```
+
+---
+
 ### add_selection
 
 ```lua
@@ -700,6 +716,22 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.doc:clear_cache(l: any, n: any)
+```
+
+---
+
+### clear_search_selections
+
+```lua
+(method) core.doc:clear_search_selections()
+```
+
+---
+
+### clear_undo_redo
+
+```lua
+(method) core.doc:clear_undo_redo()
 ```
 
 ---
@@ -905,7 +937,7 @@ The character at the "end" position is not included by default.
 
 @*param* `inclusive` — Whether or not to return the character at the last position
 
-See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#401#9)
+See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#409#9)
 
 ---
 
@@ -1016,6 +1048,15 @@ Check if the parameter is strictly of the object type.
 ```
 
 Check if the parameter inherits from the object.
+
+---
+
+### is_search_selection
+
+```lua
+(method) core.doc:is_search_selection(line1: any, col1: any, line2: any, col2: any)
+  -> boolean
+```
 
 ---
 
@@ -1785,7 +1826,7 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.docview:get_line_screen_position(line: any, col: any)
-  -> unknown
+  -> number
   2. unknown
 ```
 
@@ -2041,7 +2082,7 @@ any neccesary changes in sizes, padding, etc...
 ### scroll_to_make_visible
 
 ```lua
-(method) core.docview:scroll_to_make_visible(line: any, col: any)
+(method) core.docview:scroll_to_make_visible(line: any, col: any, instant: any)
 ```
 
 ---

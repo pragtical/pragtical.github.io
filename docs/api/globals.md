@@ -211,6 +211,18 @@ See: https://bitop.luajit.org/
 
 ---
 
+## diff
+
+```lua
+global diff: diff
+```
+
+Functionality to generate the differences between two strings.
+
+[\[View Library\]](/docs/api/diff)
+
+---
+
 ## dirmonitor
 
 ```lua

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 21
+sidebar_position: 22
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -430,6 +430,19 @@ Do not use raw operations on this table.
 
 ---
 
+## scroll_context_lines
+
+```lua
+(field) scroll_context_lines: integer
+```
+
+Minimum number of lines to keep visible above and below the cursor
+when scrolling the document.
+
+The default is 10
+
+---
+
 ## scroll_past_end
 
 ```lua
@@ -439,6 +452,18 @@ Do not use raw operations on this table.
 Enables/disables scrolling past the end of a document.
 
 Defaults to true.
+
+---
+
+## show_line_numbers
+
+```lua
+(field) show_line_numbers: boolean
+```
+
+Show or hide the line numbers.
+
+The default is true
 
 ---
 

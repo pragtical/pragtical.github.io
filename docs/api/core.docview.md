@@ -1,5 +1,5 @@
 ---
-sidebar_position: 27
+sidebar_position: 28
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -438,7 +438,7 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.docview:get_gutter_width()
-  -> unknown
+  -> number|unknown
   2. number
 ```
 
@@ -466,7 +466,7 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.docview:get_line_screen_position(line: any, col: any)
-  -> unknown
+  -> number
   2. unknown
 ```
 
@@ -714,7 +714,7 @@ any neccesary changes in sizes, padding, etc...
 ## scroll_to_make_visible
 
 ```lua
-(method) core.docview:scroll_to_make_visible(line: any, col: any)
+(method) core.docview:scroll_to_make_visible(line: any, col: any, instant: any)
 ```
 
 ---
