@@ -3,6 +3,9 @@ sidebar_position: 9
 description: Learn about the Pragtical built-in Diff Viewer
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Diff Viewer
 
 The Pragtical code editor includes a **Built-in Diff Viewer** designed to help
@@ -90,6 +93,35 @@ There are different ways to open the Diff Viewer:
 | Previous difference       | <kbd>ctrl+alt+,</kbd> |
 | Sync changes              | <kbd>ctrl+return</kbd> |
 
+## Configuration
+
+The following configuration options are available:
+
+<Tabs>
+  <TabItem value="user-module" label="User Module" default>
+
+```lua
+---Logs the amount of time taken to recompute differences.
+---@type boolean
+config.plugins.diffview.log_items = false
+
+---Disable syntax coloring on changed lines to improve visibility.
+---@type boolean
+config.plugins.diffview.plain_text = false
+
+---The color used on changed lines when plain text is enabled.
+---@type renderer.color
+config.plugins.diffview.plain_text_color = { common.color "#ffffff" }
+```
+
+  </TabItem>
+  <TabItem value="settings-ui" label="Settings UI">
+
+![diff viewer settings panel][2]
+
+  </TabItem>
+</Tabs>
+
 ## Api Usage Example
 
 You can easily compare any two open files. For example:
@@ -110,11 +142,12 @@ diffview.string_to_file("some text", "src/file.ext")
 diffview.file_to_string("src/file.ext", "some text")
 ```
 
-For additional details check the [diff api docs] which contain the refenreces
+For additional details check the [diff api docs] which contain the references
 to the C backend and [diffviewer api docs].
 
 
 [1]:                         /img/user-guide/diff-viewer/diff-view.png
+[2]:                         /img/user-guide/diff-viewer/settings.png
 [diff api docs]:             /docs/api/diff
 [diffviewer api docs]:       /docs/api/plugins.diffview
 [Source Control Management]: /plugins?plugin=scm
