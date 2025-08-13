@@ -4,10 +4,307 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Wed, 30 Jul 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 13 Aug 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.7.0 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v370-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v370-release</guid>
+            <pubDate>Wed, 13 Aug 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Better colors, better performance, new Diff Viewer, SDL3 port and a seasoned]]></description>
+            <content:encoded><![CDATA[<p>Better colors, better performance, new Diff Viewer, SDL3 port and a seasoned
+dosage of new features, fixes and enhancements!</p>
+<p>Many of the new features and fixes on this release are possible thanks to all
+the help, suggestions and testing provided by <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="diff-viewer">Diff Viewer<a href="https://pragtical.dev/blog/pragtical-v370-release#diff-viewer" class="hash-link" aria-label="Direct link to Diff Viewer" title="Direct link to Diff Viewer">​</a></h2>
+<p>One of the most exciting features on this release is the new file and
+strings differences viewer that was suggested by
+<a href="https://github.com/bananakid" target="_blank" rel="noopener noreferrer">bananakid</a>, who also provided testing and useful
+feedback, Thank You!</p>
+<p>Here is a preview of the viewer and configuration settings:</p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/a8e5e42b-0688-41d5-8f4f-2f68acfdf482" alt="diff viewer" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://github.com/user-attachments/assets/8fbdf60c-43f7-4320-98da-44d58b1a231d" alt="diff viewer settings+" class="img_ev3q"></p>
+<p><strong>Short video preview of the Diff Viewer:</strong></p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/f5856c26-be2b-44f4-8d68-73b472fb90e9"></video>
+<p><strong>New styles that can be set by color themes:</strong></p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_delete </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(200, 84, 84, 1)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_insert </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(77, 127, 73, 1)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_modify </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(202, 173, 85, 1)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_delete_background </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(200, 84, 84, 0.30)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_insert_background </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(77, 127, 73, 0.30)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_modify_background </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(202, 173, 85, 0.30)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_delete_inline </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(200, 84, 84, 0.40)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">style</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">diff_insert_inline </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">color </span><span class="token string" style="color:rgb(255, 121, 198)">"rgba(77, 127, 73, 0.40)"</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="better-colors">Better Colors<a href="https://pragtical.dev/blog/pragtical-v370-release#better-colors" class="hash-link" aria-label="Direct link to Better Colors" title="Direct link to Better Colors">​</a></h2>
+<p>This release ships with a bunch of improvements and corrections to the
+color themes courtesy of <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a> who also raised
+the subject of search selection highlights not been eye friendly. For this,
+we now introduced the ability of having a different highlight color for
+search selections as seen below:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/097a96b0-e80e-4664-ba17-09d1fe23d737"></video>
+<p>New style fields introduced with this change that can be set by color themes:</p>
+<ul>
+<li><code>style.search_selection</code> - background color of the selection</li>
+<li><code>style.search_selection_text</code> - foreground (text) color of selection</li>
+</ul>
+<p>Also, we got the <strong>nightfox</strong> family of color themes thanks to ranjan.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-config-options">New Config Options<a href="https://pragtical.dev/blog/pragtical-v370-release#new-config-options" class="hash-link" aria-label="Direct link to New Config Options" title="Direct link to New Config Options">​</a></h2>
+<p>We added some new config options that let you modify some aspects of the editor.
+These configuration options are:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Draw the current FPS, the average frame time, and the maximum time that</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---coroutines have to run per frame without affecting the rendering process</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---plus the total amount of running coroutines. If set to 'uncapped' the system</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---will draw at the maximum speed per second for benchmarking purposes.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Defaults to false.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type boolean | "uncapped"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">draw_stats </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">false</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Perform case insensitive next word selection.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The default is false.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type boolean</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">select_add_next_no_case </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">false</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Minimum number of lines to keep visible above and below the cursor</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---when scrolling the document.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The default is 10</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type integer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">scroll_context_lines </span><span class="token operator">=</span><span class="token plain"> </span><span class="token number">10</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Show or hide the line numbers.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The default is true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type boolean</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">show_line_numbers </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">true</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Some previews on the effect of the config flags:</p>
+<p><strong>config.draw_stats</strong>
+<img loading="lazy" src="https://github.com/user-attachments/assets/56dd291d-8918-4ff3-a0d0-5b63f21fa9e3" alt="draw_stats" class="img_ev3q"></p>
+<p><strong>config.select_add_next_no_case</strong></p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/12870d5c-105a-4e82-a3c1-6937a3b0fd8a"></video>
+<p><strong>config.scroll_context_lines</strong></p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/1ae403a5-c260-49c8-9915-c846f546eb5d"></video>
+<p>All these configuration options are also accessible from the Settings UI.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ui-improvements">UI Improvements<a href="https://pragtical.dev/blog/pragtical-v370-release#ui-improvements" class="hash-link" aria-label="Direct link to UI Improvements" title="Direct link to UI Improvements">​</a></h2>
+<p>One feature mostly unknown by users is the ability to search for a line
+of code on current document using the goto line command. Syntax coloring
+was added to the shown results:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/095801d2-3844-4f68-a882-fd3890558238"></video>
+<p>Welcome page is responsive:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/3d622bdf-95bd-4fbd-a335-f2f35df5ffd7"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="repl-history-and-completion-support">REPL History and Completion Support<a href="https://pragtical.dev/blog/pragtical-v370-release#repl-history-and-completion-support" class="hash-link" aria-label="Direct link to REPL History and Completion Support" title="Direct link to REPL History and Completion Support">​</a></h2>
+<p>The previous release added a new REPL to easily interface with the Pragtical
+runtime from the CLI. This release improves the REPL by adding history and
+completion support that also works on Windows thanks to the lua linenoise
+wrapper which I forked in order to integrate it with linenoise-ng, fixing
+various segmentation faults and bugs. Finally, multiple return values are
+properly handled now as seen on the video below:</p>
+<video muted="" loop="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/ec9491b9-3f80-4d14-9f1e-29544942e2b0"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="performance-galore">Performance Galore<a href="https://pragtical.dev/blog/pragtical-v370-release#performance-galore" class="hash-link" aria-label="Direct link to Performance Galore" title="Direct link to Performance Galore">​</a></h2>
+<p>Now, the officially distributed binary builds are generated using
+<strong>Profiler Guided Optimizations</strong> and <strong>Link Time Optimizations</strong> to get
+some better performance. For PGO I introduced a lua stress script to
+generate the profiler data by running various tasks like: text editing,
+tokenizing, scale changes, rect drawing, multiple process launching, etc...</p>
+<p>LuaJIT FFI is now been used to call into some of the most hot C functions
+used at runtime in order to reduce the calling overhead produced by the Lua
+C API by up to 90%.</p>
+<p>Also, the node system was modified to only perform updates on active views
+and draw only the visible ones. This improves performance when having multiple
+documents open at once.</p>
+<p>A performance regression that was introduced with the fonts defer bitmap
+feature was fixed thanks to reproducible test data provided by Amer. Pinpointing
+the issue took some profiling and analyzing but it was finally fixed resulting
+on snappier editor performance when opening files containing whitespace
+characters.</p>
+<p>The <code>config.fps</code> flag is now better respected since the rendering system will
+not go much higher from the set value. Before, setting a value of 60 would not
+have much effect with total frames per second surpassing this value by the
+hundreds on forced redraws or received events, now, the max fps should be
+more aligned to the configured amount.</p>
+<p>Other performance improvements are listed on the change log!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="core-additions">Core Additions<a href="https://pragtical.dev/blog/pragtical-v370-release#core-additions" class="hash-link" aria-label="Direct link to Core Additions" title="Direct link to Core Additions">​</a></h2>
+<p>Some new methods made it in the core to help on the performance and code
+duplication reduction departments.</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Get an estimated range of visible columns. It is an estimate because fonts</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---and their fallbacks may not be monospaced or may differ in size. This</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---function provides a way of optimization on really long lines for plugins</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---that perform drawing operations on them.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---It is good practice to set the `extra_cols` parameter to a value that leaves</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---room for the differences in font sizes.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param line integer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param extra_cols? integer Amount of columns to deduce on col1 and include on col2 (default: 100)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return integer col1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return integer col2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return integer ucol1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return integer ucol2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> DocView</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">get_visible_cols_range</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">line</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> extra_cols</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Open the given resource using the system launcher.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The resource can be an url, file or directory in most cases...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param resource string</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return boolean success</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">open_in_system</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">resource</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>We truly needed <code>common.open_in_system</code>!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="other-changes">Other Changes<a href="https://pragtical.dev/blog/pragtical-v370-release#other-changes" class="hash-link" aria-label="Direct link to Other Changes" title="Direct link to Other Changes">​</a></h2>
+<p>Finally the SDL3 Port was merged after various testing.</p>
+<p>The project module settings are now reset on project change.</p>
+<p>Dropped from official builds macOS universal bundle and Windows 32 bits.</p>
+<p>A borderless mode bug was spotted on macOS some time ago by
+<a href="https://github.com/dilpreetsio" target="_blank" rel="noopener noreferrer">dilpreetsio</a> and finally fixed thanks to
+the feedback provided by <a href="https://github.com/sfesenko" target="_blank" rel="noopener noreferrer">sfesenko</a>.</p>
+<p>Various other enhancements and fixes are part of this release but, I'm getting
+lazy summarizing them and this post is getting long. Check the changes log
+below for more details.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.7.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v370-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v370-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Add option to draw rendering stats
+(<a href="https://github.com/pragtical/pragtical/pull/291" target="_blank" rel="noopener noreferrer">#291</a>)</p>
+</li>
+<li>
+<p>REPL history and completion support
+(<a href="https://github.com/pragtical/pragtical/pull/287" target="_blank" rel="noopener noreferrer">#287</a>)</p>
+</li>
+<li>
+<p>Configurable amount of context lines visible on scroll
+(<a href="https://github.com/pragtical/pragtical/pull/311" target="_blank" rel="noopener noreferrer">#311</a>)</p>
+</li>
+<li>
+<p>Add built-in config to toggle line numbers
+(<a href="https://github.com/pragtical/pragtical/pull/316" target="_blank" rel="noopener noreferrer">#316</a>)</p>
+</li>
+<li>
+<p>Add config option for insensitive next word selection
+(<a href="https://github.com/pragtical/pragtical/pull/332" target="_blank" rel="noopener noreferrer">#332</a>)</p>
+</li>
+<li>
+<p>New Diff Viewer for built-in support of file and string comparisons
+(<a href="https://github.com/pragtical/pragtical/pull/306" target="_blank" rel="noopener noreferrer">#306</a>)</p>
+</li>
+<li>
+<p>Add common.open_in_system(resource) function
+(<a href="https://github.com/pragtical/pragtical/pull/321" target="_blank" rel="noopener noreferrer">#321</a>)</p>
+</li>
+<li>
+<p>SDL3 port
+(<a href="https://github.com/pragtical/pragtical/pull/254" target="_blank" rel="noopener noreferrer">#254</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="colors">Colors<a href="https://pragtical.dev/blog/pragtical-v370-release#colors" class="hash-link" aria-label="Direct link to Colors" title="Direct link to Colors">​</a></h3>
+<ul>
+<li>
+<p>Add special highlight colors to search selections
+(<a href="https://github.com/pragtical/pragtical/pull/312" target="_blank" rel="noopener noreferrer">#312</a>)</p>
+</li>
+<li>
+<p>add search highlight styles to pre-packaged themes
+(<a href="https://github.com/pragtical/pragtical/pull/315" target="_blank" rel="noopener noreferrer">#315</a>)</p>
+</li>
+<li>
+<p>Add search selection styles to extra color themes
+(<a href="https://github.com/pragtical/colors/pull/2" target="_blank" rel="noopener noreferrer">colors/#2</a>)</p>
+</li>
+<li>
+<p>Improve contrast for default themes
+(<a href="https://github.com/pragtical/pragtical/pull/322" target="_blank" rel="noopener noreferrer">#322</a>)</p>
+</li>
+<li>
+<p>Improve contrast on extra themes
+(<a href="https://github.com/pragtical/colors/pull/5" target="_blank" rel="noopener noreferrer">colors/#5</a>)</p>
+</li>
+<li>
+<p>Added new nightfox family of color themes
+(<a href="https://github.com/pragtical/colors/commit/538d0424ea398f0a3db062d6ff472c36c5105b97" target="_blank" rel="noopener noreferrer">538d0424</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v370-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix common.color returning rgba values as strings
+(<a href="https://github.com/pragtical/pragtical/pull/289" target="_blank" rel="noopener noreferrer">#289</a>)</p>
+</li>
+<li>
+<p>Handle incomplete token type
+(<a href="https://github.com/pragtical/pragtical/pull/295" target="_blank" rel="noopener noreferrer">#295</a>)</p>
+</li>
+<li>
+<p>fix for tokenizer plugins not providing state
+(<a href="https://github.com/pragtical/pragtical/commit/fb56c461f876ba2431c6d18fdcec6fee5825780f" target="_blank" rel="noopener noreferrer">fb56c461</a>)</p>
+</li>
+<li>
+<p>borderless: scale window hit test info
+(<a href="https://github.com/pragtical/pragtical/pull/303" target="_blank" rel="noopener noreferrer">#303</a>)</p>
+</li>
+<li>
+<p>findfile: take into consideration subdirectories
+(<a href="https://github.com/pragtical/pragtical/pull/325" target="_blank" rel="noopener noreferrer">#325</a>)</p>
+</li>
+<li>
+<p>Reset previous project module settings on change
+(<a href="https://github.com/pragtical/pragtical/pull/329" target="_blank" rel="noopener noreferrer">#329</a>)</p>
+</li>
+<li>
+<p>projectsearch: restore docview focus on hidden treeview
+(<a href="https://github.com/pragtical/pragtical/pull/331" target="_blank" rel="noopener noreferrer">#331</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v370-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>language_lua: add c syntax coloring to ffi.cdef
+(<a href="https://github.com/pragtical/pragtical/pull/290" target="_blank" rel="noopener noreferrer">#290</a>)</p>
+</li>
+<li>
+<p>autocomplete: on max symbols return syntax_symbols
+(<a href="https://github.com/pragtical/pragtical/pull/294" target="_blank" rel="noopener noreferrer">#294</a>)</p>
+</li>
+<li>
+<p>settings ui: allow lowering line height to 0.8
+(<a href="https://github.com/pragtical/pragtical/pull/299" target="_blank" rel="noopener noreferrer">#299</a>)</p>
+</li>
+<li>
+<p>Make welcome page responsive
+(<a href="https://github.com/pragtical/pragtical/pull/300" target="_blank" rel="noopener noreferrer">#300</a>)</p>
+</li>
+<li>
+<p>Scale treeview and projectsearch size on scale changes
+(<a href="https://github.com/pragtical/pragtical/pull/304" target="_blank" rel="noopener noreferrer">#304</a>)</p>
+</li>
+<li>
+<p>Search UI: also scroll horizontally
+(<a href="https://github.com/pragtical/pragtical/pull/310" target="_blank" rel="noopener noreferrer">#310</a>)</p>
+</li>
+<li>
+<p>doc:go-to-line: live syntax preview
+(<a href="https://github.com/pragtical/pragtical/pull/314" target="_blank" rel="noopener noreferrer">#314</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="https://pragtical.dev/blog/pragtical-v370-release#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<ul>
+<li>
+<p>Use LuaJIT FFI to perform draw calls
+(<a href="https://github.com/pragtical/pragtical/pull/288" target="_blank" rel="noopener noreferrer">#288</a>)</p>
+</li>
+<li>
+<p>Limit FPS to match config.fps even during frequent events
+(<a href="https://github.com/pragtical/pragtical/pull/293" target="_blank" rel="noopener noreferrer">#293</a>)</p>
+</li>
+<li>
+<p>Add DocView<!-- -->:get_visible_cols_range<!-- -->(...)
+(<a href="https://github.com/pragtical/pragtical/pull/296" target="_blank" rel="noopener noreferrer">#296</a>)</p>
+</li>
+<li>
+<p>Revert "drawwhitespace: Cache whitespace location"
+(<a href="https://github.com/pragtical/pragtical/pull/302" target="_blank" rel="noopener noreferrer">#302</a>)</p>
+</li>
+<li>
+<p>luajit: arm64 patch to increase mcode alloc size
+(<a href="https://github.com/pragtical/pragtical/pull/301" target="_blank" rel="noopener noreferrer">#301</a>)</p>
+</li>
+<li>
+<p>Only update active views and draw visible ones
+(<a href="https://github.com/pragtical/pragtical/pull/307" target="_blank" rel="noopener noreferrer">#307</a>)</p>
+</li>
+<li>
+<p>Lower frame rate only after 3 consecutive drops
+(<a href="https://github.com/pragtical/pragtical/pull/308" target="_blank" rel="noopener noreferrer">#308</a>)</p>
+</li>
+<li>
+<p>Don't use incremental gc on Lua 5.4+
+(<a href="https://github.com/pragtical/pragtical/pull/309" target="_blank" rel="noopener noreferrer">#309</a>)</p>
+</li>
+<li>
+<p>Improve core.run() timings.
+(<a href="https://github.com/pragtical/pragtical/pull/313" target="_blank" rel="noopener noreferrer">#313</a>)</p>
+</li>
+<li>
+<p>Revert back to performant iterator on each_token
+(<a href="https://github.com/pragtical/pragtical/pull/317" target="_blank" rel="noopener noreferrer">#317</a>)</p>
+</li>
+<li>
+<p>Move inner functions to outer on tokenizer.tokenize
+(<a href="https://github.com/pragtical/pragtical/pull/318" target="_blank" rel="noopener noreferrer">#318</a>)</p>
+</li>
+<li>
+<p>Fix performance regression on defer bitmap
+(<a href="https://github.com/pragtical/pragtical/pull/326" target="_blank" rel="noopener noreferrer">#326</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v370-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>Add PGO Stress Generator Script, release and rolling builds are now
+PGO optimized, dropped macOS universal bundles and Windows 32 bit builds
+(<a href="https://github.com/pragtical/pragtical/pull/320" target="_blank" rel="noopener noreferrer">#320</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v370-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
+<ul>
+<li>
+<p>Added alpha slider to colorpicker widget</p>
+</li>
+<li>
+<p>Make use of new container widget on settings UI installed plugins
+and also on the EmptyView</p>
+</li>
+<li>
+<p>Added color reference support and make use of it on ListBox</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.6.0 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v360-release</link>
