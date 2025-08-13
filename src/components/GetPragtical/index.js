@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-const LATEST='v3.6.0';
+const LATEST='v3.7.0';
 
 function GetDownloadsMap(version) {
   return [
@@ -61,20 +61,6 @@ function GetDownloadsMap(version) {
             &nbsp;
             <code>64 bit</code>
           </li>
-          <li className={styles.li}>
-            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-i686-setup.exe`}>
-              Installer
-            </a>
-            &nbsp;
-            <code>32 bit</code>
-          </li>
-          <li className={styles.li}>
-            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-windows-i686.zip`}>
-              Portable ZIP
-            </a>
-            &nbsp;
-            <code>32 bit</code>
-          </li>
         </nav>
       ),
     },
@@ -84,11 +70,11 @@ function GetDownloadsMap(version) {
       description: (
         <nav>
           <li className={styles.li}>
-            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-universal.dmg`}>
+            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-arm64.dmg`}>
               DMG
             </a>
             &nbsp;
-            <code>Universal</code>
+            <code>Arm</code>
           </li>
           <li className={styles.li}>
             <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-x86_64.dmg`}>
@@ -96,13 +82,6 @@ function GetDownloadsMap(version) {
             </a>
             &nbsp;
             <code>Intel</code>
-          </li>
-          <li className={styles.li}>
-            <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-arm64.dmg`}>
-              DMG
-            </a>
-            &nbsp;
-            <code>Arm</code>
           </li>
         </nav>
       ),
