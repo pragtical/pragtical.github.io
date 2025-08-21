@@ -113,10 +113,10 @@ On `cmd.exe`:
 [9]: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop
 [Creating Syntaxes]:           syntaxes-and-themes/creating-syntaxes.md
 [Creating Themes]:             syntaxes-and-themes/creating-themes.md
-[Simple Plugin]:               simple-plugin.md
-[Commands]:                    commands.md
-[Managing Keyboard Shortcuts]: managing-keyboard-shortcuts.md
-[Classes and Objects]:         classes-and-objects.md
-[Using Regular Expressions]:   using-regular-expressions.md
-[Interacting with the OS]:     interacting-with-the-os.md
-[Child Processes]:             child-processes.md
+[Simple Plugin]:               writing-plugins/simple-plugin.md
+[Commands]:                    commands-and-shortcuts/commands.md
+[Managing Keyboard Shortcuts]: commands-and-shortcuts/managing-keyboard-shortcuts.md
+[Classes and Objects]:         writing-plugins/classes-and-objects.md
+[Using Regular Expressions]:   using-libraries/using-regular-expressions.md
+[Interacting with the OS]:     using-libraries/interacting-with-the-os.md
+[Child Processes]:             using-libraries/child-processes.md

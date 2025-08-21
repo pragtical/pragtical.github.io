@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import RecentPosts from '@site/src/components/RecentPosts';
 import ImageGallery from 'react-image-gallery';
 
 import styles from './index.module.css';
@@ -78,6 +79,11 @@ export default function Home() {
       <main>
         <HomeGallery />
         <HomepageFeatures />
+        <section className={styles.heroBanner}>
+          <h1>Recent Blog Posts</h1>
+          <RecentPosts />
+          <Link to="/blog">Read all posts →</Link>
+        </section>
       </main>
     </Layout>
   );

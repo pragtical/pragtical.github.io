@@ -48,6 +48,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          blogSidebarCount: 'ALL',
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/pragtical/pragtical.github.io/edit/main/',
@@ -190,7 +191,14 @@ const config = {
 
     plugins: [
       require.resolve('docusaurus-lunr-search'),
-      require.resolve('plugin-image-zoom')
+      require.resolve('plugin-image-zoom'),
+      [
+        require.resolve('./plugins/recent-blog'),
+        {
+          maxPosts: 3,          // max posts to show
+          excerptLength: 150,   // max chars for auto description
+        },
+      ]
     ],
 };
 

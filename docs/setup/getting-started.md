@@ -99,6 +99,6 @@ These are advanced topics that are useful for power users or plugin developers:
 [Plugins]:              ../user-guide/plugins.md
 [Creating Themes]:      /docs/developer-guide/syntaxes-and-themes/creating-themes
 [Creating Syntaxes]:    /docs/developer-guide/syntaxes-and-themes/creating-syntaxes
-[Simple plugin]:        ../developer-guide/simple-plugin.md
-[Regular expressions]:  ../developer-guide/using-regular-expressions.md
-[Child processes]:      ../developer-guide/child-processes.md
+[Simple plugin]:        ../developer-guide/writing-plugins/simple-plugin.md
+[Regular expressions]:  ../developer-guide/using-libraries/using-regular-expressions.md
+[Child processes]:      ../developer-guide/using-libraries/child-processes.md
