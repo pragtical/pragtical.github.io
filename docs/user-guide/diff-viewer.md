@@ -71,6 +71,12 @@ There are different ways to open the Diff Viewer:
 5. **API**:
    Plugins can programmatically launch the diff viewer using Pragtical’s Lua API.
 
+### Example Video
+
+<video autoplay muted loop style={{width: '100%'}} controls>
+  <source src="https://github.com/user-attachments/assets/f5856c26-be2b-44f4-8d68-73b472fb90e9"/>
+</video>
+
 ## Available Commands:
 
 | Name                                   | Description

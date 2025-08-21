@@ -197,4 +197,4 @@ function keymap.on_key_pressed(key, ...)
 end
 ```
 
-[1]: https://wiki.libsdl.org/SDL2/SDL_Keycode
+[1]: https://wiki.libsdl.org/SDL3/SDL_Keycode

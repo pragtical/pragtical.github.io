@@ -14,7 +14,7 @@ create an OS-specific package for Linux, Windows or macOS.
 The following libraries are required:
 
 - LuaJIT or Lua 5.4
-- SDL2
+- SDL3
 - freetype2
 - pcre2
 - uchardet
@@ -89,8 +89,9 @@ Otherwise, Pragtical will use Unix-like directory locations. It will use
 `$prefix/bin`. `$prefix` is determined when the application starts such that
 `$prefix/bin` corresponds to the location of the executable.
 
-The `user` directory does not depend on the `portable` option and will always be
-`$HOME/.config/pragtical`. On Windows, `$USERPROFILE` will be used instead of `$HOME`.
+The `user` directory does not depend on the `portable` option and if not present
+will fallback to `$HOME/.config/pragtical`. On Windows, `$USERPROFILE` will be
+used instead of `$HOME`.
 
 ## Meson Build Flags
 
@@ -111,6 +112,7 @@ can define at the setup stage with `-D<flag_name>=<value>`:
 | extra_languages    | boolean | true             | Include additional language plugins                                                      |
 | ppm                | boolean | true             | Include the plugin manager                                                               |
 | jit                | boolean | true             | Use luajit                                                                               |
+| repl_history       | boolean | true             | Enable history and completion support on REPL                                            |
 
 ## Environment Setup
 
@@ -124,7 +126,7 @@ using the following commands:
 
 ```bash
 # To install the required libraries:
-sudo apt install libfreetype6-dev libsdl2-dev libpcre2-dev libuchardet-dev
+sudo apt install libfreetype6-dev libsdl3-dev libpcre2-dev libuchardet-dev
 
 # To install Meson:
 sudo apt install meson
@@ -137,10 +139,10 @@ On macOS you can install a package manager such as [brew](https://brew.sh/) to
 install all the required dependencies.
 
 ```bash
-brew intall meson freetype sdl2 pcre2 uchardet
+brew intall meson freetype sdl3 pcre2 uchardet
 ```
 
-Otherwise you can skip this and just use the already mentioned 
+Otherwise you can skip this and just use the already mentioned
 `--wrap-mode=forcefallback` flag.
 
 ### Windows MSYS2
@@ -161,7 +163,7 @@ pacman -S \
   ${MINGW_PACKAGE_PREFIX}-pcre2 \
   ${MINGW_PACKAGE_PREFIX}-pkg-config \
   ${MINGW_PACKAGE_PREFIX}-python-pip \
-  ${MINGW_PACKAGE_PREFIX}-SDL2 \
+  ${MINGW_PACKAGE_PREFIX}-sdl3 \
   ${MINGW_PACKAGE_PREFIX}-uchardet \
 pip3 install meson
 ```

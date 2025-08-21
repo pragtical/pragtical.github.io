@@ -412,26 +412,34 @@ config.animation_rate = 0.5
 ### Other options
 
 :::note A quick reference of other options.
-| Options                   | Description
-| -------                   | -----------
-| `max_log_items`           | Maximum number of log items to store before discarding them.
-| `message_timeout`         | Time (seconds) to show each message on the StatusView.
-| `mouse_wheel_scroll`      | Number of pixels per "scroll".
-| `animate_drag_scroll`     | Enable smooth scrolling.
-| `force_scrollbar_status`  | Always expand (`"expanded"`) or hide (`"contracted"`) the scrollbar.
-| `file_size_limit`         | File size limit (MB) before Pragtical refuses to load it.
-| `symbol_pattern`          | Lua pattern used by Pragtical to find symbols.
-| `non_word_chars`          | A pattern used to find non-word characters.
-| `undo_merge_timeout`      | Time (seconds) before Pragtical merges edits to form a single undo step.
-| `max_undos`               | Number of undo to store per document.
-| `max_tabs`                | Number of tabs to show before overflowing.
-| `always_show_tabs`        | If true, always show tabs even if only one file is open.
-| `highlight_current_line`  | Highlights the current line.
-| `line_height`             | The spacing between each line.
-| `keep_newline_whitespace` | If true, removes any line that only contains whitespace (space, tabs, etc.)
-| `line_limit`              | An **advisory** limit for characters per line.
-| `tab_close_button`        | Shows or hides the tab close button for each tab.
-| `max_clicks`              | Maximum number of clicks you can perform in the editor.
+| Options                   | Value Type                    | Default                                        | Description
+| -------                   | ----------                    | -------                                        | -----------
+| `draw_stats`              | boolean,"uncapped"            | false                                          | Draw the current frames per second and other stats.
+| `max_log_items`           | integer                       | 800                                            | Maximum number of log items to store before discarding them.
+| `message_timeout`         | integer                       | 5                                              | Time (seconds) to show each message on the StatusView.
+| `mouse_wheel_scroll`      | number                        | 50 * SCALE                                     | Number of pixels per "scroll".
+| `animate_drag_scroll`     | boolean                       | false                                          | Enable smooth scrolling.
+| `force_scrollbar_status`  | false,"expanded","contracted" | false                                          | Always expand (`"expanded"`) or hide (`"contracted"`) the scrollbar.
+| `file_size_limit`         | number                        | 10                                             | File size limit (MB) before Pragtical refuses to load it.
+| `symbol_pattern`          | string                        | "[%a_][%w_]\*"                                 | Lua pattern used by Pragtical to find symbols.
+| `non_word_chars`          | string                        | " \t\n/\\()\"':,.;\<\>~!@#\$%^&\*\|+=[]{}\`?-" | A pattern used to find non-word characters.
+| `undo_merge_timeout`      | number                        | 0.3                                            | Time (seconds) before Pragtical merges edits to form a single undo step.
+| `max_undos`               | integer                       | 10000                                          | Number of undo to store per document.
+| `max_tabs`                | integer                       | 8                                              | Number of tabs to show before overflowing.
+| `max_visible_commands`    | integer                       | 10                                             | The maximum number of entries shown at a time in the command palette.
+| `max_visited_files`       | integer                       | 5                                              | The maximum amount of recent files to keep on history.
+| `hide_tabs`               | boolean                       | false                                          | Always hide tabs even if multiple documents are open.
+| `always_show_tabs`        | boolean                       | true                                           | If true, always show tabs even if only one file is open.
+| `highlight_current_line`  | boolean,"no_selection"        | "no_selection"                                 | Highlights the current line.
+| `select_add_next_no_case` | boolean                       | false                                          | Perform case insensitive next word selection.
+| `line_height`             | number                        | 1.2                                            | The spacing between each line.
+| `scroll_context_lines`    | integer                       | 10                                             | Minimum number of lines to keep visible above and below the cursor when scrolling the document.
+| `show_line_numbers`       | boolean                       | true                                           | Show or hide the line numbers.
+| `keep_newline_whitespace` | boolean                       | false                                          | If true, removes any line that only contains whitespace (space, tabs, etc.)
+| `line_limit`              | integer                       | 80                                             | An **advisory** limit for characters per line.
+| `tab_close_button`        | boolean                       | true                                           | Shows or hides the tab close button for each tab.
+| `max_clicks`              | integer                       | 3                                              | Maximum number of clicks you can perform in the editor.
+| `dirmonitor_backend`      | string,nil                    | nil                                            | Specifies the dirmonitor backend to be used or nil to use the first available one.
 :::
 
 ## Plugins

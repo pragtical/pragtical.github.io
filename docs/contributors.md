@@ -16,7 +16,7 @@ or indirectly. You can get the contributors for a particular release on the
 | [jgmdev]            | Pragtical maintainer, LSP, Settings/Widget toolkit, EditorConfig, SCM, performance improvements and many other contributions.
 | [juliardi]          | Pragtical advocate and plugin developer.
 | [k8ieone]           | Pragtical plugin manager packager for ArchLinux.
-| [AmerM137]          | Pragtical tester and issue reporter.
+| [AmerM137]          | Pragtical tester, suggestions mage and color schemes ninja.
 | [Adam]              | Lite XL maintainer, terminal, plugin manager, renderer enhancements, multi-language syntax highlighting and many other improvements.
 | [Guldoman]          | Lite XL maintainer, IME support, various bug fixes and performance improvements.
 | [Takase]            | Lite XL maintainer, Documentation, Font API optimizations, NagView, Process API improvements and various bug fixes for Windows.

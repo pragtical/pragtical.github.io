@@ -50,7 +50,7 @@ pragtical --fork /path/to/project
 * `help`: Display help information for the application or a specific command.
 * `pm`: Access the plugin manager to install, update, or manage plugins for Pragtical.
 * `repl`: Starts a basic Read–Eval–Print Loop.
-  `run`: Run a Lua script against the Pragtical runtime.
+* `run`: Run a Lua script against the Pragtical runtime.
 
 If available, you can view more detailed usage of a specific command by running:
 
