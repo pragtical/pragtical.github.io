@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[8947],{56600:e=>{e.exports=JSON.parse('{"authors":[{"name":"Jefferson Gonzalez","title":"Contributor of Pragtical","url":"https://github.com/jgmdev","socials":{"github":"https://github.com/jgmdev"},"imageURL":"https://github.com/jgmdev.png","key":"jgmdev","page":null,"count":21}]}')}}]);

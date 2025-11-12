@@ -2,11 +2,121 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2025-08-13T00:00:00.000Z</updated>
+    <updated>2025-11-11T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.7.1 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v371-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v371-release"/>
+        <updated>2025-11-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Mostly a bugs fix release with build system adjustments and a tiny bit of]]></summary>
+        <content type="html"><![CDATA[<p>Mostly a bugs fix release with build system adjustments and a tiny bit of
+enhancements sprinkled on the top.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prominent-fixes">Prominent Fixes<a href="https://pragtical.dev/blog/pragtical-v371-release#prominent-fixes" class="hash-link" aria-label="Direct link to Prominent Fixes" title="Direct link to Prominent Fixes">​</a></h2>
+<p>Some of the fixes include a correction to the dirmonitor backend detection
+logic thanks to <a href="https://github.com/TomaSajt" target="_blank" rel="noopener noreferrer">TomaSajt</a>. Also, the code
+indentation logic was wrong on some instances and should behave better now
+thanks to <a href="https://github.com/Sentmoraap" target="_blank" rel="noopener noreferrer">Sentmoraap</a>.</p>
+<p>A bug on the tokenizer was fixed to prevent the premature end of child subsyntaxes.
+As a consequence, the python language syntax should behave better now, also
+this syntax saw some more adjustments. On the newly introduced Diff Viewer the
+gap differences between the two sides was not been accounted on scroll which
+caused out of sync scrolling, should be fixed now thanks to
+<a href="https://github.com/bananakid" target="_blank" rel="noopener noreferrer">bananakid</a> who reported the issue.</p>
+<p>Some other enhancements and fixes thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>
+which includes the window title now including the current project, some
+documentation clarifications on the initial user module related to ignore
+file patterns and proper sizing of the project search find text widget.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.7.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v371-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v371-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix dirmonitor backend detection logic
+(<a href="https://github.com/pragtical/pragtical/pull/334" target="_blank" rel="noopener noreferrer">#334</a>)</p>
+</li>
+<li>
+<p>projectsearch: properly update find text widget
+(<a href="https://github.com/pragtical/pragtical/pull/335" target="_blank" rel="noopener noreferrer">#335</a>)</p>
+</li>
+<li>
+<p>tokenizer: fix premature end of child subsyntaxes
+(<a href="https://github.com/pragtical/pragtical/pull/339" target="_blank" rel="noopener noreferrer">#339</a>)</p>
+</li>
+<li>
+<p>python: fix vars and params type hinting matching
+(<a href="https://github.com/pragtical/pragtical/pull/338" target="_blank" rel="noopener noreferrer">#338</a>)</p>
+</li>
+<li>
+<p>Prevent duplicate projects on core.add_project
+(<a href="https://github.com/pragtical/pragtical/pull/342" target="_blank" rel="noopener noreferrer">#342</a>)</p>
+</li>
+<li>
+<p>DiffView: always account for gaps on scrolling
+(<a href="https://github.com/pragtical/pragtical/pull/344" target="_blank" rel="noopener noreferrer">#344</a>)</p>
+</li>
+<li>
+<p>Fix Doc<!-- -->:Indent<!-- -->/Unindent commands that inserted/deleted a wrong amount of whitespace
+(<a href="https://github.com/pragtical/pragtical/pull/343" target="_blank" rel="noopener noreferrer">#343</a>)</p>
+</li>
+<li>
+<p>treeview: fix a scale re-trigger issue
+(<a href="https://github.com/pragtical/pragtical/pull/348" target="_blank" rel="noopener noreferrer">#348</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v371-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Change window title to include current project
+(<a href="https://github.com/pragtical/pragtical/pull/336" target="_blank" rel="noopener noreferrer">#336</a>)</p>
+</li>
+<li>
+<p>clarify docs for ignored files and dir/files patterns
+(<a href="https://github.com/pragtical/pragtical/pull/337" target="_blank" rel="noopener noreferrer">#337</a>)</p>
+</li>
+<li>
+<p>emptyview: disable horizontal scrollbar
+(<a href="https://github.com/pragtical/pragtical/pull/351" target="_blank" rel="noopener noreferrer">#351</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v371-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>CI: fix for minwg download file lock
+(<a href="https://github.com/pragtical/pragtical/pull/340" target="_blank" rel="noopener noreferrer">#340</a>)</p>
+</li>
+<li>
+<p>ci: allow max of 5 min on pgo stress
+(<a href="https://github.com/pragtical/pragtical/pull/341" target="_blank" rel="noopener noreferrer">#341</a>)</p>
+</li>
+<li>
+<p>meson: update freetype2 subproject to v2.14.1-1
+(<a href="https://github.com/pragtical/pragtical/pull/347" target="_blank" rel="noopener noreferrer">#347</a>)</p>
+</li>
+<li>
+<p>meson: force static linking on windows
+(<a href="https://github.com/pragtical/pragtical/pull/346" target="_blank" rel="noopener noreferrer">#346</a>)</p>
+</li>
+<li>
+<p>meson: update pcre2 subproject to v10.47
+(<a href="https://github.com/pragtical/pragtical/pull/349" target="_blank" rel="noopener noreferrer">#349</a>)</p>
+</li>
+<li>
+<p>luajit subproject: drop mcode patches
+(<a href="https://github.com/pragtical/pragtical/pull/350" target="_blank" rel="noopener noreferrer">#350</a>)</p>
+</li>
+<li>
+<p>Update sdl3 subproject to v3.2.26</p>
+</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.7.0 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v370-release</id>
@@ -2680,19 +2790,6 @@ pattern to match the beginning of a file, <code>PATHSEP</code> should be used in
 <li>Add top tab margins (<a href="https://github.com/lite-xl/lite-xl/pull/1479" target="_blank" rel="noopener noreferrer">#1479</a>)</li>
 <li>Increase number of loadable glyphsets (<a href="https://github.com/lite-xl/lite-xl/pull/1524" target="_blank" rel="noopener noreferrer">#1524</a>)</li>
 </ul>]]></content>
-        <author>
-            <name>Jefferson Gonzalez</name>
-            <uri>https://github.com/jgmdev</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://pragtical.dev/blog/first-blog-post</id>
-        <link href="https://pragtical.dev/blog/first-blog-post"/>
-        <updated>2023-05-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The website is still a work in progress but things seem to be getting in order]]></summary>
-        <content type="html"><![CDATA[<p>The website is still a work in progress but things seem to be getting in order
-with <a href="https://docusaurus.io/" target="_blank" rel="noopener noreferrer">docusaurus</a> :)</p>]]></content>
         <author>
             <name>Jefferson Gonzalez</name>
             <uri>https://github.com/jgmdev</uri>
