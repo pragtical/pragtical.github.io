@@ -1,5 +1,5 @@
 ---
-sidebar_position: 23
+sidebar_position: 24
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -197,7 +197,7 @@ Hides the context menu and performs the command if an item is selected.
 Draws the context menu.
 
 This wraps `ContextMenu:draw_context_menu()`.
-See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#269#9)
+See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#275#9)
 
 ---
 

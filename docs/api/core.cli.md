@@ -1,5 +1,5 @@
 ---
-sidebar_position: 18
+sidebar_position: 19
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -249,6 +249,17 @@ Data type of the flag if an argument/value can be given to it
 Value assigned to the flag
 
 ---
+
+## core.cli.flag_type
+
+```lua
+core.cli.flag_type:
+   -\> "empty" -- Does not needs a value
+    | "number" -- A numerical value
+    | "string" -- Any string value
+    | "boolean" -- 0,1,false,true
+    | "list" -- Comma separated values
+```
 
 ## core.cli.sortedcommand
 

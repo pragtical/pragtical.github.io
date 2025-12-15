@@ -1,5 +1,5 @@
 ---
-sidebar_position: 78
+sidebar_position: 83
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -255,7 +255,7 @@ Array of bytes that represents a color used by the rendering functions.
 ## label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -423,7 +423,7 @@ Represents the position of a widget.
 ## rows
 
 ```lua
-(field) rows: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>[]
+(field) rows: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>[]
 ```
 
 ---
@@ -439,7 +439,7 @@ Represents the position of a widget.
 ## rows_original
 
 ```lua
-(field) rows_original: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>[]
+(field) rows_original: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>[]
 ```
 
 ---
@@ -521,7 +521,7 @@ A base widget
 ## tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -538,6 +538,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -582,6 +590,8 @@ A base widget
 
 ---
 
+## widget.listbox.colpos
+
 ## widget.listbox.column
 
 ### expand
@@ -615,6 +625,12 @@ A base widget
 ```
 
 ---
+
+## widget.listbox.drawcol
+
+## widget.listbox.filtercb
+
+## widget.listbox.row
 
 ## override_rootview
 
@@ -684,7 +700,7 @@ expand depending on the longest element
 ## add_row
 
 ```lua
-(method) widget.listbox:add_row(row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>, data: any)
+(method) widget.listbox:add_row(row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>, data: any)
 ```
 
 You can give it a table a la statusview style where you pass elements
@@ -854,7 +870,7 @@ the size and position on the row it self.
 ## draw_row_range
 
 ```lua
-(method) widget.listbox:draw_row_range(ridx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>, start_idx: integer, end_idx: integer, x: integer, y: integer, only_calc: boolean)
+(method) widget.listbox:draw_row_range(ridx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>, start_idx: integer, end_idx: integer, x: integer, y: integer, only_calc: boolean)
   -> width: integer
   2. height: integer
 ```
@@ -874,7 +890,7 @@ Render or calculate the size of the specified range of elements in a row.
 ## draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -932,7 +948,7 @@ Check if the object inherits from the given type.
 ## filter
 
 ```lua
-(method) widget.listbox:filter(match?: string|fun(self: widget.listbox, idx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>, data: any):number?)
+(method) widget.listbox:filter(match?: string|fun(self: widget.listbox, idx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>, data: any):number?)
 ```
 
 Set which rows to show using the specified match string or callback,
@@ -976,7 +992,7 @@ Get the bottom y coordinate relative to parent
 ## get_col_positions
 
 ```lua
-(method) widget.listbox:get_col_positions(row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>)
+(method) widget.listbox:get_col_positions(row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>)
   -> table<integer, integer>
 ```
 
@@ -1517,7 +1533,7 @@ Runs all registered animations removing duplicated and finished ones.
 ## schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -1566,7 +1582,7 @@ Set the widget border size and appropriately re-set the widget size.
 ## set_label
 
 ```lua
-(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 A text label for the widget, not all widgets support this.
@@ -1586,7 +1602,7 @@ Set the position of the widget and updates the child absolute coordinates
 ## set_row
 
 ```lua
-(method) widget.listbox:set_row(idx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>)
+(method) widget.listbox:set_row(idx: integer, row: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>)
 ```
 
 Change the content assigned to a row.
@@ -1641,7 +1657,7 @@ axis:
 ## set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.

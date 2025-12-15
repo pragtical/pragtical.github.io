@@ -1,5 +1,5 @@
 ---
-sidebar_position: 79
+sidebar_position: 84
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -299,7 +299,7 @@ Array of bytes that represents a color used by the rendering functions.
 ## label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -509,7 +509,7 @@ A base widget
 ## tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -526,6 +526,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -554,10 +562,31 @@ A base widget
 
 ---
 
+## widget.messagebox.buttonstype
+
+```lua
+widget.messagebox.buttonstype:
+   -\> `MessageBox.BUTTONS_OK`
+    | `MessageBox.BUTTONS_OK_CANCEL`
+    | `MessageBox.BUTTONS_YES_NO`
+    | `MessageBox.BUTTONS_YES_NO_CANCEL`
+```
+
+## widget.messagebox.icontype
+
+```lua
+widget.messagebox.icontype:
+   -\> `MessageBox.ICON_ERROR`
+    | `MessageBox.ICON_INFO`
+    | `MessageBox.ICON_WARNING`
+```
+
+## widget.messagebox.onclosehandler
+
 ## alert
 
 ```lua
-function widget.messagebox.alert(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color?: renderer.color, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.alert(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color?: renderer.color, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
 ```
 
 Wrapper to easily show a message box.
@@ -580,7 +609,7 @@ buttons:
 ## error
 
 ```lua
-function widget.messagebox.error(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.error(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
 ```
 
 Wrapper to easily show an error message box.
@@ -598,7 +627,7 @@ buttons:
 ## info
 
 ```lua
-function widget.messagebox.info(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.info(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
 ```
 
 Wrapper to easily show a info message box.
@@ -627,7 +656,7 @@ this function will only override the events once.
 ## warning
 
 ```lua
-function widget.messagebox.warning(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.warning(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
 ```
 
 Wrapper to easily show a warning message box.
@@ -819,7 +848,7 @@ Draw the widget configured border or custom one.
 ## draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -1152,7 +1181,7 @@ Check if the given mouse coordinate is hovering the widget
 ## new
 
 ```lua
-(method) widget.messagebox:new(parent: widget, title: string, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color: renderer.color)
+(method) widget.messagebox:new(parent: widget, title: string, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color: renderer.color)
 ```
 
 Constructor
@@ -1380,7 +1409,7 @@ Runs all registered animations removing duplicated and finished ones.
 ## schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -1446,7 +1475,7 @@ icon:
 ## set_label
 
 ```lua
-(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 A text label for the widget, not all widgets support this.
@@ -1456,7 +1485,7 @@ A text label for the widget, not all widgets support this.
 ## set_message
 
 ```lua
-(method) widget.messagebox:set_message(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget.messagebox:set_message(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 Change the message box message.
@@ -1501,7 +1530,7 @@ axis:
 ## set_title
 
 ```lua
-(method) widget.messagebox:set_title(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget.messagebox:set_title(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 Change the message box title.
@@ -1511,7 +1540,7 @@ Change the message box title.
 ## set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.

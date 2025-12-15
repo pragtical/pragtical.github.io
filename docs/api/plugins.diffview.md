@@ -1,5 +1,5 @@
 ---
-sidebar_position: 46
+sidebar_position: 51
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -666,6 +666,17 @@ Names used when a or b are not files.
 ```
 
 ---
+
+## plugins.diffview.view.type
+
+```lua
+\{
+    STRING_FILE: integer = 1,
+    FILE_STRING: integer = 2,
+    FILE_FILE: integer = 3,
+    STRING_STRING: integer = 4,
+\}
+```
 
 ## file_to_file
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 49
+sidebar_position: 54
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -188,6 +188,8 @@ Run a single instance of pragtical.
 
 ---
 
+## plugins.ipc.function
+
 ## plugins.ipc.instance
 
 ### id
@@ -361,6 +363,23 @@ Time in seconds when the message was sent for automatic expiration purposes.
 Type of message.
 
 ---
+
+## plugins.ipc.messagetype
+
+```lua
+plugins.ipc.messagetype:
+    | "message"
+    | "method"
+    | "signal"
+```
+
+## plugins.ipc.onmessage
+
+## plugins.ipc.onmessageread
+
+## plugins.ipc.onreply
+
+## plugins.ipc.onreplyread
 
 ## plugins.ipc.reply
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 86
+sidebar_position: 91
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -245,7 +245,7 @@ this widget is for text input
 ## label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -322,14 +322,6 @@ A base widget
 
 ```lua
 (field) placeholder: string
-```
-
----
-
-## placeholder_active
-
-```lua
-(field) placeholder_active: boolean
 ```
 
 ---
@@ -453,7 +445,7 @@ A base widget
 ## tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -470,6 +462,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -806,6 +806,7 @@ Check if the object inherits from the given type.
 ```lua
 (method) core.doc:get_indent_string(col: any)
   -> string
+  2. string
 ```
 
 ---
@@ -1577,6 +1578,14 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
+### subparent
+
+```lua
+(field) subparent: any
+```
+
+---
+
 ### super
 
 ```lua
@@ -1704,8 +1713,7 @@ Overwrite this function just to disable the core.push_clip_rect
 ### draw_line_text
 
 ```lua
-(method) core.docview:draw_line_text(line: any, x: any, y: any)
-  -> integer
+(method) widget.textbox.TextView:draw_line_text(line: any, x: any, y: any)
 ```
 
 ---
@@ -1964,7 +1972,7 @@ Check if the parameter inherits from the object.
 ### new
 
 ```lua
-(method) widget.textbox.TextView:new(parent: any)
+(method) widget.textbox.TextView:new(parent: any, subparent: any)
 ```
 
 ---
@@ -2338,7 +2346,7 @@ Draw the widget configured border or custom one.
 ## draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -2854,7 +2862,7 @@ Runs all registered animations removing duplicated and finished ones.
 ## schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -2903,7 +2911,7 @@ Set the widget border size and appropriately re-set the widget size.
 ## set_label
 
 ```lua
-(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 A text label for the widget, not all widgets support this.
@@ -2958,7 +2966,7 @@ Set the text displayed on the textbox.
 ## set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.

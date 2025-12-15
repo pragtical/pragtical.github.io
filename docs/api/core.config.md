@@ -1,5 +1,5 @@
 ---
-sidebar_position: 22
+sidebar_position: 23
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -50,6 +50,18 @@ Defaults to 1.
 
 ---
 
+## auto_fps
+
+```lua
+(field) auto_fps: boolean
+```
+
+Keep the maximum FPS locked to current display refresh rate.
+
+Defaults to true.
+
+---
+
 ## blink_period
 
 ```lua
@@ -58,7 +70,7 @@ Defaults to 1.
 
 The caret's blinking period, in seconds.
 
-Defaults to 0.8.
+Defaults to 1.2.
 
 ---
 
@@ -172,11 +184,11 @@ Defaults to false.
 (field) fps: number
 ```
 
-The frame rate of Pragtical.
+The maximum frame rate of Pragtical.
 Note that setting this value to the screen's refresh rate
-does not eliminate screen tearing.
+does not necessarily eliminates screen tearing.
 
-Defaults to 60.
+Defaults to current display refresh rate or 60.
 
 ---
 
@@ -214,6 +226,31 @@ A list of files and directories to ignore.
 Each element is a Lua pattern, where patterns ending with a forward slash
 are recognized as directories while patterns ending with an anchor ("$") are
 recognized as files.
+
+---
+
+## images_background_color
+
+```lua
+(field) images_background_color: renderer.color
+```
+
+The color used for the background of transparent images when the
+background mode is set to solid.
+
+Defaults to "#ffffff".
+
+---
+
+## images_background_mode
+
+```lua
+(field) images_background_mode: "grid"|"none"|"solid"
+```
+
+The type of background drawn behind the images.
+
+Defaults to "grid".
 
 ---
 
@@ -286,20 +323,6 @@ Defaults to 80.
 Quiet logging of threads that are taking longer than the maximum time
 allowed on a per frame iteration basis. Enable only when troubleshooting
 performance issues, since enabling this may degrade performance.
-
-Defaults to false.
-
----
-
-## lower_input_latency
-
-```lua
-(field) lower_input_latency: boolean
-```
-
-When enabled, background tasks are processed more aggressively by waiting
-less for system events when events are received. Disable this option to
-reduce CPU usage.
 
 Defaults to false.
 
@@ -439,7 +462,7 @@ Do not use raw operations on this table.
 Minimum number of lines to keep visible above and below the cursor
 when scrolling the document.
 
-The default is 10
+The default is 1
 
 ---
 
@@ -452,6 +475,18 @@ The default is 10
 Enables/disables scrolling past the end of a document.
 
 Defaults to true.
+
+---
+
+## select_add_next_no_case
+
+```lua
+(field) select_add_next_no_case: boolean
+```
+
+Perform case insensitive next word selection.
+
+The default is false.
 
 ---
 
@@ -557,4 +592,35 @@ are merged as a single undo step.
 The default is 0.3 seconds.
 
 ---
+
+## use_system_file_picker
+
+```lua
+(field) use_system_file_picker: boolean
+```
+
+Use the system file picker instead of the command palette
+when opening files.
+
+Defaults to false if no sandbox is detected.
+
+---
+
+## config.highlightlinetype
+
+```lua
+config.highlightlinetype:
+    | true -- Always highlight the current line.
+    | false -- Never highlight the current line.
+    | "no_selection" -- Highlight the current line if no text is selected.
+```
+
+## config.scrollbartype
+
+```lua
+config.scrollbartype:
+    | "expanded" -- A thicker scrollbar is shown at all times.
+    | "contracted" -- A thinner scrollbar is shown at all times.
+    | false -- The scrollbar expands when the cursor hovers over it.
+```
 

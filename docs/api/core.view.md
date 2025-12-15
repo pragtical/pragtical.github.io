@@ -1,5 +1,5 @@
 ---
-sidebar_position: 43
+sidebar_position: 47
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -20,26 +20,10 @@ local view = require "core.view"
 
 ---
 
-## context
-
-```lua
-(field) context: 'application'|'session'
-```
-
----
-
 ## current_scale
 
 ```lua
 (field) current_scale: number
-```
-
----
-
-## cursor
-
-```lua
-(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
 ```
 
 ---
@@ -117,6 +101,33 @@ accordingly. The "normal" coordinate system adapts the scrollbar coordinates
 as if it's always a vertical scrollbar, positioned at the end of the bounding box.
 
 ---
+
+## core.view.context
+
+```lua
+core.view.context:
+    | 'application'
+    | 'session'
+```
+
+## core.view.cursor
+
+```lua
+core.view.cursor:
+    | 'arrow'
+    | 'ibeam'
+    | 'sizeh'
+    | 'sizev'
+    | 'hand'
+```
+
+## core.view.mousebutton
+
+```lua
+core.view.mousebutton:
+    | 'left'
+    | 'right'
+```
 
 ## core.view.position
 

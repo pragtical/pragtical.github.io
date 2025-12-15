@@ -52,6 +52,16 @@ Alpha
 
 ---
 
+## renderer.conic_bezier
+
+Represent a conic / quadratic bezier curve with a single control point,
+in the form of \{ start_x, start_y, cp1_x, cp1_y, end_x, end_y \}.
+
+## renderer.cubic_bezier
+
+Represent a cubic bezier curve with two control points,
+in the form of \{ start_x, start_y, cp1_x, cp1_y, cp2_x, cp2_y, end_x, end_y \}.
+
 ## renderer.font
 
 ### get_metadata
@@ -142,7 +152,7 @@ Get the current size of the font.
 ### get_width
 
 ```lua
-(method) renderer.font:get_width(text: string)
+(method) renderer.font:get_width(text: string, tab_data?: renderer.tab_data)
   -> number
 ```
 
@@ -335,6 +345,26 @@ Represent options that affect a font's rendering.
 
 ---
 
+## renderer.normal_point
+
+Represent a point in a poly line, in the form of \{ x, y \}.
+
+## renderer.poly_object
+
+Represent all types accepted by the renderer.draw_poly function.
+
+## renderer.tab_data
+
+### tab_offset
+
+```lua
+(field) tab_offset: number?
+```
+
+Offset to a previous tab stop
+
+---
+
 ## begin_frame
 
 ```lua
@@ -350,6 +380,46 @@ Tell the rendering system that we want to build a new frame to render.
 ```lua
 function
 ```
+
+---
+
+## draw_canvas
+
+```lua
+function renderer.draw_canvas(canvas: canvas, x: integer, y: integer)
+```
+
+Draw a Canvas.
+
+---
+
+## draw_poly
+
+```lua
+function renderer.draw_poly(poly: integer[][], color: renderer.color)
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Draws a filled polygon, consisting of curves and points.
+The polygon is filled using the non-zero winding rule in clockwise direction.
+
+The function returns the control box of the polygon,
+which is greater than or equal to the dimensions of the rendered polygon.
+It is not guaranteed to the exact dimension of the rendered polygon.
+
+@*param* `poly` — the lines or curves to draw, up to 65535 points.
+
+
+@*return* `x` — the X coordinate of top left corner of the control box.
+
+@*return* `y` — the Y coordinate of the top left corner of the control box.
+
+@*return* `w` — the width of the control box.
+
+@*return* `h` — the height of the control box.
 
 ---
 
@@ -374,7 +444,7 @@ function
 ## draw_text
 
 ```lua
-function renderer.draw_text(font: renderer.font, text: string, x: number, y: number, color: renderer.color)
+function renderer.draw_text(font: renderer.font, text: string, x: number, y: number, color: renderer.color, tab_data?: renderer.tab_data)
   -> x: number
 ```
 
@@ -446,6 +516,17 @@ function renderer.show_debug(enable: boolean)
 
 Toggles drawing debugging rectangles on the currently rendered sections
 of the window to help troubleshoot the renderer.
+
+---
+
+## to_canvas
+
+```lua
+function renderer.to_canvas(x: integer, y: integer, w: integer, h: integer)
+  -> canvas: canvas
+```
+
+Copy a portion of the window to a new Canvas.
 
 ---
 

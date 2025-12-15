@@ -1,5 +1,5 @@
 ---
-sidebar_position: 85
+sidebar_position: 90
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -237,7 +237,7 @@ Array of bytes that represents a color used by the rendering functions.
 ## label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -457,7 +457,7 @@ A base widget
 ## tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -474,6 +474,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -559,7 +567,7 @@ them in reverse order for better events matching.
 ## add_option
 
 ```lua
-(method) widget.selectbox:add_option(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, data: any)
+(method) widget.selectbox:add_option(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, data: any)
 ```
 
 Add selectable option to the selectbox.
@@ -688,7 +696,7 @@ Draw the widget configured border or custom one.
 ## draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -1174,7 +1182,7 @@ any neccesary changes in sizes, padding, etc...
 ## on_selected
 
 ```lua
-(method) widget.selectbox:on_selected(item_idx: integer, item_data: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+1)>)
+(method) widget.selectbox:on_selected(item_idx: integer, item_data: table<integer, string|integer|fun(self: any, row: any, x: any, y: any, font: any, color: any, only_calc: any)|renderer.color|renderer.font...(+2)>)
 ```
 
 Overwrite to listen to on_selected events.
@@ -1244,7 +1252,7 @@ Runs all registered animations removing duplicated and finished ones.
 ## schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -1348,7 +1356,7 @@ axis:
 ## set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.

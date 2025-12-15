@@ -1,5 +1,5 @@
 ---
-sidebar_position: 34
+sidebar_position: 37
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -205,6 +205,15 @@ The number of seconds to yield in a coroutine. Defaults to `1/config.fps`.
 The number of seconds to wait before the function throws an error. Reads do not time out by default.
 
 ---
+
+## process.stream.readtype
+
+```lua
+process.stream.readtype:
+    | `"line"` -- Reads a single line
+    | `"all"` -- Reads the entire stream
+    | `"L"` -- Reads a single line, keeping the trailing newline character.
+```
 
 ## process.stream.writeoption
 

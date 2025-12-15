@@ -1,5 +1,5 @@
 ---
-sidebar_position: 71
+sidebar_position: 76
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -550,6 +550,26 @@ Check if the parameter inherits from the object.
 ```
 
 ---
+
+## widget.fonts.style
+
+```lua
+widget.fonts.style:
+   -\> "regular"
+    | "bold"
+    | "italic"
+    | "bold italic"
+    | "thin"
+    | "medium"
+    | "light"
+    | "black"
+    | "condensed"
+    | "oblique"
+    | "bold oblique"
+    | "extra nold"
+    | "Extra bold italic"
+    | "bold condensed"
+```
 
 ## check_is_monospace
 

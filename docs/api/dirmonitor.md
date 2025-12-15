@@ -10,6 +10,8 @@ Functionality that allows to monitor a directory or file for changes
 using the native facilities provided by the current operating system
 for better efficiency and performance.
 
+## dirmonitor.callback
+
 ## backends
 
 ```lua

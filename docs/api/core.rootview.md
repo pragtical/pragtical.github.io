@@ -1,5 +1,5 @@
 ---
-sidebar_position: 37
+sidebar_position: 40
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -38,6 +38,14 @@ local rootview = require "core.rootview"
 
 ```lua
 (field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+```
+
+---
+
+## defer_open_docs
+
+```lua
+(field) defer_open_docs: table
 ```
 
 ---
@@ -88,8 +96,13 @@ local rootview = require "core.rootview"
 (field) first_dnd_processed: boolean
 ```
 
-set this to true because at this point there are no dnd requests
- that are caused by the initial dnd into dock user action
+---
+
+## first_update_done
+
+```lua
+(field) first_update_done: boolean
+```
 
 ---
 
@@ -636,6 +649,14 @@ any neccesary changes in sizes, padding, etc...
 ```lua
 (method) core.rootview:open_doc(doc: core.doc)
   -> core.docview
+```
+
+---
+
+## process_defer_open_docs
+
+```lua
+(method) core.rootview:process_defer_open_docs()
 ```
 
 ---

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 17
+sidebar_position: 18
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -11,6 +11,14 @@ Core functionality.
 ```lua
 local core = require "core"
 ```
+
+## active_file_dialogs
+
+```lua
+(field) active_file_dialogs: table
+```
+
+---
 
 ## active_view
 
@@ -151,6 +159,8 @@ The actual maximum frames per second that can be rendered.
 (field) log_items: table
 ```
 
+log functions depend on config so initialize after loading config
+
 ---
 
 ## nag_view
@@ -165,6 +175,14 @@ The actual maximum frames per second that can be rendered.
 
 ```lua
 (field) next_active_view: any
+```
+
+---
+
+## plugin_list
+
+```lua
+(field) plugin_list: table
 ```
 
 ---
@@ -189,6 +207,14 @@ The actual maximum frames per second that can be rendered.
 
 ```lua
 (field) previous_replace: table
+```
+
+---
+
+## project_module_loaded
+
+```lua
+(field) project_module_loaded: boolean
 ```
 
 ---
@@ -280,10 +306,8 @@ A status bar implementation, check core.status_view.
 ## window
 
 ```lua
-(field) window: renwindow
+(field) window: number
 ```
-
-Functionality to create and manage windows.
 
 ---
 
@@ -351,6 +375,16 @@ Match a full path including path separators, otherwise match filename only.
 function core.add_background_thread(f: any, weak_ref: any, ...any)
   -> unknown
 ```
+
+---
+
+## add_plugins
+
+```lua
+function core.add_plugins(plugins: any)
+```
+
+Can be called from within plugins; don't insert things lower than your own priority.
 
 ---
 
@@ -454,6 +488,16 @@ Show deprecation notice once per `kind`.
 
 ---
 
+## ensure_user_directory
+
+```lua
+function core.ensure_user_directory()
+  -> boolean
+  2. unknown
+```
+
+---
+
 ## error
 
 ```lua
@@ -492,6 +536,24 @@ function core.get_log(i: any)
 
 ---
 
+## get_plugin_details
+
+```lua
+function core.get_plugin_details(path: any)
+  -> boolean|table|nil
+```
+
+---
+
+## get_view_title
+
+```lua
+function core.get_view_title(view: any)
+  -> string
+```
+
+---
+
 ## get_views_referencing_doc
 
 ```lua
@@ -515,26 +577,6 @@ function core.init()
 function core.load_plugins()
   -> boolean
   2. table
-```
-
----
-
-## load_project_module
-
-```lua
-function core.load_project_module()
-  -> boolean
-  2. unknown|nil
-```
-
----
-
-## load_user_directory
-
-```lua
-function core.load_user_directory()
-  -> boolean
-  2. unknown
 ```
 
 ---
@@ -582,6 +624,19 @@ function core.on_event(type: any, ...any)
 
 ---
 
+## open_directory_dialog
+
+```lua
+function core.open_directory_dialog(window: renwindow, callback: fun(status: "accept"|"cancel"|"error"|"unknown", result: string|string[]|nil), options?: system.dialogoptions.opendirectory)
+```
+
+Open the system directory picker.
+
+Returns immediately.
+The callback will be called with the result.
+
+---
+
 ## open_doc
 
 ```lua
@@ -591,10 +646,41 @@ function core.open_doc(filename: any)
 
 ---
 
+## open_file_dialog
+
+```lua
+function core.open_file_dialog(window: renwindow, callback: fun(status: "accept"|"cancel"|"error"|"unknown", result: string|string[]|nil), options?: system.dialogoptions.openfile)
+```
+
+Open the system file picker.
+
+Returns immediately.
+The callback will be called with the result.
+
+---
+
+## open_image
+
+```lua
+function core.open_image(filename: string)
+  -> image_view: (core.imageview)?
+```
+
+---
+
 ## open_project
 
 ```lua
 function core.open_project(project: any)
+```
+
+---
+
+## parse_plugin_details
+
+```lua
+function core.parse_plugin_details(path: any, file: any, mod_version_regex: any, priority_regex: any)
+  -> boolean|table
 ```
 
 ---
@@ -627,6 +713,16 @@ function core.push_clip_rect(x: any, y: any, w: any, h: any)
 
 ```lua
 function core.quit(force: any)
+```
+
+---
+
+## reload_absolute_module
+
+```lua
+function core.reload_absolute_module(filename: any)
+  -> boolean
+  2. unknown|nil
 ```
 
 ---
@@ -680,6 +776,19 @@ legacy interface
 ```lua
 function core.run()
 ```
+
+---
+
+## save_file_dialog
+
+```lua
+function core.save_file_dialog(window: renwindow, callback: fun(status: "accept"|"cancel"|"error"|"unknown", result: string|string[]|nil), options?: system.dialogoptions.savefile)
+```
+
+Open the system save file picker.
+
+Returns immediately.
+The callback will be called with the result.
 
 ---
 

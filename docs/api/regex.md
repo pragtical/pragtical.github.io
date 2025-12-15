@@ -69,6 +69,15 @@ Tell regex:cmatch() that subject string is not the end of a line.
 
 ---
 
+## regex.modifiers
+
+```lua
+regex.modifiers:
+    | "i" -- Case insesitive matching
+    | "m" -- Multiline matching
+    | "s" -- Match all characters with dot (.) metacharacter even new lines
+```
+
 ## cmatch
 
 ```lua

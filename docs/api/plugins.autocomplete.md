@@ -1,5 +1,5 @@
 ---
-sidebar_position: 44
+sidebar_position: 48
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -195,6 +195,8 @@ Lua patterns which match the files where the symbols are valid.
 List of symbols that belong to this symbols table.
 
 ---
+
+## plugins.autocomplete.onclose
 
 ## plugins.autocomplete.symbolinfo
 

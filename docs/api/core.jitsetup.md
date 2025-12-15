@@ -1,5 +1,5 @@
 ---
-sidebar_position: 30
+sidebar_position: 32
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -45,7 +45,7 @@ function
 ## renderer.draw_rect
 
 ```lua
-function renderer.draw_rect(x: any, y: any, w: any, h: any, color: any, tab: any)
+function renderer.draw_rect(x: any, y: any, w: any, h: any, color: any)
 ```
 
 ---
@@ -62,6 +62,7 @@ function
 
 ```lua
 function renderer.draw_text(font: any, text: any, x: any, y: any, color: any, tab: any)
+  -> integer|unknown
 ```
 
 ---

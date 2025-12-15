@@ -47,6 +47,16 @@ Directory that holds the editor lua sources and other data files.
 
 ---
 
+## DEFAULT_FPS
+
+```lua
+global DEFAULT_FPS: number
+```
+
+The default system fps based on the current display refresh rate.
+
+---
+
 ## DEFAULT_SCALE
 
 ```lua
@@ -211,6 +221,18 @@ See: https://bitop.luajit.org/
 
 ---
 
+## canvas
+
+```lua
+global canvas: canvas
+```
+
+Core functionality that allows rendering into a separate surface.
+
+[\[View Library\]](/docs/api/canvas)
+
+---
+
 ## diff
 
 ```lua
@@ -256,7 +278,7 @@ global get_current_require_path: function
 ```
 
 Returns the current `require` path.
-See: \[require\](file:///usr/share/pragtical/core/start.lua#90#9) for details and caveats
+See: \[require\](file:///tmp/lua-language-server-1000/instance.o49k/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
 
 ---
 

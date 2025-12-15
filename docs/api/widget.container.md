@@ -1,5 +1,5 @@
 ---
-sidebar_position: 64
+sidebar_position: 69
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -24,14 +24,6 @@ Indicates on a widget.styledtext that a new line follows.
 
 ```lua
 (field) __index: core.object
-```
-
----
-
-## alignment
-
-```lua
-(field) alignment: enum widget.container.alignment|widget.container.alignment
 ```
 
 ---
@@ -142,14 +134,6 @@ TODO: implement default child properties
 
 ---
 
-## direction
-
-```lua
-(field) direction: enum widget.container.direction|widget.container.direction
-```
-
----
-
 ## draggable
 
 ```lua
@@ -245,7 +229,7 @@ Array of bytes that represents a color used by the rendering functions.
 ## label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -465,7 +449,7 @@ A base widget
 ## tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -482,6 +466,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -509,6 +501,25 @@ A base widget
 ```
 
 ---
+
+## widget.container.alignment
+
+```lua
+\{
+    LEFT: integer = 1,
+    RIGHT: integer = 2,
+    CENTER: integer = 3,
+\}
+```
+
+## widget.container.direction
+
+```lua
+\{
+    HORIZONTAL: integer = 1,
+    VERTICAL: integer = 2,
+\}
+```
 
 ## widget.container.properties
 
@@ -727,7 +738,7 @@ Draw the widget configured border or custom one.
 ## draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -1242,7 +1253,7 @@ Runs all registered animations removing duplicated and finished ones.
 ## schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -1311,7 +1322,7 @@ Set default properties for all childs not having any.
 ## set_label
 
 ```lua
-(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 A text label for the widget, not all widgets support this.
@@ -1376,7 +1387,7 @@ axis:
 ## set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.
@@ -1464,6 +1475,7 @@ Toggle visibility of widget.
 
 ```lua
 (method) widget.container:update()
+  -> boolean
 ```
 
 ---

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 39
+sidebar_position: 42
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -173,14 +173,6 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ```lua
 (field) pointer: table
-```
-
----
-
-## position
-
-```lua
-(field) position: core.view.position
 ```
 
 ---
@@ -622,6 +614,20 @@ Show the item on the status bar.
 
 ---
 
+## core.statusview.item.alignment
+
+```lua
+core.statusview.item.alignment:
+   -\> `StatusView.Item.LEFT`
+    | `StatusView.Item.RIGHT`
+```
+
+## core.statusview.item.get_item
+
+## core.statusview.item.onclick
+
+## core.statusview.item.ondraw
+
 ## core.statusview.item.options
 
 Available StatusViewItem options.
@@ -722,6 +728,26 @@ Text displayed when mouse hovers the item.
 Flag to show or hide the item
 
 ---
+
+## core.statusview.item.predicate
+
+## core.statusview.item.separator
+
+```lua
+core.statusview.item.separator:
+   -\> `StatusView.separator`
+    | `StatusView.separator2`
+```
+
+## core.statusview.position
+
+```lua
+core.statusview.position:
+    | "left"
+    | "right"
+```
+
+## core.statusview.styledtext
 
 ## __call
 
@@ -1165,6 +1191,16 @@ The predefined status bar items displayed when a command view is active.
 ```
 
 The predefined status bar items displayed when a document view is active.
+
+---
+
+## register_imageview_items
+
+```lua
+(method) core.statusview:register_imageview_items()
+```
+
+The predefined status bar items displayed when an image view is active.
 
 ---
 

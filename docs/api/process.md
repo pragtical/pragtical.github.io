@@ -184,6 +184,17 @@ that allows you to read and write data easily.
 
 ---
 
+## process.errortype
+
+```lua
+process.errortype:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
+
 ## process.options
 
 Options that can be passed to process.start()
@@ -235,6 +246,34 @@ Options that can be passed to process.start()
 ```
 
 ---
+
+## process.redirecttype
+
+```lua
+process.redirecttype:
+    | `process.REDIRECT_DEFAULT`
+    | `process.REDIRECT_PIPE`
+    | `process.REDIRECT_PARENT`
+    | `process.REDIRECT_DISCARD`
+    | `process.REDIRECT_STDOUT`
+```
+
+## process.streamtype
+
+```lua
+process.streamtype:
+    | `process.STREAM_STDIN`
+    | `process.STREAM_STDOUT`
+    | `process.STREAM_STDERR`
+```
+
+## process.waittype
+
+```lua
+process.waittype:
+    | `process.WAIT_INFINITE`
+    | `process.WAIT_DEADLINE`
+```
 
 ## start
 

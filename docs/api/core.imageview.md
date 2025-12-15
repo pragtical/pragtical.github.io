@@ -1,13 +1,15 @@
 ---
-sidebar_position: 34
+sidebar_position: 31
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
-# core.nagview
+# core.imageview
+
+An image view that allows zooming in and out an image.
 
 ```lua
-local nagview = require "core.nagview"
+local imageview = require "core.imageview"
 ```
 
 ## __index
@@ -18,10 +20,38 @@ local nagview = require "core.nagview"
 
 ---
 
+## background
+
+```lua
+(field) background: canvas?
+```
+
+Core functionality that allows rendering into a separate surface.
+
+---
+
+## bg_color
+
+```lua
+(field) bg_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## bg_mode
+
+```lua
+(field) bg_mode: "grid"|"none"|"solid"
+```
+
+---
+
 ## context
 
 ```lua
-(field) context: 'application'|'session'
+(field) context: string
 ```
 
 ---
@@ -37,23 +67,15 @@ local nagview = require "core.nagview"
 ## cursor
 
 ```lua
-(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+(field) cursor: string
 ```
 
 ---
 
-## dim_alpha
+## errmsg
 
 ```lua
-(field) dim_alpha: integer
-```
-
----
-
-## force_focus
-
-```lua
-(field) force_focus: boolean
+(field) errmsg: string?
 ```
 
 ---
@@ -79,10 +101,10 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
-## hovered_item
+## height
 
 ```lua
-(field) hovered_item: any
+(field) height: number
 ```
 
 ---
@@ -95,34 +117,38 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
-## message
+## image
 
 ```lua
-(field) message: unknown
+(field) image: canvas?
+```
+
+Core functionality that allows rendering into a separate surface.
+
+---
+
+## image_scaled
+
+```lua
+(field) image_scaled: canvas?
+```
+
+Core functionality that allows rendering into a separate surface.
+
+---
+
+## mouse_pressed
+
+```lua
+(field) mouse_pressed: boolean
 ```
 
 ---
 
-## on_mouse_pressed_root
+## path
 
 ```lua
-(field) on_mouse_pressed_root: unknown
-```
-
----
-
-## on_selected
-
-```lua
-(field) on_selected: unknown
-```
-
----
-
-## options
-
-```lua
-(field) options: unknown
+(field) path: string?
 ```
 
 ---
@@ -135,10 +161,10 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
-## queue
+## prev_size
 
 ```lua
-(field) queue: table
+(field) prev_size: table
 ```
 
 ---
@@ -155,14 +181,6 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ```lua
 (field) scrollable: boolean
-```
-
----
-
-## show_height
-
-```lua
-(field) show_height: integer
 ```
 
 ---
@@ -185,29 +203,10 @@ Base view.
 
 ---
 
-## target_height
+## type
 
 ```lua
-(field) target_height: integer|unknown
-```
-
-self.target_height is the nagview height needed to display the message and
- the buttons, excluding the top and bottom padding space.
-
----
-
-## title
-
-```lua
-(field) title: unknown
-```
-
----
-
-## underline_progress
-
-```lua
-(field) underline_progress: integer
+(field) type: string
 ```
 
 ---
@@ -233,11 +232,39 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ---
 
-## visible
+## width
 
 ```lua
-(field) visible: boolean
+(field) width: number
 ```
+
+---
+
+## zoom_mode
+
+```lua
+(field) zoom_mode: "fit"|"fixed"
+```
+
+---
+
+## zoom_scale
+
+```lua
+(field) zoom_scale: number
+```
+
+---
+
+## is_supported
+
+```lua
+function core.imageview.is_supported(path: string)
+  -> supported: boolean
+  2. file_extension: string
+```
+
+Check if an image type is supported by its filename extension.
 
 ---
 
@@ -255,16 +282,8 @@ Metamethod to allow using the object call as a constructor.
 ## __tostring
 
 ```lua
-(method) core.nagview:__tostring()
+(method) core.imageview:__tostring()
   -> string
-```
-
----
-
-## change_hovered
-
-```lua
-(method) core.nagview:change_hovered(i: any)
 ```
 
 ---
@@ -277,18 +296,10 @@ Metamethod to allow using the object call as a constructor.
 
 ---
 
-## dim_window_content
-
-```lua
-(method) core.nagview:dim_window_content()
-```
-
----
-
 ## draw
 
 ```lua
-(method) core.nagview:draw()
+(method) core.imageview:draw()
 ```
 
 ---
@@ -301,19 +312,18 @@ Metamethod to allow using the object call as a constructor.
 
 ---
 
-## draw_scrollbar
+## draw_image
 
 ```lua
-(method) core.view:draw_scrollbar()
+(method) core.imageview:draw_image()
 ```
 
 ---
 
-## each_option
+## draw_scrollbar
 
 ```lua
-(method) core.nagview:each_option()
-  -> fun(...any):...unknown
+(method) core.view:draw_scrollbar()
 ```
 
 ---
@@ -335,17 +345,6 @@ Metamethod to allow using the object call as a constructor.
 ```
 
 Check if the object inherits from the given type.
-
----
-
-## get_buttons_height
-
-```lua
-(method) core.nagview:get_buttons_height()
-  -> number
-```
-
-Buttons height without padding
 
 ---
 
@@ -374,37 +373,8 @@ Buttons height without padding
 ## get_h_scrollable_size
 
 ```lua
-(method) core.view:get_h_scrollable_size()
+(method) core.imageview:get_h_scrollable_size()
   -> number
-```
-
----
-
-## get_line_height
-
-```lua
-(method) core.nagview:get_line_height()
-  -> integer
-```
-
-The two methods below are duplicated from DocView
-
----
-
-## get_line_text_y_offset
-
-```lua
-(method) core.nagview:get_line_text_y_offset()
-  -> number
-```
-
----
-
-## get_message_height
-
-```lua
-(method) core.nagview:get_message_height()
-  -> unknown
 ```
 
 ---
@@ -412,7 +382,7 @@ The two methods below are duplicated from DocView
 ## get_name
 
 ```lua
-(method) core.view:get_name()
+(method) core.imageview:get_name()
   -> string
 ```
 
@@ -421,26 +391,8 @@ The two methods below are duplicated from DocView
 ## get_scrollable_size
 
 ```lua
-(method) core.nagview:get_scrollable_size()
+(method) core.imageview:get_scrollable_size()
   -> number
-```
-
----
-
-## get_target_height
-
-```lua
-(method) core.nagview:get_target_height()
-  -> number
-```
-
----
-
-## get_title
-
-```lua
-(method) core.nagview:get_title()
-  -> unknown
 ```
 
 ---
@@ -478,6 +430,18 @@ Check if the parameter inherits from the object.
 
 ---
 
+## load
+
+```lua
+(method) core.imageview:load(path?: string)
+  -> loaded: boolean
+  2. errmsg: string?
+```
+
+Loads the given image into the view.
+
+---
+
 ## move_towards
 
 ```lua
@@ -489,16 +453,10 @@ Check if the parameter inherits from the object.
 ## new
 
 ```lua
-(method) core.nagview:new()
+(method) core.imageview:new(path?: string)
 ```
 
----
-
-## next
-
-```lua
-(method) core.nagview:next()
-```
+Constructor
 
 ---
 
@@ -530,7 +488,8 @@ Check if the parameter inherits from the object.
 ## on_mouse_moved
 
 ```lua
-(method) core.nagview:on_mouse_moved(mx: number, my: number, ...any)
+(method) core.imageview:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+  -> boolean
 ```
 
 ---
@@ -538,7 +497,7 @@ Check if the parameter inherits from the object.
 ## on_mouse_pressed
 
 ```lua
-(method) core.nagview:on_mouse_pressed(button: 'left'|'right', mx: number, my: number, clicks: integer)
+(method) core.imageview:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
   -> boolean
 ```
 
@@ -547,13 +506,7 @@ Check if the parameter inherits from the object.
 ## on_mouse_released
 
 ```lua
-(method) core.view:on_mouse_released(button: 'left'|'right', x: number, y: number)
-```
-
-```lua
-button:
-    | 'left'
-    | 'right'
+(method) core.imageview:on_mouse_released(button: 'left'|'right', x: number, y: number)
 ```
 
 ---
@@ -561,30 +514,27 @@ button:
 ## on_mouse_wheel
 
 ```lua
-(method) core.view:on_mouse_wheel(y: number, x: number)
+(method) core.imageview:on_mouse_wheel(d: number)
   -> boolean
 ```
-
-@*param* `y` — Vertical scroll delta; positive is "up"
-
-@*param* `x` — Horizontal scroll delta; positive is "left"
-
-@*return* — Capture event
 
 ---
 
 ## on_scale_change
 
 ```lua
-(method) core.nagview:on_scale_change(new_scale: number, old_scale: number)
+(method) core.view:on_scale_change(new_scale: number, prev_scale: number)
 ```
+
+Can be overriden to listen for scale change events to apply
+any neccesary changes in sizes, padding, etc...
 
 ---
 
 ## on_text_input
 
 ```lua
-(method) core.nagview:on_text_input(text: string)
+(method) core.view:on_text_input(text: string)
 ```
 
 ---
@@ -594,6 +544,17 @@ button:
 ```lua
 (method) core.view:on_touch_moved(x: number, y: number, dx: number, dy: number, i: number)
 ```
+
+---
+
+## scale_image
+
+```lua
+(method) core.imageview:scale_image()
+```
+
+Scale the currently loaded image depending on the current
+zoom mode and scale factor.
 
 ---
 
@@ -624,14 +585,6 @@ button:
 
 ---
 
-## show
-
-```lua
-(method) core.nagview:show(title: any, message: any, options: any, on_select: any)
-```
-
----
-
 ## supports_text_input
 
 ```lua
@@ -652,7 +605,7 @@ button:
 ## update
 
 ```lua
-(method) core.nagview:update()
+(method) core.imageview:update()
 ```
 
 ---
@@ -662,6 +615,36 @@ button:
 ```lua
 (method) core.view:update_scrollbar()
 ```
+
+---
+
+## zoom_in
+
+```lua
+(method) core.imageview:zoom_in()
+```
+
+Increases the image scale.
+
+---
+
+## zoom_out
+
+```lua
+(method) core.imageview:zoom_out()
+```
+
+Decreases the image scale.
+
+---
+
+## zoom_reset
+
+```lua
+(method) core.imageview:zoom_reset()
+```
+
+Sets image size to original.
 
 ---
 

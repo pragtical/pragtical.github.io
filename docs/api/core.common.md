@@ -1,5 +1,5 @@
 ---
-sidebar_position: 21
+sidebar_position: 22
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -248,7 +248,7 @@ If none is found, nil is returned.
 ## fuzzy_match
 
 ```lua
-function core.common.fuzzy_match(haystack: string, needle: string, files: boolean)
+function core.common.fuzzy_match(haystack: string, needle: string, files?: boolean)
   -> number
 ```
 
@@ -273,6 +273,30 @@ Performs fuzzy matching and returns recently used strings if needed.
 
 If the needle is empty, then a list of recently used strings
 are added to the result, followed by strings from the haystack.
+
+---
+
+## get_caller_info
+
+```lua
+function core.common.get_caller_info(stacklevel?: integer)
+```
+
+Print debugging information about the caller at a given stack level.
+
+This function retrieves and prints:
+  * Source file of the call
+  * Line number within that file
+  * Name of the calling function (if available)
+
+Useful for tracing execution flow.
+
+Stack levels:
+  1 = get_caller_info()
+  2 = the function that called get_caller_info()
+  3 = that function’s caller (default)
+
+@*param* `stacklevel` — The stack frame to inspect. Defaults to 3.
 
 ---
 
@@ -476,6 +500,18 @@ This function is needed because the path returned by `system.absolute_path`
 may contain drive letters in upper or lowercase.
 
 @*param* `filename` — The input path.
+
+---
+
+## open_in_system
+
+```lua
+function core.common.open_in_system(resource: string)
+  -> success: boolean
+```
+
+Open the given resource using the system launcher.
+The resource can be an url, file or directory in most cases...
 
 ---
 

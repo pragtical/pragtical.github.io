@@ -27,6 +27,268 @@ also known as SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency()
 
 ---
 
+## system.dialogoptions._base
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
+## system.dialogoptions._file
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### filters
+
+```lua
+(field) filters: system.dialogoptions.filter[]?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
+## system.dialogoptions._open
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### allow_many
+
+```lua
+(field) allow_many: boolean?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
+## system.dialogoptions.filter
+
+### name
+
+```lua
+(field) name: string
+```
+
+---
+
+## system.dialogoptions.opendirectory
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### allow_many
+
+```lua
+(field) allow_many: boolean?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
+## system.dialogoptions.openfile
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### allow_many
+
+```lua
+(field) allow_many: boolean?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### filters
+
+```lua
+(field) filters: system.dialogoptions.filter[]?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
+## system.dialogoptions.savefile
+
+### accept_label
+
+```lua
+(field) accept_label: string?
+```
+
+---
+
+### cancel_label
+
+```lua
+(field) cancel_label: string?
+```
+
+---
+
+### default_location
+
+```lua
+(field) default_location: string?
+```
+
+---
+
+### filters
+
+```lua
+(field) filters: system.dialogoptions.filter[]?
+```
+
+---
+
+### title
+
+```lua
+(field) title: string?
+```
+
+---
+
 ## system.fileinfo
 
 ### modified
@@ -68,6 +330,39 @@ The directory is a symlink. This field is only set on Linux and on directories.
 Type of file
 
 ---
+
+## system.fileinfotype
+
+```lua
+system.fileinfotype:
+    | "file" -- It is a file.
+    | "dir" -- It is a directory.
+```
+
+## system.fstype
+
+```lua
+system.fstype:
+    | "ext2/ext3"
+    | "nfs"
+    | "fuse"
+    | "smb"
+    | "smb2"
+    | "reiserfs"
+    | "tmpfs"
+    | "ramfs"
+    | "ntfs"
+```
+
+## system.windowmode
+
+```lua
+system.windowmode:
+    | "normal"
+    | "minimized"
+    | "maximized"
+    | "fullscreen"
+```
 
 ## absolute_path
 
@@ -139,7 +434,7 @@ Truncates a file to a set length.
 ## fuzzy_match
 
 ```lua
-function system.fuzzy_match(haystack: string, needle: string, file: boolean)
+function system.fuzzy_match(haystack: string, needle: string, file?: boolean)
   -> score: integer
 ```
 
@@ -157,10 +452,25 @@ of the haystack, eg: with a haystack "/my/path/to/file" and a needle
 
 ```lua
 function system.get_clipboard()
-  -> string
+  -> string?
 ```
 
 Retrieve the text currently stored on the clipboard.
+
+---
+
+## get_display_info
+
+```lua
+function system.get_display_info()
+  -> current_scale: number
+  2. refresh_rate: number
+  3. width: number
+  4. height: number
+  5. default_scale: number
+```
+
+Get the primary display details.
 
 ---
 
@@ -231,6 +541,27 @@ function system.get_process_id()
 ```
 
 Get the process id of pragtical itself.
+
+---
+
+## get_sandbox
+
+```lua
+function system.get_sandbox()
+  -> "flatpak"|"macos"|"none"|"snap"|"unknown"
+```
+
+Returns the current sandbox type.
+
+
+```lua
+return #1:
+    | "none"
+    | "unknown"
+    | "flatpak"
+    | "snap"
+    | "macos"
+```
 
 ---
 
@@ -367,6 +698,40 @@ creates the directories on the given path.
 
 ---
 
+## open_directory_dialog
+
+```lua
+function system.open_directory_dialog(window: renwindow, id: integer, options?: system.dialogoptions.opendirectory)
+```
+
+Opens a directory picker.
+
+**NOTE**: don't use this directly, use `core.open_directory_dialog` instead.
+
+Returns immediately.
+
+When the operation completes, an event will be received by the event loop,
+containing the results.
+
+---
+
+## open_file_dialog
+
+```lua
+function system.open_file_dialog(window: renwindow, id: integer, options?: system.dialogoptions.openfile)
+```
+
+Opens a file picker.
+
+**NOTE**: don't use this directly, use `core.open_file_dialog` instead.
+
+Returns immediately.
+
+When the operation completes, an event will be received by the event loop,
+containing the results.
+
+---
+
 ## path_compare
 
 ```lua
@@ -437,6 +802,9 @@ Touch events:
  * "touchreleased" -\> x, y, finger_id
  * "touchmoved" -\> x, y, distance_x, distance_y, finger_id
 
+Dialog events:
+ * "dialogfinished" -\> id, status, result
+
 ---
 
 ## raise_window
@@ -463,6 +831,23 @@ Deletes an empty directory.
 @*return* `success` — True if the operation suceeded, false otherwise
 
 @*return* `message` — An error message if the operation failed
+
+---
+
+## save_file_dialog
+
+```lua
+function system.save_file_dialog(window: renwindow, id: integer, options?: system.dialogoptions.savefile)
+```
+
+Opens a save file picker.
+
+**NOTE**: don't use this directly, use `core.save_file_dialog` instead.
+
+Returns immediately.
+
+When the operation completes, an event will be received by the event loop,
+containing the results.
 
 ---
 

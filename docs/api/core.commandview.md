@@ -1,5 +1,5 @@
 ---
-sidebar_position: 20
+sidebar_position: 21
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -672,6 +672,7 @@ Check if the object inherits from the given type.
 ```lua
 (method) core.doc:get_indent_string(col: any)
   -> string
+  2. string
 ```
 
 ---

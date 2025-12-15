@@ -1,5 +1,5 @@
 ---
-sidebar_position: 52
+sidebar_position: 57
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -317,7 +317,7 @@ Array of bytes that represents a color used by the rendering functions.
 ### label
 
 ```lua
-(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
 
 ---
@@ -446,6 +446,22 @@ Represents the position of a widget.
 
 ```lua
 (field) query: string
+```
+
+---
+
+### queue_search
+
+```lua
+(field) queue_search: boolean
+```
+
+---
+
+### queue_skip_draw
+
+```lua
+(field) queue_skip_draw: boolean
 ```
 
 ---
@@ -602,6 +618,14 @@ manually intercepting ctrl+wheel.
 
 ---
 
+### stop
+
+```lua
+(field) stop: boolean
+```
+
+---
+
 ### super
 
 ```lua
@@ -625,7 +649,7 @@ A base widget
 ### tooltip
 
 ```lua
-(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)?
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
 ```
 
 ---
@@ -658,6 +682,14 @@ A base widget
 
 ```lua
 (field) type_name: string
+```
+
+---
+
+### updated
+
+```lua
+(field) updated: boolean
 ```
 
 ---
@@ -903,7 +935,7 @@ Draw the widget configured border or custom one.
 ### draw_styled_text
 
 ```lua
-(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
   -> width: integer
   2. height: integer
 ```
@@ -1399,6 +1431,14 @@ Opens a DocView of the user selected match.
 
 ---
 
+### queue_refresh
+
+```lua
+(method) plugins.projectsearch.resultsview:queue_refresh()
+```
+
+---
+
 ### refresh
 
 ```lua
@@ -1442,7 +1482,7 @@ Runs all registered animations removing duplicated and finished ones.
 ### schedule_update
 
 ```lua
-(method) widget:schedule_update()
+(method) widget:schedule_update(delayed: any)
 ```
 
 Schedule a core update and redraw. Since widgets try to not fire updates
@@ -1491,7 +1531,7 @@ Set the widget border size and appropriately re-set the widget size.
 ### set_label
 
 ```lua
-(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>)
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
 ```
 
 A text label for the widget, not all widgets support this.
@@ -1536,7 +1576,7 @@ axis:
 ### set_tooltip
 
 ```lua
-(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.fontreference>, command?: string)
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
 ```
 
 Text displayed when the widget is hovered.
@@ -1566,6 +1606,16 @@ Perform an animated show.
 @*param* `lock_x` — Do not resize width while animating
 
 @*param* `lock_y` — Do not resize height while animating
+
+---
+
+### stop_search
+
+```lua
+(method) plugins.projectsearch.resultsview:stop_search()
+```
+
+Flag that the search threads should be stopped.
 
 ---
 

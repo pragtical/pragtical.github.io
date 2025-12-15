@@ -1,5 +1,5 @@
 ---
-sidebar_position: 19
+sidebar_position: 20
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -46,10 +46,42 @@ be passed into the function associated with the command.
 
 ---
 
+## core.command.command_name
+
+A command is identified by a command name.
+The command name contains a category and the name itself, separated by a colon (':').
+
+All commands should be in lowercase and should not contain whitespaces; instead
+they should be replaced by a dash ('-').
+
+## core.command.predicate
+
+A predicate is a string, an Object or a function, that is used to determine
+whether a command should be executed.
+
+If the predicate is a string, it is resolved into an `Object` via `require()`
+and checked against the active view with `Object:extends()`. 
+For example, `"core.docview"` will match any view that inherits from `DocView`. 
+A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
+instead of matching any view that inherits the predicate.
+
+If the predicate is a table, it is checked against the active view with `Object:extends()`.
+Strict matching via `Object:is()` is not available.
+
+If the predicate is a function, it must behave like a predicate function.
+
+## core.command.predicate_function
+
+A predicate function accepts arguments from `command.perform()` and evaluates to a boolean. 
+If the function returns true, then the function associated with the command is executed.
+
+The predicate function can also return other values after the boolean, which will
+be passed into the function associated with the command.
+
 ## add
 
 ```lua
-function core.command.add(predicate: string|core.object|fun(...any):boolean, ...unknown, map: { [string]: fun(...any) })
+function core.command.add(predicate?: string|core.object|fun(...any):boolean, ...unknown, map: { [string]: fun(...any) })
 ```
 
 Adds commands to the map.
