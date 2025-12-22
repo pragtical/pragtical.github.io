@@ -27,7 +27,11 @@ Provides class-based inheritance for Lua.
 local Object = require "core.object"
 local MyClass = Object:extend()
 
-function MyClass:new(param)
+function MyClass:new(param) 
+  -- IMPORTANT: Call super constructor first, use . instead of : and pass
+  -- self explicitly, forgetting this call is a common mistake
+  -- that can lead to uninitialized state and unexpected behavior
+  MyClass.super.new(self)
   self.value = param
 end
 
@@ -35,21 +39,6 @@ function MyClass:method()
   return self.value
 end
 ```
-
-:::warning Important: Call Super Constructor
-When extending a class, **always call the super class constructor** in your `new()` method:
-
-```lua
-function MyClass:new(param)
-  -- IMPORTANT: Call super constructor first
-  -- Note: use . instead of : and pass self explicitly
-  MyClass.super.new(self)
-  self.value = param
-end
-```
-
-Forgetting this call is a common mistake that can lead to uninitialized state and unexpected behavior.
-:::
 
 ### Key Methods
 
