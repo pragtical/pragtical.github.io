@@ -42,6 +42,7 @@ command.add(nil, {
 - First line must be `-- mod-version:3`
 - Require the modules you need
 - Register commands with `command.add()`
+- Plugin file names must be valid Lua identifiers in lowercase (e.g., `myplugin.lua`, `auto_save.lua`) to work with config paths like `config.plugins.plugin_name`
 
 ## Example 1: Simple Command Plugin
 
