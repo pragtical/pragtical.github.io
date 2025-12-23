@@ -343,11 +343,10 @@ Document column ↔ X offset within line:
 
 
 ### Notes
-- **Variable FPS** To lower cpu usage, the editor does not run at a constant FPS. The configured `config.fps` is basically the maximum allowed frames per second. Pragtical also prevents calling the update and draw methods of views when they aren't visible (by checking if their size is 0) to save cpu cycles.
+- **Variable FPS** To lower cpu usage, the editor does not run at a constant FPS. The configured `config.fps` is basically the maximum allowed frames per second. Pragtical also prevents calling the update and draw methods of views when they aren't visible (by checking if their size is 0) to save cpu cycles. Pragtical implements cached rendering in C which skips draw commands for parts of the UI that have not changed  (and for the most part those that go beyond the viewable area).
 - **Line Caching**: DocView implements column-to-x-offset caching for lines longer than 500 characters (defined by `CACHE_LINE_LEN`). This significantly improves performance on extremely long lines.
 - **Visible Range Optimization**: Views only draw and update content that's visible on screen. Use `DocView:get_visible_line_range()` and `DocView:get_visible_cols_range()` when implementing plugins that process document content.
 - **Font Tab Size**: When working with fonts, remember to call `font:set_tab_size(indent_size)` to ensure proper tab rendering. DocView handles this automatically for syntax highlighting.
-Coordinate Systems
 
 Debugging Tips
 
