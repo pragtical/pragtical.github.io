@@ -10,8 +10,15 @@ description: Quick start guide to writing plugins.
 A plugin is a Lua file placed in your user plugins directory that extends the editor's functionality.
 
 :::info Plugin Locations
-- **User plugins:** `user/plugins/` - Place your custom plugins here
-- **Built-in plugins:** `data/plugins/` - Plugins that ship with the editor
+- **User plugins:** `USERDIR/plugins/` - Place your custom plugins here
+- **Built-in plugins:** `DATADIR/plugins/` - Plugins that ship with the editor
+
+`USERDIR` and `DATADIR` are global Lua variables available in all plugins. See [Configuration → Location](../user-guide/configuration.md#location) for where Pragtical looks for the user directory.
+
+**Common user plugin directory locations:**
+- **Portable install:** `<pragtical_executable_dir>/user/plugins/`
+- **Linux/macOS:** `~/.config/pragtical/plugins/`
+- **Windows:** `%USERPROFILE%/.config/pragtical/plugins/`
 :::
 
 ### Minimal Plugin Structure
@@ -22,8 +29,6 @@ local core = require "core"
 local command = require "core.command"
 
 -- your plugin code here
--- ...
--- ...
 
 command.add(nil, {
   ["myplugin:do-something"] = function()
