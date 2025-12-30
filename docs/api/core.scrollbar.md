@@ -1,23 +1,15 @@
 ---
-sidebar_position: 41
+sidebar_position: 42
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
 # core.scrollbar
 
-Scrollbar
-Use Scrollbar:set_size to set the bounding box of the view the scrollbar belongs to.
-Use Scrollbar:update to update the scrollbar animations.
-Use Scrollbar:draw to draw the scrollbar.
-Use Scrollbar:on_mouse_pressed, Scrollbar:on_mouse_released,
-Scrollbar:on_mouse_moved and Scrollbar:on_mouse_left to react to mouse movements;
-the scrollbar won't update automatically.
-Use Scrollbar:set_percent to set the scrollbar location externally.
-
-To manage all the orientations, the scrollbar changes the coordinates system
-accordingly. The "normal" coordinate system adapts the scrollbar coordinates
-as if it's always a vertical scrollbar, positioned at the end of the bounding box.
+Scrollable viewport indicator with draggable thumb.
+Supports both vertical and horizontal orientation with configurable alignment.
+Uses a "normal" coordinate system internally that treats all scrollbars as
+vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ```lua
 local scrollbar = require "core.scrollbar"
@@ -29,6 +21,9 @@ local scrollbar = require "core.scrollbar"
 (field) __index: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ## alignment
@@ -37,7 +32,7 @@ local scrollbar = require "core.scrollbar"
 (field) alignment: "e"|"s"
 ```
 
-Start or End (left to right, top to bottom)
+Start or end position (left/top vs right/bottom)
 
 ---
 
@@ -47,7 +42,7 @@ Start or End (left to right, top to bottom)
 (field) contracted_margin: number?
 ```
 
-Override the default value specified by `style.contracted_scrollbar_margin`
+Override for style.contracted_scrollbar_margin
 
 ---
 
@@ -57,7 +52,7 @@ Override the default value specified by `style.contracted_scrollbar_margin`
 (field) contracted_size: number?
 ```
 
-Override the default value specified by `style.scrollbar_size`
+Override for style.scrollbar_size
 
 ---
 
@@ -67,17 +62,17 @@ Override the default value specified by `style.scrollbar_size`
 (field) direction: "h"|"v"
 ```
 
-Vertical or Horizontal
+Vertical or horizontal orientation
 
 ---
 
 ## drag_start_offset
 
 ```lua
-(field) drag_start_offset: integer
+(field) drag_start_offset: number
 ```
 
-Private. Used to offset the start of the drag from the top of the thumb
+Offset from thumb top when drag started
 
 ---
 
@@ -87,7 +82,7 @@ Private. Used to offset the start of the drag from the top of the thumb
 (field) dragging: boolean
 ```
 
-Scrollbar dragging status
+True when user is dragging the thumb
 
 ---
 
@@ -97,7 +92,7 @@ Scrollbar dragging status
 (field) expand_percent: number
 ```
 
-Private. Used to keep track of animations
+Animation state \[0-1\] for hover expansion
 
 ---
 
@@ -107,7 +102,7 @@ Private. Used to keep track of animations
 (field) expanded_margin: number?
 ```
 
-Override the default value specified by `style.expanded_scrollbar_margin`
+Override for style.expanded_scrollbar_margin
 
 ---
 
@@ -117,27 +112,17 @@ Override the default value specified by `style.expanded_scrollbar_margin`
 (field) expanded_size: number?
 ```
 
-Override the default value specified by `style.expanded_scrollbar_size`
+Override for style.expanded_scrollbar_size
 
 ---
 
 ## force_status
 
 ```lua
-(field) force_status: "contracted"|"expanded"|false
+(field) force_status: ("contracted"|"expanded"|false)?
 ```
 
-Force the scrollbar status
-
----
-
-## hovering
-
-```lua
-(field) hovering: table
-```
-
-What is currently being hovered. `thumb` implies` track`
+Forced display state
 
 ---
 
@@ -147,35 +132,17 @@ What is currently being hovered. `thumb` implies` track`
 (field) minimum_thumb_size: number?
 ```
 
-Override the default value specified by `style.minimum_thumb_size`
-
----
-
-## normal_rect
-
-```lua
-(field) normal_rect: table
-```
+Override for style.minimum_thumb_size
 
 ---
 
 ## percent
 
 ```lua
-(field) percent: integer
+(field) percent: number
 ```
 
-Position in percent \[0-1\]
-
----
-
-## rect
-
-```lua
-(field) rect: table
-```
-
-Position information of the owner
+Scroll position \[0-1\]
 
 ---
 
@@ -185,17 +152,96 @@ Position information of the owner
 (field) super: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
-## ScrollbarOptions
+## core.scrollbar.hovering
+
+### thumb
+
+```lua
+(field) thumb: boolean
+```
+
+True if mouse is over thumb
+
+---
+
+### track
+
+```lua
+(field) track: boolean
+```
+
+True if mouse is over track
+
+---
+
+## core.scrollbar.normal_rect
+
+### across
+
+```lua
+(field) across: number
+```
+
+Position perpendicular to scroll direction
+
+---
+
+### across_size
+
+```lua
+(field) across_size: number
+```
+
+Size perpendicular to scroll direction
+
+---
+
+### along
+
+```lua
+(field) along: number
+```
+
+Position parallel to scroll direction
+
+---
+
+### along_size
+
+```lua
+(field) along_size: number
+```
+
+Size parallel to scroll direction
+
+---
+
+### scrollable
+
+```lua
+(field) scrollable: number
+```
+
+Total scrollable size
+
+---
+
+## core.scrollbar.options
+
+Configuration options for creating a scrollbar.
 
 ### alignment
 
 ```lua
-(field) alignment: "e"|"s"
+(field) alignment: ("e"|"s")?
 ```
 
-Start or End (left to right, top to bottom)
+Start or End - left/top vs right/bottom (default: "e")
 
 ---
 
@@ -205,7 +251,7 @@ Start or End (left to right, top to bottom)
 (field) contracted_margin: number?
 ```
 
-Override the default value specified by `style.contracted_scrollbar_margin`
+Override style.contracted_scrollbar_margin
 
 ---
 
@@ -215,17 +261,17 @@ Override the default value specified by `style.contracted_scrollbar_margin`
 (field) contracted_size: number?
 ```
 
-Override the default value specified by `style.scrollbar_size`
+Override style.scrollbar_size
 
 ---
 
 ### direction
 
 ```lua
-(field) direction: "h"|"v"
+(field) direction: ("h"|"v")?
 ```
 
-Vertical or Horizontal
+Vertical or Horizontal (default: "v")
 
 ---
 
@@ -235,7 +281,7 @@ Vertical or Horizontal
 (field) expanded_margin: number?
 ```
 
-Override the default value specified by `style.expanded_scrollbar_margin`
+Override style.expanded_scrollbar_margin
 
 ---
 
@@ -245,17 +291,17 @@ Override the default value specified by `style.expanded_scrollbar_margin`
 (field) expanded_size: number?
 ```
 
-Override the default value specified by `style.expanded_scrollbar_size`
+Override style.expanded_scrollbar_size
 
 ---
 
 ### force_status
 
 ```lua
-(field) force_status: "contracted"|"expanded"|false
+(field) force_status: ("contracted"|"expanded"|false)?
 ```
 
-Force the scrollbar status
+Force display state
 
 ---
 
@@ -265,7 +311,51 @@ Force the scrollbar status
 (field) minimum_thumb_size: number?
 ```
 
-Override the default value specified by `style.minimum_thumb_size`
+Override style.minimum_thumb_size
+
+---
+
+## core.scrollbar.rect
+
+### h
+
+```lua
+(field) h: number
+```
+
+---
+
+### scrollable
+
+```lua
+(field) scrollable: number
+```
+
+Total scrollable size
+
+---
+
+### w
+
+```lua
+(field) w: number
+```
+
+---
+
+### x
+
+```lua
+(field) x: number
+```
+
+---
+
+### y
+
+```lua
+(field) y: number
+```
 
 ---
 
@@ -273,10 +363,14 @@ Override the default value specified by `style.minimum_thumb_size`
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -293,11 +387,22 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.scrollbar:_get_thumb_rect_normal()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
+
+Get thumb rectangle in normalized coordinates.
+Internal helper - use get_thumb_rect() for real coordinates.
+
+@*return* `x` — Normalized x coordinate
+
+@*return* `y` — Normalized y coordinate
+
+@*return* `w` — Normalized width
+
+@*return* `h` — Normalized height
 
 ---
 
@@ -305,28 +410,69 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.scrollbar:_get_track_rect_normal()
-  -> number
-  2. integer
-  3. number
-  4. integer
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
+
+Get track rectangle in normalized coordinates.
+Internal helper - use get_track_rect() for real coordinates.
+
+@*return* `x` — Normalized x coordinate
+
+@*return* `y` — Normalized y coordinate
+
+@*return* `w` — Normalized width
+
+@*return* `h` — Normalized height
 
 ---
 
 ## _on_mouse_moved_normal
 
 ```lua
-(method) core.scrollbar:_on_mouse_moved_normal(x: any, y: any, dx: any, dy: any)
-  -> boolean|number
+(method) core.scrollbar:_on_mouse_moved_normal(x: number, y: number, dx: number, dy: number)
+  -> result: boolean|number
 ```
+
+Handle mouse movement in normalized coordinates.
+Internal helper - use on_mouse_moved() for real coordinates.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*param* `dx` — Normalized delta x
+
+@*param* `dy` — Normalized delta y
+
+@*return* `result` — True if hovering, 0-1 percent if dragging, falsy otherwise
 
 ---
 
 ## _on_mouse_pressed_normal
 
 ```lua
-(method) core.scrollbar:_on_mouse_pressed_normal(button: any, x: any, y: any, clicks: any)
-  -> boolean|number
+(method) core.scrollbar:_on_mouse_pressed_normal(button: 'left'|'right', x: number, y: number, clicks: integer)
+  -> result: boolean|number
+```
+
+Handle mouse press in normalized coordinates.
+Internal helper - use on_mouse_pressed() for real coordinates.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*param* `clicks` — Number of clicks
+
+@*return* `result` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
+
+```lua
+button:
+    | 'left'
+    | 'right'
 ```
 
 ---
@@ -334,8 +480,23 @@ Metamethod to allow using the object call as a constructor.
 ## _on_mouse_released_normal
 
 ```lua
-(method) core.scrollbar:_on_mouse_released_normal(button: any, x: any, y: any)
-  -> boolean
+(method) core.scrollbar:_on_mouse_released_normal(button: 'left'|'right', x: number, y: number)
+  -> hovering: boolean
+```
+
+Handle mouse release in normalized coordinates.
+Internal helper - use on_mouse_released() for real coordinates.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*return* `hovering` — True if hovering track or thumb
+
+```lua
+button:
+    | 'left'
+    | 'right'
 ```
 
 ---
@@ -343,8 +504,23 @@ Metamethod to allow using the object call as a constructor.
 ## _overlaps_normal
 
 ```lua
-(method) core.scrollbar:_overlaps_normal(x: any, y: any)
-  -> string|unknown
+(method) core.scrollbar:_overlaps_normal(x: number, y: number)
+  -> part: "thumb"|"track"|nil
+```
+
+Check what part of scrollbar overlaps a point in normalized coordinates.
+Internal helper - use overlaps() for real coordinates.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*return* `part` — What was hit, or nil if nothing
+
+```lua
+part:
+    | "thumb"
+    | "track"
 ```
 
 ---
@@ -352,12 +528,18 @@ Metamethod to allow using the object call as a constructor.
 ## _update_hover_status_normal
 
 ```lua
-(method) core.scrollbar:_update_hover_status_normal(x: any, y: any)
-  -> boolean
+(method) core.scrollbar:_update_hover_status_normal(x: number, y: number)
+  -> hovering: boolean
 ```
 
-Updates the scrollbar hover status.
-This gets called by other functions and shouldn't be called manually
+Update hover status in normalized coordinates.
+Internal helper called by other mouse methods.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*return* `hovering` — True if hovering track or thumb
 
 ---
 
@@ -367,7 +549,8 @@ This gets called by other functions and shouldn't be called manually
 (method) core.scrollbar:draw()
 ```
 
-Draw both the scrollbar track and thumb
+Draw the complete scrollbar (track and thumb).
+Call this from the owning view's draw() method.
 
 ---
 
@@ -377,7 +560,8 @@ Draw both the scrollbar track and thumb
 (method) core.scrollbar:draw_thumb()
 ```
 
-Draw the scrollbar thumb
+Draw the scrollbar thumb (draggable indicator).
+Highlights when hovered or being dragged.
 
 ---
 
@@ -387,7 +571,9 @@ Draw the scrollbar thumb
 (method) core.scrollbar:draw_track()
 ```
 
-Draw the scrollbar track
+Draw the scrollbar track (background).
+Only draws when hovered/dragging or expanded.
+Fades in based on expand_percent animation.
 
 ---
 
@@ -395,8 +581,14 @@ Draw the scrollbar track
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -404,10 +596,16 @@ Draw the scrollbar track
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -415,15 +613,21 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.scrollbar:get_thumb_rect()
-  -> integer
-  2. integer
-  3. integer
-  4. integer
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
 
-Get the thumb rect (the part of the scrollbar that can be dragged)
+Get the thumb rectangle (the draggable part of the scrollbar).
 
-@*return* — x, y, w, h
+@*return* `x` — Screen x coordinate
+
+@*return* `y` — Screen y coordinate
+
+@*return* `w` — Width in pixels
+
+@*return* `h` — Height in pixels
 
 ---
 
@@ -431,15 +635,21 @@ Get the thumb rect (the part of the scrollbar that can be dragged)
 
 ```lua
 (method) core.scrollbar:get_track_rect()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
 
-Get the track rect (the "background" of the scrollbar)
+Get the track rectangle (the background of the scrollbar).
 
-@*return* — x, y, w, h
+@*return* `x` — Screen x coordinate
+
+@*return* `y` — Screen y coordinate
+
+@*return* `w` — Width in pixels
+
+@*return* `h` — Height in pixels
 
 ---
 
@@ -447,10 +657,16 @@ Get the track rect (the "background" of the scrollbar)
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -458,10 +674,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -469,30 +691,59 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
 ## new
 
 ```lua
-(method) core.scrollbar:new(options: ScrollbarOptions)
+(method) core.scrollbar:new(options: core.scrollbar.options)
 ```
+
+Constructor - initializes a scrollbar with specified orientation and style.
+
+@*param* `options` — Configuration options
 
 ---
 
 ## normal_to_real
 
 ```lua
-(method) core.scrollbar:normal_to_real(x: any, y: any, w: any, h: any)
-  -> unknown
-  2. unknown
-  3. unknown
-  4. unknown
+(method) core.scrollbar:normal_to_real(x?: number, y?: number, w?: number, h?: number)
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
+
+Transform normalized coordinates back to real coordinate system.
+Internal helper for orientation/alignment handling.
+
+@*param* `x` — Normalized x coordinate
+
+@*param* `y` — Normalized y coordinate
+
+@*param* `w` — Normalized width
+
+@*param* `h` — Normalized height
+
+@*return* `x` — Real x
+
+@*return* `y` — Real y
+
+@*return* `w` — Real width
+
+@*return* `h` — Real height
 
 ---
 
@@ -502,72 +753,106 @@ Check if the parameter inherits from the object.
 (method) core.scrollbar:on_mouse_left()
 ```
 
-Updates the scrollbar hovering status
+Handle mouse leaving the scrollbar area.
+Clears all hover states.
 
 ---
 
 ## on_mouse_moved
 
 ```lua
-(method) core.scrollbar:on_mouse_moved(x: any, y: any, dx: any, dy: any)
-  -> boolean|number
+(method) core.scrollbar:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+  -> result: (boolean|number)?
 ```
 
-Updates the scrollbar with mouse moved info.
-Won't update the scrollbar position automatically.
-Use Scrollbar:set_percent to update it.
+Handle mouse movement events on the scrollbar.
+Updates hover status and returns drag position if dragging.
+Does NOT automatically update scroll position - caller must use set_percent().
 
-This updates the hovering status.
+@*param* `x` — Screen x coordinate
 
-Returns a falsy value if the event happened outside the scrollbar.
-Returns `true` if the scrollbar is hovered.
-If the scrollbar was being dragged, this returns a value between 0 and 1
-representing the percent of the position.
+@*param* `y` — Screen y coordinate
+
+@*param* `dx` — Delta x since last move
+
+@*param* `dy` — Delta y since last move
+
+@*return* `result` — True if hovering, 0-1 percent if dragging, falsy otherwise
 
 ---
 
 ## on_mouse_pressed
 
 ```lua
-(method) core.scrollbar:on_mouse_pressed(button: any, x: any, y: any, clicks: any)
-  -> boolean|number
+(method) core.scrollbar:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
+  -> result: (boolean|number)?
 ```
 
-Updates the scrollbar with mouse pressed info.
-Won't update the scrollbar position automatically.
-Use Scrollbar:set_percent to update it.
+Handle mouse press events on the scrollbar.
+Sets dragging state if thumb is clicked.
+Does NOT automatically update scroll position - caller must use set_percent().
 
-This sets the dragging status if needed.
+@*param* `button` — Mouse button
 
-Returns a falsy value if the event happened outside the scrollbar.
-Returns `true` if the thumb was pressed.
-If the track was pressed this returns a value between 0 and 1
-representing the percent of the position.
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*param* `clicks` — Number of clicks
+
+@*return* `result` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
+
+```lua
+button:
+    | 'left'
+    | 'right'
+```
 
 ---
 
 ## on_mouse_released
 
 ```lua
-(method) core.scrollbar:on_mouse_released(button: any, x: any, y: any)
-  -> boolean|nil
+(method) core.scrollbar:on_mouse_released(button: 'left'|'right', x: number, y: number)
+  -> hovering: boolean?
 ```
 
-Updates the scrollbar dragging status
+Handle mouse release events on the scrollbar.
+Clears dragging state and updates hover status.
+
+@*param* `button` — Mouse button
+
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*return* `hovering` — True if hovering track or thumb
+
+```lua
+button:
+    | 'left'
+    | 'right'
+```
 
 ---
 
 ## overlaps
 
 ```lua
-(method) core.scrollbar:overlaps(x: any, y: any)
-  -> "thumb"|"track"|nil
+(method) core.scrollbar:overlaps(x: number, y: number)
+  -> part: "thumb"|"track"|nil
 ```
 
-Get what part of the scrollbar the coordinates overlap
+Check what part of the scrollbar overlaps a screen point.
+
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*return* `part` — What was hit, or nil if nothing
 
 ```lua
-return #1:
+part:
     | "thumb"
     | "track"
 ```
@@ -577,12 +862,31 @@ return #1:
 ## real_to_normal
 
 ```lua
-(method) core.scrollbar:real_to_normal(x: any, y: any, w: any, h: any)
-  -> unknown
-  2. unknown
-  3. unknown
-  4. unknown
+(method) core.scrollbar:real_to_normal(x?: number, y?: number, w?: number, h?: number)
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
 ```
+
+Transform real coordinates to normalized coordinate system.
+Internal helper for orientation/alignment handling.
+
+@*param* `x` — Real x coordinate
+
+@*param* `y` — Real y coordinate
+
+@*param* `w` — Real width
+
+@*param* `h` — Real height
+
+@*return* `x` — Normalized x
+
+@*return* `y` — Normalized y
+
+@*return* `w` — Normalized width
+
+@*return* `h` — Normalized height
 
 ---
 
@@ -592,9 +896,10 @@ return #1:
 (method) core.scrollbar:set_forced_status(status: "contracted"|"expanded"|false)
 ```
 
-Set the status the scrollbar is forced to keep
+Set the forced display status of the scrollbar.
+When forced, the scrollbar won't animate based on hover state.
 
-@*param* `status` — The status to force
+@*param* `status` — Status to force (false to allow auto-animation)
 
 ```lua
 status:
@@ -611,9 +916,9 @@ status:
 (method) core.scrollbar:set_percent(percent: number)
 ```
 
-Updates the scrollbar location
+Set the scrollbar thumb position.
 
-@*param* `percent` — number between 0 and 1 where 0 means thumb at the top and 1 at the bottom
+@*param* `percent` — Position from 0-1 (0 = top/left, 1 = bottom/right)
 
 ---
 
@@ -623,9 +928,18 @@ Updates the scrollbar location
 (method) core.scrollbar:set_size(x: number, y: number, w: number, h: number, scrollable: number)
 ```
 
-Updates the bounding box of the view the scrollbar belongs to.
+Set the bounding box of the view this scrollbar belongs to.
+Must be called when view size or scrollable area changes.
 
-@*param* `scrollable` — size of the scrollable area
+@*param* `x` — View x position
+
+@*param* `y` — View y position
+
+@*param* `w` — View width
+
+@*param* `h` — View height
+
+@*param* `scrollable` — Total scrollable size (height for vertical, width for horizontal)
 
 ---
 
@@ -635,7 +949,8 @@ Updates the bounding box of the view the scrollbar belongs to.
 (method) core.scrollbar:update()
 ```
 
-Updates the scrollbar animations
+Update scrollbar animations (hover expansion).
+Call this every frame to animate the scrollbar width on hover.
 
 ---
 

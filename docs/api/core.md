@@ -85,6 +85,9 @@ This value is automatically updated on each core.step().
 (field) command_view: core.commandview
 ```
 
+Command palette and input prompt view.
+Provides autocomplete, suggestions, and command execution interface.
+
 ---
 
 ## cursor_change_req
@@ -168,6 +171,10 @@ log functions depend on config so initialize after loading config
 ```lua
 (field) nag_view: core.nagview
 ```
+
+Modal dialog view for confirmations and alerts.
+Displays a message with buttons, dims the background, and captures focus.
+Multiple dialogs queue automatically.
 
 ---
 
@@ -275,7 +282,8 @@ We load core views before plugins that may need them.
 (field) status_view: core.statusview
 ```
 
-A status bar implementation, check core.status_view.
+Status bar with customizable items displaying document info and system status.
+Access the global instance via `core.status_view`.
 
 ---
 
@@ -643,6 +651,21 @@ The callback will be called with the result.
 function core.open_doc(filename: any)
   -> unknown
 ```
+
+---
+
+## open_file
+
+```lua
+function core.open_file(filename: string)
+  -> core.docview|core.imageview
+```
+
+Opens the given file path in the root view.
+If the given file is a supported image, it will open it in the image viewer;
+otherwise, it will open it as a normal text file.
+
+@*param* `filename` — Path to the file to open
 
 ---
 

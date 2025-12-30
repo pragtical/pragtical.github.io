@@ -38,7 +38,7 @@ The predicate and its associated function.
 (field) predicate: fun(...any):boolean, ...unknown
 ```
 
-A predicate function accepts arguments from `command.perform()` and evaluates to a boolean. 
+A predicate function accepts arguments from `command.perform()` and evaluates to a boolean.
 If the function returns true, then the function associated with the command is executed.
 
 The predicate function can also return other values after the boolean, which will
@@ -60,8 +60,8 @@ A predicate is a string, an Object or a function, that is used to determine
 whether a command should be executed.
 
 If the predicate is a string, it is resolved into an `Object` via `require()`
-and checked against the active view with `Object:extends()`. 
-For example, `"core.docview"` will match any view that inherits from `DocView`. 
+and checked against the active view with `Object:extends()`.
+For example, `"core.docview"` will match any view that inherits from `DocView`.
 A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
 instead of matching any view that inherits the predicate.
 
@@ -72,7 +72,7 @@ If the predicate is a function, it must behave like a predicate function.
 
 ## core.command.predicate_function
 
-A predicate function accepts arguments from `command.perform()` and evaluates to a boolean. 
+A predicate function accepts arguments from `command.perform()` and evaluates to a boolean.
 If the function returns true, then the function associated with the command is executed.
 
 The predicate function can also return other values after the boolean, which will
@@ -87,11 +87,8 @@ function core.command.add(predicate?: string|core.object|fun(...any):boolean, ..
 Adds commands to the map.
 
 The function accepts a table containing a list of commands
-and their functions. 
+and their functions.
 If a command already exists, it will be replaced.
-See:
-  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
-  * \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
 
 ---
 
@@ -118,8 +115,6 @@ that is internally used to dispatch and execute commands.
 This function should not be called manually.
 
 @*param* `predicate` — If nil, the predicate always evaluates to true.
-
-See: \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
 
 ---
 
@@ -154,7 +149,7 @@ function core.command.perform(name: string, ...any)
 
 Performs a command.
 
-The arguments passed into this function are forwarded to the predicate function. 
+The arguments passed into this function are forwarded to the predicate function.
 If the predicate function returns more than 1 value, the other values are passed
 to the command.
 
@@ -162,10 +157,6 @@ Otherwise, the arguments passed into this function are passed directly
 to the command.
 
 @*return* — true if the command is performed successfully.
-
-See:
-  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
-  * \[core.command.predicate_function\](file:///usr/share/pragtical/core/command.lua#12#10)
 
 ---
 
@@ -180,7 +171,5 @@ Prettifies the command name.
 
 This function adds a space between the colon and the command name,
 replaces dashes with spaces and capitalizes the command appropriately.
-See: \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
 
 ---
-

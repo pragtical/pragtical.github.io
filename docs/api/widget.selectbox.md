@@ -1,5 +1,5 @@
 ---
-sidebar_position: 90
+sidebar_position: 91
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -25,6 +25,9 @@ Indicates on a widget.styledtext that a new line follows.
 ```lua
 (field) __index: core.object
 ```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
 
 ---
 
@@ -525,10 +528,14 @@ this function will only override the events once.
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -615,6 +622,9 @@ Center the widget horizontally and vertically to the screen or parent widget.
 (method) core.view:clamp_scroll_position()
 ```
 
+Clamp scroll position to valid range (0 to max scrollable size).
+Called automatically by update(). Override get_scrollable_size() to customize.
+
 ---
 
 ## deactivate
@@ -673,6 +683,9 @@ Used internally when dragging is activated.
 (method) core.view:draw_background(color: renderer.color)
 ```
 
+Draw a solid background color for the entire view.
+Commonly called at the start of draw() methods.
+
 ---
 
 ## draw_border
@@ -725,8 +738,14 @@ TODO: something similar should be on pragtical core.
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -734,10 +753,16 @@ TODO: something similar should be on pragtical core.
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -778,11 +803,21 @@ Get the bottom y coordinate relative to parent
 
 ```lua
 (method) core.view:get_content_bounds()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x1: number
+  2. y1: number
+  3. x2: number
+  4. y2: number
 ```
+
+Get the content bounds in content coordinates (accounting for scroll).
+
+@*return* `x1` — Left edge
+
+@*return* `y1` — Top edge
+
+@*return* `x2` — Right edge
+
+@*return* `y2` — Bottom edge
 
 ---
 
@@ -793,6 +828,13 @@ Get the bottom y coordinate relative to parent
   -> x: number
   2. y: number
 ```
+
+Get the top-left corner of content area in screen coordinates.
+Accounts for scroll offset. Use for drawing content at correct position.
+
+@*return* `x` — Screen x coordinate
+
+@*return* `y` — Screen y coordinate
 
 ---
 
@@ -978,10 +1020,16 @@ Perform an animated hide.
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -989,10 +1037,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -1000,10 +1054,16 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
@@ -1032,8 +1092,21 @@ Check if the given mouse coordinate is hovering the widget
 ## move_towards
 
 ```lua
-(method) core.view:move_towards(t: any, k: any, dest: any, rate: any, name: any)
+(method) core.view:move_towards(t: table, k: string|number, dest: number, rate?: number, name?: string)
 ```
+
+Smoothly animate a value towards a destination.
+Use this for animations instead of direct assignment.
+
+@*param* `t` — Table containing the value
+
+@*param* `k` — Key in table
+
+@*param* `dest` — Target value
+
+@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+
+@*param* `name` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1081,8 +1154,17 @@ Send file drop event to hovered child.
 ## on_ime_text_editing
 
 ```lua
-(method) core.view:on_ime_text_editing(text: any, start: any, length: any)
+(method) core.view:on_ime_text_editing(text: string, start: number, length: number)
 ```
+
+Handle IME (Input Method Editor) text composition events.
+Override for IME support in text editors. Called during composition.
+
+@*param* `text` — Composition text being edited
+
+@*param* `start` — Start position of selection within composition
+
+@*param* `length` — Length of selection within composition
 
 ---
 
@@ -1206,6 +1288,19 @@ Redirects any text input to active child with the input_text flag.
 (method) core.view:on_touch_moved(x: number, y: number, dx: number, dy: number, i: number)
 ```
 
+Handle touch move events (touchscreen/trackpad gestures).
+Override for touch-specific behavior. Base implementation handles scrolling.
+
+@*param* `x` — Current touch x coordinate
+
+@*param* `y` — Current touch y coordinate
+
+@*param* `dx` — Delta x since last position
+
+@*param* `dy` — Delta y since last position
+
+@*param* `i` — Touch finger/pointer index
+
 ---
 
 ## release_mouse
@@ -1265,8 +1360,12 @@ used when a re-update and re-draw is strictly needed.
 
 ```lua
 (method) core.view:scrollbar_dragging()
-  -> boolean
+  -> dragging: boolean
 ```
+
+Check if user is currently dragging either scrollbar.
+
+@*return* `dragging` — True if scrollbar drag is in progress
 
 ---
 
@@ -1274,8 +1373,12 @@ used when a re-update and re-draw is strictly needed.
 
 ```lua
 (method) core.view:scrollbar_hovering()
-  -> boolean
+  -> hovering: boolean
 ```
+
+Check if mouse is hovering over either scrollbar track.
+
+@*return* `hovering` — True if mouse is over scrollbar
 
 ---
 
@@ -1283,8 +1386,17 @@ used when a re-update and re-draw is strictly needed.
 
 ```lua
 (method) core.view:scrollbar_overlaps_point(x: number, y: number)
-  -> boolean
+  -> overlaps: boolean
 ```
+
+Check if a screen point overlaps either scrollbar.
+Useful for determining cursor style or handling clicks.
+
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1396,6 +1508,9 @@ Perform an animated show.
   -> boolean
 ```
 
+Whether this view accepts text input (enables IME).
+Override and return true for text editors and input fields.
+
 ---
 
 ## swap_active_child
@@ -1456,8 +1571,14 @@ Toggle visibility of widget.
 ## try_close
 
 ```lua
-(method) core.view:try_close(do_close: any)
+(method) core.view:try_close(do_close: function)
 ```
+
+Called when view is requested to close (e.g., tab close button).
+Override to show confirmation dialogs for unsaved changes.
+Example: `core.command_view:enter("Save?", \{submit = do_close\})`
+
+@*param* `do_close` — Call this function to actually close the view
 
 ---
 
@@ -1496,6 +1617,9 @@ Called on the update function to be able to scroll the child widgets.
 ```lua
 (method) core.view:update_scrollbar()
 ```
+
+Update scrollbar positions and sizes.
+Called automatically by update(). Rarely needs to be called manually.
 
 ---
 

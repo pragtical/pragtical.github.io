@@ -278,7 +278,6 @@ global get_current_require_path: function
 ```
 
 Returns the current `require` path.
-See: \[require\](file:///tmp/lua-language-server-1000/instance.o49k/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
 
 ---
 
@@ -415,4 +414,3 @@ Additional utf8 support not provided by lua.
 [\[View Library\]](/docs/api/utf8extra)
 
 ---
-

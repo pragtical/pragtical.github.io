@@ -1,12 +1,13 @@
 ---
-sidebar_position: 42
+sidebar_position: 43
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
 # core.statusview
 
-A status bar implementation, check core.status_view.
+Status bar with customizable items displaying document info and system status.
+Access the global instance via `core.status_view`.
 
 ```lua
 local statusview = require "core.statusview"
@@ -18,6 +19,8 @@ local statusview = require "core.statusview"
 (field) Item: core.statusview.item
 ```
 
+Individual status bar item with custom rendering and interaction.
+
 ---
 
 ## __index
@@ -26,6 +29,9 @@ local statusview = require "core.statusview"
 (field) __index: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ## active_items
@@ -33,6 +39,8 @@ local statusview = require "core.statusview"
 ```lua
 (field) active_items: core.statusview.item[]
 ```
+
+Currently visible items that pass predicates
 
 ---
 
@@ -66,6 +74,8 @@ local statusview = require "core.statusview"
 (field) dragged_panel: ""|"left"|"right"
 ```
 
+Panel being dragged ("left", "right", or "")
+
 ---
 
 ## get_items_warn
@@ -82,18 +92,10 @@ local statusview = require "core.statusview"
 (field) h_scrollbar: core.scrollbar
 ```
 
-Scrollbar
-Use Scrollbar:set_size to set the bounding box of the view the scrollbar belongs to.
-Use Scrollbar:update to update the scrollbar animations.
-Use Scrollbar:draw to draw the scrollbar.
-Use Scrollbar:on_mouse_pressed, Scrollbar:on_mouse_released,
-Scrollbar:on_mouse_moved and Scrollbar:on_mouse_left to react to mouse movements;
-the scrollbar won't update automatically.
-Use Scrollbar:set_percent to set the scrollbar location externally.
-
-To manage all the orientations, the scrollbar changes the coordinates system
-accordingly. The "normal" coordinate system adapts the scrollbar coordinates
-as if it's always a vertical scrollbar, positioned at the end of the bounding box.
+Scrollable viewport indicator with draggable thumb.
+Supports both vertical and horizontal orientation with configurable alignment.
+Uses a "normal" coordinate system internally that treats all scrollbars as
+vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
@@ -103,6 +105,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) hide_messages: boolean
 ```
 
+Whether to suppress status messages
+
 ---
 
 ## hovered_item
@@ -111,6 +115,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) hovered_item: core.statusview.item
 ```
 
+Item currently under mouse cursor
+
 ---
 
 ## hovered_panel
@@ -118,6 +124,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ```lua
 (field) hovered_panel: ""|"left"|"right"
 ```
+
+Panel under cursor ("left", "right", or "")
 
 ---
 
@@ -135,6 +143,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) items: core.statusview.item[]
 ```
 
+All registered items
+
 ---
 
 ## left_width
@@ -142,6 +152,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ```lua
 (field) left_width: number
 ```
+
+Visible width of left panel
 
 ---
 
@@ -151,6 +163,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) left_xoffset: number
 ```
 
+Horizontal pan offset for left panel
+
 ---
 
 ## message
@@ -159,6 +173,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) message: table<integer, string|renderer.color|renderer.font>
 ```
 
+Current temporary message content
+
 ---
 
 ## message_timeout
@@ -166,6 +182,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ```lua
 (field) message_timeout: number
 ```
+
+Timestamp when current message expires
 
 ---
 
@@ -183,6 +201,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) r_left_width: number
 ```
 
+Real (total) width of left panel content
+
 ---
 
 ## r_right_width
@@ -190,6 +210,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ```lua
 (field) r_right_width: number
 ```
+
+Real (total) width of right panel content
 
 ---
 
@@ -199,6 +221,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 (field) right_width: number
 ```
 
+Visible width of right panel
+
 ---
 
 ## right_xoffset
@@ -206,6 +230,8 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 ```lua
 (field) right_xoffset: number
 ```
+
+Horizontal pan offset for right panel
 
 ---
 
@@ -269,6 +295,8 @@ Base view.
 (field) tooltip: table<integer, string|renderer.color|renderer.font>
 ```
 
+Persistent tooltip content
+
 ---
 
 ## tooltip_mode
@@ -276,6 +304,8 @@ Base view.
 ```lua
 (field) tooltip_mode: boolean
 ```
+
+Whether persistent tooltip is active
 
 ---
 
@@ -285,18 +315,10 @@ Base view.
 (field) v_scrollbar: core.scrollbar
 ```
 
-Scrollbar
-Use Scrollbar:set_size to set the bounding box of the view the scrollbar belongs to.
-Use Scrollbar:update to update the scrollbar animations.
-Use Scrollbar:draw to draw the scrollbar.
-Use Scrollbar:on_mouse_pressed, Scrollbar:on_mouse_released,
-Scrollbar:on_mouse_moved and Scrollbar:on_mouse_left to react to mouse movements;
-the scrollbar won't update automatically.
-Use Scrollbar:set_percent to set the scrollbar location externally.
-
-To manage all the orientations, the scrollbar changes the coordinates system
-accordingly. The "normal" coordinate system adapts the scrollbar coordinates
-as if it's always a vertical scrollbar, positioned at the end of the bounding box.
+Scrollable viewport indicator with draggable thumb.
+Supports both vertical and horizontal orientation with configurable alignment.
+Uses a "normal" coordinate system internally that treats all scrollbars as
+vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
@@ -310,13 +332,15 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ## core.statusview.item
 
+Individual status bar item with custom rendering and interaction.
+
 ### LEFT
 
 ```lua
 (field) LEFT: integer
 ```
 
-Flag to tell the item should be aligned on left side of status bar.
+Align item on left side of status bar.
 
 ---
 
@@ -326,7 +350,7 @@ Flag to tell the item should be aligned on left side of status bar.
 (field) RIGHT: integer
 ```
 
-Flag to tell the item should be aligned on right side of status bar.
+Align item on right side of status bar.
 
 ---
 
@@ -336,6 +360,9 @@ Flag to tell the item should be aligned on right side of status bar.
 (field) __index: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ### active
@@ -343,6 +370,8 @@ Flag to tell the item should be aligned on right side of status bar.
 ```lua
 (field) active: boolean
 ```
+
+Whether item passes predicate check
 
 ---
 
@@ -352,6 +381,8 @@ Flag to tell the item should be aligned on right side of status bar.
 (field) alignment: `StatusView.Item.LEFT`|`StatusView.Item.RIGHT`
 ```
 
+Left or right side placement
+
 ---
 
 ### background_color
@@ -360,7 +391,7 @@ Flag to tell the item should be aligned on right side of status bar.
 (field) background_color: renderer.color|nil
 ```
 
-Array of bytes that represents a color used by the rendering functions.
+Normal background color
 
 ---
 
@@ -370,7 +401,7 @@ Array of bytes that represents a color used by the rendering functions.
 (field) background_color_hover: renderer.color|nil
 ```
 
-Array of bytes that represents a color used by the rendering functions.
+Hover background color
 
 ---
 
@@ -380,6 +411,8 @@ Array of bytes that represents a color used by the rendering functions.
 (field) cached_item: table<integer, string|renderer.color|renderer.font>
 ```
 
+Cached rendered content
+
 ---
 
 ### command
@@ -388,7 +421,7 @@ Array of bytes that represents a color used by the rendering functions.
 (field) command: string|nil
 ```
 
-Command to perform when the item is clicked.
+Command name to execute on click
 
 ---
 
@@ -398,6 +431,8 @@ Command to perform when the item is clicked.
 (field) name: string
 ```
 
+Unique identifier for the item
+
 ---
 
 ### on_click
@@ -406,7 +441,7 @@ Command to perform when the item is clicked.
 (field) on_click: fun(button: string, x: number, y: number)|nil
 ```
 
-Function called when item is clicked and no command is set.
+Click handler function
 
 ---
 
@@ -416,8 +451,7 @@ Function called when item is clicked and no command is set.
 (field) on_draw: fun(x: any, y: any, h: any, hovered: boolean, calc_only?: boolean):number|nil
 ```
 
-Custom drawing that when passed calc true should return the needed width for
-drawing and when false should draw.
+Custom drawing function
 
 ---
 
@@ -427,6 +461,8 @@ drawing and when false should draw.
 (field) predicate: fun():boolean
 ```
 
+Condition to display item
+
 ---
 
 ### separator
@@ -434,6 +470,8 @@ drawing and when false should draw.
 ```lua
 (field) separator: `StatusView.separator2`|`StatusView.separator`
 ```
+
+Separator style
 
 ---
 
@@ -443,6 +481,9 @@ drawing and when false should draw.
 (field) super: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ### tooltip
@@ -450,6 +491,8 @@ drawing and when false should draw.
 ```lua
 (field) tooltip: string
 ```
+
+Text shown on mouse hover
 
 ---
 
@@ -459,6 +502,8 @@ drawing and when false should draw.
 (field) visible: boolean
 ```
 
+Whether item is shown
+
 ---
 
 ### w
@@ -467,6 +512,8 @@ drawing and when false should draw.
 (field) w: number
 ```
 
+Width in pixels (calculated)
+
 ---
 
 ### x
@@ -474,6 +521,8 @@ drawing and when false should draw.
 ```lua
 (field) x: number
 ```
+
+Horizontal position (calculated)
 
 ---
 
@@ -489,10 +538,14 @@ fun(self: core.statusview.item):table<integer, string|renderer.color|renderer.fo
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -509,8 +562,14 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -518,10 +577,16 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -532,8 +597,9 @@ Check if the object inherits from the given type.
   -> table<integer, string|renderer.color|renderer.font>
 ```
 
-Called by the status bar each time that the item needs to be rendered,
-if on_draw() is set this function is obviated.
+Generate the styled text for this item.
+Override this method or pass `get_item` in options.
+Ignored if `on_draw` is set.
 
 ---
 
@@ -543,7 +609,7 @@ if on_draw() is set this function is obviated.
 (method) core.statusview.item:hide()
 ```
 
-Do not show the item on the status bar.
+Hide the item from the status bar.
 
 ---
 
@@ -551,10 +617,16 @@ Do not show the item on the status bar.
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -562,10 +634,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -573,10 +651,16 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
@@ -586,7 +670,7 @@ Check if the parameter inherits from the object.
 (method) core.statusview.item:new(options: core.statusview.item.options)
 ```
 
-Constructor
+Create a new status bar item.
 
 ---
 
@@ -596,11 +680,11 @@ Constructor
 (method) core.statusview.item:set_predicate(predicate: string|table|fun():boolean)
 ```
 
-A condition to evaluate if the item should be displayed. If a string
-is given it is treated as a require import that should return a valid object
-which is checked against the current active view, the sames applies if a
-table is given. A function that returns a boolean can be used instead to
-perform a custom evaluation, setting to nil means always evaluates to true.
+Set the condition to evaluate whether this item should be displayed.
+String: treated as module name (e.g. "core.docview"), checked against active view.
+Table: treated as class, checked against active view with `is()`.
+Function: called each update, should return boolean.
+Nil: always displays the item.
 
 ---
 
@@ -630,13 +714,15 @@ core.statusview.item.alignment:
 
 ## core.statusview.item.options
 
-Available StatusViewItem options.
+Options for creating a status bar item.
 
 ### alignment
 
 ```lua
 (field) alignment: `StatusView.Item.LEFT`|`StatusView.Item.RIGHT`
 ```
+
+Left or right side placement
 
 ---
 
@@ -646,8 +732,7 @@ Available StatusViewItem options.
 (field) command: string|fun(button: string, x: number, y: number)|nil
 ```
 
-The name of a valid registered command or a callback function to execute
-when the item is clicked.
+Command name or click callback
 
 ---
 
@@ -657,8 +742,7 @@ when the item is clicked.
 (field) get_item: fun(self: core.statusview.item):table<integer, string|renderer.color|renderer.font>?, table<integer, string|renderer.color|renderer.font>?
 ```
 
-A function that should return a core.statusview.styledtext element,
-returning an empty table is allowed.
+Function returning styled text (can return empty table)
 
 ---
 
@@ -668,7 +752,7 @@ returning an empty table is allowed.
 (field) name: string
 ```
 
-A unique name to identify the item on the status bar.
+Unique identifier for the item
 
 ---
 
@@ -678,9 +762,7 @@ A unique name to identify the item on the status bar.
 (field) position: integer?
 ```
 
-The position in which to insert the given item on the internal table,
-a value of -1 inserts the item at the end which is the default. A value
-of 1 will insert the item at the beggining.
+Insertion position (-1=end, 1=beginning)
 
 ---
 
@@ -690,11 +772,7 @@ of 1 will insert the item at the beggining.
 (field) predicate: string|table|fun():boolean
 ```
 
-A condition to evaluate if the item should be displayed. If a string
-is given it is treated as a require import that should return a valid object
-which is checked against the current active view, the sames applies if a
-table is given. A function that returns a boolean can be used instead to
-perform a custom evaluation, setting to nil means always evaluates to true.
+Condition for display (string=module, table=class, function=custom, nil=always)
 
 ---
 
@@ -704,8 +782,7 @@ perform a custom evaluation, setting to nil means always evaluates to true.
 (field) separator: (`StatusView.separator2`|`StatusView.separator`)?
 ```
 
-The type of separator rendered to the right of the item if another item
-follows it.
+Separator style (space or pipe)
 
 ---
 
@@ -715,7 +792,7 @@ follows it.
 (field) tooltip: string?
 ```
 
-Text displayed when mouse hovers the item.
+Text displayed on mouse hover
 
 ---
 
@@ -725,7 +802,7 @@ Text displayed when mouse hovers the item.
 (field) visible: boolean?
 ```
 
-Flag to show or hide the item
+Initial visibility state
 
 ---
 
@@ -741,22 +818,24 @@ core.statusview.item.separator:
 
 ## core.statusview.position
 
-```lua
-core.statusview.position:
-    | "left"
-    | "right"
-```
+Left or right alignment identifier.
 
 ## core.statusview.styledtext
+
+Styled text array containing fonts, colors, and strings.
 
 ## __call
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -773,10 +852,12 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.statusview:add_item(options: core.statusview.item.options)
-  -> core.statusview.item
+  -> item: core.statusview.item
 ```
 
-Adds an item to be rendered in the status bar.
+Add a new item to the status bar.
+
+@*return* `item` — The created item
 
 ---
 
@@ -786,6 +867,9 @@ Adds an item to be rendered in the status bar.
 (method) core.view:clamp_scroll_position()
 ```
 
+Clamp scroll position to valid range (0 to max scrollable size).
+Called automatically by update(). Override get_scrollable_size() to customize.
+
 ---
 
 ## display_messages
@@ -794,7 +878,9 @@ Adds an item to be rendered in the status bar.
 (method) core.statusview:display_messages(enable: boolean)
 ```
 
-Enable or disable system wide messages on the status bar.
+Enable or disable system messages on the status bar.
+
+@*param* `enable` — True to show messages, false to hide them
 
 ---
 
@@ -804,9 +890,14 @@ Enable or disable system wide messages on the status bar.
 (method) core.statusview:drag_panel(panel: "left"|"right", dx: number)
 ```
 
-Drag the given panel if possible.
+Pan a status bar panel horizontally when content overflows.
+
+@*param* `panel` — Panel to drag ("left" or "right")
+
+@*param* `dx` — Horizontal drag distance in pixels
 
 ```lua
+-- Left or right alignment identifier.
 panel:
     | "left"
     | "right"
@@ -820,6 +911,8 @@ panel:
 (method) core.statusview:draw()
 ```
 
+Render the status bar with all active items, messages, and tooltips.
+
 ---
 
 ## draw_background
@@ -827,6 +920,9 @@ panel:
 ```lua
 (method) core.view:draw_background(color: renderer.color)
 ```
+
+Draw a solid background color for the entire view.
+Commonly called at the start of draw() methods.
 
 ---
 
@@ -836,7 +932,9 @@ panel:
 (method) core.statusview:draw_item_tooltip(item: core.statusview.item)
 ```
 
-Draw the tooltip of a given status bar item.
+Draw a tooltip box above the status bar for an item.
+
+@*param* `item` — Item with tooltip text
 
 ---
 
@@ -846,7 +944,15 @@ Draw the tooltip of a given status bar item.
 (method) core.statusview:draw_items(items: table<integer, string|renderer.color|renderer.font>, right_align?: boolean, xoffset?: number, yoffset?: number)
 ```
 
-Draws a table of styled text on the status bar starting on the left or right.
+Draw styled text on the status bar with optional alignment.
+
+@*param* `items` — Styled text to render
+
+@*param* `right_align` — True to right-align, false for left-align
+
+@*param* `xoffset` — Horizontal offset in pixels
+
+@*param* `yoffset` — Vertical offset in pixels
 
 ---
 
@@ -856,14 +962,23 @@ Draws a table of styled text on the status bar starting on the left or right.
 (method) core.view:draw_scrollbar()
 ```
 
+Draw the view's scrollbars.
+Commonly called at the end of draw() methods.
+
 ---
 
 ## extend
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -871,10 +986,16 @@ Draws a table of styled text on the status bar starting on the left or right.
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -882,11 +1003,21 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.view:get_content_bounds()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x1: number
+  2. y1: number
+  3. x2: number
+  4. y2: number
 ```
+
+Get the content bounds in content coordinates (accounting for scroll).
+
+@*return* `x1` — Left edge
+
+@*return* `y1` — Top edge
+
+@*return* `x2` — Right edge
+
+@*return* `y2` — Bottom edge
 
 ---
 
@@ -898,14 +1029,26 @@ Check if the object inherits from the given type.
   2. y: number
 ```
 
+Get the top-left corner of content area in screen coordinates.
+Accounts for scroll offset. Use for drawing content at correct position.
+
+@*return* `x` — Screen x coordinate
+
+@*return* `y` — Screen y coordinate
+
 ---
 
 ## get_h_scrollable_size
 
 ```lua
 (method) core.view:get_h_scrollable_size()
-  -> number
+  -> width: number
 ```
+
+Get the total scrollable width of the view's content.
+Used by horizontal scrollbar.
+
+@*return* `width` — Width in pixels (default: 0, no horizontal scroll)
 
 ---
 
@@ -913,10 +1056,16 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.statusview:get_hovered_panel(x: number, y: number)
-  -> string
+  -> panel: string
 ```
 
-Return the currently hovered panel or empty string if none.
+Determine which panel (left or right) is under the cursor.
+
+@*param* `x` — Mouse x coordinate
+
+@*param* `y` — Mouse y coordinate
+
+@*return* `panel` — "left", "right", or "" if none
 
 ---
 
@@ -924,10 +1073,14 @@ Return the currently hovered panel or empty string if none.
 
 ```lua
 (method) core.statusview:get_item(name: string)
-  -> core.statusview.item|nil
+  -> item: core.statusview.item|nil
 ```
 
-Get an item object associated to a name or nil if not found.
+Get a status bar item by name.
+
+@*param* `name` — Unique item name
+
+@*return* `item` — The item or nil if not found
 
 ---
 
@@ -939,6 +1092,14 @@ Get an item object associated to a name or nil if not found.
   2. w: number
 ```
 
+Calculate the visible portion of an item considering panel overflow.
+
+@*param* `item` — Item to check
+
+@*return* `x` — Visible x coordinate (0 if fully clipped)
+
+@*return* `w` — Visible width (0 if fully clipped)
+
 ---
 
 ## get_items
@@ -949,8 +1110,13 @@ Get an item object associated to a name or nil if not found.
   2. right: table
 ```
 
-Older method of retrieving the status bar items and which is now
-deprecated in favour of core.status_view:add_item().
+Legacy method for retrieving status bar items.
+
+@*param* `nowarn` — Suppress deprecation warning if true
+
+@*return* `left` — Left-aligned items
+
+@*return* `right` — Right-aligned items
 
 ---
 
@@ -958,10 +1124,14 @@ deprecated in favour of core.status_view:add_item().
 
 ```lua
 (method) core.statusview:get_items_list(alignment?: `StatusView.Item.LEFT`|`StatusView.Item.RIGHT`)
-  -> core.statusview.item[]
+  -> items: core.statusview.item[]
 ```
 
-Get a list of items.
+Get all items or items filtered by alignment.
+
+@*param* `alignment` — Filter by left or right alignment
+
+@*return* `items` — List of items
 
 ```lua
 alignment:
@@ -975,8 +1145,11 @@ alignment:
 
 ```lua
 (method) core.view:get_name()
-  -> string
+  -> name: string
 ```
+
+Get the name displayed in the view's tab.
+Override to show document name, file path, etc.
 
 ---
 
@@ -984,8 +1157,13 @@ alignment:
 
 ```lua
 (method) core.view:get_scrollable_size()
-  -> number
+  -> height: number
 ```
+
+Get the total scrollable height of the view's content.
+Used by scrollbar to calculate thumb size and position.
+
+@*return* `height` — Height in pixels (default: infinite)
 
 ---
 
@@ -995,7 +1173,7 @@ alignment:
 (method) core.statusview:hide()
 ```
 
-Hide the status bar
+Hide the status bar.
 
 ---
 
@@ -1005,7 +1183,9 @@ Hide the status bar
 (method) core.statusview:hide_items(names?: string|table<integer, string>)
 ```
 
-Hides the given items from the status view or all if no names given.
+Hide specific items or all items if no names provided.
+
+@*param* `names` — Single name or list of item names
 
 ---
 
@@ -1013,10 +1193,16 @@ Hides the given items from the status view or all if no names given.
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -1024,10 +1210,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -1035,10 +1227,16 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
@@ -1051,7 +1249,13 @@ Check if the parameter inherits from the object.
 
 Move an item to a different position.
 
-@*param* `position` — Can be negative value to position in reverse order
+@*param* `name` — Item name to move
+
+@*param* `position` — New position (negative for reverse order)
+
+@*param* `alignment` — Optional new alignment
+
+@*return* `moved` — True if item was found and moved
 
 ```lua
 alignment:
@@ -1064,8 +1268,21 @@ alignment:
 ## move_towards
 
 ```lua
-(method) core.view:move_towards(t: any, k: any, dest: any, rate: any, name: any)
+(method) core.view:move_towards(t: table, k: string|number, dest: number, rate?: number, name?: string)
 ```
+
+Smoothly animate a value towards a destination.
+Use this for animations instead of direct assignment.
+
+@*param* `t` — Table containing the value
+
+@*param* `k` — Key in table
+
+@*param* `dest` — Target value
+
+@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+
+@*param* `name` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1075,7 +1292,7 @@ alignment:
 (method) core.statusview:new()
 ```
 
-Constructor
+Create a new status bar and register default items.
 
 ---
 
@@ -1083,16 +1300,36 @@ Constructor
 
 ```lua
 (method) core.view:on_file_dropped(filename: string, x: number, y: number)
-  -> boolean
+  -> consumed: boolean
 ```
+
+Handle file drop events (drag and drop from OS).
+Override to handle dropped files. Return true to consume event.
+
+@*param* `filename` — Absolute path to dropped file
+
+@*param* `x` — Screen x where file was dropped
+
+@*param* `y` — Screen y where file was dropped
+
+@*return* `consumed` — True to consume event, false to propagate
 
 ---
 
 ## on_ime_text_editing
 
 ```lua
-(method) core.view:on_ime_text_editing(text: any, start: any, length: any)
+(method) core.view:on_ime_text_editing(text: string, start: number, length: number)
 ```
+
+Handle IME (Input Method Editor) text composition events.
+Override for IME support in text editors. Called during composition.
+
+@*param* `text` — Composition text being edited
+
+@*param* `start` — Start position of selection within composition
+
+@*param* `length` — Length of selection within composition
 
 ---
 
@@ -1102,6 +1339,8 @@ Constructor
 (method) core.statusview:on_mouse_left()
 ```
 
+Handle mouse leaving the status bar area.
+
 ---
 
 ## on_mouse_moved
@@ -1110,22 +1349,53 @@ Constructor
 (method) core.statusview:on_mouse_moved(x: number, y: number, dx: number, dy: number)
 ```
 
+Handle mouse movement over the status bar.
+Updates hovered item, cursor, and handles panel dragging.
+
+@*param* `x` — Mouse x coordinate
+
+@*param* `y` — Mouse y coordinate
+
+@*param* `dx` — Delta x movement
+
+@*param* `dy` — Delta y movement
+
 ---
 
 ## on_mouse_pressed
 
 ```lua
-(method) core.statusview:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
-  -> boolean|nil
+(method) core.statusview:on_mouse_pressed(button: string, x: number, y: number, clicks: number)
+  -> boolean
 ```
+
+Handle mouse button press events.
+Clicking on active message opens log view. Left-click enables panel dragging when content overflows.
+
+@*param* `button` — Mouse button identifier
+
+@*param* `x` — Mouse x coordinate
+
+@*param* `y` — Mouse y coordinate
+
+@*param* `clicks` — Number of clicks
 
 ---
 
 ## on_mouse_released
 
 ```lua
-(method) core.statusview:on_mouse_released(button: 'left'|'right', x: number, y: number)
+(method) core.statusview:on_mouse_released(button: string, x: number, y: number)
 ```
+
+Handle mouse button release events.
+Executes item command or callback if clicked on an item.
+
+@*param* `button` — Mouse button identifier
+
+@*param* `x` — Mouse x coordinate
+
+@*param* `y` — Mouse y coordinate
 
 ---
 
@@ -1135,6 +1405,12 @@ Constructor
 (method) core.statusview:on_mouse_wheel(y: number, x: number)
 ```
 
+Handle mouse wheel scrolling to pan overflowing panels.
+
+@*param* `y` — Vertical scroll amount
+
+@*param* `x` — Horizontal scroll amount
+
 ---
 
 ## on_scale_change
@@ -1143,8 +1419,12 @@ Constructor
 (method) core.view:on_scale_change(new_scale: number, prev_scale: number)
 ```
 
-Can be overriden to listen for scale change events to apply
-any neccesary changes in sizes, padding, etc...
+Called when DPI scale changes (display moved, zoom changed, etc.).
+Override to adjust sizes, padding, or other scale-dependent values.
+
+@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
+
+@*param* `prev_scale` — Previous scale factor
 
 ---
 
@@ -1154,6 +1434,11 @@ any neccesary changes in sizes, padding, etc...
 (method) core.view:on_text_input(text: string)
 ```
 
+Handle text input events (typing, IME composition).
+Override for text editing. Called after IME composition completes.
+
+@*param* `text` — Input text (may be multiple characters)
+
 ---
 
 ## on_touch_moved
@@ -1161,6 +1446,19 @@ any neccesary changes in sizes, padding, etc...
 ```lua
 (method) core.view:on_touch_moved(x: number, y: number, dx: number, dy: number, i: number)
 ```
+
+Handle touch move events (touchscreen/trackpad gestures).
+Override for touch-specific behavior. Base implementation handles scrolling.
+
+@*param* `x` — Current touch x coordinate
+
+@*param* `y` — Current touch y coordinate
+
+@*param* `dx` — Delta x since last position
+
+@*param* `dy` — Delta y since last position
+
+@*param* `i` — Touch finger/pointer index
 
 ---
 
@@ -1170,7 +1468,10 @@ any neccesary changes in sizes, padding, etc...
 (method) core.statusview:order_items(names: table<integer, string>)
 ```
 
-Order the items by name
+Reorder items by the given name list.
+Items are placed at the beginning in the order specified.
+
+@*param* `names` — List of item names in desired order
 
 ---
 
@@ -1180,7 +1481,8 @@ Order the items by name
 (method) core.statusview:register_command_items()
 ```
 
-The predefined status bar items displayed when a command view is active.
+Register default status bar items for command views.
+Shows file count icon.
 
 ---
 
@@ -1190,7 +1492,8 @@ The predefined status bar items displayed when a command view is active.
 (method) core.statusview:register_docview_items()
 ```
 
-The predefined status bar items displayed when a document view is active.
+Register default status bar items for document views.
+Shows file, position, selections, indentation, encoding, line ending, etc.
 
 ---
 
@@ -1200,7 +1503,8 @@ The predefined status bar items displayed when a document view is active.
 (method) core.statusview:register_imageview_items()
 ```
 
-The predefined status bar items displayed when an image view is active.
+Register default status bar items for image views.
+Shows image filename, dimensions, and zoom level.
 
 ---
 
@@ -1208,10 +1512,14 @@ The predefined status bar items displayed when an image view is active.
 
 ```lua
 (method) core.statusview:remove_item(name: string)
-  -> removed_item: core.statusview.item
+  -> removed_item: core.statusview.item|nil
 ```
 
-Remove an item from the status view.
+Remove an item from the status bar.
+
+@*param* `name` — Item name to remove
+
+@*return* `removed_item` — The removed item or nil
 
 ---
 
@@ -1221,7 +1529,7 @@ Remove an item from the status view.
 (method) core.statusview:remove_tooltip()
 ```
 
-Deactivates tooltip mode.
+Hide the persistent tooltip and restore normal status bar items.
 
 ---
 
@@ -1229,8 +1537,12 @@ Deactivates tooltip mode.
 
 ```lua
 (method) core.view:scrollbar_dragging()
-  -> boolean
+  -> dragging: boolean
 ```
+
+Check if user is currently dragging either scrollbar.
+
+@*return* `dragging` — True if scrollbar drag is in progress
 
 ---
 
@@ -1238,8 +1550,12 @@ Deactivates tooltip mode.
 
 ```lua
 (method) core.view:scrollbar_hovering()
-  -> boolean
+  -> hovering: boolean
 ```
+
+Check if mouse is hovering over either scrollbar track.
+
+@*return* `hovering` — True if mouse is over scrollbar
 
 ---
 
@@ -1247,8 +1563,17 @@ Deactivates tooltip mode.
 
 ```lua
 (method) core.view:scrollbar_overlaps_point(x: number, y: number)
-  -> boolean
+  -> overlaps: boolean
 ```
+
+Check if a screen point overlaps either scrollbar.
+Useful for determining cursor style or handling clicks.
+
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1258,7 +1583,7 @@ Deactivates tooltip mode.
 (method) core.statusview:show()
 ```
 
-Show the status bar
+Show the status bar.
 
 ---
 
@@ -1268,7 +1593,9 @@ Show the status bar
 (method) core.statusview:show_items(names?: string|table<integer, string>)
 ```
 
-Shows the given items from the status view or all if no names given.
+Show specific items or all items if no names provided.
+
+@*param* `names` — Single name or list of item names
 
 ---
 
@@ -1278,7 +1605,14 @@ Shows the given items from the status view or all if no names given.
 (method) core.statusview:show_message(icon: string, icon_color: renderer.color, text: string)
 ```
 
-Shows a message for a predefined amount of time.
+Display a temporary message in the status bar.
+Message duration is controlled by `config.message_timeout`.
+
+@*param* `icon` — Icon character to display
+
+@*param* `icon_color` — Icon color
+
+@*param* `text` — Message text
 
 ---
 
@@ -1288,8 +1622,10 @@ Shows a message for a predefined amount of time.
 (method) core.statusview:show_tooltip(text: string|table<integer, string|renderer.color|renderer.font>)
 ```
 
-Activates tooltip mode displaying only the given
-text until core.statusview:remove_tooltip() is called.
+Show a persistent tooltip replacing all status bar content.
+Remains visible until `remove_tooltip()` is called.
+
+@*param* `text` — Plain text or styled text array
 
 ---
 
@@ -1300,6 +1636,9 @@ text until core.statusview:remove_tooltip() is called.
   -> boolean
 ```
 
+Whether this view accepts text input (enables IME).
+Override and return true for text editors and input fields.
+
 ---
 
 ## toggle
@@ -1308,15 +1647,21 @@ text until core.statusview:remove_tooltip() is called.
 (method) core.statusview:toggle()
 ```
 
-Toggle the visibility of the status bar
+Toggle status bar visibility.
 
 ---
 
 ## try_close
 
 ```lua
-(method) core.view:try_close(do_close: any)
+(method) core.view:try_close(do_close: function)
 ```
+
+Called when view is requested to close (e.g., tab close button).
+Override to show confirmation dialogs for unsaved changes.
+Example: `core.command_view:enter("Save?", \{submit = do_close\})`
+
+@*param* `do_close` — Call this function to actually close the view
 
 ---
 
@@ -1326,6 +1671,8 @@ Toggle the visibility of the status bar
 (method) core.statusview:update()
 ```
 
+Update status bar height, message scroll, and active items.
+
 ---
 
 ## update_active_items
@@ -1334,9 +1681,8 @@ Toggle the visibility of the status bar
 (method) core.statusview:update_active_items()
 ```
 
-Set the active items that will be displayed on the left or right side
-of the status bar checking their predicates and performing positioning
-calculations for proper functioning of tooltips and clicks.
+Rebuild the active items list by evaluating predicates and calculating positions.
+Updates item visibility, positions, and handles panel overflow.
 
 ---
 
@@ -1345,6 +1691,9 @@ calculations for proper functioning of tooltips and clicks.
 ```lua
 (method) core.view:update_scrollbar()
 ```
+
+Update scrollbar positions and sizes.
+Called automatically by update(). Rarely needs to be called manually.
 
 ---
 

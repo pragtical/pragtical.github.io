@@ -1,5 +1,5 @@
 ---
-sidebar_position: 51
+sidebar_position: 52
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -53,6 +53,9 @@ The color used on changed lines when plain text is enabled.
 ```lua
 (field) __index: core.object
 ```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
 
 ---
 
@@ -126,6 +129,10 @@ The color used on changed lines when plain text is enabled.
 (field) doc_view_a: core.docview
 ```
 
+View for editing documents with syntax highlighting and text editing.
+Extends View to provide text editing capabilities including selection,
+scrolling, IME support, and rendering with syntax highlighting.
+
 ---
 
 ### doc_view_b
@@ -133,6 +140,10 @@ The color used on changed lines when plain text is enabled.
 ```lua
 (field) doc_view_b: core.docview
 ```
+
+View for editing documents with syntax highlighting and text editing.
+Extends View to provide text editing capabilities including selection,
+scrolling, IME support, and rendering with syntax highlighting.
 
 ---
 
@@ -142,18 +153,10 @@ The color used on changed lines when plain text is enabled.
 (field) h_scrollbar: core.scrollbar
 ```
 
-Scrollbar
-Use Scrollbar:set_size to set the bounding box of the view the scrollbar belongs to.
-Use Scrollbar:update to update the scrollbar animations.
-Use Scrollbar:draw to draw the scrollbar.
-Use Scrollbar:on_mouse_pressed, Scrollbar:on_mouse_released,
-Scrollbar:on_mouse_moved and Scrollbar:on_mouse_left to react to mouse movements;
-the scrollbar won't update automatically.
-Use Scrollbar:set_percent to set the scrollbar location externally.
-
-To manage all the orientations, the scrollbar changes the coordinates system
-accordingly. The "normal" coordinate system adapts the scrollbar coordinates
-as if it's always a vertical scrollbar, positioned at the end of the bounding box.
+Scrollable viewport indicator with draggable thumb.
+Supports both vertical and horizontal orientation with configurable alignment.
+Uses a "normal" coordinate system internally that treats all scrollbars as
+vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
@@ -247,18 +250,10 @@ Base view.
 (field) v_scrollbar: core.scrollbar
 ```
 
-Scrollbar
-Use Scrollbar:set_size to set the bounding box of the view the scrollbar belongs to.
-Use Scrollbar:update to update the scrollbar animations.
-Use Scrollbar:draw to draw the scrollbar.
-Use Scrollbar:on_mouse_pressed, Scrollbar:on_mouse_released,
-Scrollbar:on_mouse_moved and Scrollbar:on_mouse_left to react to mouse movements;
-the scrollbar won't update automatically.
-Use Scrollbar:set_percent to set the scrollbar location externally.
-
-To manage all the orientations, the scrollbar changes the coordinates system
-accordingly. The "normal" coordinate system adapts the scrollbar coordinates
-as if it's always a vertical scrollbar, positioned at the end of the bounding box.
+Scrollable viewport indicator with draggable thumb.
+Supports both vertical and horizontal orientation with configurable alignment.
+Uses a "normal" coordinate system internally that treats all scrollbars as
+vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
@@ -274,10 +269,14 @@ as if it's always a vertical scrollbar, positioned at the end of the bounding bo
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -296,6 +295,9 @@ Metamethod to allow using the object call as a constructor.
 (method) core.view:clamp_scroll_position()
 ```
 
+Clamp scroll position to valid range (0 to max scrollable size).
+Called automatically by update(). Override get_scrollable_size() to customize.
+
 ---
 
 ### draw
@@ -312,6 +314,9 @@ Metamethod to allow using the object call as a constructor.
 (method) core.view:draw_background(color: renderer.color)
 ```
 
+Draw a solid background color for the entire view.
+Commonly called at the start of draw() methods.
+
 ---
 
 ### draw_scrollbar
@@ -326,8 +331,14 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -335,10 +346,16 @@ Metamethod to allow using the object call as a constructor.
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -346,11 +363,21 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.view:get_content_bounds()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x1: number
+  2. y1: number
+  3. x2: number
+  4. y2: number
 ```
+
+Get the content bounds in content coordinates (accounting for scroll).
+
+@*return* `x1` — Left edge
+
+@*return* `y1` — Top edge
+
+@*return* `x2` — Right edge
+
+@*return* `y2` — Bottom edge
 
 ---
 
@@ -362,14 +389,26 @@ Check if the object inherits from the given type.
   2. y: number
 ```
 
+Get the top-left corner of content area in screen coordinates.
+Accounts for scroll offset. Use for drawing content at correct position.
+
+@*return* `x` — Screen x coordinate
+
+@*return* `y` — Screen y coordinate
+
 ---
 
 ### get_h_scrollable_size
 
 ```lua
 (method) core.view:get_h_scrollable_size()
-  -> number
+  -> width: number
 ```
+
+Get the total scrollable width of the view's content.
+Used by horizontal scrollbar.
+
+@*return* `width` — Width in pixels (default: 0, no horizontal scroll)
 
 ---
 
@@ -395,10 +434,16 @@ Check if the object inherits from the given type.
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -406,10 +451,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -417,18 +468,37 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
 ### move_towards
 
 ```lua
-(method) core.view:move_towards(t: any, k: any, dest: any, rate: any, name: any)
+(method) core.view:move_towards(t: table, k: string|number, dest: number, rate?: number, name?: string)
 ```
+
+Smoothly animate a value towards a destination.
+Use this for animations instead of direct assignment.
+
+@*param* `t` — Table containing the value
+
+@*param* `k` — Key in table
+
+@*param* `dest` — Target value
+
+@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+
+@*param* `name` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -446,16 +516,36 @@ Constructor
 
 ```lua
 (method) core.view:on_file_dropped(filename: string, x: number, y: number)
-  -> boolean
+  -> consumed: boolean
 ```
+
+Handle file drop events (drag and drop from OS).
+Override to handle dropped files. Return true to consume event.
+
+@*param* `filename` — Absolute path to dropped file
+
+@*param* `x` — Screen x where file was dropped
+
+@*param* `y` — Screen y where file was dropped
+
+@*return* `consumed` — True to consume event, false to propagate
 
 ---
 
 ### on_ime_text_editing
 
 ```lua
-(method) core.view:on_ime_text_editing(text: any, start: any, length: any)
+(method) core.view:on_ime_text_editing(text: string, start: number, length: number)
 ```
+
+Handle IME (Input Method Editor) text composition events.
+Override for IME support in text editors. Called during composition.
+
+@*param* `text` — Composition text being edited
+
+@*param* `start` — Start position of selection within composition
+
+@*param* `length` — Length of selection within composition
 
 ---
 
@@ -515,6 +605,11 @@ Constructor
 (method) core.view:on_text_input(text: string)
 ```
 
+Handle text input events (typing, IME composition).
+Override for text editing. Called after IME composition completes.
+
+@*param* `text` — Input text (may be multiple characters)
+
 ---
 
 ### on_touch_moved
@@ -537,8 +632,12 @@ Constructor
 
 ```lua
 (method) core.view:scrollbar_dragging()
-  -> boolean
+  -> dragging: boolean
 ```
+
+Check if user is currently dragging either scrollbar.
+
+@*return* `dragging` — True if scrollbar drag is in progress
 
 ---
 
@@ -546,8 +645,12 @@ Constructor
 
 ```lua
 (method) core.view:scrollbar_hovering()
-  -> boolean
+  -> hovering: boolean
 ```
+
+Check if mouse is hovering over either scrollbar track.
+
+@*return* `hovering` — True if mouse is over scrollbar
 
 ---
 
@@ -555,8 +658,17 @@ Constructor
 
 ```lua
 (method) core.view:scrollbar_overlaps_point(x: number, y: number)
-  -> boolean
+  -> overlaps: boolean
 ```
+
+Check if a screen point overlaps either scrollbar.
+Useful for determining cursor style or handling clicks.
+
+@*param* `x` — Screen x coordinate
+
+@*param* `y` — Screen y coordinate
+
+@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -566,6 +678,9 @@ Constructor
 (method) core.view:supports_text_input()
   -> boolean
 ```
+
+Whether this view accepts text input (enables IME).
+Override and return true for text editors and input fields.
 
 ---
 
@@ -588,8 +703,14 @@ Constructor
 ### try_close
 
 ```lua
-(method) core.view:try_close(do_close: any)
+(method) core.view:try_close(do_close: function)
 ```
+
+Called when view is requested to close (e.g., tab close button).
+Override to show confirmation dialogs for unsaved changes.
+Example: `core.command_view:enter("Save?", \{submit = do_close\})`
+
+@*param* `do_close` — Call this function to actually close the view
 
 ---
 
@@ -616,6 +737,9 @@ Updates the registered differences between current side A and B.
 ```lua
 (method) core.view:update_scrollbar()
 ```
+
+Update scrollbar positions and sizes.
+Called automatically by update(). Rarely needs to be called manually.
 
 ---
 

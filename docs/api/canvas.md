@@ -1,5 +1,5 @@
 ---
-sidebar_position: 17
+sidebar_position: 3
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -7,10 +7,6 @@ sidebar_position: 17
 # canvas
 
 Core functionality that allows rendering into a separate surface.
-
-```lua
-local canvas = require "canvas"
-```
 
 ## canvas.scale_mode
 

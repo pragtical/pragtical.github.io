@@ -1,15 +1,17 @@
 ---
-sidebar_position: 48
+sidebar_position: 34
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
-# core.view
+# core.logview
 
-Base view.
+Log message viewer with expandable entries.
+Displays messages from core.log_items in reverse chronological order.
+Click to expand/collapse, ctrl+click to copy to clipboard.
 
 ```lua
-local view = require "core.view"
+local logview = require "core.logview"
 ```
 
 ## __index
@@ -23,11 +25,37 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## context
+
+```lua
+(field) context: string
+```
+
+---
+
 ## current_scale
 
 ```lua
 (field) current_scale: number
 ```
+
+---
+
+## cursor
+
+```lua
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+```
+
+---
+
+## expanding
+
+```lua
+(field) expanding: core.logview.item_height[]
+```
+
+Queue of items currently animating
 
 ---
 
@@ -52,6 +80,32 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+## last_item
+
+```lua
+(field) last_item: table?
+```
+
+Last log item seen (for detecting new entries)
+
+---
+
+## position
+
+```lua
+(field) position: core.view.position
+```
+
+---
+
+## scroll
+
+```lua
+(field) scroll: core.view.scroll
+```
+
+---
+
 ## scrollable
 
 ```lua
@@ -71,11 +125,10 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 ## super
 
 ```lua
-(field) super: core.object
+(field) super: core.view
 ```
 
-Base class providing OOP functionality for Lua.
-All classes in Pragtical inherit from Object.
+Base view.
 
 ---
 
@@ -92,152 +145,55 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
-## core.view.context
+## yoffset
 
 ```lua
-core.view.context:
-    | 'application'
-    | 'session'
+(field) yoffset: number
 ```
 
-## core.view.cursor
-
-```lua
-core.view.cursor:
-    | 'arrow'
-    | 'ibeam'
-    | 'sizeh'
-    | 'sizev'
-    | 'hand'
-```
-
-## core.view.mousebutton
-
-```lua
-core.view.mousebutton:
-    | 'left'
-    | 'right'
-```
-
-## core.view.position
-
-### x
-
-```lua
-(field) x: number
-```
+Vertical offset for slide-in animation of new items
 
 ---
 
-### y
+## core.logview.item_height
+
+### current
 
 ```lua
-(field) y: number
+(field) current: number
 ```
+
+Current animated height
 
 ---
 
-## core.view.scroll
-
-### to
+### expanded
 
 ```lua
-(field) to: core.view.position
+(field) expanded: number
 ```
+
+Height when expanded
 
 ---
 
-### x
+### normal
 
 ```lua
-(field) x: number
+(field) normal: number
 ```
+
+Height when collapsed
 
 ---
 
-### y
+### target
 
 ```lua
-(field) y: number
+(field) target: number
 ```
 
----
-
-## core.view.scrollbar
-
-### h
-
-```lua
-(field) h: core.view.thumbtrack
-```
-
----
-
-### w
-
-```lua
-(field) w: core.view.thumbtrackwidth
-```
-
----
-
-### x
-
-```lua
-(field) x: core.view.thumbtrack
-```
-
----
-
-### y
-
-```lua
-(field) y: core.view.thumbtrack
-```
-
----
-
-## core.view.thumbtrack
-
-### thumb
-
-```lua
-(field) thumb: number
-```
-
----
-
-### track
-
-```lua
-(field) track: number
-```
-
----
-
-## core.view.thumbtrackwidth
-
-### thumb
-
-```lua
-(field) thumb: number
-```
-
----
-
-### to
-
-```lua
-(field) to: core.view.thumbtrack
-```
-
----
-
-### track
-
-```lua
-(field) track: number
-```
+Target height for animation
 
 ---
 
@@ -259,7 +215,7 @@ Automatically creates instance and calls new() with provided arguments.
 ## __tostring
 
 ```lua
-(method) core.view:__tostring()
+(method) core.logview:__tostring()
   -> string
 ```
 
@@ -279,14 +235,11 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 ## draw
 
 ```lua
-(method) core.view:draw()
+(method) core.logview:draw()
 ```
 
-Called every frame to render the view.
-Override to draw custom content. Typical pattern:
-1. Call self:draw_background(color)
-2. Draw your content
-3. Call self:draw_scrollbar()
+Draw the log view.
+Renders log items with icons, timestamps, and expandable content.
 
 ---
 
@@ -309,6 +262,33 @@ Commonly called at the start of draw() methods.
 
 Draw the view's scrollbars.
 Commonly called at the end of draw() methods.
+
+---
+
+## each_item
+
+```lua
+(method) core.logview:each_item()
+  -> iterator: fun():integer, table, number, number, number, number
+```
+
+Iterate over all log items with their screen positions.
+Items are yielded in reverse chronological order (newest first).
+
+@*return* `iterator` — Iterator yielding: index, item, x, y, width, height
+
+---
+
+## expand_item
+
+```lua
+(method) core.logview:expand_item(item: table)
+```
+
+Toggle expansion state of a log item.
+Adds item to animation queue for smooth expand/collapse.
+
+@*param* `item` — Log item to toggle
 
 ---
 
@@ -400,26 +380,26 @@ Used by horizontal scrollbar.
 ## get_name
 
 ```lua
-(method) core.view:get_name()
+(method) core.logview:get_name()
   -> name: string
 ```
 
-Get the name displayed in the view's tab.
-Override to show document name, file path, etc.
+Get the view name for display.
+
+@*return* `name` — Always returns "Log"
 
 ---
 
 ## get_scrollable_size
 
 ```lua
-(method) core.view:get_scrollable_size()
+(method) core.logview:get_scrollable_size()
   -> height: number
 ```
 
-Get the total scrollable height of the view's content.
-Used by scrollbar to calculate thumb size and position.
+Get the total scrollable height of the log.
 
-@*return* `height` — Height in pixels (default: infinite)
+@*return* `height` — Total height in pixels
 
 ---
 
@@ -498,12 +478,10 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) core.view:new()
+(method) core.logview:new()
 ```
 
-Constructor - initializes a new view instance.
-Override this in subclasses and always call super constructor first:
-`MyView.super.new(self)`
+Constructor - initializes the log viewer.
 
 ---
 
@@ -579,21 +557,20 @@ Base implementation handles scrollbar dragging.
 ## on_mouse_pressed
 
 ```lua
-(method) core.view:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
-  -> consumed: boolean?
+(method) core.logview:on_mouse_pressed(button: 'left'|'right', px: number, py: number, clicks: integer)
+  -> handled: boolean
 ```
 
-Handle mouse button press events.
-Override to handle clicks. Return true to consume event and prevent propagation.
-Base implementation handles scrollbar clicks.
+Handle mouse press events for item expansion and copying.
+Click to expand/collapse, ctrl+click to copy to clipboard.
 
-@*param* `x` — Screen x coordinate
+@*param* `px` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `py` — Screen y coordinate
 
-@*param* `clicks` — Number of consecutive clicks (configurable with config.max_clicks)
+@*param* `clicks` — Number of clicks
 
-@*return* `consumed` — True to consume event, false/nil to propagate
+@*return* `handled` — Always returns true
 
 ```lua
 button:
@@ -645,15 +622,11 @@ Override for custom scroll behavior. Base implementation does nothing.
 ## on_scale_change
 
 ```lua
-(method) core.view:on_scale_change(new_scale: number, prev_scale: number)
+(method) core.logview:on_scale_change()
 ```
 
-Called when DPI scale changes (display moved, zoom changed, etc.).
-Override to adjust sizes, padding, or other scale-dependent values.
-
-@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
-
-@*param* `prev_scale` — Previous scale factor
+Handle DPI scale changes.
+Resets cached item heights so they recalculate with new font sizes.
 
 ---
 
@@ -764,12 +737,11 @@ Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 ## update
 
 ```lua
-(method) core.view:update()
+(method) core.logview:update()
 ```
 
-Called every frame to update view state.
-Override to add custom update logic. Always call super.update(self) first.
-Handles: scale changes, scroll animation, scrollbar updates.
+Update the log view each frame.
+Handles: new item detection, scroll adjustment, expansion animations.
 
 ---
 

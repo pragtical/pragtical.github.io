@@ -28,6 +28,9 @@ A unique value representing the divider in a context menu.
 (field) __index: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ## current_scale
@@ -92,6 +95,9 @@ A unique value representing the divider in a context menu.
 (field) super: core.object
 ```
 
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
 ---
 
 ## core.contextmenu.item
@@ -146,8 +152,8 @@ A predicate is a string, an Object or a function, that is used to determine
 whether a command should be executed.
 
 If the predicate is a string, it is resolved into an `Object` via `require()`
-and checked against the active view with `Object:extends()`. 
-For example, `"core.docview"` will match any view that inherits from `DocView`. 
+and checked against the active view with `Object:extends()`.
+For example, `"core.docview"` will match any view that inherits from `DocView`.
 A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
 instead of matching any view that inherits the predicate.
 
@@ -162,10 +168,14 @@ If the predicate is a function, it must behave like a predicate function.
 
 ```lua
 (method) core.object:__call(...any)
-  -> core.object
+  -> obj: core.object
 ```
 
-Metamethod to allow using the object call as a constructor.
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj` — The new instance of the class
 
 ---
 
@@ -197,7 +207,6 @@ Hides the context menu and performs the command if an item is selected.
 Draws the context menu.
 
 This wraps `ContextMenu:draw_context_menu()`.
-See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#275#9)
 
 ---
 
@@ -226,8 +235,14 @@ Returns an iterator that iterates over each context menu item and their dimensio
 
 ```lua
 (method) core.object:extend()
-  -> core.object
+  -> cls: core.object
 ```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls` — The new class table
 
 ---
 
@@ -235,10 +250,16 @@ Returns an iterator that iterates over each context menu item and their dimensio
 
 ```lua
 (method) core.object:extends(T: any)
-  -> boolean
+  -> extends: boolean
 ```
 
-Check if the object inherits from the given type.
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T` — Class to check inheritance from
+
+@*return* `extends` — True if object is T or inherits from T
 
 ---
 
@@ -287,10 +308,16 @@ Hides the context menu.
 
 ```lua
 (method) core.object:is(T: any)
-  -> boolean
+  -> is_exact: boolean
 ```
 
-Check if the object is strictly of the given type.
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T` — Class to check against
+
+@*return* `is_exact` — True if object is exactly type T
 
 ---
 
@@ -298,10 +325,16 @@ Check if the object is strictly of the given type.
 
 ```lua
 (method) core.object:is_class_of(T: any)
-  -> boolean
+  -> is_instance: boolean
 ```
 
-Check if the parameter is strictly of the object type.
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T` — Object to check
+
+@*return* `is_instance` — True if T is exactly an instance of this class
 
 ---
 
@@ -309,10 +342,16 @@ Check if the parameter is strictly of the object type.
 
 ```lua
 (method) core.object:is_extended_by(T: any)
-  -> boolean
+  -> is_extended: boolean
 ```
 
-Check if the parameter inherits from the object.
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T` — Object or class to check
+
+@*return* `is_extended` — True if T inherits from this class
 
 ---
 
@@ -400,4 +439,3 @@ Shows the context menu.
 Event handler for content update.
 
 ---
-
