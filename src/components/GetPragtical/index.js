@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-const LATEST='v3.8.1';
+const LATEST='v3.8.2';
 
 function GetDownloadsMap(version) {
   return [
