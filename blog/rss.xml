@@ -4,10 +4,193 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Tue, 16 Dec 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 24 Jan 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.8.2 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v382-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v382-release</guid>
+            <pubDate>Sat, 24 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Another month, another release accompanied with the usual bug fixes, additional]]></description>
+            <content:encoded><![CDATA[<p>Another month, another release accompanied with the usual bug fixes, additional
+enhancements and CI build system improvements. Salted with a pinch of
+new features in order to keep the flavor going on!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="views-state-support">Views State Support<a href="https://pragtical.dev/blog/pragtical-v382-release#views-state-support" class="hash-link" aria-label="Direct link to Views State Support" title="Direct link to Views State Support">​</a></h2>
+<p>This release adds support for saving and loading a View state explicitly,
+allowing to properly load them on subsequent editor launches. This change
+introduces the following new methods that can be implemented by child
+Views to enable state restoration on next session load:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Serialize this view into a persistable state table.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---This method is called when the editor is saving workspace/session state.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The returned table must contain only plain Lua data (no functions,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---userdata, metatables, or cyclic references).</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Returning `nil` indicates that this view should NOT be restored when</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---reloading the workspace.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return table? state</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> View</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">get_state</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">return</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">nil</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Create and initialize a new view instance from a previously saved state.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---This function is called when restoring workspace/session state.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Implementations are responsible for:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---  * creating the view instance</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---  * applying any persisted state</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---If loading the instance failed nil will be returned.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param state table</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return core.view? view</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> View</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">from_state</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">state</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">return</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">nil</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre></div></div>
+<p>These functionality was implemented on DocView and ImageView.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Views that do not provide implementation of these methods will no longer be
+automatically reloaded on subsequent editor launches.</p></div></div>
+<p>Another new method is <code>View:get_module()</code> which allows to easily fetch the
+module associated to the current View child:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Returns the module path of this view.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---This method resolves the Lua module name that loaded the concrete view</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---class (for example `"core.view"`).</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---If the view class cannot be associated with any loaded module, `nil`</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---is returned.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return string? path</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> View</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">get_module</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="image-loading-improvements">Image Loading Improvements<a href="https://pragtical.dev/blog/pragtical-v382-release#image-loading-improvements" class="hash-link" aria-label="Direct link to Image Loading Improvements" title="Direct link to Image Loading Improvements">​</a></h2>
+<p>A new function was added to more easily allow opening images on the viewer and
+text files on the document viewer:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Opens the given file path in the root view.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---If the given file is a supported image, it will open it in the image viewer;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---otherwise, it will open it as a normal text file.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param filename string Path to the file to open</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return core.imageview|core.docview</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> core</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">open_file</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">filename</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre></div></div>
+<p>This function is now been use on find files plugin and other places that need
+to load files into the editor.</p>
+<p>Also thanks to <a href="https://github.com/tacf" target="_blank" rel="noopener noreferrer">tacf</a> xpm joins svg as one of the image
+formats that is allowed to be opened as a text file from within the TreeView.</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/977db19b-583d-47de-ba67-1bc24eb93a2e" alt="open in editor" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ui-improvements">UI Improvements<a href="https://pragtical.dev/blog/pragtical-v382-release#ui-improvements" class="hash-link" aria-label="Direct link to UI Improvements" title="Direct link to UI Improvements">​</a></h2>
+<p>Thanks to <a href="https://github.com/juliardi" target="_blank" rel="noopener noreferrer">juliardi</a> (the evangelist) a button was
+added to the toolbar and settings plugins tab to more easily access the plugin manager:</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/3ab7b45f-93bb-4fd9-b69a-b16afce59211"></video>
+<p>The scale plugin now keeps previous scale factor on editor restart and even
+on sub-instances launched thru main editor since an internal environment
+variable is been use for this purpose.</p>
+<p>Also, the renderer cache cell size was reduced to improve detection of dirty
+regions, the code related to this change was documented and re-arranged
+for clearness and the convenience of future contributors.</p>
+<p><strong>Before</strong></p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELLS_X</span><span class="token macro property"> </span><span class="token macro property expression number">80</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELLS_Y</span><span class="token macro property"> </span><span class="token macro property expression number">50</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELL_SIZE</span><span class="token macro property"> </span><span class="token macro property expression number">96</span><br></span></code></pre></div></div>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/7e2ce9c5-ede8-41ea-a487-42b829831483" alt="before cell size" class="img_ev3q"></p>
+<p><strong>After</strong></p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">/* These values represent the maximum size that can be tracked by rencache</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">   7680x4320 = 8k resolution, we use a common divisor for the size of regions</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">   that will be dirty checked.</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">*/</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELL_SIZE</span><span class="token macro property"> </span><span class="token macro property expression number">60</span><span class="token macro property expression"> </span><span class="token macro property comment" style="color:rgb(98, 114, 164)">/* common divisor of width and height */</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELLS_X</span><span class="token macro property"> </span><span class="token macro property expression punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token macro property expression number">7680</span><span class="token macro property expression"> </span><span class="token macro property expression operator">/</span><span class="token macro property expression"> RENCACHE_CELL_SIZE</span><span class="token macro property expression punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token macro property expression"> </span><span class="token macro property comment" style="color:rgb(98, 114, 164)">/* 128 cells */</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">define</span><span class="token macro property"> </span><span class="token macro property macro-name">RENCACHE_CELLS_Y</span><span class="token macro property"> </span><span class="token macro property expression punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token macro property expression number">4320</span><span class="token macro property expression"> </span><span class="token macro property expression operator">/</span><span class="token macro property expression"> RENCACHE_CELL_SIZE</span><span class="token macro property expression punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token macro property expression"> </span><span class="token macro property comment" style="color:rgb(98, 114, 164)">/* 72 cells */</span><br></span></code></pre></div></div>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/7fb0fad1-1c03-46f9-882e-b2eac0be47f1" alt="after cell size" class="img_ev3q"></p>
+<p>Two new variants of monokai were introduced:</p>
+<ul>
+<li>monokai-pro - thanks to <a href="https://github.com/suxragi" target="_blank" rel="noopener noreferrer">suxragi</a></li>
+<li>monokai-varied - forgot who gave me this one, thank you too!</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="additional-improvements">Additional Improvements<a href="https://pragtical.dev/blog/pragtical-v382-release#additional-improvements" class="hash-link" aria-label="Direct link to Additional Improvements" title="Direct link to Additional Improvements">​</a></h2>
+<p>More Lua doc comments were added thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>
+which allows better LSP code completion when working with the editor source
+code as better generation of the <a href="https://pragtical.dev/docs/category/api" target="_blank" rel="noopener noreferrer">API reference</a>
+exposed on the website.</p>
+<p>Also, Thanks to our testing <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Ninja</a> the following
+bugs where corrected:</p>
+<ul>
+<li>Wrong scale factor detection on Windows</li>
+<li>EmptyView widgets not properly positioned when transitions are turned off.</li>
+</ul>
+<p>Fixed a documentation bug on DirMonitor thanks to <a href="https://github.com/walkero-gr" target="_blank" rel="noopener noreferrer">Walkero</a>,
+also proper cleaning of watched directories on backends like kqueue.</p>
+<p>Correction to the context menu sizing on 4K displays thanks also to
+<a href="https://github.com/tacf" target="_blank" rel="noopener noreferrer">tacf</a>:</p>
+<p><strong>Before</strong></p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/837cf738-d4c6-46ef-9a41-29f202118276" alt="before context menu 1" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/976b876d-e750-4ce1-a5a1-abb5ad2b0d9a" alt="before context menu 2" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/cf85f0e2-e0df-4dfa-b899-4e09ca00055a" alt="before context menu 3" class="img_ev3q"></p>
+<p><strong>After</strong></p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/3f556e16-7224-4671-ad10-99b0037af0be" alt="after context menu 1" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/cd1979c2-d6dd-4c2d-a147-9cb6ec29fddf" alt="after context menu 2" class="img_ev3q">
+<img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/21e08cc6-5eb6-4c7d-a589-854c72693ae8" alt="after context menu 3" class="img_ev3q"></p>
+<p>On the build/CI system front, now the generated profiler guided optimizations
+are been really used on clang builds AKA macOS builds, so crossing fingers and
+hoping that now it works xD. Other optimizations were done to the CI like
+defaulting to optimization level 3, installation of additional LuaJIT modules
+and building of LuaJIT in amalgamation mode. Also, sdl and sdl_image were
+updated both to v3.4.0, finally, the CI Linux AArch64 builds will require glibc
+version 2.29 since the newer dependency versions introduced a requirement on
+<code>posix_spawn_file_actions_addchdir_np</code> for this architecture.</p>
+<p>Other fixes and improvements on the changes log below, enjoy!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.8.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v382-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v382-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>Add view state save/load support
+(<a href="https://github.com/pragtical/pragtical/pull/409" target="_blank" rel="noopener noreferrer">#409</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v382-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Documentation
+(<a href="https://github.com/pragtical/pragtical/pull/396" target="_blank" rel="noopener noreferrer">#396</a>)</p>
+</li>
+<li>
+<p>Open images in viewer from open file operations
+(<a href="https://github.com/pragtical/pragtical/pull/403" target="_blank" rel="noopener noreferrer">#403</a>)</p>
+</li>
+<li>
+<p>core.step: deprioritize only the mousemove event
+(<a href="https://github.com/pragtical/pragtical/pull/407" target="_blank" rel="noopener noreferrer">#407</a>)</p>
+</li>
+<li>
+<p>Add xpm as additional open as text format
+(<a href="https://github.com/pragtical/pragtical/pull/410" target="_blank" rel="noopener noreferrer">#410</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ui-enhancements">UI Enhancements<a href="https://pragtical.dev/blog/pragtical-v382-release#ui-enhancements" class="hash-link" aria-label="Direct link to UI Enhancements" title="Direct link to UI Enhancements">​</a></h3>
+<ul>
+<li>
+<p>scale plugin: keep current scale state on restart
+(<a href="https://github.com/pragtical/pragtical/pull/401" target="_blank" rel="noopener noreferrer">#401</a>)</p>
+</li>
+<li>
+<p>Reduce rencache cell size for better dirty detect
+(<a href="https://github.com/pragtical/pragtical/pull/405" target="_blank" rel="noopener noreferrer">#405</a>)</p>
+</li>
+<li>
+<p>add button for opening plugin manager from settings and toolbarview
+(<a href="https://github.com/pragtical/pragtical/pull/408" target="_blank" rel="noopener noreferrer">#408</a>)</p>
+</li>
+<li>
+<p>Made plugin manager button more subtle on settings ui
+(<a href="https://github.com/pragtical/pragtical/commit/40b0287e333dafe95d028531d7c33d68b7aa6f34" target="_blank" rel="noopener noreferrer">40b0287e</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v382-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>common.dirname: treat leading / as directory name
+(<a href="https://github.com/pragtical/pragtical/pull/400" target="_blank" rel="noopener noreferrer">#400</a>)</p>
+</li>
+<li>
+<p>Reorder current/default scales on get_display_info
+(<a href="https://github.com/pragtical/pragtical/pull/402" target="_blank" rel="noopener noreferrer">#402</a>)</p>
+</li>
+<li>
+<p>EmptyView: re-update childs on size/pos changes
+(<a href="https://github.com/pragtical/pragtical/pull/404" target="_blank" rel="noopener noreferrer">#404</a>)</p>
+</li>
+<li>
+<p>DirMonitor: fix doc comment error
+(<a href="https://github.com/pragtical/pragtical/pull/406" target="_blank" rel="noopener noreferrer">#406</a>)</p>
+</li>
+<li>
+<p>fix: context menu not properly sized
+(<a href="https://github.com/pragtical/pragtical/pull/411" target="_blank" rel="noopener noreferrer">#411</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v382-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>CI: really use profiler data when compiling with clang
+(<a href="https://github.com/pragtical/pragtical/commit/30c734abd630d188ff98fb19ea5d208ee2c15b64" target="_blank" rel="noopener noreferrer">30c734ab</a>)</p>
+</li>
+<li>
+<p>CI: always use optimization level 3
+(<a href="https://github.com/pragtical/pragtical/commit/ac6395f8a10683c08feba611bb327207d624812e" target="_blank" rel="noopener noreferrer">ac6395f8</a>)</p>
+</li>
+<li>
+<p>Build luajit subproject in amalgamation mode.
+(<a href="https://github.com/pragtical/pragtical/pull/390" target="_blank" rel="noopener noreferrer">#390</a>)</p>
+</li>
+<li>
+<p>LuaJIT subproject: install additional lua modules
+(<a href="https://github.com/pragtical/pragtical/pull/391" target="_blank" rel="noopener noreferrer">#391</a>)</p>
+</li>
+<li>
+<p>Update colors subproject for more monokai variations
+(<a href="https://github.com/pragtical/pragtical/pull/392" target="_blank" rel="noopener noreferrer">#392</a>)</p>
+</li>
+<li>
+<p>Update SDL and SDL_image to v3.4.0
+(<a href="https://github.com/pragtical/pragtical/pull/413" target="_blank" rel="noopener noreferrer">#413</a>)</p>
+</li>
+<li>
+<p>CI: fix polyfill-glibc on Linux AArch64 (bumps required glibc to v2.29)
+(<a href="https://github.com/pragtical/pragtical/commit/ed651cea3acf58d1ec8863f88276895ffd70e484" target="_blank" rel="noopener noreferrer">ed651cea</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.8.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v381-release</link>
@@ -397,7 +580,7 @@ below for more!</p>
 (<a href="https://github.com/lite-xl/lite-xl/pull/2184" target="_blank" rel="noopener noreferrer">#2184</a>)</p>
 </li>
 <li>
-<p>Rearrange Plugin Loading and SDL Initialization (#1881)
+<p>Rearrange Plugin Loading and SDL Initialization
 (<a href="https://github.com/lite-xl/lite-xl/pull/1881" target="_blank" rel="noopener noreferrer">#1881</a>)</p>
 </li>
 <li>
@@ -2702,75 +2885,6 @@ plugin, and includes the accumulated bug fixes listed below as new color schemes
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.1.1...v3.1.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.1.1...v3.1.2</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.1.1 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v311-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v311-release</guid>
-            <pubDate>Sun, 06 Aug 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[This release fixes improper absolutes path treatment when opening files and]]></description>
-            <content:encoded><![CDATA[<p>This release fixes improper absolutes path treatment when opening files and
-introduces some other small improvements as new meson setup options.
-The new meson setup options are <code>extra_colors</code> and <code>extra_languages</code> which are
-set to true by default and will allow downloading additional languages and
-color schemes to be included on the <code>meson install</code> step.</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.1.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v311-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v311-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Merged Windows dark title bar theme support from <a href="https://github.com/lite-xl/lite-xl/pull/514" target="_blank" rel="noopener noreferrer">lite-xl/lite-xl#514</a> with some changes to make it less invasive (<a href="https://github.com/pragtical/pragtical/commit/7ca48a8342496fe153edaada2f0f04002d52fb78" target="_blank" rel="noopener noreferrer">7ca48a83</a>)</p>
-</li>
-<li>
-<p>Introduced new color schemes <code>yaru</code> and <code>yaru_dark</code></p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v311-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>CI Latest Builds: switched from debug to debugoptimized (<a href="https://github.com/pragtical/pragtical/commit/cf880c5ad6a99523a1ff1ac1259e2b5f0dccbb1a" target="_blank" rel="noopener noreferrer">cf880c5a</a>)</p>
-</li>
-<li>
-<p>Added widget as a meson subproject (<a href="https://github.com/pragtical/pragtical/commit/bdddc4c6385bf6a2be9e3684e0bdfc6cb807dd99" target="_blank" rel="noopener noreferrer">bdddc4c6</a>)</p>
-</li>
-<li>
-<p>Added colors and languages as meson subproject (<a href="https://github.com/pragtical/pragtical/commit/111ca76f925bafdd88f15f874caf8c84037fcf02" target="_blank" rel="noopener noreferrer">111ca76f</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="documentation">Documentation<a href="https://pragtical.dev/blog/pragtical-v311-release#documentation" class="hash-link" aria-label="Direct link to Documentation" title="Direct link to Documentation">​</a></h3>
-<ul>
-<li>Fixed common.relative_path() doc comments (<a href="https://github.com/pragtical/pragtical/commit/f44f10fa3aa08573b0e0d9866c97f84a9559717d" target="_blank" rel="noopener noreferrer">f44f10fa</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ui-enhancements">UI Enhancements<a href="https://pragtical.dev/blog/pragtical-v311-release#ui-enhancements" class="hash-link" aria-label="Direct link to UI Enhancements" title="Direct link to UI Enhancements">​</a></h3>
-<ul>
-<li>Added GUI for treeview show hidden/ignored (<a href="https://github.com/pragtical/pragtical/commit/64eee3d38d766aa28ecc5c60b01bb6cb85cdffb0" target="_blank" rel="noopener noreferrer">64eee3d3</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v311-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>Do not append cwd to absolute files on startup (<a href="https://github.com/pragtical/pragtical/commit/853e6b7600b06c2560c67f94832921762650d8aa" target="_blank" rel="noopener noreferrer">853e6b76</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="other-changes">Other Changes<a href="https://pragtical.dev/blog/pragtical-v311-release#other-changes" class="hash-link" aria-label="Direct link to Other Changes" title="Direct link to Other Changes">​</a></h3>
-<ul>
-<li>
-<p>Added compat for lua 5.4 userdata (uv) functions (<a href="https://github.com/pragtical/pragtical/commit/e048a9c839ce8c0646d4ee6e435149c63a176a2b" target="_blank" rel="noopener noreferrer">e048a9c8</a>)</p>
-</li>
-<li>
-<p>Refactored core.project into a core.object (<a href="https://github.com/pragtical/pragtical/commit/a5df5be84ff31af8125fdf4bd1ce4fab2162e280" target="_blank" rel="noopener noreferrer">a5df5be8</a>)</p>
-<ul>
-<li>Added doc comments</li>
-<li>Exposed compile_ignore_files() as a method</li>
-</ul>
-</li>
-<li>
-<p>Recompile ignore patterns when changed from gui (<a href="https://github.com/pragtical/pragtical/commit/c3edcafc595db7787c98e2260502b5d40a231121" target="_blank" rel="noopener noreferrer">c3edcafc</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v311-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>Normalize stroke before adding keybind (<a href="https://github.com/lite-xl/lite-xl/pull/1334" target="_blank" rel="noopener noreferrer">#1334</a>)</li>
-<li>Make DocView aware of scrollbars sizes (<a href="https://github.com/lite-xl/lite-xl/pull/1177" target="_blank" rel="noopener noreferrer">#1177</a>)</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.1.0...v3.1.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.1.0...v3.1.1</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
