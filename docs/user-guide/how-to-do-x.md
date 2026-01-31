@@ -13,7 +13,7 @@ Quick cookbook-style answers to common tasks in Pragtical.
 Press `Ctrl+P` (or `Cmd+P` on macOS) to open the fuzzy file finder. Start typing the filename and press Enter.
 
 ### Find files in my project
-`Ctrl+Shift+P` → Type "Find File" → Enter
+Open command palette with `Ctrl+Shift+P`, type "Find File", then press Enter to search for files in your project
 
 ### Switch between open files
 - `Ctrl+Tab` - Cycle through recent files
@@ -34,7 +34,7 @@ Press `Ctrl+\` to toggle the file tree sidebar.
 `Ctrl+Shift+F` - Opens project search with results in a new view
 
 ### Use regex in search
-In the search dialog, click the regex button (or use `Ctrl+Shift+P` → "Toggle Regex")
+In the search dialog, click the regex button (or open command palette with `Ctrl+Shift+P`, type "Toggle Regex", then press Enter)
 
 ### Find next/previous match
 `F3` - Find next
@@ -68,7 +68,7 @@ In the search dialog, click the regex button (or use `Ctrl+Shift+P` → "Toggle 
 
 
 ### Align columns
-Select lines, then `Ctrl+Shift+P` → "Tabularize" → Enter delimiter (e.g., `=` or `,`)
+Select lines, then open command palette with `Ctrl+Shift+P`, type "Tabularize", press Enter, and specify delimiter (e.g., `=` or `,`)
 
 **Example:**
 ```
@@ -107,10 +107,10 @@ Right-click a tab → "Split Right/Left/Up/Down" or drag a tab to screen edge
 `F11` - Toggle fullscreen mode
 
 ### View whitespace
-`Ctrl+Shift+P` → "Draw Whitespace: Toggle"
+Open command palette with `Ctrl+Shift+P`, type "Draw Whitespace: Toggle", then press Enter
 
 ### Show line guide
-`Ctrl+Shift+P` → Settings → Plugins → Line Guide → Enable
+Open command palette with `Ctrl+Shift+P`, navigate to Settings → Plugins → Line Guide → Enable
 
 ---
 
@@ -141,7 +141,7 @@ config.plugins.plugin_name = false
 ```
 
 ### Change indentation
-`Ctrl+Shift+P` → Settings → Core → Editor
+Open command palette with `Ctrl+Shift+P`, navigate to Settings → Core → Editor
 - Set "Indent Size" (default: 2)
 - Set "Indentation Type" (default: space)
 
@@ -203,13 +203,13 @@ Open command palette (`Ctrl+Shift+P`) and look for the keybinding shown on the r
 Your workspace (open files, layout) saves automatically per project.
 
 ### Open recent project
-`Ctrl+Shift+P` → "Open Recent Project"
+Open command palette with `Ctrl+Shift+P`, type "Open Recent Project", then press Enter
 
 ### Add folder to current project
-`Ctrl+Shift+P` → "Core: Add Directory"
+Open command palette with `Ctrl+Shift+P`, type "Core: Add Directory", then press Enter
 
 ### Change project directory
-`Ctrl+Shift+P` → "Core: Change Project Folder"
+Open command palette with `Ctrl+Shift+P`, type "Core: Change Project Folder", then press Enter
 
 ---
 
@@ -219,7 +219,7 @@ Your workspace (open files, layout) saves automatically per project.
 `Ctrl+G` - Opens "Go to Line" dialog
 
 ### Toggle case
-Select text → `Ctrl+Shift+P` → "Uppercase/Lowercase"
+Select text → open command palette with `Ctrl+Shift+P`, type "Uppercase/Lowercase", then press Enter
 
 ### Trim trailing whitespace
 Disabled by default. To configure: Settings → Plugins → Trim Whitespace
@@ -228,7 +228,7 @@ Disabled by default. To configure: Settings → Plugins → Trim Whitespace
 Settings → Plugins → Line Wrapping → Enable
 
 ### Diff view
-`Ctrl+Shift+P` → "Diff View: Start Files Comparison" - Compare two files side-by-side
+Open command palette with `Ctrl+Shift+P`, type "Diff View: Start Files Comparison", then press Enter to compare two files side-by-side
 
 ---
 
@@ -238,7 +238,7 @@ Settings → Plugins → Line Wrapping → Enable
 Settings -> Keybindings
 
 ### Check logs
-`Ctrl+Shift+P` → "Core: Open Log"
+Open command palette with `Ctrl+Shift+P`, type "Core: Open Log", then press Enter
 
 ---
 
@@ -254,7 +254,7 @@ When searching files, commands, or autocomplete, you don't need to type the full
 Drag files from your file manager into Pragtical to open them.
 
 ### Multiple projects
-Add multiple folders to work on several projects simultaneously with `Ctrl+Shift+P` → "Core: Add Directory"
+Add multiple folders to work on several projects simultaneously: open command palette with `Ctrl+Shift+P`, type "Core: Add Directory", then press Enter
 
 ### Pattern exclusions
 Configure ignored files/folders in Settings or `init.lua`:
@@ -266,7 +266,7 @@ table.insert(config.ignore_files, "^node_modules/")
 ```
 
 ### Quick color picker
-Place cursor on a color code (like `#FF0000`) → `Ctrl+Shift+P` → "Pick Color"
+Place cursor on a color code (like `#FF0000`) → open command palette with `Ctrl+Shift+P`, type "Pick Color", then press Enter
 
 ---
 
