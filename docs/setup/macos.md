@@ -5,9 +5,9 @@ description: macOS-specific instructions for setting up Pragtical.
 
 # macOS
 
-Installing Pragtical on macOS is simple: just download a DMG file from our
-[releases] page, open it and drag the program into your Applications folder.
-Make sure to follow the steps explained below.
+To install Pragtical on macOS download a DMG file from the [GitHub releases][1]
+page, open it and drag the program into your Applications folder. Make sure to
+follow the steps explained below.
 
 ## Launch the App
 
@@ -35,4 +35,4 @@ xattr -cr /Applications/Pragtical.app
 Afterwards, you should be able to launch Pragtical normally.
 
 
-[releases]: https://github.com/pragtical/pragtical/releases
+[1]: https://github.com/pragtical/pragtical/releases
