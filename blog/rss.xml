@@ -4,10 +4,133 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Sat, 24 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 29 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.8.3 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v383-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v383-release</guid>
+            <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A long overdue release given the important fixes, while minimal, the]]></description>
+            <content:encoded><![CDATA[<p>A long overdue release given the important fixes, while minimal, the
+assortment of bug fixes do make a difference. Also, included are some
+enhancements and new features.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="open-file-at-line">Open File at Line<a href="https://pragtical.dev/blog/pragtical-v383-release#open-file-at-line" class="hash-link" aria-label="Direct link to Open File at Line" title="Direct link to Open File at Line">​</a></h2>
+<p>Thanks to <a href="https://github.com/detomastah" target="_blank" rel="noopener noreferrer">detomastah</a> it is now possible to
+open a file at a specific line when using the find file plugin:</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/fdfbf3c9-6d70-4b07-933b-26a4aad7cc7e" alt="open file at line" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="show-column-position-in-characters">Show Column Position in Characters<a href="https://pragtical.dev/blog/pragtical-v383-release#show-column-position-in-characters" class="hash-link" aria-label="Direct link to Show Column Position in Characters" title="Direct link to Show Column Position in Characters">​</a></h2>
+<p>As reported by <a href="https://github.com/2trvl" target="_blank" rel="noopener noreferrer">2trvl</a> when viewing a text document
+the caret position on the status bar was displayed in bytes instead of
+codepoints. This behavior was changed to display it by default in characters
+but it is configurable to display bytes if desired as shown below:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Controls how the caret column is displayed in the status bar.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---When set to `"char"`, the column is based on the number of characters</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---from the start of the line (UTF-8 aware).</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---When set to `"byte"`, the column is based on the raw byte offset.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Defaults to `"char"`.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type "char" | "byte"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">caret_column_mode </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"char"</span><br></span></code></pre></div></div>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/4420cc61-c5dc-4543-89b5-53fb07c06ac4" alt="configure caret column dispaly" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="imageview-zoom-using-mouse-position">ImageView Zoom Using Mouse Position<a href="https://pragtical.dev/blog/pragtical-v383-release#imageview-zoom-using-mouse-position" class="hash-link" aria-label="Direct link to ImageView Zoom Using Mouse Position" title="Direct link to ImageView Zoom Using Mouse Position">​</a></h2>
+<p>When zooming an image the current mouse position is used as an indicator of
+where to position the scaled image by moving the scroll bars. With this
+enhancement also comes support for a bigger scale size of 8k when possible.</p>
+<p><strong>Before</strong></p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/a8eec86a-accb-4223-9629-e59f8165f484"></video>
+<p><strong>After</strong></p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/01ef3797-b2d7-4fb1-8f3b-eb7e1658d248"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="root-color-picker-preview-always-visible">Root Color Picker Preview Always Visible<a href="https://pragtical.dev/blog/pragtical-v383-release#root-color-picker-preview-always-visible" class="hash-link" aria-label="Direct link to Root Color Picker Preview Always Visible" title="Direct link to Root Color Picker Preview Always Visible">​</a></h2>
+<p>Now, when moving the mouse to the window edges the color picker preview is
+dynamically repositioned to keep it visible.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/05a6027e-3aae-483b-b3f8-66ee3da8bc78"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="bug-fixes">Bug Fixes<a href="https://pragtical.dev/blog/pragtical-v383-release#bug-fixes" class="hash-link" aria-label="Direct link to Bug Fixes" title="Direct link to Bug Fixes">​</a></h2>
+<p>The most important bug fix on this release was a crash on the project search
+when syntax highlighting was enabled on the search results. It was caused from
+invalid utf-8 text been feed into the tokenizer. Thanks to
+<a href="https://github.com/0riginaln0" target="_blank" rel="noopener noreferrer">0riginaln0</a> who reported this bug it is
+now resolved.</p>
+<p><strong>Other fixes include:</strong></p>
+<ul>
+<li>
+<p>Better compatibility in open_in_system for AmigaOS 4 thanks to
+<a href="https://github.com/walkero-gr" target="_blank" rel="noopener noreferrer">Walkero</a></p>
+</li>
+<li>
+<p>Corrected hover state management on the Widget library. (This was a known
+annoyance but it seems was waiting for it to be reported in order to fix it 😀)</p>
+</li>
+<li>
+<p>Temporary fix for borderless decoration not getting drawn on maximized window
+under Microsoft Windows.</p>
+</li>
+</ul>
+<p>Special thanks to <a href="https://github.com/2trvl" target="_blank" rel="noopener noreferrer">2trvl</a> who opened various issues
+for many of the bug fixes on this release.</p>
+<p>Other fixes and improvements on the changes log below, enjoy!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.8.3" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v383-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v383-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Open file at line
+(<a href="https://github.com/pragtical/pragtical/pull/428" target="_blank" rel="noopener noreferrer">#428</a>)</p>
+</li>
+<li>
+<p>StatusView doc<!-- -->:position<!-- --> show col in characters
+(<a href="https://github.com/pragtical/pragtical/pull/432" target="_blank" rel="noopener noreferrer">#432</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v383-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>ImageView: zoom using mouse position
+(<a href="https://github.com/pragtical/pragtical/pull/420" target="_blank" rel="noopener noreferrer">#420</a>)</p>
+</li>
+<li>
+<p>rootpickcolor: keep color preview always visible
+(<a href="https://github.com/pragtical/pragtical/pull/421" target="_blank" rel="noopener noreferrer">#421</a>)</p>
+</li>
+<li>
+<p>Allow loading namespaced native lua libraries
+(<a href="https://github.com/pragtical/pragtical/pull/436" target="_blank" rel="noopener noreferrer">#436</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v383-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fixes in open_in_system() for AmigaOS 4
+(<a href="https://github.com/pragtical/pragtical/pull/416" target="_blank" rel="noopener noreferrer">#416</a>)</p>
+</li>
+<li>
+<p>Widgets: update for SearchReplaceList crash fix
+(<a href="https://github.com/pragtical/pragtical/pull/418" target="_blank" rel="noopener noreferrer">#418</a>)</p>
+</li>
+<li>
+<p>Update widget for latest hover fix
+(<a href="https://github.com/pragtical/pragtical/pull/433" target="_blank" rel="noopener noreferrer">#433</a>)</p>
+</li>
+<li>
+<p>Check node hovered_scroll_button is set on rootview
+(<a href="https://github.com/pragtical/pragtical/pull/434" target="_blank" rel="noopener noreferrer">#434</a>)</p>
+</li>
+<li>
+<p>Defer startup file loading after plugins loaded
+(<a href="https://github.com/pragtical/pragtical/pull/430" target="_blank" rel="noopener noreferrer">#430</a>)</p>
+</li>
+<li>
+<p>Fix borderless on maximized window (Windows)
+(<a href="https://github.com/pragtical/pragtical/pull/435" target="_blank" rel="noopener noreferrer">#435</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v383-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>CI: disable polyfill_glibc - issues with linenoise
+(<a href="https://github.com/pragtical/pragtical/pull/419" target="_blank" rel="noopener noreferrer">#419</a>)</p>
+</li>
+<li>
+<p>ppm subproject: don't use lua bytecode
+(<a href="https://github.com/pragtical/pragtical/pull/438" target="_blank" rel="noopener noreferrer">#438</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.8.2 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v382-release</link>
@@ -2742,149 +2865,6 @@ and updates SDL2 meson wrap to latest.</p>
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.1.2...v3.2.0" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.1.2...v3.2.0</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.1.2 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v312-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v312-release</guid>
-            <pubDate>Sun, 24 Sep 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[This release introduces a new widgets based welcome screen:]]></description>
-            <content:encoded><![CDATA[<p>This release introduces a new widgets based welcome screen:</p>
-<p><img decoding="async" loading="lazy" src="https://github.com/pragtical/pragtical/assets/1702572/a04fd0fb-542e-42c7-8cbd-d473f4c25107" alt="pragtical-welcome" class="img_ev3q"></p>
-<p>It also features compatibility changes to properly work with the terminal
-plugin, and includes the accumulated bug fixes listed below as new color schemes.</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.1.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v312-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v312-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Syntax files symbol_pattern, non_word_chars props (<a href="https://github.com/pragtical/pragtical/pull/12" target="_blank" rel="noopener noreferrer">#12</a>)</p>
-</li>
-<li>
-<p>New Welcome Screen - Converted emptyview to widget with additions (<a href="https://github.com/pragtical/pragtical/commit/e08f1b18b28e26351a27dd9a5aeeb2bcc4c2d48f" target="_blank" rel="noopener noreferrer">e08f1b18</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v312-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fixes #10 by using the scrollbar expanded size (<a href="https://github.com/pragtical/pragtical/pull/11" target="_blank" rel="noopener noreferrer">#11</a>)</p>
-</li>
-<li>
-<p>Fix core<!-- -->:open-file<!-- --> to not be dependant on chdir (<a href="https://github.com/pragtical/pragtical/commit/47bfcb07bb1db489f97d2fa4a6c0432905eb87c0" target="_blank" rel="noopener noreferrer">47bfcb07</a>)</p>
-</li>
-<li>
-<p>Respect coroutines redraw requests while on focus (<a href="https://github.com/pragtical/pragtical/commit/f450b6124e53b83c5bf41d6261e79ecac555d0ce" target="_blank" rel="noopener noreferrer">f450b612</a>)</p>
-</li>
-<li>
-<p>Do not process clicks on contextmenu divider (<a href="https://github.com/pragtical/pragtical/pull/22" target="_blank" rel="noopener noreferrer">#22</a>)</p>
-</li>
-<li>
-<p>Fixed issue with open file command (<a href="https://github.com/pragtical/pragtical/commit/d8906c2111b056438c142622c16c338fef61a70d" target="_blank" rel="noopener noreferrer">d8906c21</a>)</p>
-</li>
-<li>
-<p>MacOS: allow combining cmd+ctrl and replace alt with option (<a href="https://github.com/pragtical/pragtical/commit/0674f1f5a5ebc0866b7e826eeacaadc355325e69" target="_blank" rel="noopener noreferrer">0674f1f5</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v312-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Improvements to language_css (<a href="https://github.com/pragtical/pragtical/commit/f2a0790d2c6b0ace73b66b31a5ea59ac60e7c3c4" target="_blank" rel="noopener noreferrer">f2a0790d</a>)</p>
-</li>
-<li>
-<p>Better compat math.{tointeger|type|ult} for luajit (<a href="https://github.com/pragtical/pragtical/commit/80bce6c0b1275050a779eac85e79dc472e309d91" target="_blank" rel="noopener noreferrer">80bce6c0</a>)</p>
-</li>
-<li>
-<p>Added Mike Pall bitops library to non jit lua for consistency (<a href="https://github.com/pragtical/pragtical/commit/5efc02a84350c544a6475255e04e5110eff083b7" target="_blank" rel="noopener noreferrer">5efc02a8</a>)</p>
-</li>
-<li>
-<p>Use native bit operators on Lua &gt;= 5.3 (<a href="https://github.com/pragtical/pragtical/commit/10cecbec61015d1b3a01837f082b205d00da87b5" target="_blank" rel="noopener noreferrer">10cecbec</a>)</p>
-</li>
-<li>
-<p>Highlight CUDA source code the same as C++ (<a href="https://github.com/pragtical/pragtical/pull/15" target="_blank" rel="noopener noreferrer">#15</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ui-enhancements">UI Enhancements<a href="https://pragtical.dev/blog/pragtical-v312-release#ui-enhancements" class="hash-link" aria-label="Direct link to UI Enhancements" title="Direct link to UI Enhancements">​</a></h3>
-<ul>
-<li>
-<p>statusview: separate item for doc position percent <a href="https://github.com/lite-xl/lite-xl/pull/1579" target="_blank" rel="noopener noreferrer">lite-xl/lite-xl#1579</a></p>
-</li>
-<li>
-<p>Highlight default theme on settings ui, fixes #23 (<a href="https://github.com/pragtical/pragtical/commit/cd7181dfa5f0d2d2a95081cf3096460b271beec6" target="_blank" rel="noopener noreferrer">cd7181df</a>)</p>
-</li>
-<li>
-<p>treeview: do not show hidden files by default (<a href="https://github.com/pragtical/pragtical/commit/ecda0a0ab7ff1c4f4795bb7af745ab728b5a6798" target="_blank" rel="noopener noreferrer">ecda0a0a</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="colors">Colors<a href="https://pragtical.dev/blog/pragtical-v312-release#colors" class="hash-link" aria-label="Direct link to Colors" title="Direct link to Colors">​</a></h3>
-<ul>
-<li>
-<p>Added new Yaru dark and light theme (<a href="https://github.com/pragtical/colors/commit/5fa3cc13fdf33f4ae7dc0d79c2b377f21761ec3c" target="_blank" rel="noopener noreferrer">5fa3cc13</a>)</p>
-</li>
-<li>
-<p>Improvements to tokyo-night (<a href="https://github.com/pragtical/colors/commit/551c351d8c57818bcd350a4dae9d10e7c9506384" target="_blank" rel="noopener noreferrer">551c351d</a>)</p>
-</li>
-<li>
-<p>Added solarized_dark theme (<a href="https://github.com/pragtical/colors/commit/b9791efad6d7c726b2485cb4126681067c2e3a1c" target="_blank" rel="noopener noreferrer">b9791efa</a>)</p>
-</li>
-<li>
-<p>Improvements to Monokai themes (<a href="https://github.com/pragtical/colors/commit/79264c47449aa5d7f86c2f03558d2205931644eb" target="_blank" rel="noopener noreferrer">79264c47</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v312-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Switch to an older ubuntu builder, fixes #13 (<a href="https://github.com/pragtical/pragtical/pull/16" target="_blank" rel="noopener noreferrer">#16</a>)</p>
-</li>
-<li>
-<p>Fixes for msvc ci run (<a href="https://github.com/pragtical/pragtical/commit/39caabc0ac7775141c8cfaff0e53b12abe66d4d8" target="_blank" rel="noopener noreferrer">39caabc0</a>)</p>
-</li>
-<li>
-<p>Applied msvc fixes from <a href="https://github.com/lite-xl/lite-xl/pull/1577" target="_blank" rel="noopener noreferrer">lite-xl/lite-xl#1572</a></p>
-</li>
-<li>
-<p>Rename latest builds to rolling (<a href="https://github.com/pragtical/pragtical/commit/51754f3375d2cb3d0daae04e6014fa75fa8d45cd" target="_blank" rel="noopener noreferrer">51754f33</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v312-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
-<ul>
-<li>Widget: delay RootView require</li>
-<li>ListBox: rendering fixes</li>
-<li>Skip ctrl+wheel by default, better tooltip remove</li>
-<li>Fix floating ListBox rows offset</li>
-<li>ListBox: horizontal scroll support</li>
-<li>SelectBox: hide list when clicking outside</li>
-<li>Better handle ctrl modkey state</li>
-<li>Make widgets inherit name from parent (<a href="https://github.com/pragtical/widget/pull/2" target="_blank" rel="noopener noreferrer">#2</a>)</li>
-<li>Give selectbox container same name as the selectbox (<a href="https://github.com/pragtical/widget/pull/1" target="_blank" rel="noopener noreferrer">#1</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v312-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>
-<p>Normalize strokes in fixed order (<a href="https://github.com/lite-xl/lite-xl/pull/1572" target="_blank" rel="noopener noreferrer">#1572</a>)</p>
-</li>
-<li>
-<p>fix(core): defer core<!-- -->:open-log<!-- --> until everything is loaded (<a href="https://github.com/lite-xl/lite-xl/pull/1585" target="_blank" rel="noopener noreferrer">#1585</a>)</p>
-</li>
-<li>
-<p>Fix scrollbar misinterpreting percent (<a href="https://github.com/lite-xl/lite-xl/pull/1587" target="_blank" rel="noopener noreferrer">#1587</a>)</p>
-</li>
-<li>
-<p>Fix returned percent when clicking the Scrollbar track (<a href="https://github.com/pragtical/pragtical/commit/e07ea0fe11b6dc02a9ed1edd4d2333db0846340a" target="_blank" rel="noopener noreferrer">e07ea0fe</a>)</p>
-</li>
-<li>
-<p>Adds super as a modkey. (<a href="https://github.com/lite-xl/lite-xl/pull/1590" target="_blank" rel="noopener noreferrer">#1590</a>)</p>
-</li>
-<li>
-<p>Add NaN guard to View<!-- -->:update_scrollbar<!-- --> (<a href="https://github.com/pragtical/pragtical/commit/aa0d6f6c71d4f02bbdbc09ef7f5984f50a21c87c" target="_blank" rel="noopener noreferrer">aa0d6f6c</a>)</p>
-</li>
-<li>
-<p>Fixed C++14 digit separators (<a href="https://github.com/lite-xl/lite-xl/pull/1593" target="_blank" rel="noopener noreferrer">#1593</a>)</p>
-</li>
-<li>
-<p>Fix Scrollbar.{expanded,contracted}_size documentation (<a href="https://github.com/pragtical/pragtical/commit/70245ba0862761237e6aabbc7f7a1f259402a4ee" target="_blank" rel="noopener noreferrer">70245ba0</a>)</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.1.1...v3.1.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.1.1...v3.1.2</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
