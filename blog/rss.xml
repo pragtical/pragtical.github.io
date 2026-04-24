@@ -4,10 +4,35 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Thu, 23 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.8.7 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v387-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v387-release</guid>
+            <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Sometimes we fix something and break another thing without even noticing]]></description>
+            <content:encoded><![CDATA[<p>Sometimes we fix something and break another thing without even noticing
+but, it is better to notice early than be sorry. it is said that the number seven
+is blessed and so is our patch number!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="bug-fix">Bug Fix<a href="https://pragtical.dev/blog/pragtical-v387-release#bug-fix" class="hash-link" aria-label="Direct link to Bug Fix" title="Direct link to Bug Fix">​</a></h2>
+<p>Immediately following v3.8.6 we make another release to fix an issue that
+was introducing while trying to save some cpu cycles on the View update routine.</p>
+<p>Previously we added a change to prevent unnecessary scroll logic on a View
+update but didn't noticed this affected the StatusView show message functionality.
+This update change should fix the scenario where a view is marked as non-scrollable
+but still hacks around the scroll mechanism as it is done with the StatusView
+show_message mechanism which uses the scroll system to display temporary messages.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.8.7" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v387-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v387-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>Fix non-scrollable skipping affecting statusview
+(<a href="https://github.com/pragtical/pragtical/pull/462" target="_blank" rel="noopener noreferrer">#462</a>)</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.8.6 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v386-release</link>
@@ -2633,90 +2658,6 @@ of patterns matching nothing code.
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.3.0 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v330-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v330-release</guid>
-            <pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Prominent changes on this release include: adaptive sizing of autocomplete box,]]></description>
-            <content:encoded><![CDATA[<p>Prominent changes on this release include: adaptive sizing of autocomplete box,
-TreeView horizontal scrollbar support, TreeList widget and performance
-improvements.</p>
-<p><strong>TreeList Widget for LSP Symbols</strong></p>
-<p><img decoding="async" loading="lazy" src="https://github.com/pragtical/lsp/assets/1702572/ebccab31-3995-4922-9557-b4d98025da65" alt="symbols-treeview" class="img_ev3q"></p>
-<p><strong>Adaptive Sizing Autocomplete</strong></p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/pragtical/pragtical/assets/1702572/09e69438-c765-4d31-a9b0-8e7bc1756057"></video>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.3.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v330-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api">API<a href="https://pragtical.dev/blog/pragtical-v330-release#api" class="hash-link" aria-label="Direct link to API" title="Direct link to API">​</a></h3>
-<ul>
-<li>
-<p>Expose renderer.font.get_metadata() as a method, documented it, etc...
-(<a href="https://github.com/pragtical/pragtical/pull/64" target="_blank" rel="noopener noreferrer">#64</a>)</p>
-</li>
-<li>
-<p>Expose get_partial_symbol on autocomplete plugin (for LSP)
-(<a href="https://github.com/pragtical/pragtical/pull/66" target="_blank" rel="noopener noreferrer">#66</a>)</p>
-</li>
-<li>
-<p>Increase mod version from 3.3.1 to 3.4.0 (also because of new system.setenv)
-(<a href="https://github.com/pragtical/pragtical/pull/68" target="_blank" rel="noopener noreferrer">#68</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v330-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>Fix modversion matching to align with semver
-(<a href="https://github.com/pragtical/pragtical/pull/71" target="_blank" rel="noopener noreferrer">#71</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v330-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Enable horizontal scrollbar on treeview plugin
-(<a href="https://github.com/pragtical/pragtical/pull/63" target="_blank" rel="noopener noreferrer">#63</a>)</p>
-</li>
-<li>
-<p>Added adaptive sizing to autocomplete plugin
-(<a href="https://github.com/pragtical/pragtical/pull/67" target="_blank" rel="noopener noreferrer">#67</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v330-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>Removed no longer needed microtar subproject
-(<a href="https://github.com/pragtical/pragtical/pull/70" target="_blank" rel="noopener noreferrer">#70</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v330-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
-<ul>
-<li>
-<p>Optimize SearchReplaceList collapse/uncollapse
-(<a href="https://github.com/pragtical/widget/pull/4" target="_blank" rel="noopener noreferrer">#4</a>)</p>
-</li>
-<li>
-<p>FontDialog: use the font metadata preview text if available
-(<a href="https://github.com/pragtical/widget/pull/5" target="_blank" rel="noopener noreferrer">#5</a>)</p>
-</li>
-<li>
-<p>Added new TreeList widget
-(<a href="https://github.com/pragtical/widget/pull/6" target="_blank" rel="noopener noreferrer">#6</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v330-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
-<ul>
-<li>Merged: glyphset loading optimization for faster font loading
-(<a href="https://github.com/lite-xl/lite-xl/pull/1543" target="_blank" rel="noopener noreferrer">#1543</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v330-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>
-<p>process: fix unitialized variables
-(<a href="https://github.com/lite-xl/lite-xl/pull/1719" target="_blank" rel="noopener noreferrer">#1719</a>)</p>
-</li>
-<li>
-<p>Added .pyi extension to python.
-(<a href="https://github.com/lite-xl/lite-xl/pull/1728" target="_blank" rel="noopener noreferrer">#1728</a>)</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.2.2...v3.3.0" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.2.2...v3.3.0</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
