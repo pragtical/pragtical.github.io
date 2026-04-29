@@ -18,7 +18,7 @@ but, it is better to notice early than be sorry. it is said that the number seve
 is blessed and so is our patch number!</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="bug-fix">Bug Fix<a href="https://pragtical.dev/blog/pragtical-v387-release#bug-fix" class="hash-link" aria-label="Direct link to Bug Fix" title="Direct link to Bug Fix">​</a></h2>
 <p>Immediately following v3.8.6 we make another release to fix an issue that
-was introducing while trying to save some cpu cycles on the View update routine.</p>
+was introduced while trying to save some cpu cycles on the View update routine.</p>
 <p>Previously we added a change to prevent unnecessary scroll logic on a View
 update but didn't noticed this affected the StatusView show message functionality.
 This update change should fix the scenario where a view is marked as non-scrollable
