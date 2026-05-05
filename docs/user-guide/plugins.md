@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Plugins
 
-Pragtical implements many features as plugins. By default official releases
+Pragtical implements many features as plugins. By default, official releases
 bundle all language and color plugins for convenience.
 
 Extra plugins can be found on the github [plugins repository] or this website
@@ -19,6 +19,8 @@ plugins repository.
 :::
 
 ## Location
+
+### Bundled Plugins
 
 Plugins that come bundled with Pragtical are usually stored in
 `DATADIR/plugins`.
@@ -32,7 +34,13 @@ then `DATADIR` will be `<path-to-exe>/../share/pragtical`.
 
 Otherwise, `DATADIR` will be `<path-to-exe>/data`.
 
+### User Plugins
+
 User plugins should be installed into `USERDIR/plugins`.
+
+On Linux, `DATADIR` uses the XDG Base Directory Specification. Pragtical first
+checks the `$XDG_CONFIG_HOME` environment variable and falls back to
+`~/.config` otherwise.
 
 ## Plugin managers
 
@@ -42,6 +50,8 @@ plugin managers can be built to install and manage plugins.
 Currently, there are two plugin managers made for Pragtical. These two plugin
 managers use vastly different ways of plugin management, so make sure to
 consult the main page on each of them for exact instructions.
+
+:::caution The Miq project was archived in 2025 and is not being maintained.
 
 ### PPM
 
