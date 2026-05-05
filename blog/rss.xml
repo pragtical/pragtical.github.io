@@ -4,10 +4,118 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 05 May 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.9.0 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v390-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v390-release</guid>
+            <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[The time has finally come! A new contestant enters the arena and promises some]]></description>
+            <content:encoded><![CDATA[<p>The time has finally come! A new contestant enters the arena and promises some
+performance gains to help make the editor snappier and more responsive, with
+another new friend to make sure it works.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="native-tokenizer">Native Tokenizer<a href="https://pragtical.dev/blog/pragtical-v390-release#native-tokenizer" class="hash-link" aria-label="Direct link to Native Tokenizer" title="Direct link to Native Tokenizer">​</a></h2>
+<p>I'm happy to announce we finally got a native tokenizer in the form of a
+Lua module and benchmarks have proved to provide performance gains that
+can reach a 20X to 30X improvement over the previous Lua tokenizer.</p>
+<p>Here is a video showcasing the evident performance gains with a 4000 lines file.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/1af115a2-e6d0-4fdb-a974-cc995afbc969"></video>
+<p>This native tokenizer is enabled by default (config.native_tokenizer) and can
+be toggled from the settings UI.</p>
+<p>You can benchmark it with the new provided repo script:</p>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">pragtical run scripts/lua/benchmarks/tokenizer.lua </span><span class="token punctuation" style="color:rgb(248, 248, 242)">\</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token operator">&lt;</span><span class="token plain">path-to-source-file</span><span class="token operator">&gt;</span><span class="token plain"> </span><span class="token operator">&lt;</span><span class="token plain">iterations_count</span><span class="token operator">|</span><span class="token plain">defaults-to-</span><span class="token operator file-descriptor important">3</span><span class="token operator">&gt;</span><br></span></code></pre></div></div>
+<p>To keep compatibility I ported most functionality from utf8extra and regex Lua
+modules into non Lua dependent C for usage on the native tokenizer. Some time
+ago I started an initial tokenizer port from Lua to C++ and with the help
+of Copilot got it ported to C and working! GitHub Copilot basically implemented
+it since the original code was mostly interfaces (with the exception of the
+utf8extra and regex ports). Hopefully if it breaks it will not come
+biting at us 😂, but is incredible how far these LLM models have come...</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="testing-framework">Testing Framework<a href="https://pragtical.dev/blog/pragtical-v390-release#testing-framework" class="hash-link" aria-label="Direct link to Testing Framework" title="Direct link to Testing Framework">​</a></h2>
+<p>Another worthwhile addition on this release is the new testing framework,
+accompanied of tests to check our Lua C modules and some pure Lua component
+tests like core.common courtesy of <a href="https://github.com/walkero-gr" target="_blank" rel="noopener noreferrer">Walkero</a>!</p>
+<p>Here is how the tests look at the terminal emulator:</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/929208d4-75df-4858-95b7-723ecd1655cd" alt="pragtical tests" class="img_ev3q"></p>
+<p>This test framework supports running the tests inside coroutines, so you can
+<code>coroutine.yield()</code> from your tests in the same way done with
+core.add_thread/core.add_background_thread (check the runner.lua test for an
+example). And the most important aspect, the whole pragtical runtime is
+available to the written tests!</p>
+<p>A new <code>core.test</code> module was added to easily describe and write tests. Also,
+a new cli command <code>test</code> (eg: <code>pragtical test &lt;dir_or_test_file&gt;</code>) will allow
+to automatically run a directory containing lua test files or directly a single
+test file.</p>
+<p>It should help us better catch errors on the API's, hopefully more test scripts
+keep coming up to help us battle test the project :)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="other-enhancements-and-fixes">Other Enhancements and Fixes<a href="https://pragtical.dev/blog/pragtical-v390-release#other-enhancements-and-fixes" class="hash-link" aria-label="Direct link to Other Enhancements and Fixes" title="Direct link to Other Enhancements and Fixes">​</a></h3>
+<p>Some improvements were made for macOS (at least that is what I think since
+macOS is not my daily driver for better testing):</p>
+<ul>
+<li>The shared memory module used for IPC was rewritten to better support of macOS.</li>
+<li>PPM was not been packaged for official macOS binary releases, which is fixed now.</li>
+</ul>
+<p>Fixes and enhancements thanks to <a href="https://github.com/badiku" target="_blank" rel="noopener noreferrer">badiku</a> issue reports:</p>
+<ul>
+<li>Drawing operations where processing before an update was called, this caused
+various issues with plugins that relied on update been call before draw.</li>
+<li>The core<!-- -->:open-file<!-- --> command now trims double quotes from the given path
+to allow opening it, for example <code>"/path/to/file"</code> gets trim into
+<code>/path/to/file</code>, this allows properly opening files which path was copied
+from a file explorer and pasted into Pragtical.</li>
+</ul>
+<p>Finally, a new zig meson cross file was added to allow targeting older glibc v2.17.
+This should permit more easily targeting older Linux distributions. Building
+with it seems to work but haven't plugged it yet into our GitHub CI builds,
+hopefully we can do it for future releases.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.9.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v390-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v390-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>Native tokenizer implementation
+(<a href="https://github.com/pragtical/pragtical/pull/467" target="_blank" rel="noopener noreferrer">#467</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v390-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>drawwhitespace plugin: properly handle nil selections
+(<a href="https://github.com/pragtical/pragtical/pull/463" target="_blank" rel="noopener noreferrer">#463</a>)</p>
+</li>
+<li>
+<p>Ensure first update ran on views before draw
+(<a href="https://github.com/pragtical/pragtical/pull/469" target="_blank" rel="noopener noreferrer">#469</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v390-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Add testing framework and initial set of tests
+(<a href="https://github.com/pragtical/pragtical/pull/465" target="_blank" rel="noopener noreferrer">#465</a>)</p>
+</li>
+<li>
+<p>Compatible rewrite of shmem
+(<a href="https://github.com/pragtical/pragtical/pull/466" target="_blank" rel="noopener noreferrer">#466</a>)</p>
+</li>
+<li>
+<p>Trim double quotes from path on core<!-- -->:open-file<!-- -->
+(<a href="https://github.com/pragtical/pragtical/pull/470" target="_blank" rel="noopener noreferrer">#470</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v390-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Fix PPM not packaging into generated DMG's for mac
+(<a href="https://github.com/pragtical/pragtical/pull/464" target="_blank" rel="noopener noreferrer">#464</a>)</p>
+</li>
+<li>
+<p>Change meson cross files to ini added zig conf
+(<a href="https://github.com/pragtical/pragtical/pull/471" target="_blank" rel="noopener noreferrer">#471</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.8.7 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v387-release</link>
@@ -2556,108 +2664,6 @@ to table index</p>
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.3.1...v3.4.0" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.3.1...v3.4.0</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.3.1 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v331-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v331-release</guid>
-            <pubDate>Thu, 18 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[This release consist mostly of editor and build system bug fixes with some]]></description>
-            <content:encoded><![CDATA[<p>This release consist mostly of editor and build system bug fixes with some
-minor new features and enhancements.</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.3.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v331-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v331-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>settings ui: added max_visible_commands config
-(<a href="https://github.com/pragtical/pragtical/pull/79" target="_blank" rel="noopener noreferrer">#79</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v331-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fixes to autocomplete re-sizing code
-(<a href="https://github.com/pragtical/pragtical/pull/76" target="_blank" rel="noopener noreferrer">#76</a>)</p>
-</li>
-<li>
-<p>Fix conflicting goto jump on tokenizer which was introduced by the skipping
-of patterns matching nothing code.
-(<a href="https://github.com/pragtical/pragtical/commit/b2d03264046e4f1afa7360c1cd738b44bc824af3" target="_blank" rel="noopener noreferrer">b2d03264</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v331-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Renamed numpad insert key from 'ins' to 'insert' and empty 5 to 'clear'
-(<a href="https://github.com/pragtical/pragtical/pull/73" target="_blank" rel="noopener noreferrer">#73</a>)</p>
-</li>
-<li>
-<p>Added TextEditor category on linux
-(<a href="https://github.com/pragtical/pragtical/pull/77" target="_blank" rel="noopener noreferrer">#77</a>)</p>
-</li>
-<li>
-<p>plugin language_lua: added unescaped [=string=] support
-(<a href="https://github.com/pragtical/pragtical/pull/78" target="_blank" rel="noopener noreferrer">#78</a>)</p>
-</li>
-<li>
-<p>Alert by default of file changes in autoreload plugin
-(<a href="https://github.com/pragtical/pragtical/pull/82" target="_blank" rel="noopener noreferrer">#82</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v331-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Build the plugin manager statically for msys
-(<a href="https://github.com/pragtical/pragtical/pull/80" target="_blank" rel="noopener noreferrer">#80</a>)</p>
-</li>
-<li>
-<p>Fix for mbedtls2 detection on ppm subproject
-(<a href="https://github.com/pragtical/pragtical/commit/abc2d93f880633aa966a6c762ede2e3b3d86a9d0" target="_blank" rel="noopener noreferrer">abc2d93f</a>)</p>
-</li>
-<li>
-<p>Meson subproject updates
-(<a href="https://github.com/pragtical/pragtical/commit/6f5ab1212f02e10219723a72df6abe54acb54cac" target="_blank" rel="noopener noreferrer">6f5ab121</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v331-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>
-<p>Improve autocomplete scroll behavior
-(<a href="https://github.com/lite-xl/lite-xl/pull/1732" target="_blank" rel="noopener noreferrer">#1732</a>)</p>
-</li>
-<li>
-<p>Fix language_js regex/comment distinction
-(<a href="https://github.com/lite-xl/lite-xl/pull/1731" target="_blank" rel="noopener noreferrer">#1731</a>)</p>
-</li>
-<li>
-<p>scripts: not hardcode MSYSTEM
-(<a href="https://github.com/lite-xl/lite-xl/pull/1739" target="_blank" rel="noopener noreferrer">#1739</a>)</p>
-</li>
-<li>
-<p>Add SerenityOS platform support
-(<a href="https://github.com/lite-xl/lite-xl/pull/1745" target="_blank" rel="noopener noreferrer">#1745</a>)</p>
-</li>
-<li>
-<p>Limit language_js regex avoidance to numbers, and fix starting /* comments
-(<a href="https://github.com/lite-xl/lite-xl/pull/1744" target="_blank" rel="noopener noreferrer">#1744</a>)</p>
-</li>
-<li>
-<p>Fixed some typos in core.init
-(<a href="https://github.com/lite-xl/lite-xl/pull/1755" target="_blank" rel="noopener noreferrer">#1755</a>)</p>
-</li>
-<li>
-<p>Added Arduino syntax highlighting support alongside C++.
-(<a href="https://github.com/lite-xl/lite-xl/pull/1767" target="_blank" rel="noopener noreferrer">#1767</a>)</p>
-</li>
-<li>
-<p>Fix BufferSize in g_read for Windows
-(<a href="https://github.com/lite-xl/lite-xl/pull/1722" target="_blank" rel="noopener noreferrer">#1722</a>)</p>
-</li>
-<li>
-<p>Skip patterns matching nothing in tokenizer
-(<a href="https://github.com/lite-xl/lite-xl/pull/1743" target="_blank" rel="noopener noreferrer">#1743</a>)</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.3.0...v3.3.1</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
