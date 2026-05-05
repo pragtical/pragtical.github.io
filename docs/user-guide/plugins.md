@@ -56,9 +56,11 @@ consult the main page on each of them for exact instructions.
 
 ### PPM
 
-[ppm] is more akin to distro package managers such as `apt` and `dnf`. ppm is
-currently shipped on pragtical official releases and a GUI for installing
-plugins is shipped as part of the editor, also it is accessible from the command
+[ppm] is more akin to distro package managers such as `apt` and `dnf`.
+
+ppm is part of the official Pragtical distribution. A GUI for installing
+plugins is available from the main toolbar and via the various `Plugin Manager`
+commands in the command palette. It is also accessible from the command
 line interface by invoking `pragtical pm`.
 
 <video autoplay muted loop style={{width: '100%'}} controls>

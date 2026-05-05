@@ -9,6 +9,10 @@ description: Learn about basic operations in Pragtical.
 
 Pragtical comes with a file browser by default.
 You can open, rename, move and delete files with it.
+
+With a single left-click, documents will instantly open and [images][Image Viewer]
+will be previewed in a new tab.
+
 Right-clicking on a file or folder will show more options.
 
 Other than that, you can also open files with <kbd>ctrl+p</kbd>.
@@ -162,3 +166,4 @@ when you restart the editor.
 [2]: /img/user-guide/project-search.png
 [3]: /img/user-guide/line-endings.png
 [4]: /img/user-guide/indent.png
+[Image Viewer]: /image-viewer

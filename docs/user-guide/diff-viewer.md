@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-description: Learn about the Pragtical built-in Diff Viewer
+description: Learn about Pragtical's built-in Diff Viewer
 ---
 
 import Tabs from '@theme/Tabs';
