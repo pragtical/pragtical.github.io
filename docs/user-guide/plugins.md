@@ -52,6 +52,7 @@ managers use vastly different ways of plugin management, so make sure to
 consult the main page on each of them for exact instructions.
 
 :::caution The Miq project was archived in 2025 and is not being maintained.
+:::
 
 ### PPM
 
