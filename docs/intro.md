@@ -86,6 +86,10 @@ evident.
 to perform different types of task, the way these tasks are scheduled has been
 improved on Pragtical to provide better editor responsiveness.
 
+* **Native Tokenizer** - in order to perform faster syntax highlighting we
+ported the Lua tokenizer into a native Lua module with optimizations that
+provide a 20X to 30X performance improvement.
+
 ### More Features
 
 Some of the additional features and enhancements include:
@@ -121,10 +125,17 @@ easily navigate and synchronize the differences. The functionality is
 expanded by the [Source Control Management] where it will let you compare
 your current checkout file to an older version on the commit history.
 
+* **Built-in [Image Viewer]** - A basic image viewer powered by [SDL_Image]
+with support for a decent amount of image formats. Some of its features include
+zoom in/out and toggleable background mode (none, solid and grid) for transparent
+images.
+
 
 [CLI]:                       /docs/user-guide/cli
 [Diff Viewer]:               /docs/user-guide/diff-viewer
+[Image Viewer]:              /docs/user-guide/image-viewer
 [SDL]:                       https://www.libsdl.org/
+[SDL_Image]:                 https://github.com/libsdl-org/SDL_image/
 [LSP]:                       /plugins?plugin=lsp
 [EditorConfig]:              /plugins?plugin=editorconfig
 [Integrated Terminal]:       /plugins?plugin=terminal
