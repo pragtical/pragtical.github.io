@@ -166,4 +166,4 @@ when you restart the editor.
 [2]: /img/user-guide/project-search.png
 [3]: /img/user-guide/line-endings.png
 [4]: /img/user-guide/indent.png
-[Image Viewer]: /image-viewer
+[Image Viewer]: /docs/user-guide/image-viewer
