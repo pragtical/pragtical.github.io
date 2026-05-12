@@ -2,11 +2,134 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2026-05-05T00:00:00.000Z</updated>
+    <updated>2026-05-12T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.10.0 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v3100-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v3100-release"/>
+        <updated>2026-05-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Pragtical v3.10.0 is out with a fairly packed set of editor-facing additions:]]></summary>
+        <content type="html"><![CDATA[<p>Pragtical v3.10.0 is out with a fairly packed set of editor-facing additions:
+networking support, Markdown previews, richer text rendering, color emoji, and
+some process API cleanup that should make scripting integrations more useful.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="networking-apis">Networking APIs<a href="https://pragtical.dev/blog/pragtical-v3100-release#networking-apis" class="hash-link" aria-label="Direct link to Networking APIs" title="Direct link to Networking APIs">​</a></h2>
+<p>This release adds TCP+SSL and UDP support using SDL3_net and mbedtls v4. The new
+networking pieces extend Pragtical's Lua-facing runtime APIs and are covered by
+new HTTP and WebSocket tests.</p>
+<p>HTTP and WebSocket modules were added that simplify the usage of the new
+networking support, giving scripts and plugins a stronger base for networked
+workflows.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="markdown-preview">Markdown Preview<a href="https://pragtical.dev/blog/pragtical-v3100-release#markdown-preview" class="hash-link" aria-label="Direct link to Markdown Preview" title="Direct link to Markdown Preview">​</a></h2>
+<p>MarkdownView preview support landed in this release. Markdown files can now be
+previewed directly inside the editor.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/3275bf44-7f47-4b6b-a8bd-ae9f596762ea"></video>
+<p>The autocomplete description box now uses MarkdownView too, so formatted
+documentation can render in a more useful way while coding.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/12bb6b36-4248-4326-bc0b-821d83ecd6d1"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="text-rendering">Text Rendering<a href="https://pragtical.dev/blog/pragtical-v3100-release#text-rendering" class="hash-link" aria-label="Direct link to Text Rendering" title="Direct link to Text Rendering">​</a></h2>
+<p>Optional ligature support was added using Harfbuzz that can be enabled or
+disabled on a per font basis.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/04b8c5e2-78e6-4144-b1ba-ef07b7dea70f"></video>
+<p>Color emojis also made it in! We support emoji fonts with embedded image files
+and COLRv1.</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/6cd20872-3a0d-47a0-813e-202a669b149c" alt="color emoji" class="img_ev3q"></p>
+<p>The widget subproject was also updated for ligatures in the font dialog, plus
+TreeList filtering, textbox password mode, and label scrolling support.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="process-api-and-build-work">Process API and Build Work<a href="https://pragtical.dev/blog/pragtical-v3100-release#process-api-and-build-work" class="hash-link" aria-label="Direct link to Process API and Build Work" title="Direct link to Process API and Build Work">​</a></h2>
+<p>The process API was ported to SDL3's process API and received follow-up fixes
+for Windows behavior and exit code handling. A new <code>linux-mingw32-x86_64.ini</code>
+Meson cross file was added for Linux-hosted MinGW builds.</p>
+<p>Special thanks to <a href="https://github.com/acook" target="_blank" rel="noopener noreferrer">acook</a> who landed improvements
+to the documentation of pragtical website, reported various issues and suggested
+the open documentation and website new commands.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.10.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3100-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v3100-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>New view-documentation-help and view-website commands
+(<a href="https://github.com/pragtical/pragtical/pull/474" target="_blank" rel="noopener noreferrer">#474</a>)</p>
+</li>
+<li>
+<p>Add TCP+SSL and UDP support using SDL3_net+mbedtls
+(<a href="https://github.com/pragtical/pragtical/pull/398" target="_blank" rel="noopener noreferrer">#398</a>)</p>
+</li>
+<li>
+<p>Add MarkdownView preview support
+(<a href="https://github.com/pragtical/pragtical/pull/475" target="_blank" rel="noopener noreferrer">#475</a>)</p>
+</li>
+<li>
+<p>Add optional Ligatures support using Harfbuzz
+(<a href="https://github.com/pragtical/pragtical/pull/479" target="_blank" rel="noopener noreferrer">#479</a>)</p>
+</li>
+<li>
+<p>Add color emoji support
+(<a href="https://github.com/pragtical/pragtical/pull/480" target="_blank" rel="noopener noreferrer">#480</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3100-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Port process API to use new sdl3 process API
+(<a href="https://github.com/pragtical/pragtical/pull/477" target="_blank" rel="noopener noreferrer">#477</a>)</p>
+</li>
+<li>
+<p>Use MarkdownView for autocomplete description box
+(<a href="https://github.com/pragtical/pragtical/pull/482" target="_blank" rel="noopener noreferrer">#482</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3100-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Process API: default background to true on Windows
+(<a href="https://github.com/pragtical/pragtical/pull/478" target="_blank" rel="noopener noreferrer">#478</a>)</p>
+</li>
+<li>
+<p>Restore image opening from treeview
+(<a href="https://github.com/pragtical/pragtical/commit/cee3bbb0" target="_blank" rel="noopener noreferrer">cee3bbb0</a>)</p>
+</li>
+<li>
+<p>process: drop background since detach is almost same
+(<a href="https://github.com/pragtical/pragtical/commit/4285a25b" target="_blank" rel="noopener noreferrer">4285a25b</a>)</p>
+</li>
+<li>
+<p>Fix harfbuzz build issue on msys
+(<a href="https://github.com/pragtical/pragtical/commit/18450100" target="_blank" rel="noopener noreferrer">18450100</a>)</p>
+</li>
+<li>
+<p>Patch sdl3 process api return exitcode on Windows
+(<a href="https://github.com/pragtical/pragtical/commit/f93cc85d" target="_blank" rel="noopener noreferrer">f93cc85d</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v3100-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
+<ul>
+<li>
+<p>Update widget for TreeList filter support
+(<a href="https://github.com/pragtical/pragtical/pull/476" target="_blank" rel="noopener noreferrer">#476</a>)</p>
+</li>
+<li>
+<p>Update widget for ligatures in font dialog
+(<a href="https://github.com/pragtical/pragtical/commit/55def203" target="_blank" rel="noopener noreferrer">55def203</a>)</p>
+</li>
+<li>
+<p>widget: textbox password mode, label scrolling
+(<a href="https://github.com/pragtical/pragtical/commit/a110e82b" target="_blank" rel="noopener noreferrer">a110e82b</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3100-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>Add linux-mingw32-x86_64.ini meson cross file
+(<a href="https://github.com/pragtical/pragtical/commit/e53400c1" target="_blank" rel="noopener noreferrer">e53400c1</a>)</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.9.0 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v390-release</id>
@@ -2547,198 +2670,6 @@ symbols on C/C++ and fallback detection of UTF-16/32 when no encoding was detect
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1</a></p>]]></content>
-        <author>
-            <name>Jefferson Gonzalez</name>
-            <uri>https://github.com/jgmdev</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Pragtical v3.4.0 Release]]></title>
-        <id>https://pragtical.dev/blog/pragtical-v340-release</id>
-        <link href="https://pragtical.dev/blog/pragtical-v340-release"/>
-        <updated>2024-06-25T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[After two months finally a release with the accumulated sum of new]]></summary>
-        <content type="html"><![CDATA[<p>After two months finally a release with the accumulated sum of new
-features, fixes and enhancements!</p>
-<p>One notable change is the DocView cache for better performance on files
-with really long lines, which previously caused the editor to hang when plugins
-like drawwhitespace, colorpreview or selectionhighlight were enabled.</p>
-<p>Also, this release introduces code that moves window management from C
-to Lua, which breaks most <code>system.{*window*}</code> functions. Updating the following
-plugins will be necessary for a smooth transition:</p>
-<ul>
-<li>centerdoc</li>
-<li>opacity</li>
-<li>lsp</li>
-</ul>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v340-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v340-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Add ui config to toggle the treeview toolbar
-(<a href="https://github.com/pragtical/pragtical/pull/84" target="_blank" rel="noopener noreferrer">#84</a>)</p>
-</li>
-<li>
-<p>Support multiple projects on the findfile plugin
-(<a href="https://github.com/pragtical/pragtical/pull/100" target="_blank" rel="noopener noreferrer">#100</a>)</p>
-</li>
-<li>
-<p>Multiproject handling for statusview doc<!-- -->:file<!-- -->
-(<a href="https://github.com/pragtical/pragtical/pull/101" target="_blank" rel="noopener noreferrer">#101</a>)</p>
-</li>
-<li>
-<p>Introductory window creation and management using Lua
-(<a href="https://github.com/pragtical/pragtical/pull/108" target="_blank" rel="noopener noreferrer">#108</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v340-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
-<ul>
-<li>Basic doc/docview cache for better performance
-(<a href="https://github.com/pragtical/pragtical/pull/105" target="_blank" rel="noopener noreferrer">#105</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v340-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>CLI: lowercase the appname on usage description
-(<a href="https://github.com/pragtical/pragtical/pull/92" target="_blank" rel="noopener noreferrer">#92</a>)</p>
-</li>
-<li>
-<p>Mark common.serializeoptions fields as optional
-(<a href="https://github.com/pragtical/pragtical/pull/95" target="_blank" rel="noopener noreferrer">#95</a>)</p>
-</li>
-<li>
-<p>Render the statusview message on demand
-(<a href="https://github.com/pragtical/pragtical/pull/103" target="_blank" rel="noopener noreferrer">#103</a>)</p>
-</li>
-<li>
-<p>Check doc is still in view before autoreloading it
-(<a href="https://github.com/pragtical/pragtical/pull/104" target="_blank" rel="noopener noreferrer">#104</a>)</p>
-</li>
-<li>
-<p>Handle conversion of \ to ¥ as reported on #94
-(<a href="https://github.com/pragtical/pragtical/pull/106" target="_blank" rel="noopener noreferrer">#106</a>)</p>
-</li>
-<li>
-<p>Support for utf-8 text reduction on node title
-(<a href="https://github.com/pragtical/pragtical/pull/107" target="_blank" rel="noopener noreferrer">#107</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v340-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Add /usr/local/bin, /usr/local/sbin to PATH on Mac OS X
-(<a href="https://github.com/pragtical/pragtical/pull/87" target="_blank" rel="noopener noreferrer">#87</a>)</p>
-</li>
-<li>
-<p>Assign <code>ctrl+,</code> binding to open user module command
-(<a href="https://github.com/pragtical/pragtical/pull/88" target="_blank" rel="noopener noreferrer">#88</a>)</p>
-</li>
-<li>
-<p>Update JetBrains Mono font to latest version 2.304
-(<a href="https://github.com/pragtical/pragtical/pull/91" target="_blank" rel="noopener noreferrer">#91</a>)</p>
-</li>
-<li>
-<p>Auto chdir to project depending on active document
-(<a href="https://github.com/pragtical/pragtical/pull/93" target="_blank" rel="noopener noreferrer">#93</a>)</p>
-</li>
-<li>
-<p>Improvements to core.visited_files handling
-(<a href="https://github.com/pragtical/pragtical/pull/96" target="_blank" rel="noopener noreferrer">#96</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workarounds">Workarounds<a href="https://pragtical.dev/blog/pragtical-v340-release#workarounds" class="hash-link" aria-label="Direct link to Workarounds" title="Direct link to Workarounds">​</a></h3>
-<ul>
-<li>Disable assert on font resizing to allow fonts scanning.
-(<a href="https://github.com/pragtical/pragtical/pull/89" target="_blank" rel="noopener noreferrer">#89</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v340-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Changes to msys build on rolling release workflow
-(<a href="https://github.com/pragtical/pragtical/commit/d581132858e9427717fa853e7fd21f0963a90ad0" target="_blank" rel="noopener noreferrer">d5811328</a>)</p>
-</li>
-<li>
-<p>Various maintainance changes to github workflows</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v340-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
-<ul>
-<li>
-<p>Use correct path separator on FilePicker widget
-(<a href="https://github.com/pragtical/widget/commit/1347e8c337fd4715702e3347f2277f93c1379570" target="_blank" rel="noopener noreferrer">1347e8c3</a>)</p>
-</li>
-<li>
-<p>Update for lua window management
-(<a href="https://github.com/pragtical/widget/pull/7" target="_blank" rel="noopener noreferrer">#7</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v340-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>
-<p>build: fix dirmonitor backend selection
-(<a href="https://github.com/lite-xl/lite-xl/pull/1790" target="_blank" rel="noopener noreferrer">#1790</a>)</p>
-</li>
-<li>
-<p>api/system: fix newlines returned by get_clipboard
-(<a href="https://github.com/lite-xl/lite-xl/pull/1788" target="_blank" rel="noopener noreferrer">#1788</a>)</p>
-</li>
-<li>
-<p>Change co_wait to co_await in language_cpp
-(<a href="https://github.com/lite-xl/lite-xl/pull/1800" target="_blank" rel="noopener noreferrer">#1800</a>)</p>
-</li>
-<li>
-<p>build: fix dirmonitor backend selection
-(<a href="https://github.com/lite-xl/lite-xl/pull/1790" target="_blank" rel="noopener noreferrer">#1790</a>)</p>
-</li>
-<li>
-<p>Handle static constexpr in language_cpp
-(<a href="https://github.com/lite-xl/lite-xl/pull/1806" target="_blank" rel="noopener noreferrer">#1806</a>)</p>
-</li>
-<li>
-<p>improve number highlighting for c
-(<a href="https://github.com/lite-xl/lite-xl/pull/1752" target="_blank" rel="noopener noreferrer">#1752</a>)</p>
-</li>
-<li>
-<p>language_cpp: backport number highlighting from c
-(<a href="https://github.com/lite-xl/lite-xl/pull/1818" target="_blank" rel="noopener noreferrer">#1818</a>)</p>
-</li>
-<li>
-<p>Add support for binary integer literals.
-(<a href="https://github.com/lite-xl/lite-xl/pull/1819" target="_blank" rel="noopener noreferrer">#1819</a>)</p>
-</li>
-<li>
-<p>Update language_python.lua
-(<a href="https://github.com/lite-xl/lite-xl/pull/1723" target="_blank" rel="noopener noreferrer">#1723</a>)</p>
-</li>
-<li>
-<p>rootview: workaround macos weird dnd event timing</p>
-</li>
-<li>
-<p>Expand Process API
-(<a href="https://github.com/lite-xl/lite-xl/pull/1757" target="_blank" rel="noopener noreferrer">#1757</a>)</p>
-</li>
-<li>
-<p>fix(dirmonitor): avoid calling the change callback multiple times
-in the same notification
-(<a href="https://github.com/lite-xl/lite-xl/pull/1824" target="_blank" rel="noopener noreferrer">#1824</a>)</p>
-</li>
-<li>
-<p>core/rootview: fix dnd multiple folders into dock
-(<a href="https://github.com/lite-xl/lite-xl/pull/1828" target="_blank" rel="noopener noreferrer">#1828</a>)</p>
-</li>
-<li>
-<p>fix(doc): convert Doc<!-- -->:merge_cursors<!-- --> parameter from "selection index"
-to table index</p>
-</li>
-<li>
-<p>core/doc: fix wrong table index in Doc<!-- -->:merge_cursors</p>
-</li>
-<li>
-<p>Keep font scale updated for RENDERER backend</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.3.1...v3.4.0" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.3.1...v3.4.0</a></p>]]></content>
         <author>
             <name>Jefferson Gonzalez</name>
             <uri>https://github.com/jgmdev</uri>
