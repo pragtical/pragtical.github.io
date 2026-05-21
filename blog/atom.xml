@@ -2,11 +2,88 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2026-05-12T00:00:00.000Z</updated>
+    <updated>2026-05-20T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.10.1 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v3101-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v3101-release"/>
+        <updated>2026-05-20T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Pragtical v3.10.1 is a follow-up release that polishes the MarkdownView]]></summary>
+        <content type="html"><![CDATA[<p>Pragtical v3.10.1 is a follow-up release that polishes the MarkdownView
+experience, adds a few handy command options, and fixes thread and event
+handling issues reported since v3.10.0.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="markdownview-improvements">MarkdownView Improvements<a href="https://pragtical.dev/blog/pragtical-v3101-release#markdownview-improvements" class="hash-link" aria-label="Direct link to MarkdownView Improvements" title="Direct link to MarkdownView Improvements">​</a></h2>
+<p>The MarkdownView received incremental parsing support, which makes re-rendering
+faster when only parts of a document change. Copy interactions were also added,
+so selected text can be copied directly from the preview. Selection behavior
+received further polish for a smoother editing experience.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="command-enhancements">Command Enhancements<a href="https://pragtical.dev/blog/pragtical-v3101-release#command-enhancements" class="hash-link" aria-label="Direct link to Command Enhancements" title="Direct link to Command Enhancements">​</a></h2>
+<p>The file-open commands now accept a <code>selection_callback</code> parameter and an
+<code>allow_directories</code> flag, giving plugins and scripts more control over how files
+and directories are opened.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3101-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h2>
+<p>Thread API fixes landed in this cycle, addressing edge cases that could cause
+problems in multi-threaded workflows. The event queue also received a fix that
+filters out unused events, reducing unnecessary processing.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3101-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h2>
+<p>A build fix for recent sdl3_net changes was included, and the bundled SDL3_net
+was pinned to the latest pre-release to keep builds consistent.</p>
+<p>Most of these changes were also done in preparation for the upcoming
+<a href="https://github.com/pragtical/assistant" target="_blank" rel="noopener noreferrer">AI assistant plugin</a>, which relies on
+MarkdownView for rendering rich responses and the new command options for
+file handling.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.10.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3101-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3101-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Add incremental parsing support to MarkdownView
+(<a href="https://github.com/pragtical/pragtical/pull/485" target="_blank" rel="noopener noreferrer">#485</a>)</p>
+</li>
+<li>
+<p>Add MarkdownView copy interactions
+(<a href="https://github.com/pragtical/pragtical/pull/489" target="_blank" rel="noopener noreferrer">#489</a>)</p>
+</li>
+<li>
+<p>Add selection_callback and allow_directories to file-open commands
+(<a href="https://github.com/pragtical/pragtical/pull/487" target="_blank" rel="noopener noreferrer">#487</a>)</p>
+</li>
+<li>
+<p>Polish MarkdownView selection behavior
+(<a href="https://github.com/pragtical/pragtical/commit/07499bc8" target="_blank" rel="noopener noreferrer">07499bc8</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes-1">Fixes<a href="https://pragtical.dev/blog/pragtical-v3101-release#fixes-1" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Another batch of thread api fixes
+(<a href="https://github.com/pragtical/pragtical/pull/488" target="_blank" rel="noopener noreferrer">#488</a>)</p>
+</li>
+<li>
+<p>Filter non used events on the events queue
+(<a href="https://github.com/pragtical/pragtical/pull/486" target="_blank" rel="noopener noreferrer">#486</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system-1">Build System<a href="https://pragtical.dev/blog/pragtical-v3101-release#build-system-1" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Fix build for new sdl3_net changes
+(<a href="https://github.com/pragtical/pragtical/pull/483" target="_blank" rel="noopener noreferrer">#483</a>)</p>
+</li>
+<li>
+<p>SDL3_Net: pin to latest pre-release
+(<a href="https://github.com/pragtical/pragtical/commit/46b3d698" target="_blank" rel="noopener noreferrer">46b3d698</a>)</p>
+</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.10.0 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v3100-release</id>
@@ -2616,60 +2693,6 @@ issue on hyprland. Also updated other wrap components.
 </li>
 </ul>
 <p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2</a></p>]]></content>
-        <author>
-            <name>Jefferson Gonzalez</name>
-            <uri>https://github.com/jgmdev</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Pragtical v3.4.1 Release]]></title>
-        <id>https://pragtical.dev/blog/pragtical-v341-release</id>
-        <link href="https://pragtical.dev/blog/pragtical-v341-release"/>
-        <updated>2024-06-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[This quick minor release introduces some more enhancements and fixes for]]></summary>
-        <content type="html"><![CDATA[<p>This quick minor release introduces some more enhancements and fixes for
-annoyances found while testing other stuff, most of them are triggered in some
-edge cases but still, they were causing an itch 😄</p>
-<p>Some nice additions are: better restoration of window size on startup which
-was causing me headaches on wayland, support for autocompletion of preprocessor
-symbols on C/C++ and fallback detection of UTF-16/32 when no encoding was detected.</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v341-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v341-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>If no surface return on font_render_glyph
-(<a href="https://github.com/pragtical/pragtical/pull/114" target="_blank" rel="noopener noreferrer">#114</a>)</p>
-</li>
-<li>
-<p>Restore support for tokenizer empty matches with subsyntax
-(<a href="https://github.com/pragtical/pragtical/pull/112" target="_blank" rel="noopener noreferrer">#111</a>)</p>
-</li>
-<li>
-<p>If encoding detect fails check if UTF-16/32 LE/BE
-(<a href="https://github.com/pragtical/pragtical/pull/115" target="_blank" rel="noopener noreferrer">#115</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v341-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Better matching of placeholder chars (_) on lua
-(<a href="https://github.com/pragtical/pragtical/pull/112" target="_blank" rel="noopener noreferrer">#112</a>)</p>
-</li>
-<li>
-<p>Better restore of window mode/size on startup
-(<a href="https://github.com/pragtical/pragtical/pull/113" target="_blank" rel="noopener noreferrer">#113</a>)</p>
-</li>
-<li>
-<p>Added custom symbols pattern to language c and cpp
-(<a href="https://github.com/pragtical/pragtical/pull/116" target="_blank" rel="noopener noreferrer">#116</a>)</p>
-</li>
-<li>
-<p>autocomplete: strip punctuations from partials
-(<a href="https://github.com/pragtical/pragtical/pull/117" target="_blank" rel="noopener noreferrer">#117</a>)</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.0...v3.4.1</a></p>]]></content>
         <author>
             <name>Jefferson Gonzalez</name>
             <uri>https://github.com/jgmdev</uri>
