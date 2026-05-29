@@ -4,10 +4,155 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Wed, 20 May 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.11.0 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v3110-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v3110-release</guid>
+            <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Pragtical v3.11.0 is out with code folding support, generated settings views,]]></description>
+            <content:encoded><![CDATA[<p>Pragtical v3.11.0 is out with code folding support, generated settings views,
+faster rendering paths for large files, and a set of MarkdownView and tokenizer
+improvements that make long documents smoother to work with.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="code-folding">Code Folding<a href="https://pragtical.dev/blog/pragtical-v3110-release#code-folding" class="hash-link" aria-label="Direct link to Code Folding" title="Direct link to Code Folding">​</a></h2>
+<p>This release adds code folding support to the editor. Fold markers are rendered
+in the gutter, folded regions integrate with DocView's visual line mapping, and
+the editor now keeps search, go-to-line, line wrapping, indent guides, and
+smooth caret behavior aligned with hidden folded lines.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/ab145ec2-94d8-4d41-a724-808b09d42608"></video>
+<p>Fold state is also persisted per project, so documents can reopen with their
+previous folded regions restored.</p>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/1d1dc701-63c5-415d-8ab4-77bbe6e42853"></video>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="config">Config<a href="https://pragtical.dev/blog/pragtical-v3110-release#config" class="hash-link" aria-label="Direct link to Config" title="Direct link to Config">​</a></h3>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">plugins</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">codefold </span><span class="token operator">=</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)">-- Whether code folding is enabled.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  enabled </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">true</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)">-- If true, newly opened documents have all fold regions initially collapsed.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  start_folded </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">false</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)">-- If true, folded regions hide the folded end-line tail.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  hide_tail_on_fold </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">true</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)">-- If true, all fold markers are always visible.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  always_show_fold_markers </span><span class="token operator">=</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">false</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token comment" style="color:rgb(98, 114, 164)">-- Width in pixels reserved for fold toggle indicators in the gutter.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  toggle_width </span><span class="token operator">=</span><span class="token plain"> common</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">round</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token number">24</span><span class="token plain"> </span><span class="token operator">*</span><span class="token plain"> SCALE</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="commands">Commands<a href="https://pragtical.dev/blog/pragtical-v3110-release#commands" class="hash-link" aria-label="Direct link to Commands" title="Direct link to Commands">​</a></h3>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">keymap</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">add</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"alt+shift+left"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"> </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"code-folding:toggle"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"alt+shift+right"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"> </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"code-folding:toggle"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"alt+shift+up"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"> </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"code-folding:fold-all"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token string" style="color:rgb(255, 121, 198)">"alt+shift+down"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token plain"> </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"code-folding:unfold-all"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="settings-views">Settings Views<a href="https://pragtical.dev/blog/pragtical-v3110-release#settings-views" class="hash-link" aria-label="Direct link to Settings Views" title="Direct link to Settings Views">​</a></h2>
+<p>Generated settings views landed in this release, giving plugins a structured way
+to expose configurable options without hand-building every settings screen.
+Follow-up fixes also improved how nested plugin subconfig values are merged back
+into the global configuration.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="preview">Preview<a href="https://pragtical.dev/blog/pragtical-v3110-release#preview" class="hash-link" aria-label="Direct link to Preview" title="Direct link to Preview">​</a></h3>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/004dcd00-fe03-4016-a344-8575fb979b9d"></video>
+<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/c3457f24-bfc3-41fd-a257-8dc61d3d1c93"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rendering-and-wrapping">Rendering And Wrapping<a href="https://pragtical.dev/blog/pragtical-v3110-release#rendering-and-wrapping" class="hash-link" aria-label="Direct link to Rendering And Wrapping" title="Direct link to Rendering And Wrapping">​</a></h2>
+<p>DocView received better long-line rendering behavior, and the native tokenizer
+now matches long lines more efficiently. The line wrapping plugin was synced
+with DocView's visual line helpers, improving wrapped-line drawing, navigation,
+selection, and integration with plugins that need to reason about visible rows.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="native-tokenizer-local-benchmarks">Native Tokenizer Local Benchmarks:<a href="https://pragtical.dev/blog/pragtical-v3110-release#native-tokenizer-local-benchmarks" class="hash-link" aria-label="Direct link to Native Tokenizer Local Benchmarks:" title="Direct link to Native Tokenizer Local Benchmarks:">​</a></h3>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">codemirror.min.js, about 1 MB with very long minified lines:</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    Before: about 1314.3 s</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    After: about 43.6 s</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    Speedup: about 30.1x</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">sqlite3.c, about 8 MB and 235k lines:</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    Before: about 6.3 s</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    After: about 3.0 s</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    Speedup: about 2.1x</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="markdownview">MarkdownView<a href="https://pragtical.dev/blog/pragtical-v3110-release#markdownview" class="hash-link" aria-label="Direct link to MarkdownView" title="Direct link to MarkdownView">​</a></h2>
+<p>As suggested by <a href="https://github.com/Vinfall" target="_blank" rel="noopener noreferrer">Vinfall</a> MarkdownView now renders
+frontmatter blocks in a legible format:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="before">Before<a href="https://pragtical.dev/blog/pragtical-v3110-release#before" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before">​</a></h3>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/e6adf3e1-646d-4af9-94f4-1221c4461016" alt="frontmatter before" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="after">After<a href="https://pragtical.dev/blog/pragtical-v3110-release#after" class="hash-link" aria-label="Direct link to After" title="Direct link to After">​</a></h3>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/0eab1e4f-49fd-481e-917d-ef3e173fdd31" alt="frontmatter after" class="img_ev3q"></p>
+<p>It can also parse large Markdown views asynchronously. This keeps previews more
+responsive while large documents are parsed and laid out.</p>
+<p>Markdown code block highlighting also recognizes more popular language aliases.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="networking-and-runtime">Networking And Runtime<a href="https://pragtical.dev/blog/pragtical-v3110-release#networking-and-runtime" class="hash-link" aria-label="Direct link to Networking And Runtime" title="Direct link to Networking And Runtime">​</a></h2>
+<p>While working with the <a href="https://github.com/pragtical/assistant" target="_blank" rel="noopener noreferrer">assistant plugin</a>
+found some issue where our code expected all sent data to be written at once.
+Now TCP writes return byte counts, making network scripting behavior more
+reliable.</p>
+<p>The editor also reduces unfocused wake delay when focus is restored,
+which helps it react more promptly after returning to the application.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="fixes-and-build-work">Fixes And Build Work<a href="https://pragtical.dev/blog/pragtical-v3110-release#fixes-and-build-work" class="hash-link" aria-label="Direct link to Fixes And Build Work" title="Direct link to Fixes And Build Work">​</a></h2>
+<p>Several Windows build issues were addressed, including clang-cl compatibility,
+MSVC fallback handling, and a parallel build collision involving generated
+<code>pragtical.lib</code> and <code>.exp</code> files. GitHub workflow dependencies were also updated.</p>
+<p>Thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">AmerM137</a> who spearheaded many of the
+fixes and improvements for this release.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.11.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3110-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v3110-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Add generated settings views
+(<a href="https://github.com/pragtical/pragtical/pull/490" target="_blank" rel="noopener noreferrer">#490</a>)</p>
+</li>
+<li>
+<p>Add code folding support
+(<a href="https://github.com/pragtical/pragtical/pull/515" target="_blank" rel="noopener noreferrer">#515</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3110-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Render MarkdownView frontmatter legibly
+(<a href="https://github.com/pragtical/pragtical/pull/502" target="_blank" rel="noopener noreferrer">#502</a>)</p>
+</li>
+<li>
+<p>Improve DocView long-line rendering
+(<a href="https://github.com/pragtical/pragtical/pull/507" target="_blank" rel="noopener noreferrer">#507</a>)</p>
+</li>
+<li>
+<p>Optimize native tokenizer matching for long lines
+(<a href="https://github.com/pragtical/pragtical/pull/508" target="_blank" rel="noopener noreferrer">#508</a>)</p>
+</li>
+<li>
+<p>Sync line wrapping with DocView rendering
+(<a href="https://github.com/pragtical/pragtical/pull/509" target="_blank" rel="noopener noreferrer">#509</a>)</p>
+</li>
+<li>
+<p>Add codeblock patterns for popular Markdown languages
+(<a href="https://github.com/pragtical/pragtical/pull/511" target="_blank" rel="noopener noreferrer">#511</a>)</p>
+</li>
+<li>
+<p>Return byte counts from TCP writes
+(<a href="https://github.com/pragtical/pragtical/pull/512" target="_blank" rel="noopener noreferrer">#512</a>)</p>
+</li>
+<li>
+<p>Parse large Markdown views asynchronously
+(<a href="https://github.com/pragtical/pragtical/pull/513" target="_blank" rel="noopener noreferrer">#513</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3110-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix clang-cl build errors on Windows
+(<a href="https://github.com/pragtical/pragtical/pull/491" target="_blank" rel="noopener noreferrer">#491</a>)</p>
+</li>
+<li>
+<p>Avoid pragtical.lib/.exp collision in MSVC parallel builds
+(<a href="https://github.com/pragtical/pragtical/pull/493" target="_blank" rel="noopener noreferrer">#493</a>)</p>
+</li>
+<li>
+<p>Correct native tokenizer matching semantics
+(<a href="https://github.com/pragtical/pragtical/pull/496" target="_blank" rel="noopener noreferrer">#496</a>)</p>
+</li>
+<li>
+<p>Add explicit type fields to language_python pair patterns
+(<a href="https://github.com/pragtical/pragtical/pull/498" target="_blank" rel="noopener noreferrer">#498</a>)
+(<a href="https://github.com/pragtical/pragtical/pull/503" target="_blank" rel="noopener noreferrer">#503</a>)</p>
+</li>
+<li>
+<p>Fix settings subconfig merge
+(<a href="https://github.com/pragtical/pragtical/commit/64609770" target="_blank" rel="noopener noreferrer">64609770</a>)</p>
+</li>
+<li>
+<p>Reduce unfocused wake delay when restoring focus
+(<a href="https://github.com/pragtical/pragtical/pull/504" target="_blank" rel="noopener noreferrer">#504</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3110-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Add C11 fallback for MSVC and silence clang-cl warnings
+(<a href="https://github.com/pragtical/pragtical/pull/500" target="_blank" rel="noopener noreferrer">#500</a>)
+(<a href="https://github.com/pragtical/pragtical/pull/506" target="_blank" rel="noopener noreferrer">#506</a>)</p>
+</li>
+<li>
+<p>Update GitHub workflow dependencies
+(<a href="https://github.com/pragtical/pragtical/pull/514" target="_blank" rel="noopener noreferrer">#514</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.10.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v3101-release</link>
@@ -2552,72 +2697,6 @@ and applied on the whole interface, also the plain software renderer is faster.
 (<a href="https://github.com/pragtical/pragtical/pull/148" target="_blank" rel="noopener noreferrer">#148</a>)</p>
 </li>
 </ul>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.4.2 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v342-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v342-release</guid>
-            <pubDate>Sun, 11 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[This release includes the accumulated dose of fixes, some performance]]></description>
-            <content:encoded><![CDATA[<p>This release includes the accumulated dose of fixes, some performance
-improvements and enhacements as listed on the changes log.</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v342-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v342-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
-<ul>
-<li>
-<p>Revert previous optimized glyphset loading lite-xl/lite-xl#1543
-and rebased/merged new implementation which is even faster
-(<a href="https://github.com/lite-xl/lite-xl/pull/1845" target="_blank" rel="noopener noreferrer">lite-xl/lite-xl#1845</a>)</p>
-</li>
-<li>
-<p>Port rest of regex functions from Lua to C
-(<a href="https://github.com/pragtical/pragtical/pull/120" target="_blank" rel="noopener noreferrer">#120</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v342-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Enable utf8 module for Lua &lt; 5.3 using utf8extra
-(<a href="https://github.com/pragtical/pragtical/pull/119" target="_blank" rel="noopener noreferrer">#119</a>)</p>
-</li>
-<li>
-<p>Use core.warn on autocomplete plugin
-(<a href="https://github.com/pragtical/pragtical/commit/89d24eb45e82a2bd49ce0a8ed56e313169c17693" target="_blank" rel="noopener noreferrer">89d24eb4</a>)</p>
-</li>
-<li>
-<p>Improvements to c/c++ language plugins
-(<a href="https://github.com/pragtical/pragtical/pull/128" target="_blank" rel="noopener noreferrer">#128</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v342-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fix thread initialization on non macOS bundle
-(<a href="https://github.com/pragtical/pragtical/pull/118" target="_blank" rel="noopener noreferrer">#118</a>)</p>
-</li>
-<li>
-<p>Fix use of no longer valid core.add_project_directory
-(<a href="https://github.com/pragtical/pragtical/pull/121" target="_blank" rel="noopener noreferrer">#121</a>)</p>
-</li>
-<li>
-<p>Fix for IPC plugin to properly open a relative path
-(<a href="https://github.com/pragtical/pragtical/pull/125" target="_blank" rel="noopener noreferrer">#125</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v342-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Fix PPM build on msys
-(<a href="https://github.com/pragtical/pragtical/pull/126" target="_blank" rel="noopener noreferrer">#126</a>)</p>
-</li>
-<li>
-<p>Update sdl2 wrap to v2.30.6 which fixes an initialization
-issue on hyprland. Also updated other wrap components.
-(<a href="https://github.com/pragtical/pragtical/pull/127" target="_blank" rel="noopener noreferrer">#127</a>)</p>
-</li>
-</ul>
-<p><strong>Full Changelog</strong>: <a href="https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2" target="_blank" rel="noopener noreferrer">https://github.com/pragtical/pragtical/compare/v3.4.1...v3.4.2</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
