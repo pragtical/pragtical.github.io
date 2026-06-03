@@ -2,11 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2026-05-29T00:00:00.000Z</updated>
+    <updated>2026-06-02T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.11.1 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v3111-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v3111-release"/>
+        <updated>2026-06-02T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A follow-up release that adds a welcome screen recent project context menu,]]></summary>
+        <content type="html"><![CDATA[<p>A follow-up release that adds a welcome screen recent project context menu,
+polishes code folding behavior, improves line wrapping performance for long
+lines, and fixes a handful of process I/O and status bar issues.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="welcome-recent-project-menu">Welcome Recent Project Menu<a href="https://pragtical.dev/blog/pragtical-v3111-release#welcome-recent-project-menu" class="hash-link" aria-label="Direct link to Welcome Recent Project Menu" title="Direct link to Welcome Recent Project Menu">​</a></h2>
+<p>The welcome screen now shows a recent project context menu, making it possible
+to remove all or single projects as other open options.</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/7dda9d14-07e9-4ea5-815e-da557ed3c491" alt="context menu" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="code-folding-polish">Code Folding Polish<a href="https://pragtical.dev/blog/pragtical-v3111-release#code-folding-polish" class="hash-link" aria-label="Direct link to Code Folding Polish" title="Direct link to Code Folding Polish">​</a></h2>
+<p>Several behavioral improvements were made to the code folding support that
+shipped in v3.11.0, refining how fold markers are displayed and interact with
+the editor.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="line-wrapping-performance">Line Wrapping Performance<a href="https://pragtical.dev/blog/pragtical-v3111-release#line-wrapping-performance" class="hash-link" aria-label="Direct link to Line Wrapping Performance" title="Direct link to Line Wrapping Performance">​</a></h2>
+<p>Line wrapping rebuilds for long lines were optimized, reducing the work done
+when only part of a wrapped line changes.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3111-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h2>
+<p>Hidden status bar items no longer trigger unnecessary rebuilds. Process writes
+now return the actual number of bytes written, matching the behavior expected
+for partial-write scenarios. A race condition in the HTTP test infrastructure
+was also addressed.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3111-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h2>
+<p>AppImage packaging received several improvements, including embedded version
+metadata so AppImage tools can identify and update builds correctly.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.11.1" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3111-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v3111-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>Add welcome recent project menu
+(<a href="https://github.com/pragtical/pragtical/pull/519" target="_blank" rel="noopener noreferrer">#519</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3111-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Polish codefold marker behavior
+(<a href="https://github.com/pragtical/pragtical/pull/518" target="_blank" rel="noopener noreferrer">#518</a>)</p>
+</li>
+<li>
+<p>Optimize linewrapping rebuilds for long lines
+(<a href="https://github.com/pragtical/pragtical/pull/520" target="_blank" rel="noopener noreferrer">#520</a>)</p>
+</li>
+<li>
+<p>Use highlighter<!-- -->:each_token<!-- --> in draw_line_text
+(<a href="https://github.com/pragtical/pragtical/pull/523" target="_blank" rel="noopener noreferrer">#523</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes-1">Fixes<a href="https://pragtical.dev/blog/pragtical-v3111-release#fixes-1" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Avoid hidden status item rebuilds
+(<a href="https://github.com/pragtical/pragtical/pull/516" target="_blank" rel="noopener noreferrer">#516</a>)</p>
+</li>
+<li>
+<p>Return partial process writes
+(<a href="https://github.com/pragtical/pragtical/pull/517" target="_blank" rel="noopener noreferrer">#517</a>)</p>
+</li>
+<li>
+<p>Avoid HTTP test port file race
+(<a href="https://github.com/pragtical/pragtical/commit/08ed2c34" target="_blank" rel="noopener noreferrer">08ed2c34</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system-1">Build System<a href="https://pragtical.dev/blog/pragtical-v3111-release#build-system-1" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Improve AppImage packaging
+(<a href="https://github.com/pragtical/pragtical/pull/522" target="_blank" rel="noopener noreferrer">#522</a>)</p>
+</li>
+<li>
+<p>Embed AppImage version metadata
+(<a href="https://github.com/pragtical/pragtical/commit/21ef76c0" target="_blank" rel="noopener noreferrer">21ef76c0</a>)</p>
+</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.11.0 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v3110-release</id>
@@ -2681,95 +2762,6 @@ prevent crashes on X11.</p>
 <li>
 <p>Rescale the EmptyView icons font on instantiation
 (<a href="https://github.com/pragtical/pragtical/pull/156" target="_blank" rel="noopener noreferrer">#156</a>)</p>
-</li>
-</ul>]]></content>
-        <author>
-            <name>Jefferson Gonzalez</name>
-            <uri>https://github.com/jgmdev</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Pragtical v3.4.3 Release]]></title>
-        <id>https://pragtical.dev/blog/pragtical-v343-release</id>
-        <link href="https://pragtical.dev/blog/pragtical-v343-release"/>
-        <updated>2024-08-26T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[This release fixes various issues reported on GitHub, and introduces]]></summary>
-        <content type="html"><![CDATA[<p>This release fixes various issues reported on GitHub, and introduces
-some new features and enhacements. The big ticket for this release is overall
-better scaling behaviour. macOS builds now default to the plain software
-renderer which is faster. This is possible because various releases ago (almost
-a year?) we introduced functionality to detect the display scale at runtime,
-meaning that scaling should be properly performed Lua side instead of relying
-on the renderer. The SDL Renderer (aka "hardware renderer") is still available
-but since the <strong>glyph loading optimizations</strong>, it needs some adjustments to
-better handle the positions and sizes of fonts when the scale is &gt;= 2.</p>
-<p>So, this release improves upon previous scaling code work and fixes some related
-issues. Finally, widgets now behave better when the scale changes.</p>
-<p>Thanks to everyone who reported issues and helped with testing!</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.3" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v343-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v343-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Add cli flag to allow forking editor to background
-(<a href="https://github.com/pragtical/pragtical/pull/132" target="_blank" rel="noopener noreferrer">#132</a>)</p>
-</li>
-<li>
-<p>Scale plugin: added commands and bindings to allow zooming/scaling the code
-independently of the user interface.
-(<a href="https://github.com/pragtical/pragtical/pull/150" target="_blank" rel="noopener noreferrer">#150</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v343-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
-<ul>
-<li>Widgets: moved most calculations out of <code>update</code> to specialized
-<code>update_size_position</code> function that gets called mostly only when neccesary.
-Also improved widgets size/position calculations for better scaling.
-(<a href="https://github.com/pragtical/widget/pull/9" target="_blank" rel="noopener noreferrer">#9</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v343-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Patched some luajit functions to support unicode file names
-and strings on windows
-(<a href="https://github.com/pragtical/pragtical/pull/138" target="_blank" rel="noopener noreferrer">#138</a>)</p>
-</li>
-<li>
-<p>Always select first result on findfile plugin
-(<a href="https://github.com/pragtical/pragtical/pull/141" target="_blank" rel="noopener noreferrer">#141</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v343-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Use PRAGTICAL_USERDIR instead of HOME on <code>scripts/run-local</code> because
-XDG_CONFIG_HOME been set has priority over HOME.
-(<a href="https://github.com/pragtical/pragtical/pull/133" target="_blank" rel="noopener noreferrer">#133</a>)</p>
-</li>
-<li>
-<p>Fix scaling logic regressions, now macOS builds are configure by default
-with the software renderer since current display scale is detected at startup
-and applied on the whole interface, also the plain software renderer is faster.
-(<a href="https://github.com/pragtical/pragtical/pull/134" target="_blank" rel="noopener noreferrer">#134</a>)</p>
-</li>
-<li>
-<p>Return actual scale on <code>system.get_scale()</code> for macOS too
-(<a href="https://github.com/pragtical/pragtical/pull/143" target="_blank" rel="noopener noreferrer">#143</a>)</p>
-</li>
-<li>
-<p>Minor correction on search_ui replace button position
-(<a href="https://github.com/pragtical/pragtical/pull/149" target="_blank" rel="noopener noreferrer">#149</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v343-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Fix rolling builds staying as draft
-(<a href="https://github.com/pragtical/pragtical/commit/a0d062f5e9017f2f1878daf42dd197a007ff45b6" target="_blank" rel="noopener noreferrer">a0d062f5</a>)</p>
-</li>
-<li>
-<p>Remove widget submodule in favor of subproject
-(<a href="https://github.com/pragtical/pragtical/pull/148" target="_blank" rel="noopener noreferrer">#148</a>)</p>
 </li>
 </ul>]]></content>
         <author>
