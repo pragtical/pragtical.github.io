@@ -1,4 +1,0 @@
-/*
- * Manifest based plugins browser.
- * @license MIT Pragtical Team
- */
