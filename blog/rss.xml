@@ -4,10 +4,52 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Tue, 02 Jun 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 03 Jun 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.11.2 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v3112-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v3112-release</guid>
+            <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Pragtical v3.11.2 is a focused bug-fix release that tightens file lookup]]></description>
+            <content:encoded><![CDATA[<p>Pragtical v3.11.2 is a focused bug-fix release that tightens file lookup
+behavior, fixes JavaScript syntax highlighting around regex literals, and makes
+DocView drawing more robust when plugins update virtual line state.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-root-file-lookup-fix">Project Root File Lookup Fix<a href="https://pragtical.dev/blog/pragtical-v3112-release#project-root-file-lookup-fix" class="hash-link" aria-label="Direct link to Project Root File Lookup Fix" title="Direct link to Project Root File Lookup Fix">​</a></h2>
+<p>Findfile now resolves paths against the open project root. This keeps file
+search behavior consistent when the current working directory differs from the
+project that is open in the editor.</p>
+<p>Thanks to <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">AmerM137</a> for spotting this one!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="javascript-regex-highlighting">JavaScript Regex Highlighting<a href="https://pragtical.dev/blog/pragtical-v3112-release#javascript-regex-highlighting" class="hash-link" aria-label="Direct link to JavaScript Regex Highlighting" title="Direct link to JavaScript Regex Highlighting">​</a></h2>
+<p>JavaScript regex literals following ternary colons are now parsed correctly,
+fixing a syntax highlighting edge case in conditional expressions.</p>
+<p>Expressions like the following are now properly handled:</p>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">var</span><span class="token plain"> c </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"&lt;"</span><span class="token plain"> </span><span class="token operator">===</span><span class="token plain"> a </span><span class="token operator">||</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"&gt;"</span><span class="token plain"> </span><span class="token operator">===</span><span class="token plain"> a </span><span class="token operator">?</span><span class="token plain"> </span><span class="token regex regex-delimiter">/</span><span class="token regex regex-source language-regex char-class char-class-punctuation punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token regex regex-source language-regex char-class">(){}[</span><span class="token regex regex-source language-regex char-class special-escape escape">\]</span><span class="token regex regex-source language-regex char-class">&lt;&gt;</span><span class="token regex regex-source language-regex char-class char-class-punctuation punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token regex regex-delimiter">/</span><span class="token plain"> </span><span class="token operator">:</span><span class="token plain"> </span><span class="token regex regex-delimiter">/</span><span class="token regex regex-source language-regex char-class char-class-punctuation punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token regex regex-source language-regex char-class">(){}[</span><span class="token regex regex-source language-regex char-class special-escape escape">\]</span><span class="token regex regex-source language-regex char-class char-class-punctuation punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token regex regex-delimiter">/</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="docview-drawing-robustness">DocView Drawing Robustness<a href="https://pragtical.dev/blog/pragtical-v3112-release#docview-drawing-robustness" class="hash-link" aria-label="Direct link to DocView Drawing Robustness" title="Direct link to DocView Drawing Robustness">​</a></h2>
+<p>DocView now skips stale visual rows that no longer map to backing document text
+before dispatching gutter or line body draw calls. This prevents plugins that
+hook into drawing from receiving invalid line indexes during short-lived virtual
+line transitions after edits or plugin updates.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.11.2" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3112-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3112-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Always resolve findfile paths against the open project root
+(<a href="https://github.com/pragtical/pragtical/pull/525" target="_blank" rel="noopener noreferrer">#525</a>)</p>
+</li>
+<li>
+<p>Fix JavaScript regex literals after ternary colons
+(<a href="https://github.com/pragtical/pragtical/pull/526" target="_blank" rel="noopener noreferrer">#526</a>)</p>
+</li>
+<li>
+<p>Skip stale visual rows while drawing DocView
+(<a href="https://github.com/pragtical/pragtical/pull/527" target="_blank" rel="noopener noreferrer">#527</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.11.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v3111-release</link>
@@ -2642,51 +2684,6 @@ ignore files.</li>
 <li>
 <p>Add primary selection support
 (<a href="https://github.com/lite-xl/lite-xl/pull/1729" target="_blank" rel="noopener noreferrer">#1729</a>)</p>
-</li>
-</ul>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.4.4 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v344-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v344-release</guid>
-            <pubDate>Tue, 27 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[This is a SCALE bug fix release! Release explanation slightly adapted from]]></description>
-            <content:encoded><![CDATA[<p>This is a <strong>SCALE bug fix</strong> release! Release explanation slightly adapted from
-<a href="https://github.com/pragtical/pragtical/pull/152" target="_blank" rel="noopener noreferrer">#152</a></p>
-<p>Since new renwindow api (that allows initializing windows directly in Lua) the
-main window creation was moved to core.init but, the scale detection code was
-still been performed before. This meant that loading the default system style
-was using the incorrect scale causing issues that would only be resolved by
-manually re-scaling the interface.</p>
-<p>Previously, tried to wrongly fix the issue by delegating the responsibility to
-the scale plugin but that wasn't the correct solution (didn't notice what
-explained on first paragraph until later 😓). Now we defer style loading until
-main window is created and the default system scale properly detected, this
-ensures that the correct scale is set before performing any style calculations
-that rely on it.</p>
-<p>Now besides updating scale on the displaychanged event it also updates it when
-the window is resized, but we limited the amount of scale checks on resize to
-prevent crashes on X11.</p>
-<p>Hopefully these changes finally tackle the scale issues 😄</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.4.4" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v344-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v344-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Adjust scale retrieveal on startup
-(<a href="https://github.com/pragtical/pragtical/pull/152" target="_blank" rel="noopener noreferrer">#152</a>)</p>
-</li>
-<li>
-<p>When scale changes rescale item sizes on LogView
-(<a href="https://github.com/pragtical/pragtical/pull/154" target="_blank" rel="noopener noreferrer">#154</a>)</p>
-</li>
-<li>
-<p>Updated widgets to latest with smaller rescale fix
-(<a href="https://github.com/pragtical/pragtical/pull/155" target="_blank" rel="noopener noreferrer">#155</a>)</p>
-</li>
-<li>
-<p>Rescale the EmptyView icons font on instantiation
-(<a href="https://github.com/pragtical/pragtical/pull/156" target="_blank" rel="noopener noreferrer">#156</a>)</p>
 </li>
 </ul>]]></content:encoded>
         </item>
