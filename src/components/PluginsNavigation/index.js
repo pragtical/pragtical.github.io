@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useLocation } from '@docusaurus/router';
 import showdown from 'showdown';
 import hljs from 'highlight.js';
 
@@ -61,6 +62,17 @@ class Plugins {
     this.submit = document.querySelector(options.submit);
     /** @type {HTMLElement} */
     this.results = document.querySelector(options.results);
+    /** @type {NodeListOf<HTMLElement>} */
+    this.category_buttons = document.querySelectorAll(options.category_buttons);
+
+    /** @type {string} */
+    this.currentCategory = "any";
+
+    /** @type {number} */
+    this.currentPage = 0;
+
+    /** @type {{title: string, getItems: function}|null} */
+    this.currentSection = null;
 
     this.text = options.text;
 
@@ -73,6 +85,13 @@ class Plugins {
     this.submit.addEventListener("click", function(){
       that.search();
     });
+
+    for (var i = 0; i < this.category_buttons.length; i++) {
+      this.category_buttons[i].addEventListener("click", function(){
+        var category = this.getAttribute("data-category");
+        that.selectCategory(category);
+      });
+    }
 
     fetch("https://raw.githubusercontent.com/pragtical/plugins/master/manifest.json")
       .then((response) => response.json())
@@ -116,6 +135,11 @@ class Plugins {
   render() {
     if (!this.query || !this.submit || !this.results) {
       return false;
+    }
+
+    if (this.currentCategory !== "any") {
+      this.renderCategory(this.currentCategory);
+      return;
     }
 
     this.renderFeatured();
@@ -167,20 +191,108 @@ class Plugins {
   }
 
   renderSection(title, items_callback) {
+    this.currentSection = {title: title, getItems: items_callback};
+
     var heading = document.createElement("h2");
     heading.innerText = title;
-
     this.results.append(heading);
 
     var container = document.createElement("div");
     container.className = "container";
 
     var plugins = items_callback();
-    for (var index in plugins) {
-      container.append(this.renderPlugin(plugins[index]));
+    var pageSize = 42;
+    var total = plugins.length;
+    var page = this.currentPage;
+    var start = page * pageSize;
+    var slice = total > pageSize ? plugins.slice(start, start + pageSize) : plugins;
+
+    for (var index in slice) {
+      container.append(this.renderPlugin(slice[index]));
     }
 
     this.results.append(container);
+
+    if (total > pageSize) {
+      this.renderPagination(total, pageSize);
+    }
+  }
+
+  renderPagination(total, pageSize) {
+    var that = this;
+    var page = this.currentPage;
+    var totalPages = Math.ceil(total / pageSize);
+
+    var nav = document.createElement("div");
+    nav.className = "pagination";
+
+    var prev = document.createElement("button");
+    prev.innerHTML = "&#8592;";
+    prev.className = "page-nav" + (page === 0 ? " disabled" : "");
+    prev.addEventListener("click", function() {
+      if (that.currentPage > 0) {
+        that.currentPage--;
+        that.rerenderSection();
+      }
+    });
+    nav.append(prev);
+
+    var pages = [];
+    var seen = {};
+    var addPage = function(p) {
+      if (p >= 0 && p < totalPages && !seen[p]) {
+        pages.push(p);
+        seen[p] = true;
+      }
+    };
+    addPage(0);
+    for (var i = Math.max(0, page - 2); i <= Math.min(totalPages - 1, page + 2); i++) {
+      addPage(i);
+    }
+    addPage(totalPages - 1);
+    pages.sort(function(a, b) { return a - b; });
+
+    var prevPage = -1;
+    for (var j = 0; j < pages.length; j++) {
+      var p = pages[j];
+      if (prevPage !== -1 && p > prevPage + 1) {
+        var ellipsis = document.createElement("span");
+        ellipsis.className = "page-ellipsis";
+        ellipsis.innerText = "…";
+        nav.append(ellipsis);
+      }
+      (function(pageNum) {
+        var btn = document.createElement("button");
+        btn.className = "page-num" + (pageNum === page ? " active" : "");
+        btn.innerText = pageNum + 1;
+        btn.addEventListener("click", function() {
+          that.currentPage = pageNum;
+          that.rerenderSection();
+        });
+        nav.append(btn);
+      })(p);
+      prevPage = p;
+    }
+
+    var next = document.createElement("button");
+    next.innerHTML = "&#8594;";
+    next.className = "page-nav" + (page === totalPages - 1 ? " disabled" : "");
+    next.addEventListener("click", function() {
+      if (that.currentPage < totalPages - 1) {
+        that.currentPage++;
+        that.rerenderSection();
+      }
+    });
+    nav.append(next);
+
+    this.results.append(nav);
+  }
+
+  rerenderSection() {
+    if (!this.currentSection) return;
+    this.results.innerHTML = "";
+    this.renderSection(this.currentSection.title, this.currentSection.getItems);
+    this.results.scrollIntoView({behavior: "smooth", block: "start"});
   }
 
   renderFeatured() {
@@ -219,6 +331,75 @@ class Plugins {
         }
       }
       return that.getRandom(languages);
+    });
+  }
+
+  /**
+   * Select a category and render its plugins.
+   * @param {string} category
+   */
+  syncCategoryButtons() {
+    for (var i = 0; i < this.category_buttons.length; i++) {
+      var btn = this.category_buttons[i];
+      if (btn.getAttribute("data-category") === this.currentCategory) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    }
+  }
+
+  selectCategory(category) {
+    this.currentPage = 0;
+    this.currentCategory = category;
+    this.changePath({category: category});
+    this.results.innerHTML = "";
+    this.syncCategoryButtons();
+    this.renderCategory(category);
+  }
+
+  /**
+   * Get plugins matching a category.
+   * @param {string} category
+   * @return {PluginInfo[]}
+   */
+  getByCategory(category) {
+    var plugins = [];
+    for (var index in this.plugins.addons) {
+      var plugin = this.plugins.addons[index];
+      var match = false;
+      switch (category) {
+        case "languages":
+          match = /^language_/.test(plugin.id);
+          break;
+        case "lsp":
+          match = /^lsp/.test(plugin.id);
+          break;
+        case "ide":
+          match = /^ide/.test(plugin.id);
+          break;
+        default:
+          match = true;
+          break;
+      }
+      if (match) {
+        if (!plugin.name)
+          this.setPluginName(plugin);
+        plugins.push(plugin);
+      }
+    }
+    return plugins;
+  }
+
+  /**
+   * Render all plugins in a category.
+   * @param {string} category
+   */
+  renderCategory(category) {
+    var that = this;
+    var title = this.text[category] || category;
+    this.renderSection(title, function(){
+      return that.getByCategory(category);
     });
   }
 
@@ -271,6 +452,7 @@ class Plugins {
   }
 
   loadPath(search) {
+    this.currentPage = 0;
     this.hidePluginInfo();
     if (search && search != "") {
       var search = search.substring(1);
@@ -285,9 +467,18 @@ class Plugins {
       } else if (params.q) {
         this.query.value = params.q;
         this.search();
+      } else if (params.category) {
+        this.currentCategory = params.category;
+        this.syncCategoryButtons();
+        this.results.innerHTML = "";
+        this.render();
       }
     } else {
       this.query.value = "";
+      this.currentCategory = "any";
+      for (var i = 0; i < this.category_buttons.length; i++) {
+        this.category_buttons[i].classList.remove("active");
+      }
       this.search();
     }
   }
@@ -498,7 +689,7 @@ class Plugins {
       + '</div>'
       + '<div><strong>'+this.text.installation+':</strong></div>'
       + '<div class="install">'
-      + '<div class="command">ppm install '+plugin.id+'</div>'
+      + '<div class="command">pragtical pm install '+plugin.id+'</div>'
       + '</div>'
       + '</div>'
       + '</div>'
@@ -549,11 +740,14 @@ class Plugins {
   }
 
   search() {
+    this.currentPage = 0;
     if (this.query.value.trim() != "") {
       /** @type {string} */
       var query = this.query.value.trim();
 
-      this.changePath({q: query});
+      var pathParams = {q: query};
+      if (this.currentCategory !== "any") pathParams.category = this.currentCategory;
+      this.changePath(pathParams);
 
       query = query.toLowerCase();
 
@@ -562,8 +756,12 @@ class Plugins {
       /** @type {PluginInfo[]} */
       var found_plugins = [];
 
-      for (var index in this.plugins.addons) {
-        var plugin = this.plugins.addons[index];
+      var pool = this.currentCategory !== "any"
+        ? this.getByCategory(this.currentCategory)
+        : this.plugins.addons;
+
+      for (var index in pool) {
+        var plugin = pool[index];
         plugin.search_score = 0;
         var found = false;
         var matches = 0;
@@ -604,7 +802,12 @@ class Plugins {
       });
     } else {
       this.results.innerHTML = "";
-      this.render();
+      if (this.currentCategory !== "any") {
+        this.changePath({category: this.currentCategory});
+        this.renderCategory(this.currentCategory);
+      } else {
+        this.render();
+      }
     }
   }
 
@@ -670,18 +873,26 @@ class Plugins {
 }
 
 export default function PluginsNavigation() {
+  const pluginsRef = useRef(null);
+  const isMounted = useRef(false);
+  const location = useLocation();
+
   // Load the Plugin class after rendering the required html components
   useEffect(() => {
-    new Plugins({
+    pluginsRef.current = new Plugins({
       page_plugins: "#page-plugins",
       page_info: "#page-plugin-info",
       query: "#plugins .query",
       submit: "#plugins .submit",
       results: "#plugins .results",
+      category_buttons: "#plugins .categories button",
       text: {
         featured: "Featured",
         fortune: "Wheel of Fortune",
         languages: "Languages",
+        lsp: "LSP",
+        ide: "IDE",
+        any: "All Plugins",
         installation: "Installation",
         copy: "COPY",
         plugin: "plugin",
@@ -692,6 +903,21 @@ export default function PluginsNavigation() {
     });
   }, []); // <-- empty array means 'run once'
 
+  // Re-sync view when Docusaurus client-side navigation changes the URL.
+  // We watch location.key (changes on every React Router navigation) rather than
+  // location.search, because changePath uses window.history.pushState directly
+  // which bypasses React Router — so location.search never reflects those changes.
+  // We read window.location.search directly for the same reason.
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    if (pluginsRef.current) {
+      pluginsRef.current.loadPath(window.location.search);
+    }
+  }, [location.key]);
+
   return (
     <div className="container">
       <page id="page-plugins">
@@ -699,6 +925,12 @@ export default function PluginsNavigation() {
           <div className="search">
             <input className="query" type="text" placeholder="Search Pragtical Plugins" autofocus />
             <button className="submit">Search</button>
+          </div>
+          <div className="categories">
+            <button data-category="any">All</button>
+            <button data-category="languages">Languages</button>
+            <button data-category="lsp">LSP</button>
+            <button data-category="ide">IDE</button>
           </div>
           <div className="results"></div>
         </div>

@@ -58,6 +58,82 @@ page { width: 100%; }
   border: solid 1px white;
 }
 
+#plugins .categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px auto 0 auto;
+  max-width: 50%;
+}
+
+#plugins .categories button {
+  font-size: 15px;
+  padding: 6px 16px;
+  background-color: var(--color-background2);
+  border: solid 2px var(--color-background2);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+#plugins .categories button:hover {
+  background-color: var(--color-selection);
+  border-color: var(--color-selection);
+}
+
+#plugins .categories button.active {
+  background-color: var(--color-selection);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+#plugins .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px auto;
+}
+
+#plugins .pagination button {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  background-color: var(--color-background2);
+  border: solid 2px var(--color-background2);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+#plugins .pagination button:hover:not(.disabled):not(.active) {
+  background-color: var(--color-selection);
+  border-color: var(--color-selection);
+}
+
+#plugins .pagination button.active {
+  background-color: var(--color-selection);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+#plugins .pagination button.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+#plugins .pagination .page-ellipsis {
+  color: var(--color-text);
+  padding: 0 4px;
+  line-height: 36px;
+}
+
 #plugins .search input, #plugins .search button,
 .plugin-details input, .plugin-details button, .plugin-details .button a {
   font-size: 18px;
