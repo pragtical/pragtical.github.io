@@ -82,15 +82,28 @@ Some editors such as [Visual Studio Code] and [Neovim] tends to have this proces
 abstracted by plugins. Luckily, some commonly-used language servers are provided
 as plugins as well, prefixed with `lsp_`.
 
-| Plugin            | Language(s)         | Server          | Platforms
-| ------            | -----------         | ------          | ---------
-| [lsp_c]           | C, C++, Objective-C | [clangd]        | Linux, macOS, Windows
-| [lsp_lua]         | Lua                 | [LuaLS]         | Linux, macOS, Windows
-| [lsp_python]      | Python              | [Pyright]       | Linux, macOS, Windows
-| [lsp_quicklintjs] | JavaScript          | [quick-lint-js] | Linux, macOS, Windows
-| [lsp_rust]        | Rust                | [rust-analyzer] | Linux, macOS, Windows
-| [lsp_tex]         | TeX                 | [texlab]        | Linux, macOS, Windows
-| [lsp_zig]         | Zig                 | [zls]           | Linux, macOS, Windows
+| Plugin            | Language(s)              | Server                                                                    | Platforms
+| ------            | -----------              | ------                                                                    | ---------
+| [lsp_bash]        | Bash                     | [bash-language-server]                                                    | Linux, macOS, Windows
+| [lsp_c]           | C, C++, Objective-C      | [clangd]                                                                  | Linux, macOS, Windows
+| [lsp_clojure]     | Clojure                  | [clojure-lsp]                                                             | Linux, macOS, Windows
+| [lsp_css]         | CSS, LESS, SCSS          | [vscode-css-languageserver]                                               | Linux, macOS, Windows
+| [lsp_d]           | D                        | [serve_d]                                                                 | Linux, macOS, Windows
+| [lsp_emmet]       | JSX, TSX, HTML, XML, CSS, SCSS | [emmet-language-server]                                             | Linux, macOS, Windows
+| [lsp_go]          | Go                       | [gopls]                                                                   | Linux, macOS, Windows
+| [lsp_haxe]        | Haxe                     | [haxe-language-server]                                                    | Linux, macOS, Windows
+| [lsp_html]        | HTML                     | [vscode-html-languageserver]                                              | Linux, macOS, Windows
+| [lsp_java]        | Java                     | [jdtls]                                                                   | Linux, macOS, Windows
+| [lsp_json]        | JSON                     | [vscode-json-languageserver]                                              | Linux, macOS, Windows
+| [lsp_lua]         | Lua                      | [LuaLS]                                                                   | Linux, macOS, Windows
+| [lsp_php]         | PHP                      | [Intelephense]                                                            | Linux, macOS, Windows
+| [lsp_python]      | Python                   | [Pyright], [Ruff]                                                         | Linux, macOS, Windows
+| [lsp_quicklintjs] | JavaScript               | [quick-lint-js]                                                           | Linux, macOS, Windows
+| [lsp_rust]        | Rust                     | [rust-analyzer]                                                           | Linux, macOS, Windows
+| [lsp_tex]         | TeX                      | [texlab]                                                                  | Linux, macOS, Windows
+| [lsp_typescript]  | TypeScript, JavaScript   | [typescript-language-server]                                              | Linux, macOS, Windows
+| [lsp_yaml]        | YAML                     | [yaml-language-server]                                                    | Linux, macOS, Windows
+| [lsp_zig]         | Zig                      | [zls]                                                                     | Linux, macOS, Windows
 
 ### Manual Installation
 
@@ -317,20 +330,46 @@ Python at all.
 [lsp_snippets]:               https://github.com/vqns/lite-xl-snippets
 [Visual Studio Code]:         https://code.visualstudio.com/
 [Neovim]:                     https://neovim.io/
-[lsp_c]:                      https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_c.lua?raw=1
+[lsp_bash]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_bash.lua?raw=1
+[bash-language-server]:       https://github.com/bash-lsp/bash-language-server
+[lsp_c]:                      https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_c.lua?raw=1
 [clangd]:                     https://clangd.llvm.org/
-[lsp_lua]:                    https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_lua.lua?raw=1
+[lsp_clojure]:                https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_clojure.lua?raw=1
+[clojure-lsp]:                https://clojure-lsp.io/
+[lsp_css]:                    https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_css.lua?raw=1
+[vscode-css-languageserver]:  https://github.com/microsoft/vscode/tree/main/extensions/css-language-features/server
+[lsp_d]:                      https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_d.lua?raw=1
+[serve_d]:                    https://github.com/Pure-D/serve-d
+[lsp_emmet]:                  https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_emmet.lua?raw=1
+[emmet-language-server]:      https://github.com/olrtg/emmet-language-server
+[lsp_go]:                     https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_go.lua?raw=1
+[gopls]:                      https://github.com/golang/tools
+[lsp_haxe]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_haxe.lua?raw=1
+[haxe-language-server]:       https://github.com/vshaxe/haxe-language-server
+[lsp_html]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_html.lua?raw=1
+[vscode-html-languageserver]: https://github.com/microsoft/vscode/tree/main/extensions/html-language-features/server
+[lsp_java]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_java.lua?raw=1
+[jdtls]:                      https://github.com/eclipse-jdtls/eclipse.jdt.ls
+[lsp_json]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_json.lua?raw=1
+[vscode-json-languageserver]: https://github.com/microsoft/vscode/tree/main/extensions/json-language-features/server
+[lsp_lua]:                    https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_lua.lua?raw=1
 [LuaLS]:                      https://luals.github.io/
-[lsp_python]:                 https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_python.lua?raw=1
+[lsp_php]:                    https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_php.lua?raw=1
+[Intelephense]:               https://intelephense.com/
+[lsp_python]:                 https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_python.lua?raw=1
 [Pyright]:                    https://github.com/Microsoft/pyright
-[lsp_quicklintjs]:            https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_quicklintjs.lua?raw=1
+[Ruff]:                       https://github.com/astral-sh/ruff
+[lsp_quicklintjs]:            https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_quicklintjs.lua?raw=1
 [quick-lint-js]:              https://quick-lint-js.com/
-[lsp_rust]:                   https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_rust.lua?raw=1
+[lsp_rust]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_rust.lua?raw=1
 [rust-analyzer]:              https://github.com/rust-lang/rust-analyzer
-[lsp_tex]:                    https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_tex.lua?raw=1
+[lsp_tex]:                    https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_tex.lua?raw=1
 [texlab]:                     https://github.com/latex-lsp/texlab
-[lsp_zig]:                    https://github.com/adamharrison/lite-xl-lsp-servers/blob/master/plugins/lsp_zig.lua?raw=1
-[zls]:                        https://install.zigtools.org/
+[lsp_typescript]:             https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_typescript.lua?raw=1
+[lsp_yaml]:                   https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_yaml.lua?raw=1
+[yaml-language-server]:       https://github.com/redhat-developer/yaml-language-server
+[lsp_zig]:                    https://github.com/pragtical/lsp-servers/blob/master/plugins/lsp_zig.lua?raw=1
+[zls]:                        https://zigtools.org/
 [nvm]:                        https://github.com/nvm-sh/nvm
 [nvim-lspconfig]:             https://github.com/neovim/nvim-lspconfig
 [typescript-language-server]: https://github.com/typescript-language-server/typescript-language-server
