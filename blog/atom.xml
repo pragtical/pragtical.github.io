@@ -2,11 +2,158 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pragtical.dev/blog</id>
     <title>Pragtical Blog</title>
-    <updated>2026-06-03T00:00:00.000Z</updated>
+    <updated>2026-06-09T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pragtical.dev/blog"/>
     <subtitle>Pragtical Blog</subtitle>
     <icon>https://pragtical.dev/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pragtical v3.12.0 Release]]></title>
+        <id>https://pragtical.dev/blog/pragtical-v3120-release</id>
+        <link href="https://pragtical.dev/blog/pragtical-v3120-release"/>
+        <updated>2026-06-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Pragtical v3.12.0 is out with a modular renderer stack, a new SDL GPU backend,]]></summary>
+        <content type="html"><![CDATA[<p>Pragtical v3.12.0 is out with a modular renderer stack, a new SDL GPU backend,
+project module trust prompts, networking safety improvements, and a set of
+polish fixes for plugin loading, search feedback, diffs, and the welcome view.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="modular-renderer-backends">Modular Renderer Backends<a href="https://pragtical.dev/blog/pragtical-v3120-release#modular-renderer-backends" class="hash-link" aria-label="Direct link to Modular Renderer Backends" title="Direct link to Modular Renderer Backends">​</a></h2>
+<p>This release splits the renderer implementations into selectable backends. The
+surface renderer remains the default, while SDL renderer and SDL GPU are now
+built into the same binary and can be selected at startup:</p>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token assign-left variable" style="color:rgb(189, 147, 249);font-style:italic">PRAGTICAL_RENDERER</span><span class="token operator">=</span><span class="token plain">surface</span><span class="token operator">|</span><span class="token plain">sdlrenderer</span><span class="token operator">|</span><span class="token plain">sdlgpu</span><br></span></code></pre></div></div>
+<p>Packagers can also choose the compiled default with Meson:</p>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token parameter variable" style="color:rgb(189, 147, 249);font-style:italic">-Drenderer_backend</span><span class="token operator">=</span><span class="token plain">surface</span><span class="token operator">|</span><span class="token plain">sdlrenderer</span><span class="token operator">|</span><span class="token plain">sdlgpu</span><br></span></code></pre></div></div>
+<p>The important part is that this is no longer a one-backend-at-build-time setup.
+Users and developers can switch renderers without rebuilding the editor.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sdl-gpu-backend">SDL GPU Backend<a href="https://pragtical.dev/blog/pragtical-v3120-release#sdl-gpu-backend" class="hash-link" aria-label="Direct link to SDL GPU Backend" title="Direct link to SDL GPU Backend">​</a></h2>
+<p>The new SDL GPU backend moves editor rendering toward GPU-native replay instead
+of relying on CPU dirty-region uploads as the main path. Window rendering now
+uses GPU-backed frame textures, atlas-backed glyph rendering, and batched replay
+for text, rectangles, canvases, pixels, and polygons.</p>
+<p>The backend also supports offscreen rendering paths used by canvases, including
+canvas copy, blend, clip, and mutation behavior. Canvas revision tracking was
+added so cached draw commands are invalidated when canvas contents change.</p>
+<p>SDL GPU remains opt-in for this release, but it is usable enough for testing and
+for users who want to try the faster path. If SDL GPU cannot create a usable GPU
+device, Pragtical falls back to the surface backend instead of aborting during
+startup.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="renderer-performance">Renderer Performance<a href="https://pragtical.dev/blog/pragtical-v3120-release#renderer-performance" class="hash-link" aria-label="Direct link to Renderer Performance" title="Direct link to Renderer Performance">​</a></h2>
+<p>Local global-PGO benchmark runs showed SDL GPU reducing frame time across the
+main graphics benchmarks when compared with the surface backend:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">renderer_backend.lua:  surface 5.966 ms, sdlgpu 3.431 ms, 1.74x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">zoom_stress.lua:       surface 41.310 ms, sdlgpu 34.393 ms, 1.20x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">rect_cube.lua:         surface 1.935 ms, sdlgpu 1.301 ms, 1.49x faster</span><br></span></code></pre></div></div>
+<p>Text rendering benefits the most from atlas-backed GPU replay:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">hot grayscale text:    surface 9.622 ms, sdlgpu 4.361 ms, 2.21x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">hot subpixel text:     surface 10.630 ms, sdlgpu 4.355 ms, 2.44x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">cold glyph churn:      surface 6.675 ms, sdlgpu 1.986 ms, 3.36x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">icon font text:        surface 6.311 ms, sdlgpu 1.893 ms, 3.33x faster</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">clipped text:          surface 3.139 ms, sdlgpu 1.856 ms, 1.69x faster</span><br></span></code></pre></div></div>
+<p>This is still a first release of the GPU backend. The surface renderer remains
+the conservative default while SDL GPU continues to mature across platforms.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="vsync-and-presentation">VSync And Presentation<a href="https://pragtical.dev/blog/pragtical-v3120-release#vsync-and-presentation" class="hash-link" aria-label="Direct link to VSync And Presentation" title="Direct link to VSync And Presentation">​</a></h2>
+<p>Renderer presentation now has a backend hook for vsync. The graphics "Auto FPS"
+setting can apply it live through <code>renwindow:set_vsync(enabled)</code>.</p>
+<p>For SDL GPU this ties swapchain behavior to the editor's frame pacing: auto FPS
+uses tear-free presentation, while disabling it presents every rendered frame for
+lower latency. This fixes tearing observed on D3D12/Windows during GPU backend
+testing.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-module-trust">Project Module Trust<a href="https://pragtical.dev/blog/pragtical-v3120-release#project-module-trust" class="hash-link" aria-label="Direct link to Project Module Trust" title="Direct link to Project Module Trust">​</a></h2>
+<p>Project modules are now gated behind trust prompts. This makes project-local Lua
+loading more explicit and safer, especially when opening code from unknown or
+downloaded repositories.</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/f2974efc-7674-4aa4-8ede-6bc6b0dc4bba" alt="trust preview" class="img_ev3q"></p>
+<p>As pointed out by <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">AmerM137</a> Network-sensitive Lua
+loading also received additional safeguards. Network Lua files and remote
+Markdown images are skipped when networking is disabled.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="search-plugins-and-ui-fixes">Search, Plugins, And UI Fixes<a href="https://pragtical.dev/blog/pragtical-v3120-release#search-plugins-and-ui-fixes" class="hash-link" aria-label="Direct link to Search, Plugins, And UI Fixes" title="Direct link to Search, Plugins, And UI Fixes">​</a></h2>
+<p>Search now reports totals incrementally, so large searches provide feedback
+while results are still being collected, which fixes an issue reported by
+<a href="https://github.com/2trvl." target="_blank" rel="noopener noreferrer">2trvl</a>.</p>
+<p>Plugin loading was tightened so non-Lua files are not treated as plugins, plugin
+directory details are handled correctly, fixing an issue reported by <strong>Kabcorp</strong>.
+Also, the EmptyView plugin button appears when the plugin manager command is available.</p>
+<p>DiffView also received fixes for scrollbar markers and folding behavior, and
+fold hover state is now cleared when the mouse leaves the relevant area.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-and-packaging">Build And Packaging<a href="https://pragtical.dev/blog/pragtical-v3120-release#build-and-packaging" class="hash-link" aria-label="Direct link to Build And Packaging" title="Direct link to Build And Packaging">​</a></h2>
+<p>Local runs now copy LuaJIT modules needed by runtime profiling helpers, making
+<code>scripts/run-local</code> more useful for development and profiling sessions.</p>
+<p>The <code>ppm</code> helper now uses its native Meson build path, and rolling release
+artifacts are stripped. Those builds are meant for regular use rather than
+debug-symbol-based issue reports, so stripping reduces size and improves the
+release artifact profile.</p>
+<p>Thanks to everyone who reported bugs!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.12.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3120-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v3120-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Modularize renderer backends and add SDL GPU rendering
+(<a href="https://github.com/pragtical/pragtical/pull/481" target="_blank" rel="noopener noreferrer">#481</a>)</p>
+</li>
+<li>
+<p>Gate project modules behind trust prompts
+(<a href="https://github.com/pragtical/pragtical/pull/530" target="_blank" rel="noopener noreferrer">#530</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3120-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Use startup scale environment when restarting
+(<a href="https://github.com/pragtical/pragtical/pull/528" target="_blank" rel="noopener noreferrer">#528</a>)</p>
+</li>
+<li>
+<p>Copy LuaJIT modules for local runs
+(<a href="https://github.com/pragtical/pragtical/pull/529" target="_blank" rel="noopener noreferrer">#529</a>)</p>
+</li>
+<li>
+<p>Skip network Lua files when networking is disabled
+(<a href="https://github.com/pragtical/pragtical/pull/532" target="_blank" rel="noopener noreferrer">#532</a>)</p>
+</li>
+<li>
+<p>Disable remote markdown images when networking is disabled
+(<a href="https://github.com/pragtical/pragtical/pull/533" target="_blank" rel="noopener noreferrer">#533</a>)</p>
+</li>
+<li>
+<p>Show search totals incrementally
+(<a href="https://github.com/pragtical/pragtical/pull/536" target="_blank" rel="noopener noreferrer">#536</a>)</p>
+</li>
+<li>
+<p>Use native ppm Meson build
+(<a href="https://github.com/pragtical/pragtical/pull/540" target="_blank" rel="noopener noreferrer">#540</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3120-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Skip loading non-Lua files as plugins
+(<a href="https://github.com/pragtical/pragtical/pull/535" target="_blank" rel="noopener noreferrer">#535</a>)</p>
+</li>
+<li>
+<p>Handle directory plugin details
+(<a href="https://github.com/pragtical/pragtical/commit/2d6b3aa3" target="_blank" rel="noopener noreferrer">2d6b3aa3</a>)</p>
+</li>
+<li>
+<p>Clear fold hover state on mouse leave
+(<a href="https://github.com/pragtical/pragtical/pull/537" target="_blank" rel="noopener noreferrer">#537</a>)</p>
+</li>
+<li>
+<p>Fix DiffView scrollbar markers and disable folding in diffs
+(<a href="https://github.com/pragtical/pragtical/pull/538" target="_blank" rel="noopener noreferrer">#538</a>)</p>
+</li>
+<li>
+<p>Fix regex negative offsets
+(<a href="https://github.com/pragtical/pragtical/pull/539" target="_blank" rel="noopener noreferrer">#539</a>)</p>
+</li>
+<li>
+<p>Fix EmptyView plugin button detection
+(<a href="https://github.com/pragtical/pragtical/pull/542" target="_blank" rel="noopener noreferrer">#542</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3120-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>Strip rolling release artifacts
+(<a href="https://github.com/pragtical/pragtical/pull/543" target="_blank" rel="noopener noreferrer">#543</a>)</li>
+</ul>]]></content>
+        <author>
+            <name>Jefferson Gonzalez</name>
+            <uri>https://github.com/jgmdev</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pragtical v3.11.2 Release]]></title>
         <id>https://pragtical.dev/blog/pragtical-v3112-release</id>
@@ -2602,163 +2749,6 @@ elements that weren't embedded HTML).</li>
 <li>
 <p>treeview: remove unused code
 (<a href="https://github.com/lite-xl/lite-xl/pull/1895" target="_blank" rel="noopener noreferrer">#1895</a>)</p>
-</li>
-</ul>]]></content>
-        <author>
-            <name>Jefferson Gonzalez</name>
-            <uri>https://github.com/jgmdev</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Pragtical v3.5.0 Release]]></title>
-        <id>https://pragtical.dev/blog/pragtical-v350-release</id>
-        <link href="https://pragtical.dev/blog/pragtical-v350-release"/>
-        <updated>2024-09-15T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A new week and a new release with fixes and performance improvements!]]></summary>
-        <content type="html"><![CDATA[<p>A new week and a new release with fixes and performance improvements!</p>
-<p>Over the past few days, various people have helped by reporting issues on the GitHub
-<a href="https://github.com/pragtical/pragtical/issues" target="_blank" rel="noopener noreferrer">issue tracker</a>, and this release
-tackles some of them. One prominent change is the improvement in the way that
-coroutines are scheduled, resulting in overall better responsiveness and
-performance of the editor, an improvement that would not have been possible
-without the testing of <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">AmerM137</a>.</p>
-<p>Also, while working on a not-yet-finished C++ native tokenizer (to see if we gain
-some better performance), I found that the <code>utf8.len</code> function accepts a
-<code>lax</code> parameter that allows calculating the length of the string without
-checking if it is invalid UTF-8 (we don't need this check since we are passing
-clean UTF-8 text to the tokenizer). Using this flag on the Lua tokenizer calls of
-<code>ulen</code> gives us over a 75% time reduction in the per-line tokenization process.</p>
-<p>Another area that has seen improvements is in the startup and memory usage
-departments. We changed how the settings plugin deals with the global status
-of the scrollbar to not depend on a coroutine. In the memory department, we
-modified various core plugins that make use of weak document table keys to
-clear the content of these tables immediately after a document is closed. This
-change should result in the garbage collector kicking in sooner for cleanup
-of unused memory.</p>
-<p>This release also introduces AppImage and Portable <code>ARM64 Linux builds</code> of the
-editor for people working on those platforms, as suggested by
-<a href="https://github.com/jvoisin" target="_blank" rel="noopener noreferrer">jvoisin</a>.</p>
-<p>For plugin developers, we introduced two new functions to deal with ignore
-files: <code>core.get_ignore_file_rules()</code> and <code>common.match_ignore_rule(path, info, ignore_rules)</code>.
-Also, the editor version was aligned with the mod version, meaning that they
-are now the same.</p>
-<p>Some other changes include:</p>
-<ul>
-<li>Proper updates to the NoteBook widget on tab change.</li>
-<li>Better DPI runtime awareness on Windows (special thanks to
-<a href="https://github.com/LeDominik" target="_blank" rel="noopener noreferrer">LeDominik</a>, who performed macOS scale testing
-on previous releases, resulting in today's improvements).</li>
-<li>Fixes to the regex C API that allow it to work properly on macOS ARM64
-(reported by <a href="https://github.com/dilpreetsio" target="_blank" rel="noopener noreferrer">dilpreetsio</a>).</li>
-<li>Better borderless behavior when clicking window action buttons.</li>
-<li>Fixes to window size restoration on startup.</li>
-<li>Improvements to the findfile and projectsearch plugins in handling
-ignore files.</li>
-</ul>
-<p>A big THANK YOU to everyone who reports issues!</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.5.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v350-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-improvements">Performance Improvements<a href="https://pragtical.dev/blog/pragtical-v350-release#performance-improvements" class="hash-link" aria-label="Direct link to Performance Improvements" title="Direct link to Performance Improvements">​</a></h3>
-<ul>
-<li>
-<p>Lower input latency improving co-routine scheduling and tokenizer
-(<a href="https://github.com/pragtical/pragtical/pull/174" target="_blank" rel="noopener noreferrer">#174</a>)</p>
-</li>
-<li>
-<p>Reduce the amount of co-routines needed on startup
-(<a href="https://github.com/pragtical/pragtical/pull/176" target="_blank" rel="noopener noreferrer">#176</a>)</p>
-</li>
-<li>
-<p>Document lax param and use on tokenizer ulen calls
-(<a href="https://github.com/pragtical/pragtical/pull/183" target="_blank" rel="noopener noreferrer">#183</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v350-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Added PerMonitor dpi awareness to windows manifest
-(<a href="https://github.com/pragtical/pragtical/pull/158" target="_blank" rel="noopener noreferrer">#158</a>)</p>
-</li>
-<li>
-<p>Don't trust weak table keys to clean cached items
-(<a href="https://github.com/pragtical/pragtical/pull/164" target="_blank" rel="noopener noreferrer">#164</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api">API<a href="https://pragtical.dev/blog/pragtical-v350-release#api" class="hash-link" aria-label="Direct link to API" title="Direct link to API">​</a></h3>
-<ul>
-<li>
-<p>Introduce new ignore files handling functions
-(<a href="https://github.com/pragtical/pragtical/pull/177" target="_blank" rel="noopener noreferrer">#177</a>)</p>
-</li>
-<li>
-<p>Use project version as mods version
-(<a href="https://github.com/pragtical/pragtical/pull/184" target="_blank" rel="noopener noreferrer">#184</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v350-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fix issues with window size restoration (spotted on Windows)
-(<a href="https://github.com/pragtical/pragtical/pull/162" target="_blank" rel="noopener noreferrer">#162</a>)</p>
-</li>
-<li>
-<p>IPC Plugin: restore current project working dir
-(<a href="https://github.com/pragtical/pragtical/pull/167" target="_blank" rel="noopener noreferrer">#167</a>)</p>
-</li>
-<li>
-<p>If all documents are closed chdir to root project
-(<a href="https://github.com/pragtical/pragtical/pull/168" target="_blank" rel="noopener noreferrer">#168</a>)</p>
-</li>
-<li>
-<p>findfile: use project when resolving file path
-(<a href="https://github.com/pragtical/pragtical/pull/169" target="_blank" rel="noopener noreferrer">#169</a>)</p>
-</li>
-<li>
-<p>Fix regex api wrong value set to regex.ENDANCHORED
-(<a href="https://github.com/pragtical/pragtical/pull/170" target="_blank" rel="noopener noreferrer">#170</a>)</p>
-</li>
-<li>
-<p>regex api: use proper type for options parameter
-(<a href="https://github.com/pragtical/pragtical/pull/171" target="_blank" rel="noopener noreferrer">#171</a>)</p>
-</li>
-<li>
-<p>Do not maximize window on macOS at startup
-(<a href="https://github.com/pragtical/pragtical/pull/175" target="_blank" rel="noopener noreferrer">#175</a>)</p>
-</li>
-<li>
-<p>Process TitleView button actions on mouse release
-(<a href="https://github.com/pragtical/pragtical/pull/178" target="_blank" rel="noopener noreferrer">#178</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v350-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Add Linux AArch64 build target to CI
-(<a href="https://github.com/pragtical/pragtical/pull/157" target="_blank" rel="noopener noreferrer">#157</a>)</p>
-</li>
-<li>
-<p>CI: Properly enable ccache for linux builds
-(<a href="https://github.com/pragtical/pragtical/pull/161" target="_blank" rel="noopener noreferrer">#161</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v350-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
-<ul>
-<li>Allow scheduling core updates and redraws
-(<a href="https://github.com/pragtical/widget/commit/a2637c377da8a92eb4bd966d12ab6a45e71c4e43" target="_blank" rel="noopener noreferrer">a2637c37</a>)</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes">Lite XL Inherited Changes<a href="https://pragtical.dev/blog/pragtical-v350-release#lite-xl-inherited-changes" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes" title="Direct link to Lite XL Inherited Changes">​</a></h3>
-<ul>
-<li>
-<p>DocView: check token_count not 0
-(<a href="https://github.com/lite-xl/lite-xl/pull/1879" target="_blank" rel="noopener noreferrer">#1879</a>)</p>
-</li>
-<li>
-<p>Added in keyboard shortcut tooltips.
-(<a href="https://github.com/lite-xl/lite-xl/pull/1880" target="_blank" rel="noopener noreferrer">#1880</a>)</p>
-</li>
-<li>
-<p>Add primary selection support
-(<a href="https://github.com/lite-xl/lite-xl/pull/1729" target="_blank" rel="noopener noreferrer">#1729</a>)</p>
 </li>
 </ul>]]></content>
         <author>
