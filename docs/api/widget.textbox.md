@@ -1,5 +1,5 @@
 ---
-sidebar_position: 92
+sidebar_position: 99
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -310,6 +310,14 @@ Represents the position of a widget.
 ```
 
 A base widget
+
+---
+
+## password
+
+```lua
+(field) password: boolean
+```
 
 ---
 
@@ -661,8 +669,10 @@ All classes in Pragtical inherit from Object.
 ### syntax
 
 ```lua
-(field) syntax: table|unknown
+(field) syntax: core.syntax.syntax
 ```
+
+A language syntax definition used by syntax plugins and tokenizers.
 
 ---
 
@@ -954,11 +964,13 @@ Get the lua pattern used to match symbols taking into account current subsyntax.
   -> string
 ```
 
-Returns the content of the doc between two positions.
-The positions will be sanitized and sorted.
+Returns the content of the doc between two positions. 
+The positions will be sanitized and sorted. 
 The character at the "end" position is not included by default.
 
 @*param* `inclusive` — Whether or not to return the character at the last position
+
+See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#409#9)
 
 ---
 
@@ -1652,6 +1664,47 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+### visual_lines
+
+```lua
+(field) visual_lines: table
+```
+
+---
+
+### visual_lines_change_id
+
+```lua
+(field) visual_lines_change_id: integer
+```
+
+---
+
+### visual_lines_dirty
+
+```lua
+(field) visual_lines_dirty: boolean
+```
+
+---
+
+### visual_lines_invalid_from
+
+```lua
+(field) visual_lines_invalid_from: integer?
+```
+
+---
+
+### from_state
+
+```lua
+function core.docview.from_state(state: table)
+  -> core.docview|unknown
+```
+
+---
+
 ### __call
 
 ```lua
@@ -1783,6 +1836,7 @@ Draw a complete line including highlight and selections.
 
 ```lua
 (method) widget.textbox.TextView:draw_line_text(line: integer, x: number, y: number)
+  -> integer
 ```
 
 ---
@@ -1806,6 +1860,29 @@ Called after main text to draw on top.
 
 Draw the view's scrollbars.
 Commonly called at the end of draw() methods.
+
+---
+
+### each_visible_line
+
+```lua
+(method) core.docview:each_visible_line()
+  -> fun():integer?, integer?, integer?
+```
+
+Iterate visible rows as virtual offset plus real document position.
+
+---
+
+### ensure_line_visible
+
+```lua
+(method) core.docview:ensure_line_visible(line: integer)
+  -> line: integer
+```
+
+Ensure a document line is visible in this view.
+Plugins that hide lines can override this to reveal the requested line.
 
 ---
 
@@ -1844,18 +1921,9 @@ Example: `view:extends(View)` returns true for View and all subclasses
 ### get_col_x_offset
 
 ```lua
-(method) core.docview:get_col_x_offset(line: integer, col: integer)
-  -> offset: number
+(method) widget.textbox.TextView:get_col_x_offset(line: integer, col: integer)
+  -> number
 ```
-
-Get the horizontal pixel offset for a column position.
-Accounts for tabs, syntax highlighting fonts, and caches long lines.
-
-@*param* `line` — Line number
-
-@*param* `col` — Column number (byte offset)
-
-@*return* `offset` — Horizontal pixel offset
 
 ---
 
@@ -1946,6 +2014,17 @@ Get the scrollable width (infinite for horizontal scrolling).
 
 ---
 
+### get_hidden_lines
+
+```lua
+(method) core.docview:get_hidden_lines()
+  -> hidden_lines: table<integer, boolean>?
+```
+
+Return plugin-provided hidden document lines.
+
+---
+
 ### get_line_height
 
 ```lua
@@ -1988,6 +2067,48 @@ Get the vertical offset for centering text within a line.
 
 ---
 
+### get_line_visual_height
+
+```lua
+(method) core.docview:get_line_visual_height(line: integer)
+  -> height: number
+```
+
+Get the visual height occupied by a real document line.
+Wrapped lines may span more than one row.
+
+@*param* `line` — Real document line
+
+---
+
+### get_line_wraps
+
+```lua
+(method) core.docview:get_line_wraps(line: integer)
+  -> starts: integer[]?
+```
+
+Return visual row start columns for a document line.
+
+---
+
+### get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ### get_name
 
 ```lua
@@ -2002,6 +2123,15 @@ Get the vertical offset for centering text within a line.
 ```lua
 (method) widget.textbox.TextView:get_scrollable_size()
   -> integer
+```
+
+---
+
+### get_state
+
+```lua
+(method) core.docview:get_state()
+  -> table
 ```
 
 ---
@@ -2053,21 +2183,60 @@ Get the range of visible lines in the current viewport.
 
 ---
 
-### get_x_offset_col
+### get_visual_line_col_from_x
 
 ```lua
-(method) core.docview:get_x_offset_col(line: integer, x: number)
+(method) core.docview:get_visual_line_col_from_x(row: integer, x: number)
   -> col: integer
 ```
 
-Get the column at a horizontal pixel offset.
-Inverse of get_col_x_offset. Accounts for variable-width fonts.
+Resolve a visual row-local horizontal offset to a document column.
 
-@*param* `line` — Line number
+@*param* `row` — Visual row
 
-@*param* `x` — Horizontal pixel offset
+@*param* `x` — Horizontal offset from text origin
 
-@*return* `col` — Column number (byte offset)
+---
+
+### get_visual_lines
+
+```lua
+(method) core.docview:get_visual_lines()
+  -> table
+```
+
+---
+
+### get_x_offset_col
+
+```lua
+(method) widget.textbox.TextView:get_x_offset_col(line: integer, x: number)
+  -> integer
+```
+
+---
+
+### has_variable_visual_lines
+
+```lua
+(method) core.docview:has_variable_visual_lines()
+  -> boolean
+```
+
+Return whether this view needs a materialized visual-line model.
+Views with wraps or other row expansions should override this.
+
+---
+
+### invalidate_visual_lines
+
+```lua
+(method) core.docview:invalidate_visual_lines(from_line?: integer)
+```
+
+Mark the visual-line model dirty.
+
+@*param* `from_line` — First line that changed (reserved for incremental rebuilds)
 
 ---
 
@@ -2119,6 +2288,17 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 @*param* `T` — Object or class to check
 
 @*return* `is_extended` — True if T inherits from this class
+
+---
+
+### is_line_visible
+
+```lua
+(method) core.docview:is_line_visible(line: integer)
+  -> boolean
+```
+
+Return whether a document line contributes visual rows.
 
 ---
 
@@ -2185,6 +2365,23 @@ Use this for animations instead of direct assignment.
 
 ---
 
+### offset_from_position
+
+```lua
+(method) core.docview:offset_from_position(line: integer, col?: integer)
+  -> offset: integer
+```
+
+Convert a real document position to its composed visual line offset.
+
+@*param* `line` — Real document line
+
+@*param* `col` — Optional column
+
+@*return* `offset` — Visual line index (1-based)
+
+---
+
 ### on_file_dropped
 
 ```lua
@@ -2225,11 +2422,12 @@ Updates IME decoration and scrolls to keep composition visible.
 ### on_mouse_left
 
 ```lua
-(method) core.view:on_mouse_left()
+(method) core.docview:on_mouse_left()
 ```
 
-Called when mouse leaves the view's area.
-Override to clear hover states. Base implementation notifies scrollbars.
+Handle mouse leaving the view area.
+Clears hover state that would otherwise remain until the next mouse move
+inside the DocView.
 
 ---
 
@@ -2347,6 +2545,38 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 @*param* `dy` — Delta y since last position
 
 @*param* `i` — Touch finger/pointer index
+
+---
+
+### position_from_offset
+
+```lua
+(method) core.docview:position_from_offset(offset: integer)
+  -> line: integer
+  2. col: integer
+```
+
+Convert a visual line offset (from get_visible_line_range) to a real
+document position. Plugins that iterate visible rows should call this to get
+the real line and column represented by each composed visual row.
+
+@*param* `offset` — Visual line index (1-based)
+
+@*return* `line` — Real document line
+
+@*return* `col` — Column where the visual row starts
+
+---
+
+### rebuild_visual_lines
+
+```lua
+(method) core.docview:rebuild_visual_lines(from_line?: integer)
+```
+
+Rebuild the composed visual-line model.
+
+@*param* `from_line` — First document line that may have changed
 
 ---
 
@@ -2511,6 +2741,70 @@ Sets the bounding box for the system IME composition window.
 
 Update scrollbar positions and sizes.
 Called automatically by update(). Rarely needs to be called manually.
+
+---
+
+### visual_line_count
+
+```lua
+(method) core.docview:visual_line_count()
+  -> count: integer
+```
+
+Get the total number of visual rows.
+
+---
+
+### visual_position_from_row
+
+```lua
+(method) core.docview:visual_position_from_row(row: integer)
+  -> line: integer
+  2. col: integer
+```
+
+Convert a visual row to a real document position.
+
+---
+
+### visual_row_from_position
+
+```lua
+(method) core.docview:visual_row_from_position(line: integer, col?: integer)
+  -> row: integer
+```
+
+Convert a real document position to a visual row.
+
+---
+
+### visual_rows_for_line
+
+```lua
+(method) core.docview:visual_rows_for_line(line: integer)
+  -> first_row: integer?
+  2. row_count: integer
+```
+
+Get the first visual row and row count for a real document line.
+
+---
+
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
 
 ---
 
@@ -2859,6 +3153,23 @@ Get height including borders.
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -2867,6 +3178,17 @@ Get height including borders.
 ```
 
 The name that is displayed on pragtical tabs.
+
+---
+
+## get_password_mode
+
+```lua
+(method) widget.textbox:get_password_mode()
+  -> boolean
+```
+
+Get whether password display mode is enabled.
 
 ---
 
@@ -2932,6 +3254,24 @@ widget or the size of the widget it self if greater.
 (method) widget:get_size()
   -> widget.position
 ```
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 
@@ -3078,7 +3418,7 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) widget.textbox:new(parent: widget, text: boolean, placeholder: any)
+(method) widget.textbox:new(parent: widget, text: boolean, placeholder: any, options: any)
 ```
 
 ---
@@ -3367,6 +3707,16 @@ A text label for the widget, not all widgets support this.
 
 ---
 
+## set_password_mode
+
+```lua
+(method) widget.textbox:set_password_mode(enabled: boolean)
+```
+
+Enable or disable password display mode.
+
+---
+
 ## set_position
 
 ```lua
@@ -3560,3 +3910,4 @@ will get executed for a predefined period of time when a widget is
 initialized, scale has changed or a widget switched from hidden to visible.
 
 ---
+

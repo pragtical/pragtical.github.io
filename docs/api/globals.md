@@ -278,6 +278,7 @@ global get_current_require_path: function
 ```
 
 Returns the current `require` path.
+See: \[require\](file:///tmp/lua-language-server-1000/instance.kU8I/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
 
 ---
 
@@ -288,6 +289,19 @@ global global: function
 ```
 
 used to define a global variable
+
+---
+
+## net
+
+```lua
+global net: net
+```
+
+Core functionality that allows non-blocking network communication with
+encryption support (SSL) on TCP connections.
+
+[\[View Library\]](/docs/api/net)
 
 ---
 
@@ -323,6 +337,15 @@ global renderer: renderer
 ```
 
 Core functionality to render or draw elements into the screen.
+
+Renderer backend selection can be overridden at startup with:
+`PRAGTICAL_RENDERER=surface|sdlrenderer|sdlgpu`.
+
+When using the `sdlgpu` backend, GPU device selection can be influenced with:
+`PRAGTICAL_SDLGPU_POWER=auto|low|high`.
+The default `auto` mode tries the low-power GPU first, then high-performance
+GPU before falling back to the software surface backend. `low` and `high`
+are strict single-preference modes.
 
 [\[View Library\]](/docs/api/renderer)
 
@@ -414,3 +437,4 @@ Additional utf8 support not provided by lua.
 [\[View Library\]](/docs/api/utf8extra)
 
 ---
+

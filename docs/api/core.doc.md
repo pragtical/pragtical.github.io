@@ -1,5 +1,5 @@
 ---
-sidebar_position: 26
+sidebar_position: 28
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -174,8 +174,10 @@ All classes in Pragtical inherit from Object.
 ## syntax
 
 ```lua
-(field) syntax: table|unknown
+(field) syntax: core.syntax.syntax
 ```
+
+A language syntax definition used by syntax plugins and tokenizers.
 
 ---
 
@@ -467,11 +469,13 @@ Get the lua pattern used to match symbols taking into account current subsyntax.
   -> string
 ```
 
-Returns the content of the doc between two positions.
-The positions will be sanitized and sorted.
+Returns the content of the doc between two positions. 
+The positions will be sanitized and sorted. 
 The character at the "end" position is not included by default.
 
 @*param* `inclusive` — Whether or not to return the character at the last position
+
+See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#409#9)
 
 ---
 
@@ -852,3 +856,4 @@ For plugins to add custom actions of document change
 ```
 
 ---
+

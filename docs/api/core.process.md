@@ -1,5 +1,5 @@
 ---
-sidebar_position: 38
+sidebar_position: 42
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -125,9 +125,27 @@ fd:
 
 ```lua
 (method) process.stream:close()
+  -> success: boolean|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Closes the stream and its underlying resources.
+
+@*return* `success` — True when closed, or nil on error.
+
+@*return* `errmsg` — The error message when closing fails.
+
+@*return* `errcode` — The error code when closing fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
 
 ---
 
@@ -136,12 +154,14 @@ Closes the stream and its underlying resources.
 ```lua
 (method) process.stream:read(bytes: integer|`"L"`|`"all"`|`"line"`, options?: process.stream.readoption)
   -> data: string|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Reads data from the stream.
 
 When called inside a coroutine such as `core.add_thread()`,
-the function yields to the main thread occassionally to avoid blocking the editor. 
+the function yields to the main thread occasionally to avoid blocking the editor.
 If the function is not called inside the coroutine, the function returns immediately
 without waiting for more data.
 
@@ -149,13 +169,24 @@ without waiting for more data.
 
 @*param* `options` — Options for reading from the stream.
 
-@*return* `data` — The string read from the stream, or nil if no data could be read.
+@*return* `data` — The string read from the stream, nil if no data could be read or an error occurred.
+
+@*return* `errmsg` — The error message when reading fails.
+
+@*return* `errcode` — The error code when reading fails.
 
 ```lua
 bytes:
     | `"line"` -- Reads a single line
     | `"all"` -- Reads the entire stream
     | `"L"` -- Reads a single line, keeping the trailing newline character.
+
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
 ```
 
 ---
@@ -164,13 +195,15 @@ bytes:
 
 ```lua
 (method) process.stream:write(bytes: string, options?: process.stream.writeoption)
-  -> num_bytes: integer
+  -> num_bytes: integer|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Writes data into the stream.
 
 When called inside a coroutine such as `core.add_thread()`,
-the function yields to the main thread occassionally to avoid blocking the editor. 
+the function yields to the main thread occasionally to avoid blocking the editor.
 If the function is not called inside the coroutine,
 the function writes as much data as possible before returning.
 
@@ -178,7 +211,20 @@ the function writes as much data as possible before returning.
 
 @*param* `options` — Options for writing to the stream.
 
-@*return* `num_bytes` — The number of bytes written to the stream.
+@*return* `num_bytes` — The number of bytes written to the stream, or nil on error.
+
+@*return* `errmsg` — The error message when writing fails.
+
+@*return* `errcode` — The error code when writing fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
 
 ---
 
@@ -241,8 +287,33 @@ The number of seconds to yield in a coroutine. Defaults to `1/config.fps`.
 ## process.start
 
 ```lua
-function process.start(command: any, options: any)
-  -> table
+function process.start(command: string|table, options?: process.options)
+  -> proc: process|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
+```
+
+Create and start a new process, wrapping the native process with stream helpers.
+
+When `options.env` is a table, values are merged over the system environment.
+On Windows, environment keys are compared case-insensitively and sorted for
+the environment block passed to the native process API.
+
+@*param* `command` — First index is the command to execute and subsequent elements are parameters.
+
+@*return* `proc` — The wrapped process, or nil on error.
+
+@*return* `errmsg` — The error message when process creation fails.
+
+@*return* `errcode` — The error code when process creation fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
 ```
 
 ---
@@ -251,9 +322,27 @@ function process.start(command: any, options: any)
 
 ```lua
 (method) process.stream:close()
+  -> success: boolean|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Closes the stream and its underlying resources.
+
+@*return* `success` — True when closed, or nil on error.
+
+@*return* `errmsg` — The error message when closing fails.
+
+@*return* `errcode` — The error code when closing fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
 
 ---
 
@@ -284,12 +373,14 @@ fd:
 ```lua
 (method) process.stream:read(bytes: integer|`"L"`|`"all"`|`"line"`, options?: process.stream.readoption)
   -> data: string|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Reads data from the stream.
 
 When called inside a coroutine such as `core.add_thread()`,
-the function yields to the main thread occassionally to avoid blocking the editor. 
+the function yields to the main thread occasionally to avoid blocking the editor.
 If the function is not called inside the coroutine, the function returns immediately
 without waiting for more data.
 
@@ -297,13 +388,24 @@ without waiting for more data.
 
 @*param* `options` — Options for reading from the stream.
 
-@*return* `data` — The string read from the stream, or nil if no data could be read.
+@*return* `data` — The string read from the stream, nil if no data could be read or an error occurred.
+
+@*return* `errmsg` — The error message when reading fails.
+
+@*return* `errcode` — The error code when reading fails.
 
 ```lua
 bytes:
     | `"line"` -- Reads a single line
     | `"all"` -- Reads the entire stream
     | `"L"` -- Reads a single line, keeping the trailing newline character.
+
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
 ```
 
 ---
@@ -312,13 +414,15 @@ bytes:
 
 ```lua
 (method) process.stream:write(bytes: string, options?: process.stream.writeoption)
-  -> num_bytes: integer
+  -> num_bytes: integer|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Writes data into the stream.
 
 When called inside a coroutine such as `core.add_thread()`,
-the function yields to the main thread occassionally to avoid blocking the editor. 
+the function yields to the main thread occasionally to avoid blocking the editor.
 If the function is not called inside the coroutine,
 the function writes as much data as possible before returning.
 
@@ -326,7 +430,20 @@ the function writes as much data as possible before returning.
 
 @*param* `options` — Options for writing to the stream.
 
-@*return* `num_bytes` — The number of bytes written to the stream.
+@*return* `num_bytes` — The number of bytes written to the stream, or nil on error.
+
+@*return* `errmsg` — The error message when writing fails.
+
+@*return* `errcode` — The error code when writing fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
 
 ---
 
@@ -335,18 +452,33 @@ the function writes as much data as possible before returning.
 ```lua
 (method) process:wait(timeout?: number, scan?: number)
   -> exit_code: integer|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Waits for the process to exit.
 When called inside a coroutine such as `core.add_thread()`,
-the function yields to the main thread occassionally to avoid blocking the editor. 
+the function yields to the main thread occasionally to avoid blocking the editor.
 Otherwise, the function blocks the editor until the process exited or the timeout has expired.
 
-@*param* `timeout` — The amount of seconds to wait. If omitted, the function will wait indefinitely.
+@*param* `timeout` — The amount of milliseconds to wait. If omitted, the function will wait indefinitely.
 
-@*param* `scan` — The amount of seconds to yield while scanning. If omittted, the scan rate will be the FPS.
+@*param* `scan` — The amount of seconds to yield while scanning. If omitted, the scan rate will be the FPS.
 
-@*return* `exit_code` — The exit code for this process, or nil if the wait timed out.
+@*return* `exit_code` — The exit code for this process, or nil if the wait timed out or an error occurred.
+
+@*return* `errmsg` — The error message when the native wait fails.
+
+@*return* `errcode` — The error code when the native wait fails.
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
 
 ---
 

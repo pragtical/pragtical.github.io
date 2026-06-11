@@ -1,5 +1,5 @@
 ---
-sidebar_position: 30
+sidebar_position: 32
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -165,14 +165,6 @@ A base widget
 
 ---
 
-## first_update
-
-```lua
-(field) first_update: boolean
-```
-
----
-
 ## font
 
 ```lua
@@ -325,14 +317,6 @@ A base widget
 
 ---
 
-## plugin_manager_loaded
-
-```lua
-(field) plugin_manager_loaded: boolean
-```
-
----
-
 ## plugins
 
 ```lua
@@ -388,6 +372,24 @@ Represents the position of a widget.
 ```lua
 (field) recent_projects: widget.listbox
 ```
+
+---
+
+## recent_projects_context_target
+
+```lua
+(field) recent_projects_context_target: unknown
+```
+
+---
+
+## recent_projects_menu
+
+```lua
+(field) recent_projects_menu: core.contextmenu
+```
+
+A context menu.
 
 ---
 
@@ -585,6 +587,24 @@ A base widget
 
 ---
 
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+---
+
 ## override_rootview
 
 ```lua
@@ -638,6 +658,16 @@ Emitted to input_text widgets when clicked.
 
 Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
+
+---
+
+## add_recent_project_current_instance
+
+```lua
+(method) core.emptyview:add_recent_project_current_instance(path: string)
+```
+
+Add a recent project to the current editor instance.
 
 ---
 
@@ -928,6 +958,23 @@ Get height including borders.
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -972,6 +1019,17 @@ Overall width of the widget accounting all visible child widgets.
 
 ---
 
+## get_recent_project_row_at
+
+```lua
+(method) core.emptyview:get_recent_project_row_at(x: number, y: number)
+  -> row: integer?
+```
+
+Find the recent-project row under a screen position.
+
+---
+
 ## get_right
 
 ```lua
@@ -995,12 +1053,41 @@ widget or the size of the widget it self if greater.
 
 ---
 
+## get_selected_recent_project
+
+```lua
+(method) core.emptyview:get_selected_recent_project()
+  -> path: string?
+```
+
+Get the recent project targeted by the context menu.
+
+---
+
 ## get_size
 
 ```lua
 (method) widget:get_size()
   -> widget.position
 ```
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 
@@ -1231,30 +1318,17 @@ Emitted once when the mouse leaves the widget.
 ## on_mouse_moved
 
 ```lua
-(method) widget:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+(method) core.emptyview:on_mouse_moved(x: number, y: number, dx: number, dy: number)
   -> boolean
 ```
-
-Besides the on_mouse_moved this event emits on_mouse_enter
-and on_mouse_leave for easy hover effects. Also, if the
-widget is scrollable and pressed this will drag it unless
-there is an active input_text child active.
 
 ---
 
 ## on_mouse_pressed
 
 ```lua
-(method) widget:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
-  -> processed: boolean
-```
-
-Send mouse pressed events to hovered child or starts dragging if enabled.
-
-```lua
-button:
-    | "left"
-    | "right"
+(method) core.emptyview:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
+  -> boolean
 ```
 
 ---
@@ -1326,6 +1400,26 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 ---
 
+## open_recent_project_new_instance
+
+```lua
+(method) core.emptyview:open_recent_project_new_instance(path: string)
+```
+
+Open a recent project in a separate editor instance.
+
+---
+
+## refresh_recent_projects
+
+```lua
+(method) core.emptyview:refresh_recent_projects()
+```
+
+Refresh the displayed recent projects from the core session state.
+
+---
+
 ## release_mouse
 
 ```lua
@@ -1336,6 +1430,16 @@ Undo capture_mouse()
 
 ---
 
+## remove_all_recent_projects
+
+```lua
+(method) core.emptyview:remove_all_recent_projects()
+```
+
+Remove all projects from the recent projects list.
+
+---
+
 ## remove_child
 
 ```lua
@@ -1343,6 +1447,16 @@ Undo capture_mouse()
 ```
 
 Remove a child widget.
+
+---
+
+## remove_recent_project
+
+```lua
+(method) core.emptyview:remove_recent_project(path: string)
+```
+
+Remove a project from the recent projects list.
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 95
+sidebar_position: 102
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -549,6 +549,8 @@ A base widget
 
 ---
 
+## widget.treelist.filtercb
+
 ## widget.treelist.item
 
 ### childs
@@ -579,6 +581,22 @@ A base widget
 
 ```lua
 (field) expanded: boolean?
+```
+
+---
+
+### expanded_original
+
+```lua
+(field) expanded_original: boolean?
+```
+
+---
+
+### expanded_original_stored
+
+```lua
+(field) expanded_original_stored: boolean?
 ```
 
 ---
@@ -628,6 +646,40 @@ A base widget
 ```lua
 (field) visible: boolean?
 ```
+
+---
+
+### visible_original
+
+```lua
+(field) visible_original: boolean?
+```
+
+---
+
+### visible_original_stored
+
+```lua
+(field) visible_original_stored: boolean?
+```
+
+---
+
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
 
 ---
 
@@ -975,6 +1027,17 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 ---
 
+## filter
+
+```lua
+(method) widget.treelist:filter(match?: string|fun(self: widget.treelist, item: widget.treelist.item):(boolean|number)?)
+```
+
+Set which tree items to show using the specified match string or callback,
+if nil all items visibility is restored.
+
+---
+
 ## force_event
 
 ```lua
@@ -1147,6 +1210,23 @@ Retrieve the amount of visible items and also yield them.
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -1243,6 +1323,24 @@ Get the right x coordinate relative to parent
 (method) widget:get_size()
   -> widget.position
 ```
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 
@@ -1465,10 +1563,8 @@ Emitted once when the mouse hovers the widget.
 ## on_mouse_leave
 
 ```lua
-(method) widget:on_mouse_leave(x: any, y: any, dx: any, dy: any)
+(method) widget.treelist:on_mouse_leave(x: any, y: any, dx: any, dy: any)
 ```
-
-Emitted once when the mouse leaves the widget.
 
 ---
 

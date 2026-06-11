@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 12
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -59,6 +59,19 @@ Returns nil if it cannot be determined.
 
 ---
 
+## get_renderer_info
+
+```lua
+function renwindow.get_renderer_info(window: renwindow)
+  -> { backend: string|"sdlgpu"|"sdlrenderer"|"surface", power: string, device: string }
+```
+
+Gets renderer information for the backend currently attached to the window.
+`backend` is always set. `power` and `device` are only set by backends where
+the fields apply and the information is available.
+
+---
+
 ## get_size
 
 ```lua
@@ -68,6 +81,19 @@ function renwindow.get_size(window: renwindow)
 ```
 
 Get width and height of a window
+
+---
+
+## set_vsync
+
+```lua
+function renwindow.set_vsync(window: renwindow, enabled: boolean)
+```
+
+Enable or disable vertical synchronization for the window swapchain.
+When enabled the backend presents tear-free (synced to the display refresh);
+when disabled it presents every rendered frame for the lowest latency, which
+may tear. No-op on backends without a controllable present mode (software).
 
 ---
 

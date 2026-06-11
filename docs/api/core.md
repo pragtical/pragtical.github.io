@@ -1,5 +1,5 @@
 ---
-sidebar_position: 18
+sidebar_position: 20
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -119,6 +119,16 @@ Provides autocomplete, suggestions, and command execution interface.
 ```lua
 (field) docs: table
 ```
+
+---
+
+## exit_status
+
+```lua
+(field) exit_status: integer
+```
+
+The process exit status used when the application quits.
 
 ---
 
@@ -299,6 +309,14 @@ Access the global instance via `core.status_view`.
 
 ```lua
 (field) title_view: core.titleview
+```
+
+---
+
+## trusted_projects
+
+```lua
+(field) trusted_projects: table
 ```
 
 ---
@@ -547,7 +565,7 @@ function core.get_log(i: any)
 ## get_plugin_details
 
 ```lua
-function core.get_plugin_details(path: any)
+function core.get_plugin_details(path: string)
   -> boolean|table|nil
 ```
 
@@ -575,6 +593,15 @@ function core.get_views_referencing_doc(doc: any)
 
 ```lua
 function core.init()
+```
+
+---
+
+## is_project_trusted
+
+```lua
+function core.is_project_trusted(project: any)
+  -> boolean
 ```
 
 ---
@@ -691,6 +718,15 @@ function core.open_image(filename: string)
 
 ---
 
+## open_markdown
+
+```lua
+function core.open_markdown(filename: string)
+  -> markdown_view: (core.markdownview)?
+```
+
+---
+
 ## open_project
 
 ```lua
@@ -724,6 +760,15 @@ function core.project_absolute_path(path: any)
 
 ---
 
+## prompt_project_trust
+
+```lua
+function core.prompt_project_trust(project: any, options: any, callback: any)
+  -> boolean
+```
+
+---
+
 ## push_clip_rect
 
 ```lua
@@ -735,7 +780,7 @@ function core.push_clip_rect(x: any, y: any, w: any, h: any)
 ## quit
 
 ```lua
-function core.quit(force: any)
+function core.quit(force: any, exit_code: any)
 ```
 
 ---
@@ -800,6 +845,25 @@ legacy interface
 function core.run()
 ```
 
+Set up the run-loop state.  Called once from C (SDL_AppInit → init_lua_state)
+via the init_code that also calls core.init().  SDL_AppIterate then drives the
+loop by calling core.run_step() on every frame.
+
+---
+
+## run_step
+
+```lua
+function core.run_step()
+  -> true: boolean
+```
+
+Execute one frame of the main loop.
+
+Called by C's SDL_AppIterate on every frame.
+
+@*return* `true` — to keep running, false to quit or restart.
+
 ---
 
 ## save_file_dialog
@@ -862,6 +926,15 @@ function core.step(next_frame_time: any)
 ```lua
 function core.temp_filename(ext: any, dir: any)
   -> unknown
+```
+
+---
+
+## trust_project
+
+```lua
+function core.trust_project(project: any)
+  -> boolean|string
 ```
 
 ---

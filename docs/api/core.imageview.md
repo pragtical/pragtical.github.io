@@ -1,5 +1,5 @@
 ---
-sidebar_position: 31
+sidebar_position: 34
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -54,7 +54,7 @@ Array of bytes that represents a color used by the rendering functions.
 ## context
 
 ```lua
-(field) context: string
+(field) context: 'application'|'session'
 ```
 
 ---
@@ -129,6 +129,14 @@ Core functionality that allows rendering into a separate surface.
 ```
 
 Core functionality that allows rendering into a separate surface.
+
+---
+
+## mouse
+
+```lua
+(field) mouse: table
+```
 
 ---
 
@@ -239,6 +247,23 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ```lua
 (field) zoom_scale: number
+```
+
+---
+
+## core.imageview.zoommode
+
+```lua
+core.imageview.zoommode:
+    | "fit"
+    | "fixed"
+```
+
+## from_state
+
+```lua
+function core.imageview.from_state(state: table)
+  -> core.imageview|nil
 ```
 
 ---
@@ -408,6 +433,23 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -422,6 +464,15 @@ Accounts for scroll offset. Use for drawing content at correct position.
 ```lua
 (method) core.imageview:get_scrollable_size()
   -> number
+```
+
+---
+
+## get_state
+
+```lua
+(method) core.imageview:get_state()
+  -> table
 ```
 
 ---
@@ -513,7 +564,7 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) core.imageview:new(path?: string)
+(method) core.imageview:new(path?: string, zoom_mode: any, zoom_scale: any)
 ```
 
 Constructor

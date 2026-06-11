@@ -1,5 +1,5 @@
 ---
-sidebar_position: 43
+sidebar_position: 47
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -824,6 +824,24 @@ Left or right alignment identifier.
 
 Styled text array containing fonts, colors, and strings.
 
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+---
+
 ## __call
 
 ```lua
@@ -1141,6 +1159,23 @@ alignment:
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -1164,6 +1199,24 @@ Get the total scrollable height of the view's content.
 Used by scrollbar to calculate thumb size and position.
 
 @*return* `height` — Height in pixels (default: infinite)
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 

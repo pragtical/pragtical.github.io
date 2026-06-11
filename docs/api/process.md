@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -15,9 +15,7 @@ or write to them in a non-blocking fashion.
 (field) ERROR_INVAL: integer
 ```
 
-Error triggered when trying to terminate or kill a non running process,
-its value is platform dependent, so the value declared on this
-interface does not represents the real one.
+Error triggered when trying to terminate or kill a non running process.
 
 ---
 
@@ -27,9 +25,7 @@ interface does not represents the real one.
 (field) ERROR_NOMEM: integer
 ```
 
-Error triggered when no memory is available to allocate the process,
-its value is platform dependent, so the value declared on this
-interface does not represents the real one.
+Error triggered when no memory is available to allocate the process.
 
 ---
 
@@ -40,8 +36,7 @@ interface does not represents the real one.
 ```
 
 Error triggered when the stdout, stderr or stdin fails while reading
-or writing, its value is platform dependent, so the value declared on this
-interface does not represents the real one.
+or writing.
 
 ---
 
@@ -52,9 +47,7 @@ interface does not represents the real one.
 ```
 
 Error triggered when a process takes more time than that specified
-by the deadline parameter given on process:start(),
-its value is platform dependent, so the value declared on this
-interface does not represents the real one.
+by the timeout parameter given on process:start().
 
 ---
 
@@ -64,9 +57,7 @@ interface does not represents the real one.
 (field) ERROR_WOULDBLOCK: integer
 ```
 
-Error triggered when a read or write action is blocking,
-its value is platform dependent, so the value declared on this
-interface does not represents the real one.
+Error triggered when a read or write action is blocking.
 
 ---
 
@@ -159,7 +150,7 @@ Used for the process:close_stream() method to close stdout.
 (field) WAIT_DEADLINE: integer
 ```
 
-Instruct process:wait() to wait until the deadline given on process:start()
+Instruct process:wait() to wait until the timeout given on process:start().
 
 ---
 
@@ -202,23 +193,41 @@ Options that can be passed to process.start()
 ### cwd
 
 ```lua
-(field) cwd: string
+(field) cwd: string?
 ```
+
+Working directory for the process.
+
+---
+
+### detach
+
+```lua
+(field) detach: boolean?
+```
+
+Run the process detached from Pragtical lifecycle management. Detached
+processes are not terminated by Pragtical on shutdown. On Windows, processes
+are launched without opening a console window; when built against Pragtical's
+bundled SDL3 subproject, the real Windows exit code remains available because
+the SDL3 process backend is patched for this.
 
 ---
 
 ### env
 
 ```lua
-(field) env: table<string, string>
+(field) env: (fun(system_env: table<string, string>):string|table<string, string>)?
 ```
+
+Environment overrides, or a callback returning a NUL-separated environment block.
 
 ---
 
 ### stderr
 
 ```lua
-(field) stderr: `process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`
+(field) stderr: (`process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`)?
 ```
 
 ---
@@ -226,7 +235,7 @@ Options that can be passed to process.start()
 ### stdin
 
 ```lua
-(field) stdin: `process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`
+(field) stdin: (`process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`)?
 ```
 
 ---
@@ -234,7 +243,7 @@ Options that can be passed to process.start()
 ### stdout
 
 ```lua
-(field) stdout: `process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`
+(field) stdout: (`process.REDIRECT_DEFAULT`|`process.REDIRECT_DISCARD`|`process.REDIRECT_PARENT`|`process.REDIRECT_PIPE`|`process.REDIRECT_STDOUT`)?
 ```
 
 ---
@@ -242,8 +251,10 @@ Options that can be passed to process.start()
 ### timeout
 
 ```lua
-(field) timeout: number
+(field) timeout: number?
 ```
+
+Timeout in milliseconds used by `process.WAIT_DEADLINE`; defaults to 10.
 
 ---
 
@@ -278,17 +289,17 @@ process.waittype:
 ## start
 
 ```lua
-function process.start(command_and_params: table, options: process.options)
+function process.start(command_and_params: string|table, options?: process.options)
   -> process|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Create and start a new process
 
 @*param* `command_and_params` — First index is the command to execute
 
-and subsequente elements are parameters for the command.
+and subsequent elements are parameters for the command.
 
 
 ```lua
@@ -326,9 +337,9 @@ Translates an error code into a useful text message
 
 ```lua
 (method) process:close_stream(stream: `process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT`)
-  -> integer|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  -> boolean|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Allows you to close a stream pipe that you will not be using.
@@ -351,13 +362,36 @@ errcode:
 
 ---
 
+## interrupt
+
+```lua
+(method) process:interrupt()
+  -> boolean|nil
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
+```
+
+Sends an interrupt signal to the process
+
+
+```lua
+errcode:
+    | `process.ERROR_PIPE`
+    | `process.ERROR_WOULDBLOCK`
+    | `process.ERROR_TIMEDOUT`
+    | `process.ERROR_INVAL`
+    | `process.ERROR_NOMEM`
+```
+
+---
+
 ## kill
 
 ```lua
 (method) process:kill()
   -> boolean|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Sends SIGKILL to the process
@@ -392,12 +426,11 @@ Get the process id.
 ```lua
 (method) process:read(stream: `process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT`, len?: integer)
   -> string|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
-Read from the given stream type, if the process fails with a ERROR_PIPE it is
-automatically destroyed returning nil along error message and code.
+Read from the given stream type.
 
 @*param* `len` — Amount of bytes to read, defaults to 2048.
 
@@ -424,12 +457,11 @@ errcode:
 ```lua
 (method) process:read_stderr(len?: integer)
   -> string|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
-Read from stderr, if the process fails with a ERROR_PIPE it is
-automatically destroyed returning nil along error message and code.
+Read from stderr.
 
 @*param* `len` — Amount of bytes to read, defaults to 2048.
 
@@ -451,12 +483,11 @@ errcode:
 ```lua
 (method) process:read_stdout(len?: integer)
   -> string|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
-Read from stdout, if the process fails with a ERROR_PIPE it is
-automatically destroyed returning nil along error message and code.
+Read from stdout.
 
 @*param* `len` — Amount of bytes to read, defaults to 2048.
 
@@ -481,6 +512,11 @@ errcode:
 ```
 
 Get the exit code of the process or nil if still running.
+Processes started with `detach = true` are not owned by Pragtical after
+launch, so their real exit code may not be available. On Windows, processes
+still provide their real exit code when built against Pragtical's bundled
+SDL3 subproject, which patches SDL3 to preserve it when the process is
+launched without a console window.
 
 ---
 
@@ -500,8 +536,8 @@ Check if the process is running
 ```lua
 (method) process:terminate()
   -> boolean|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Sends SIGTERM to the process
@@ -523,8 +559,8 @@ errcode:
 ```lua
 (method) process:wait(timeout: integer|`process.WAIT_DEADLINE`|`process.WAIT_INFINITE`)
   -> exit_status: integer|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
 Wait the specified amount of time for the process to exit.
@@ -533,7 +569,7 @@ Wait the specified amount of time for the process to exit.
 
 if 0, the function will only check if process is running without waiting.
 
-@*return* `exit_status` — The process exit status or nil on error
+@*return* `exit_status` — The process exit status or nil on error.
 
 @*return* `errmsg`
 
@@ -559,15 +595,18 @@ errcode:
 ```lua
 (method) process:write(data: string)
   -> bytes: integer|nil
-  2. errmsg: string
-  3. errcode: integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1)
+  2. errmsg: string?
+  3. errcode: (integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?
 ```
 
-Write to the stdin, if the process fails with a ERROR_PIPE it is
-automatically destroyed returning nil along error message and code.
+Write to stdin.
+
+This may write only part of the provided data. A return value of 0 means the
+process is not ready to accept more bytes yet; retry later. On error this
+returns nil and an error message.
 
 
-@*return* `bytes` — The amount of bytes written or nil if error
+@*return* `bytes` — The amount of bytes written, or nil if error.
 
 @*return* `errmsg`
 

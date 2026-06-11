@@ -1,5 +1,5 @@
 ---
-sidebar_position: 25
+sidebar_position: 27
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -85,6 +85,16 @@ Stores the paths that are being watched, and their unique fd.
 
 ---
 
+## __gc
+
+```lua
+(method) core.dirwatch:__gc()
+```
+
+Unwatch all files/directories that weren't manually unwatch.
+
+---
+
 ## check
 
 ```lua
@@ -116,7 +126,7 @@ Constructor.
 ## scan
 
 ```lua
-(method) core.dirwatch:scan(path: string, unwatch?: boolean)
+(method) core.dirwatch:scan(path: string, watch?: boolean)
 ```
 
 Similar to `DirWatch:watch` but not using the native `dirmonitor` backends
@@ -125,7 +135,7 @@ should not be used unless necessary.
 
 Adding a directory using this function will not report child changes.
 
-@*param* `unwatch` — If true, remove this directory from the watch list.
+@*param* `watch` — If false, remove this directory from the watch list.
 
 ---
 
@@ -144,7 +154,7 @@ Removes a path from the watch or scan list.
 ## watch
 
 ```lua
-(method) core.dirwatch:watch(path: string, unwatch?: boolean)
+(method) core.dirwatch:watch(path: string, watch?: boolean)
 ```
 
 Watches a path.
@@ -158,7 +168,7 @@ system resource exhaustion.
 
 @*param* `path` — The path to watch. This should be an absolute path.
 
-@*param* `unwatch` — If true, the path is removed from the watch list.
+@*param* `watch` — If false, the path is removed from the watch list.
 
 ---
 

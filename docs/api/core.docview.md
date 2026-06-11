@@ -1,5 +1,5 @@
 ---
-sidebar_position: 29
+sidebar_position: 31
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -229,6 +229,38 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+## visual_lines
+
+```lua
+(field) visual_lines: table
+```
+
+---
+
+## visual_lines_change_id
+
+```lua
+(field) visual_lines_change_id: integer
+```
+
+---
+
+## visual_lines_dirty
+
+```lua
+(field) visual_lines_dirty: boolean
+```
+
+---
+
+## visual_lines_invalid_from
+
+```lua
+(field) visual_lines_invalid_from: integer?
+```
+
+---
+
 ## core.docview.ime_selection
 
 ### from
@@ -269,6 +301,15 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ```lua
 (field) offset: number
+```
+
+---
+
+## from_state
+
+```lua
+function core.docview.from_state(state: table)
+  -> core.docview|unknown
 ```
 
 ---
@@ -461,6 +502,29 @@ Commonly called at the end of draw() methods.
 
 ---
 
+## each_visible_line
+
+```lua
+(method) core.docview:each_visible_line()
+  -> fun():integer?, integer?, integer?
+```
+
+Iterate visible rows as virtual offset plus real document position.
+
+---
+
+## ensure_line_visible
+
+```lua
+(method) core.docview:ensure_line_visible(line: integer)
+  -> line: integer
+```
+
+Ensure a document line is visible in this view.
+Plugins that hide lines can override this to reveal the requested line.
+
+---
+
 ## extend
 
 ```lua
@@ -605,6 +669,17 @@ Get the scrollable width (infinite for horizontal scrolling).
 
 ---
 
+## get_hidden_lines
+
+```lua
+(method) core.docview:get_hidden_lines()
+  -> hidden_lines: table<integer, boolean>?
+```
+
+Return plugin-provided hidden document lines.
+
+---
+
 ## get_line_height
 
 ```lua
@@ -651,6 +726,48 @@ Get the vertical offset for centering text within a line.
 
 ---
 
+## get_line_visual_height
+
+```lua
+(method) core.docview:get_line_visual_height(line: integer)
+  -> height: number
+```
+
+Get the visual height occupied by a real document line.
+Wrapped lines may span more than one row.
+
+@*param* `line` — Real document line
+
+---
+
+## get_line_wraps
+
+```lua
+(method) core.docview:get_line_wraps(line: integer)
+  -> starts: integer[]?
+```
+
+Return visual row start columns for a document line.
+
+---
+
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -674,6 +791,15 @@ Get the display name for the tab (filename with * if dirty).
 Get the total scrollable height of the document.
 
 @*return* `height` — Total height in pixels
+
+---
+
+## get_state
+
+```lua
+(method) core.docview:get_state()
+  -> table
+```
 
 ---
 
@@ -715,6 +841,30 @@ Get the range of visible lines in the current viewport.
 
 ---
 
+## get_visual_line_col_from_x
+
+```lua
+(method) core.docview:get_visual_line_col_from_x(row: integer, x: number)
+  -> col: integer
+```
+
+Resolve a visual row-local horizontal offset to a document column.
+
+@*param* `row` — Visual row
+
+@*param* `x` — Horizontal offset from text origin
+
+---
+
+## get_visual_lines
+
+```lua
+(method) core.docview:get_visual_lines()
+  -> table
+```
+
+---
+
 ## get_x_offset_col
 
 ```lua
@@ -730,6 +880,30 @@ Inverse of get_col_x_offset. Accounts for variable-width fonts.
 @*param* `x` — Horizontal pixel offset
 
 @*return* `col` — Column number (byte offset)
+
+---
+
+## has_variable_visual_lines
+
+```lua
+(method) core.docview:has_variable_visual_lines()
+  -> boolean
+```
+
+Return whether this view needs a materialized visual-line model.
+Views with wraps or other row expansions should override this.
+
+---
+
+## invalidate_visual_lines
+
+```lua
+(method) core.docview:invalidate_visual_lines(from_line?: integer)
+```
+
+Mark the visual-line model dirty.
+
+@*param* `from_line` — First line that changed (reserved for incremental rebuilds)
 
 ---
 
@@ -781,6 +955,17 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 @*param* `T` — Object or class to check
 
 @*return* `is_extended` — True if T inherits from this class
+
+---
+
+## is_line_visible
+
+```lua
+(method) core.docview:is_line_visible(line: integer)
+  -> boolean
+```
+
+Return whether a document line contributes visual rows.
 
 ---
 
@@ -851,6 +1036,23 @@ Constructor - initializes a document view.
 
 ---
 
+## offset_from_position
+
+```lua
+(method) core.docview:offset_from_position(line: integer, col?: integer)
+  -> offset: integer
+```
+
+Convert a real document position to its composed visual line offset.
+
+@*param* `line` — Real document line
+
+@*param* `col` — Optional column
+
+@*return* `offset` — Visual line index (1-based)
+
+---
+
 ## on_file_dropped
 
 ```lua
@@ -891,11 +1093,12 @@ Updates IME decoration and scrolls to keep composition visible.
 ## on_mouse_left
 
 ```lua
-(method) core.view:on_mouse_left()
+(method) core.docview:on_mouse_left()
 ```
 
-Called when mouse leaves the view's area.
-Override to clear hover states. Base implementation notifies scrollbars.
+Handle mouse leaving the view area.
+Clears hover state that would otherwise remain until the next mouse move
+inside the DocView.
 
 ---
 
@@ -1013,6 +1216,38 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 @*param* `dy` — Delta y since last position
 
 @*param* `i` — Touch finger/pointer index
+
+---
+
+## position_from_offset
+
+```lua
+(method) core.docview:position_from_offset(offset: integer)
+  -> line: integer
+  2. col: integer
+```
+
+Convert a visual line offset (from get_visible_line_range) to a real
+document position. Plugins that iterate visible rows should call this to get
+the real line and column represented by each composed visual row.
+
+@*param* `offset` — Visual line index (1-based)
+
+@*return* `line` — Real document line
+
+@*return* `col` — Column where the visual row starts
+
+---
+
+## rebuild_visual_lines
+
+```lua
+(method) core.docview:rebuild_visual_lines(from_line?: integer)
+```
+
+Rebuild the composed visual-line model.
+
+@*param* `from_line` — First document line that may have changed
 
 ---
 
@@ -1169,6 +1404,52 @@ Sets the bounding box for the system IME composition window.
 
 Update scrollbar positions and sizes.
 Called automatically by update(). Rarely needs to be called manually.
+
+---
+
+## visual_line_count
+
+```lua
+(method) core.docview:visual_line_count()
+  -> count: integer
+```
+
+Get the total number of visual rows.
+
+---
+
+## visual_position_from_row
+
+```lua
+(method) core.docview:visual_position_from_row(row: integer)
+  -> line: integer
+  2. col: integer
+```
+
+Convert a visual row to a real document position.
+
+---
+
+## visual_row_from_position
+
+```lua
+(method) core.docview:visual_row_from_position(line: integer, col?: integer)
+  -> row: integer
+```
+
+Convert a real document position to a visual row.
+
+---
+
+## visual_rows_for_line
+
+```lua
+(method) core.docview:visual_rows_for_line(line: integer)
+  -> first_row: integer?
+  2. row_count: integer
+```
+
+Get the first visual row and row count for a real document line.
 
 ---
 

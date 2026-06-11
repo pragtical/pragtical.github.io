@@ -1,5 +1,5 @@
 ---
-sidebar_position: 23
+sidebar_position: 25
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -50,6 +50,18 @@ Defaults to 1.
 
 ---
 
+## animation_type
+
+```lua
+(field) animation_type: "constant"|"lerp"
+```
+
+The type of algorithm employed on general transitions.
+
+Defaults to "constant".
+
+---
+
 ## auto_fps
 
 ```lua
@@ -86,6 +98,22 @@ When set to true, Pragtical draws its own window decorations,
 which can be useful for certain setups.
 
 Defaults to false.
+
+---
+
+## caret_column_mode
+
+```lua
+(field) caret_column_mode: "byte"|"char"
+```
+
+Controls how the caret column is displayed in the status bar.
+
+When set to `"char"`, the column is based on the number of characters
+from the start of the line (UTF-8 aware).
+When set to `"byte"`, the column is based on the raw byte offset.
+
+Defaults to `"char"`.
 
 ---
 
@@ -328,6 +356,19 @@ Defaults to false.
 
 ---
 
+## markdown_preview_mode
+
+```lua
+(field) markdown_preview_mode: "bottom"|"left"|"newtab"|"right"|"top"
+```
+
+How markdown previews opened by `markdown-view:preview` should be placed
+relative to the current document.
+
+Defaults to "right".
+
+---
+
 ## max_clicks
 
 ```lua
@@ -421,7 +462,19 @@ Defaults to 5.
 
 The number of pixels scrolled per-step.
 
-Defaults to 50 * SCALE.
+Defaults to 70 * SCALE.
+
+---
+
+## native_tokenizer
+
+```lua
+(field) native_tokenizer: boolean
+```
+
+Enable the native tokenizer when available.
+
+Defaults to true.
 
 ---
 
@@ -450,6 +503,18 @@ configuration when a plugin is initially configured.
 Each plugins will then call `common.merge()` to get the finalized
 plugin config.
 Do not use raw operations on this table.
+
+---
+
+## scroll_animation_type
+
+```lua
+(field) scroll_animation_type: "constant"|"lerp"
+```
+
+The type of algorithm employed on the code editor scroll transition.
+
+Defaults to "constant".
 
 ---
 
@@ -606,6 +671,14 @@ Defaults to false if no sandbox is detected.
 
 ---
 
+## config.animationtype
+
+```lua
+config.animationtype:
+    | "constant" -- Time based constant velocity with acceleration support.
+    | "lerp" -- Linear Interpolation, starts fast ends slow.
+```
+
 ## config.highlightlinetype
 
 ```lua
@@ -613,6 +686,17 @@ config.highlightlinetype:
     | true -- Always highlight the current line.
     | false -- Never highlight the current line.
     | "no_selection" -- Highlight the current line if no text is selected.
+```
+
+## config.markdownpreviewmode
+
+```lua
+config.markdownpreviewmode:
+    | "right"
+    | "newtab"
+    | "bottom"
+    | "top"
+    | "left"
 ```
 
 ## config.scrollbartype

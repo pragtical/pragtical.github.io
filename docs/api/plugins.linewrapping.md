@@ -1,5 +1,5 @@
 ---
-sidebar_position: 57
+sidebar_position: 64
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -79,7 +79,7 @@ Requires tokenization
 ```lua
 function plugins.linewrapping.compute_line_breaks(doc: any, default_font: any, line: any, width: any, mode: any)
   -> table
-  2. integer
+  2. integer|unknown
 ```
 
 Computes the breaks for a given line, width and mode. Returns a list of columns
@@ -100,12 +100,11 @@ Draws a guide if applicable to show where wrapping is occurring.
 ## reconstruct_breaks
 
 ```lua
-function plugins.linewrapping.reconstruct_breaks(docview: any, default_font: any, width: any, line_offset: any)
+function plugins.linewrapping.reconstruct_breaks(docview: any, default_font: any, width: any)
 ```
 
-breaks are held in a single table that contains n*2 elements, where n is the amount of line breaks.
- each element represents line and column of the break. line_offset will check from the specified line
- if the first line has not changed breaks, it will stop there.
+breaks are held in a single table that contains n*2 elements, where n is the
+ amount of line breaks. Each element represents line and column of the break.
 
 ---
 

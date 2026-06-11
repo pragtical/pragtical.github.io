@@ -1,5 +1,5 @@
 ---
-sidebar_position: 82
+sidebar_position: 89
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -517,6 +517,24 @@ A base widget
 
 ---
 
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+---
+
 ## override_rootview
 
 ```lua
@@ -832,6 +850,18 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 ---
 
+## get_content_size
+
+```lua
+(method) widget.label:get_content_size()
+  -> width: number
+  2. height: number
+```
+
+Calculate the dimensions of the current label contents.
+
+---
+
 ## get_font
 
 ```lua
@@ -846,12 +876,9 @@ Get the real renderer.font associated with a widget.font.
 ## get_h_scrollable_size
 
 ```lua
-(method) widget:get_h_scrollable_size()
+(method) widget.label:get_h_scrollable_size()
   -> number
 ```
-
-Calculates the x scrollable size taking into account the right most
-widget or the size of the widget it self if greater.
 
 ---
 
@@ -863,6 +890,23 @@ widget or the size of the widget it self if greater.
 ```
 
 Get height including borders.
+
+---
+
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
 
 ---
 
@@ -924,12 +968,9 @@ Get the right x coordinate relative to parent
 ## get_scrollable_size
 
 ```lua
-(method) widget:get_scrollable_size()
+(method) widget.label:get_scrollable_size()
   -> number
 ```
-
-Calculates the y scrollable size taking into account the bottom most
-widget or the size of the widget it self if greater.
 
 ---
 
@@ -939,6 +980,24 @@ widget or the size of the widget it self if greater.
 (method) widget:get_size()
   -> widget.position
 ```
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 

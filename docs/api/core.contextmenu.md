@@ -1,5 +1,5 @@
 ---
-sidebar_position: 24
+sidebar_position: 26
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -152,8 +152,8 @@ A predicate is a string, an Object or a function, that is used to determine
 whether a command should be executed.
 
 If the predicate is a string, it is resolved into an `Object` via `require()`
-and checked against the active view with `Object:extends()`.
-For example, `"core.docview"` will match any view that inherits from `DocView`.
+and checked against the active view with `Object:extends()`. 
+For example, `"core.docview"` will match any view that inherits from `DocView`. 
 A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
 instead of matching any view that inherits the predicate.
 
@@ -207,6 +207,7 @@ Hides the context menu and performs the command if an item is selected.
 Draws the context menu.
 
 This wraps `ContextMenu:draw_context_menu()`.
+See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#276#9)
 
 ---
 
@@ -439,3 +440,4 @@ Shows the context menu.
 Event handler for content update.
 
 ---
+

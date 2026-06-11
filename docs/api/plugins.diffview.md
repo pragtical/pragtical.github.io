@@ -1,5 +1,5 @@
 ---
-sidebar_position: 52
+sidebar_position: 59
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -265,6 +265,24 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+### from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+---
+
 ### __call
 
 ```lua
@@ -412,6 +430,23 @@ Used by horizontal scrollbar.
 
 ---
 
+### get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ### get_name
 
 ```lua
@@ -427,6 +462,24 @@ Used by horizontal scrollbar.
 (method) plugins.diffview.view:get_scrollable_size()
   -> number
 ```
+
+---
+
+### get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 

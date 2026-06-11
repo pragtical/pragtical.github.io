@@ -1,5 +1,5 @@
 ---
-sidebar_position: 84
+sidebar_position: 91
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -635,6 +635,24 @@ A base widget
 
 ## widget.listbox.row
 
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+---
+
 ## override_rootview
 
 ```lua
@@ -1106,6 +1124,23 @@ Get height including borders.
 
 ---
 
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+---
+
 ## get_name
 
 ```lua
@@ -1161,6 +1196,17 @@ Get the right x coordinate relative to parent
 
 ---
 
+## get_row_at_position
+
+```lua
+(method) widget.listbox:get_row_at_position(x: number, y: number)
+  -> integer?
+```
+
+Get the row at a screen position.
+
+---
+
 ## get_row_data
 
 ```lua
@@ -1211,6 +1257,24 @@ Get the row that is currently active/selected.
 (method) widget:get_size()
   -> widget.position
 ```
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
 
 ---
 
@@ -1471,16 +1535,8 @@ Emitted once when the mouse hovers the widget.
 ## on_mouse_pressed
 
 ```lua
-(method) widget:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
-  -> processed: boolean
-```
-
-Send mouse pressed events to hovered child or starts dragging if enabled.
-
-```lua
-button:
-    | "left"
-    | "right"
+(method) widget.listbox:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
+  -> boolean
 ```
 
 ---

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 15
+sidebar_position: 16
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -642,6 +642,29 @@ function system.getcwd()
 Get the current working directory.
 
 @*return* `directory` — Current working directgory.
+
+---
+
+## has_pending_events
+
+```lua
+function system.has_pending_events()
+  -> pending: boolean
+```
+
+Check whether there are any pending events in the internal event queue
+without blocking. Useful for detecting user-input bursts to temporarily
+boost rendering speed and reduce input lag.
+
+@*return* `pending` — True if at least one event is queued, false otherwise.
+
+---
+
+## has_pending_events_lua
+
+```lua
+function
+```
 
 ---
 

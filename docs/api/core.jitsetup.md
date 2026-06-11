@@ -1,5 +1,5 @@
 ---
-sidebar_position: 32
+sidebar_position: 35
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -108,6 +108,22 @@ function
 ---
 
 ## system.get_wait_event_lua
+
+```lua
+function
+```
+
+---
+
+## system.has_pending_events
+
+```lua
+unknown
+```
+
+---
+
+## system.has_pending_events_lua
 
 ```lua
 function

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -7,6 +7,15 @@ sidebar_position: 10
 # renderer
 
 Core functionality to render or draw elements into the screen.
+
+Renderer backend selection can be overridden at startup with:
+`PRAGTICAL_RENDERER=surface|sdlrenderer|sdlgpu`.
+
+When using the `sdlgpu` backend, GPU device selection can be influenced with:
+`PRAGTICAL_SDLGPU_POWER=auto|low|high`.
+The default `auto` mode tries the low-power GPU first, then high-performance
+GPU before falling back to the software surface backend. `low` and `high`
+are strict single-preference modes.
 
 ## renderer.color
 
@@ -321,6 +330,14 @@ Represent options that affect a font's rendering.
 
 ---
 
+### ligatures
+
+```lua
+(field) ligatures: boolean
+```
+
+---
+
 ### smoothing
 
 ```lua
@@ -390,6 +407,18 @@ function renderer.draw_canvas(canvas: canvas, x: integer, y: integer)
 ```
 
 Draw a Canvas.
+
+---
+
+## draw_pixels
+
+```lua
+function renderer.draw_pixels(pixels: string, x: integer, y: integer, width: integer, height: integer)
+```
+
+Draw RGBA pixels.
+
+@*param* `pixels` — RGBA32 bytes, at least width * height * 4 bytes.
 
 ---
 
