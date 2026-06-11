@@ -71,6 +71,18 @@ the number of builds to choose from and adopting a more frequent release approac
 Over time, Pragtical has adopted various enhancements for better editor
 performance, some of them are:
 
+* **Modular Renderer Backends** - Pragtical includes multiple renderer backends
+in the same binary. The conservative surface renderer remains available, while
+SDL renderer and SDL GPU can be selected at startup with `PRAGTICAL_RENDERER`.
+This makes renderer testing and deployment possible without rebuilding the
+editor.
+
+* **SDL GPU Renderer** - the SDL GPU backend moves rendering toward GPU-native
+replay with GPU-backed frame textures, atlas-backed glyph rendering, and batched
+draw command replay for text, rectangles, canvases, pixels, and polygons. It is
+still opt-in, but already provides a faster path for users who want to test the
+new renderer stack.
+
 * **JIT** - Pragtical takes a LuaJIT first approach, meaning that our official
 builds use LuaJIT instead of PUC Lua for the performance benefits that come
 with it. Also having a LuaJIT first approach gives us FFI for free which allows
@@ -93,6 +105,15 @@ provide a 20X to 30X performance improvement.
 ### More Features
 
 Some of the additional features and enhancements include:
+
+* **Project Module Trust** - project-local Lua modules are gated behind trust
+prompts, making it explicit when a project is allowed to execute editor-side Lua
+code.
+
+* **Networking APIs** - built-in networking support is available for runtime
+features and plugins through Pragtical's Lua APIs. For restricted or minimal
+builds, networking can also be disabled at build time, which skips network Lua
+APIs and network-sensitive features such as remote Markdown images.
 
 * **Widgets** - more tightly integrated as part of the core for easier gui
 development and reusability, also ensuring that plugin developers can with
@@ -120,6 +141,10 @@ plugins to provide new CLI flags.
 * **Search/Replace** - Project-wide search and replace support, better user
 interface for both documents and project search/replace.
 
+* **[Code Folding]** - Built-in support for folding code regions, with gutter
+markers, keyboard shortcuts, persisted fold state, and settings for how folded
+regions are displayed.
+
 * **Built-in [Diff Viewer]** - A file or strings diff viewer that lets
 easily navigate and synchronize the differences. The functionality is
 expanded by the [Source Control Management] where it will let you compare
@@ -132,6 +157,7 @@ images.
 
 
 [CLI]:                       /docs/user-guide/cli
+[Code Folding]:              /docs/user-guide/code-folding
 [Diff Viewer]:               /docs/user-guide/diff-viewer
 [Image Viewer]:              /docs/user-guide/image-viewer
 [SDL]:                       https://www.libsdl.org/
