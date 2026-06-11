@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Introduction | Pragtical</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" property="og:url" content="https://pragtical.dev/docs/intro"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Introduction | Pragtical"><meta data-rh="true" name="description" content="Welcome to Pragtical!"><meta data-rh="true" property="og:description" content="Welcome to Pragtical!"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pragtical.dev/docs/intro"><link data-rh="true" rel="alternate" href="https://pragtical.dev/docs/intro" hreflang="en"><link data-rh="true" rel="alternate" href="https://pragtical.dev/docs/intro" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Introduction","item":"https://pragtical.dev/docs/intro"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Pragtical RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Pragtical Atom Feed"><link rel="stylesheet" href="/assets/css/styles.15101a1f.css">
-<script src="/assets/js/runtime~main.332e5241.js" defer="defer"></script>
-<script src="/assets/js/main.ffffa4da.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5c109ab9.js" defer="defer"></script>
+<script src="/assets/js/main.1b5422e2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -70,6 +70,20 @@ the number of builds to choose from and adopting a more frequent release approac
 performance, some of them are:</p>
 <ul>
 <li>
+<p><strong>Modular Renderer Backends</strong> - Pragtical includes multiple renderer backends
+in the same binary. The conservative surface renderer remains available, while
+SDL renderer and SDL GPU can be selected at startup with <code>PRAGTICAL_RENDERER</code>.
+This makes renderer testing and deployment possible without rebuilding the
+editor.</p>
+</li>
+<li>
+<p><strong>SDL GPU Renderer</strong> - the SDL GPU backend moves rendering toward GPU-native
+replay with GPU-backed frame textures, atlas-backed glyph rendering, and batched
+draw command replay for text, rectangles, canvases, pixels, and polygons. It is
+still opt-in, but already provides a faster path for users who want to test the
+new renderer stack.</p>
+</li>
+<li>
 <p><strong>JIT</strong> - Pragtical takes a LuaJIT first approach, meaning that our official
 builds use LuaJIT instead of PUC Lua for the performance benefits that come
 with it. Also having a LuaJIT first approach gives us FFI for free which allows
@@ -96,6 +110,17 @@ provide a 20X to 30X performance improvement.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="more-features">More Features<a href="#more-features" class="hash-link" aria-label="Direct link to More Features" title="Direct link to More Features">​</a></h3>
 <p>Some of the additional features and enhancements include:</p>
 <ul>
+<li>
+<p><strong>Project Module Trust</strong> - project-local Lua modules are gated behind trust
+prompts, making it explicit when a project is allowed to execute editor-side Lua
+code.</p>
+</li>
+<li>
+<p><strong>Networking APIs</strong> - built-in networking support is available for runtime
+features and plugins through Pragtical&#x27;s Lua APIs. For restricted or minimal
+builds, networking can also be disabled at build time, which skips network Lua
+APIs and network-sensitive features such as remote Markdown images.</p>
+</li>
 <li>
 <p><strong>Widgets</strong> - more tightly integrated as part of the core for easier gui
 development and reusability, also ensuring that plugin developers can with
@@ -127,6 +152,11 @@ plugins to provide new CLI flags.</p>
 <li>
 <p><strong>Search/Replace</strong> - Project-wide search and replace support, better user
 interface for both documents and project search/replace.</p>
+</li>
+<li>
+<p><strong><a href="/docs/user-guide/code-folding">Code Folding</a></strong> - Built-in support for folding code regions, with gutter
+markers, keyboard shortcuts, persisted fold state, and settings for how folded
+regions are displayed.</p>
 </li>
 <li>
 <p><strong>Built-in <a href="/docs/user-guide/diff-viewer">Diff Viewer</a></strong> - A file or strings diff viewer that lets
