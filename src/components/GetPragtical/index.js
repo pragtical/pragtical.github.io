@@ -4,6 +4,14 @@ import styles from './styles.module.css';
 
 const LATEST='v3.12.4';
 
+const COMMUNITY_PORTS = [
+  {
+    system: 'AmigaOS 4 / MorphOS',
+    author: 'George "walkero" Sokianos',
+    url: 'https://ko-fi.com/post/Pragtical-is-coming-to-AmigaOS-4-and-MorphOS-Y8P523M05B',
+  },
+];
+
 function GetDownloadsMap(version) {
   return [
     {
@@ -103,6 +111,33 @@ function Download({Svg, title, description}) {
   );
 }
 
+function CommunityPortsTable() {
+  return (
+    <div className={styles.tableWrapper}>
+      <table className={styles.portsTable}>
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Author</th>
+            <th>View More</th>
+          </tr>
+        </thead>
+        <tbody>
+          {COMMUNITY_PORTS.map((port) => (
+            <tr key={port.system}>
+              <td>{port.system}</td>
+              <td>{port.author}</td>
+              <td>
+                <a href={port.url}>View More</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default function GetPragtical() {
   return (
     <main>
@@ -130,6 +165,15 @@ export default function GetPragtical() {
               <Download key={idx} {...props} />
             ))}
           </div>
+        </div>
+      </section>
+      <section className={styles.downloads}>
+        <div className="container">
+          <h1 style={{textAlign:"center"}}>Third-party Ports</h1>
+          <p style={{textAlign:"center"}}>
+            Community ports of Pragtical to non-officially supported systems.
+          </p>
+          <CommunityPortsTable />
         </div>
       </section>
     </main>

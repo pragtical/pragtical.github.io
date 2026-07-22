@@ -15,6 +15,32 @@
   list-style: none;
 }
 
+.tableWrapper {
+  margin: 2rem auto 0;
+  max-width: 800px;
+  overflow-x: auto;
+}
+
+.portsTable {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.portsTable th,
+.portsTable td {
+  border: 1px solid var(--ifm-table-border-color);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.portsTable th {
+  background: var(--ifm-table-head-background);
+}
+
 [data-theme='light'] .osSvg {
   fill: #000;
 }
