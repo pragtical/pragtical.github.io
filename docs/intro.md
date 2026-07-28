@@ -155,11 +155,15 @@ with support for a decent amount of image formats. Some of its features include
 zoom in/out and toggleable background mode (none, solid and grid) for transparent
 images.
 
+* **Built-in [Markdown Preview]** - Render Markdown documents directly in the
+editor with live updates, syntax-highlighted code blocks, tables, links, and
+local or remote images.
 
 [CLI]:                       /docs/user-guide/cli
 [Code Folding]:              /docs/user-guide/code-folding
 [Diff Viewer]:               /docs/user-guide/diff-viewer
 [Image Viewer]:              /docs/user-guide/image-viewer
+[Markdown Preview]:          /docs/user-guide/markdown-preview
 [SDL]:                       https://www.libsdl.org/
 [SDL_Image]:                 https://github.com/libsdl-org/SDL_image/
 [LSP]:                       /plugins?plugin=lsp
