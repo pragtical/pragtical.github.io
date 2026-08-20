@@ -4,10 +4,79 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Wed, 22 Jul 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 20 Aug 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.12.5 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v3125-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v3125-release</guid>
+            <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Pragtical v3.12.5 is out with fixes for editing around folded code and wrapped]]></description>
+            <content:encoded><![CDATA[<p>Pragtical v3.12.5 is out with fixes for editing around folded code and wrapped
+lines, safer syntax loading for language plugins, and build updates for newer
+SDL3 and CMake combinations.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="folded-code-editing">Folded Code Editing<a href="https://pragtical.dev/blog/pragtical-v3125-release#folded-code-editing" class="hash-link" aria-label="Direct link to Folded Code Editing" title="Direct link to Folded Code Editing">​</a></h2>
+<p>Editing at folded boundaries now behaves more predictably. Pragtical expands
+collapsed regions before inserting a newline on a fold header or before a
+visible fold ending token, which preserves normal indentation and caret
+placement without disrupting edits after the folded endpoint.</p>
+<p>This release also keeps collapsed folds stable across insertion and deletion,
+improves movement and selection around hidden folded lines, and avoids inactive
+split views rewriting the shared document selection when their private fold
+state differs from the active view.</p>
+<p>Thanks to <a href="https://github.com/justin330" target="_blank" rel="noopener noreferrer">justin330</a> for reporting the issue and
+providing continous testing and feedback.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="wrapped-line-movement">Wrapped Line Movement<a href="https://pragtical.dev/blog/pragtical-v3125-release#wrapped-line-movement" class="hash-link" aria-label="Direct link to Wrapped Line Movement" title="Direct link to Wrapped Line Movement">​</a></h2>
+<p>Vertical cursor movement on wrapped lines now resolves the saved horizontal
+offset within the requested visual row. This prevents repeated Up and Down
+commands from getting stuck when moving through documents with uneven long
+lines.</p>
+<p>Thanks to <a href="https://github.com/2trvl" target="_blank" rel="noopener noreferrer">2trvl</a> for also reporting this and testing
+the fix.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="syntax-loading">Syntax Loading<a href="https://pragtical.dev/blog/pragtical-v3125-release#syntax-loading" class="hash-link" aria-label="Direct link to Syntax Loading" title="Direct link to Syntax Loading">​</a></h2>
+<p>Syntax definitions may now omit the <code>symbols</code> table when they only need
+pattern-based tokenization. Pragtical defaults missing symbol tables to an empty
+table, matching how symbol entries are used as exact text overrides.</p>
+<p>The tokenizer fixture coverage was also extended for the C3 and C3 Contract
+language definitions.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-updates">Build Updates<a href="https://pragtical.dev/blog/pragtical-v3125-release#build-updates" class="hash-link" aria-label="Direct link to Build Updates" title="Direct link to Build Updates">​</a></h2>
+<p>The SDL3 fallback build now passes <code>_GNU_SOURCE</code> through CMake's required
+definitions on Linux. This keeps SDL3 feature probes consistent under CMake 4
+and avoids conflicting fallback declarations during CI builds.</p>
+<p>The bundled SDL3 wrap was updated to v3.4.14, and the plugins subproject wrap
+was refreshed to include the latest language fixture coverage.</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.12.5" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3125-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3125-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>Default missing syntax symbols
+(<a href="https://github.com/pragtical/pragtical/pull/583" target="_blank" rel="noopener noreferrer">#583</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3125-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Fix newline edits at folded boundaries
+(<a href="https://github.com/pragtical/pragtical/pull/577" target="_blank" rel="noopener noreferrer">#577</a>)</p>
+</li>
+<li>
+<p>Fix vertical movement on wrapped lines
+(<a href="https://github.com/pragtical/pragtical/pull/581" target="_blank" rel="noopener noreferrer">#581</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3125-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Fix SDL3 probes under CMake 4
+(<a href="https://github.com/pragtical/pragtical/pull/578" target="_blank" rel="noopener noreferrer">#578</a>)</p>
+</li>
+<li>
+<p>Update SDL3 to v3.4.14
+(<a href="https://github.com/pragtical/pragtical/pull/582" target="_blank" rel="noopener noreferrer">#582</a>)</p>
+</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical Ported to AmigaOS 4 and MorphOS]]></title>
             <link>https://pragtical.dev/blog/pragtical-amigaos4-morphos-port</link>
@@ -1549,393 +1618,6 @@ was benchmarked several times with good results.</p>
 <li>
 <p>Try to make JIT more predictable, less flushing
 (<a href="https://github.com/pragtical/pragtical/pull/388" target="_blank" rel="noopener noreferrer">#388</a>)</p>
-</li>
-</ul>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.8.0 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v380-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v380-release</guid>
-            <pubDate>Sun, 14 Dec 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Many fixes and new features like the image viewer, built-in color picker,]]></description>
-            <content:encoded><![CDATA[<p>Many fixes and new features like the image viewer, built-in color picker,
-support for drawing polygons, introduction of a canvas api and experimental
-live search!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="generalized-rencache">Generalized RenCache<a href="https://pragtical.dev/blog/pragtical-v380-release#generalized-rencache" class="hash-link" aria-label="Direct link to Generalized RenCache" title="Direct link to Generalized RenCache">​</a></h2>
-<p>One prominent change is that the rencache source code was generalized to
-decouple it of the windows renderer, this allows using it in other contexts
-like the new canvas, which helps it perform better by leveraging the rencache
-feature of skipping unnecessary drawing operations.</p>
-<p>Expanding on this subject, the rencache incorporates the following new struct
-with parts decoupled from renwindow:</p>
-<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">typedef</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token class-name">uint8_t</span><span class="token plain"> </span><span class="token operator">*</span><span class="token plain">command_buf</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token class-name">size_t</span><span class="token plain"> command_buf_idx</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token class-name">size_t</span><span class="token plain"> command_buf_size</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">unsigned</span><span class="token plain"> cells_buf1</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">RENCACHE_CELLS_X </span><span class="token operator">*</span><span class="token plain"> RENCACHE_CELLS_Y</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">unsigned</span><span class="token plain"> cells_buf2</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">RENCACHE_CELLS_X </span><span class="token operator">*</span><span class="token plain"> RENCACHE_CELLS_Y</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">unsigned</span><span class="token plain"> </span><span class="token operator">*</span><span class="token plain">cells_prev</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">unsigned</span><span class="token plain"> </span><span class="token operator">*</span><span class="token plain">cells</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  RenRect rect_buf</span><span class="token punctuation" style="color:rgb(248, 248, 242)">[</span><span class="token plain">RENCACHE_CELLS_X </span><span class="token operator">*</span><span class="token plain"> RENCACHE_CELLS_Y </span><span class="token operator">/</span><span class="token plain"> </span><span class="token number">2</span><span class="token punctuation" style="color:rgb(248, 248, 242)">]</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  bool resize_issue</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  RenRect screen_rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  RenRect last_clip_rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  SDL_Window </span><span class="token operator">*</span><span class="token plain">window</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain">   </span><span class="token comment" style="color:rgb(98, 114, 164)">/* The cache can be used for both a window or surface */</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  RenSurface rensurface</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">ifdef</span><span class="token macro property"> </span><span class="token macro property expression">PRAGTICAL_USE_SDL_RENDERER</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  SDL_Renderer </span><span class="token operator">*</span><span class="token plain">renderer</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  SDL_Texture </span><span class="token operator">*</span><span class="token plain">texture</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token macro property directive-hash">#</span><span class="token macro property directive keyword" style="color:rgb(189, 147, 249);font-style:italic">endif</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><span class="token plain"> RenCache</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><br></span></code></pre></div></div>
-<p>Also, the rencache function interfaces now look like this:</p>
-<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_init</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_uninit</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_show_debug</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">bool enable</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_set_clip_rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenRect rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_draw_rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenRect rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenColor color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> bool replace</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">double</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_draw_text</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenFont </span><span class="token operator">*</span><span class="token operator">*</span><span class="token plain">font</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">char</span><span class="token plain"> </span><span class="token operator">*</span><span class="token plain">text</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token class-name">size_t</span><span class="token plain"> len</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">double</span><span class="token plain"> x</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">double</span><span class="token plain"> y</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenColor color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenTab tab</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">RenRect </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_draw_poly</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenPoint </span><span class="token operator">*</span><span class="token plain">points</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">int</span><span class="token plain"> npoints</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenColor color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_draw_canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">ren_cache</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenRect rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenCache </span><span class="token operator">*</span><span class="token plain">canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_draw_pixels</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">ren_cache</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenRect rect</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">const</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">char</span><span class="token operator">*</span><span class="token plain"> bytes</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token class-name">size_t</span><span class="token plain"> len</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_invalidate</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_begin_frame</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain">  </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_end_frame</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">RenSurface </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_get_surface</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">void</span><span class="token plain"> </span><span class="token function" style="color:rgb(80, 250, 123)">rencache_update_rects</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">RenCache </span><span class="token operator">*</span><span class="token plain">rc</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> RenRect </span><span class="token operator">*</span><span class="token plain">rects</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">int</span><span class="token plain"> count</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token punctuation" style="color:rgb(248, 248, 242)">;</span><br></span></code></pre></div></div>
-<p>As you may notice, this release introduces the new <code>rencache_draw_poly</code> and
-<code>rencache_draw_canvas</code> functions. Now lets talk about the new user facing changes!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="image-viewer">Image Viewer<a href="https://pragtical.dev/blog/pragtical-v380-release#image-viewer" class="hash-link" aria-label="Direct link to Image Viewer" title="Direct link to Image Viewer">​</a></h2>
-<p>Now you don't have to leave the editor to view an image with the built-in
-image viewer, which leverages sdl3_image with support for basic svg rendering.
-The list of built-in supported image types are: bmp, cur, gif, ico, jpg, lbm, pcx,
-png, pnm, qoi, svg, tga, xcf xpm and xv. The supported formats that require
-an external library to work are: avif, jxl, webp and until we improve the custom
-sdl3_image meson wrapper, tiff (which doesn't actually works on macOS and Windows).</p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/480dcfee-f63d-445f-9948-54042716a83b"></video>
-<p>You can take a look at the new
-<a href="https://github.com/pragtical/pragtical/blob/master/data/core/imageview.lua" target="_blank" rel="noopener noreferrer">ImageView</a>
-object.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="built-in-color-picker">Built-in Color Picker<a href="https://pragtical.dev/blog/pragtical-v380-release#built-in-color-picker" class="hash-link" aria-label="Direct link to Built-in Color Picker" title="Direct link to Built-in Color Picker">​</a></h2>
-<p>The new built-in color picker will also assist on not having to leave the
-editor to pick a color <!-- -->:P<!-- -->. It allows you to pick an RGB or HEX color from
-any part of the editor UI and save it to the clipboard so you can use it
-wherever you like.</p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/16fec786-ecbb-4c1c-bda5-b77bd17606dc"></video>
-<p>This is possible thanks to new <code>renwindow.get_color</code> api function:</p>
-<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Gets the window pixel color of the specified position.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param window renwindow</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param x number</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param y number</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return renderer.color? color</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> renwindow</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">get_color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">window</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> x</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> y</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="experimental-live-search">Experimental Live Search<a href="https://pragtical.dev/blog/pragtical-v380-release#experimental-live-search" class="hash-link" aria-label="Direct link to Experimental Live Search" title="Direct link to Experimental Live Search">​</a></h2>
-<p>This release also introduces project search results syntax coloring and
-experimental live search support which was a nice suggestion by <a href="https://github.com/AmerM137" target="_blank" rel="noopener noreferrer">Amer</a>.
-The live search support may cause undesired effects so use with cautious until
-bugs are ironed out on next releases. The plan for next releases is to also
-integrate it on the current file search with both the project search and file
-search offering an option to show them on a floating widget on the center
-of the screen, but for the moment enjoy the initial work!</p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/418b1be2-59f6-4dc1-9d50-375af7a3c1d8"></video>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="polygons-drawing-support">Polygons Drawing Support<a href="https://pragtical.dev/blog/pragtical-v380-release#polygons-drawing-support" class="hash-link" aria-label="Direct link to Polygons Drawing Support" title="Direct link to Polygons Drawing Support">​</a></h2>
-<p>Polygons! the new <code>renderer.draw_poly</code> was merged from Takase work on
-<a href="https://github.com/lite-xl/lite-xl/pull/1857" target="_blank" rel="noopener noreferrer">#1857</a> and it leverages freetype
-advanced drawing capabilities. The feature was adapted to work with the
-generalized rencache changes in Pragtical. The api function allows to draw
-smooth shapes and it was also incorporated to the new canvas api.</p>
-<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/99153d31-f902-4a00-aa59-1fe55d2c2cbc" alt="pragtical polygons" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="canvas">Canvas<a href="https://pragtical.dev/blog/pragtical-v380-release#canvas" class="hash-link" aria-label="Direct link to Canvas" title="Direct link to Canvas">​</a></h2>
-<p>Meanwhile, the new canvas code is an adaptation of Guldo branch
-<a href="https://github.com/Guldoman/lite-xl/tree/PR_canvas" target="_blank" rel="noopener noreferrer">PR_canvas</a> and it was
-also modified to use the new generalized rencache changes which helps get
-rid of those unnecessary draw calls improving its performance! Also to
-this api we introduced, draw_poly as image loading and saving support. We added
-the following additional functions to this api:</p>
-<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Loads an image into a new canvas.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param path string</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return canvas? canvas</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return string? errmsg</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">load_image</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">path</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Loads an svg image with the specified width and height.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param path string</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param width integer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param height integer</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return canvas? canvas</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return string? errmsg</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token function" style="color:rgb(80, 250, 123)">load_svg_image</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">path</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> width</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> height</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Clean the canvas, content will be replaced with transparent pixels,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---or a full opaque color if the canvas is not transparent.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param color? renderer.color Optional color used to fill the surface.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">clear</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Draws a filled polygon, consisting of curves and points.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The polygon is filled using the non-zero winding rule in clockwise direction.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---The function returns the control box of the polygon,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---which is greater than or equal to the dimensions of the rendered polygon.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---It is not guaranteed to the exact dimension of the rendered polygon.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param poly renderer.poly_object[] the lines or curves to draw, up to 65535 points.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param color renderer.color</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return number x the X coordinate of top left corner of the control box.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return number y the Y coordinate of the top left corner of the control box.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return number w the width of the control box.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return number h the height of the control box.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">draw_poly</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">poly</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> color</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Explicitly render all the draw commands sent to the canvas so far</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---without having to render the canvas into a window first.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">render</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Save the current canvas as an image.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param filename string</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param type? "png" | "jpg" | "avif" Defaults to "png"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@param quality? integer A number from 1 to 100 used for jpg and avif. Defaults to 100</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return boolean saved</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@return string? errmsg</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">function</span><span class="token plain"> canvas</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token function" style="color:rgb(80, 250, 123)">save_image</span><span class="token punctuation" style="color:rgb(248, 248, 242)">(</span><span class="token plain">filename</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> type</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> quality</span><span class="token punctuation" style="color:rgb(248, 248, 242)">)</span><span class="token plain"> </span><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">end</span><br></span></code></pre></div></div>
-<p>For all the functionality of this api consult its
-<a href="https://github.com/pragtical/pragtical/blob/master/docs/api/canvas.lua" target="_blank" rel="noopener noreferrer">doc file</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-bug-fixes">More Bug Fixes<a href="https://pragtical.dev/blog/pragtical-v380-release#more-bug-fixes" class="hash-link" aria-label="Direct link to More Bug Fixes" title="Direct link to More Bug Fixes">​</a></h2>
-<p>Finally, this release incorporates various bug fixes and enhancements for:</p>
-<ul>
-<li>Lua Core</li>
-<li>The Build System</li>
-<li>Widgets</li>
-</ul>
-<p>Some of these changes and fixes are thanks to contributors like:</p>
-<ul>
-<li><a href="https://github.com/M4he" target="_blank" rel="noopener noreferrer">M4he</a> who reported the contextmenu triggering on
-window manager resize. And also reported the Plugin Manager view stealing
-mouse clicks from tab bar.</li>
-</ul>
-<p>Also, various upstream changes made it in with additional work from us to
-improve them as fixing regressions they introduced. Check the Changes Log
-below for more!</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.8.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v380-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v380-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Add a built-in color picker
-(<a href="https://github.com/pragtical/pragtical/pull/375" target="_blank" rel="noopener noreferrer">#375</a>)</p>
-<ul>
-<li>
-<p>Document new renwindow.get_color
-(<a href="https://github.com/pragtical/pragtical/commit/c60ee0d990e9b03e8fa63210f159f7b14f95b139" target="_blank" rel="noopener noreferrer">c60ee0d9</a>)</p>
-</li>
-<li>
-<p>Use proper add keymap function on rootpickcolor plugin
-(<a href="https://github.com/pragtical/pragtical/commit/71af13e6949e8c88ad31062ec5f72a4619128d76" target="_blank" rel="noopener noreferrer">71af13e6</a>)</p>
-</li>
-<li>
-<p>rootpickcolor: forgot to properly return on_mouse_pressed
-(<a href="https://github.com/pragtical/pragtical/commit/2c1a6944544248f02b4651d50d419b57f646b45c" target="_blank" rel="noopener noreferrer">2c1a6944</a>)</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Live refresh and coloring for projectsearch plugin
-(<a href="https://github.com/pragtical/pragtical/pull/377" target="_blank" rel="noopener noreferrer">#377</a>)</p>
-</li>
-<li>
-<p>Image Viewer (directly added on merged canvas support)
-(<a href="https://github.com/pragtical/pragtical/pull/370" target="_blank" rel="noopener noreferrer">#370</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="core-changes">Core Changes<a href="https://pragtical.dev/blog/pragtical-v380-release#core-changes" class="hash-link" aria-label="Direct link to Core Changes" title="Direct link to Core Changes">​</a></h3>
-<ul>
-<li>
-<p>Generalize the rendering cache system
-(<a href="https://github.com/pragtical/pragtical/pull/368" target="_blank" rel="noopener noreferrer">#368</a>)</p>
-</li>
-<li>
-<p>Merged: Add support for drawing polygons (adapted to generalized rencache)
-(<a href="https://github.com/pragtical/pragtical/pull/369" target="_blank" rel="noopener noreferrer">#369</a>)</p>
-</li>
-<li>
-<p>Merged: canvas (adapted to generalized rencache, added poly draw, additional image loading support and image viewer)
-(<a href="https://github.com/pragtical/pragtical/pull/370" target="_blank" rel="noopener noreferrer">#370</a>)</p>
-<ul>
-<li>
-<p>Add the option to change background mode of images
-(<a href="https://github.com/pragtical/pragtical/pull/371" target="_blank" rel="noopener noreferrer">#371</a>)</p>
-</li>
-<li>
-<p>ImageView: keep scale at 1 if width less than view
-(<a href="https://github.com/pragtical/pragtical/commit/e9c305ed9cca34c15701ea882c5b1b4db230f482" target="_blank" rel="noopener noreferrer">e9c305ed</a>)</p>
-</li>
-<li>
-<p>ImageView: rescale svg images directly from source
-(<a href="https://github.com/pragtical/pragtical/pull/383" target="_blank" rel="noopener noreferrer">#383</a>)</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v380-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fix contextmenu triggered on window manager resize
-(<a href="https://github.com/pragtical/pragtical/pull/356" target="_blank" rel="noopener noreferrer">#356</a>)</p>
-</li>
-<li>
-<p>Update config.mouse_wheel_scroll on scale changes
-(<a href="https://github.com/pragtical/pragtical/pull/361" target="_blank" rel="noopener noreferrer">#361</a>)</p>
-</li>
-<li>
-<p>Scale initialization fixes
-(<a href="https://github.com/pragtical/pragtical/pull/362" target="_blank" rel="noopener noreferrer">#362</a>)</p>
-</li>
-<li>
-<p>Fix equal float comparison returning false
-(<a href="https://github.com/pragtical/pragtical/pull/363" target="_blank" rel="noopener noreferrer">#363</a>)</p>
-</li>
-<li>
-<p>Replace settings ui scroll wheel set with on_apply
-(<a href="https://github.com/pragtical/pragtical/commit/eef5ef1eae7bc75d7a1a8dae274a0316402ffc37" target="_blank" rel="noopener noreferrer">eef5ef1e</a>)</p>
-</li>
-<li>
-<p>Fix EmptyView AKA Welcome Screen flashing
-(<a href="https://github.com/pragtical/pragtical/pull/366" target="_blank" rel="noopener noreferrer">#366</a>)</p>
-</li>
-<li>
-<p>Fix the statusview tooltips jumpy text
-(<a href="https://github.com/pragtical/pragtical/pull/367" target="_blank" rel="noopener noreferrer">#367</a>)</p>
-</li>
-<li>
-<p>Fix treeview new file/folder regression (fix for inherited changes)
-(<a href="https://github.com/pragtical/pragtical/commit/cb06c0fd86e050c8d2d8283e12c3c58ff848be98" target="_blank" rel="noopener noreferrer">cb06c0fd</a>)</p>
-</li>
-<li>
-<p>Remove unneccesary save when loading project module (fix for inherited changes)
-(<a href="https://github.com/pragtical/pragtical/commit/fe217606ae0cca636405b357982d8290642e1801" target="_blank" rel="noopener noreferrer">fe217606</a>)</p>
-</li>
-<li>
-<p>Fixes to threads and channels code
-(<a href="https://github.com/pragtical/pragtical/pull/376" target="_blank" rel="noopener noreferrer">#376</a>)</p>
-</li>
-<li>
-<p>Fix inconsistency on toolbarview dest_size
-(<a href="https://github.com/pragtical/pragtical/pull/378" target="_blank" rel="noopener noreferrer">#378</a>)</p>
-</li>
-<li>
-<p>Fix system.list_dir to work with / (sdl3 port regression)
-(<a href="https://github.com/pragtical/pragtical/pull/379" target="_blank" rel="noopener noreferrer">#379</a>)</p>
-</li>
-<li>
-<p>Guard against null windows on draw operations
-(<a href="https://github.com/pragtical/pragtical/pull/381" target="_blank" rel="noopener noreferrer">#381</a>)</p>
-</li>
-<li>
-<p>Fix support for larger posix process reading (fix for inherited changes and real cause of PGO CI failures)
-(<a href="https://github.com/pragtical/pragtical/commit/73b609264bb211c75ef94b4b9da6377df81158d6" target="_blank" rel="noopener noreferrer">73b60926</a>)</p>
-</li>
-<li>
-<p>TreeView: round size.x on move_towards
-(<a href="https://github.com/pragtical/pragtical/pull/384" target="_blank" rel="noopener noreferrer">#384</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v380-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>Add option to show repainted areas
-(<a href="https://github.com/pragtical/pragtical/pull/358" target="_blank" rel="noopener noreferrer">#358</a>)</p>
-</li>
-<li>
-<p>Better out of box smoothness and responsiveness
-(<a href="https://github.com/pragtical/pragtical/pull/357" target="_blank" rel="noopener noreferrer">#357</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="widgets">Widgets<a href="https://pragtical.dev/blog/pragtical-v380-release#widgets" class="hash-link" aria-label="Direct link to Widgets" title="Direct link to Widgets">​</a></h3>
-<ul>
-<li>
-<p>Properly return from updates and draws
-(<a href="https://github.com/pragtical/widget/commit/8743ec6f9678317b12309ff82af2a4406387aba4" target="_blank" rel="noopener noreferrer">8743ec6f</a>)</p>
-</li>
-<li>
-<p>keep list properly resized on selectbox
-(<a href="https://github.com/pragtical/widget/commit/abad16b2de043e2173ce9419db6485189e0cd412" target="_blank" rel="noopener noreferrer">abad16b2</a>)</p>
-</li>
-<li>
-<p>Ensure draw is called after a proper update
-(<a href="https://github.com/pragtical/widget/commit/dc3bdd3a3c56ffb6dc5266386c7f0c10519c8974" target="_blank" rel="noopener noreferrer">dc3bdd3a</a>)</p>
-</li>
-<li>
-<p>SearchReplaceList: allow syntax highlighting on search results
-(<a href="https://github.com/pragtical/widget/commit/623b88be75aefef8e291721ba4fe549459cba398" target="_blank" rel="noopener noreferrer">623b88be</a>)</p>
-</li>
-<li>
-<p>TextBox: simplified placeholder logic
-(<a href="https://github.com/pragtical/widget/commit/e8ffacbfaeba93361d5f46d72de0065da4d35bc3" target="_blank" rel="noopener noreferrer">e8ffacbf</a>)</p>
-</li>
-<li>
-<p>SearchReplaceList: correction to skip draw logic
-(<a href="https://github.com/pragtical/widget/commit/ba3bde34589f0d703b99db7ec6fdc6fabd96af6d" target="_blank" rel="noopener noreferrer">ba3bde34</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v380-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>Fix pgo stresser getting stalled on CI (the endeavour)
-(<a href="https://github.com/pragtical/pragtical/commit/b044ce4cc806ddb01a86fb19b395475c8a01cc43" target="_blank" rel="noopener noreferrer">b044ce4c</a>)</p>
-<ul>
-<li>
-<p>Other changes to prevent pgo from stalling
-(<a href="https://github.com/pragtical/pragtical/commit/64472f4850d55c73e4af8e30c25363b80313824c" target="_blank" rel="noopener noreferrer">64472f48</a>)</p>
-</li>
-<li>
-<p>Disable system sleep and poll_event to try fix CI stall
-(<a href="https://github.com/pragtical/pragtical/commit/a8597926ec05977813526488bfbfe19412fec168" target="_blank" rel="noopener noreferrer">a8597926</a>)</p>
-</li>
-<li>
-<p>Timeout pgo stress to prevent stall
-(<a href="https://github.com/pragtical/pragtical/commit/eac0b44b408eee7675e1666f2ae0a30c63b523ba" target="_blank" rel="noopener noreferrer">eac0b44b</a>)</p>
-</li>
-<li>
-<p>Remove ci lua system overrides and disable pgo sqlite download
-(<a href="https://github.com/pragtical/pragtical/commit/f05047a050c28b0bb13c264043a3cfd062ed6ca7" target="_blank" rel="noopener noreferrer">f05047a0</a>)</p>
-</li>
-<li>
-<p>Restore pgo sqlite download stress
-(<a href="https://github.com/pragtical/pragtical/commit/86b89ae8c3a79701ab51f420771f11f0f1c31544" target="_blank" rel="noopener noreferrer">86b89ae8</a>)</p>
-</li>
-<li>
-<p>Real cause of PGO stalls renferenced on fixes section
-(<a href="https://github.com/pragtical/pragtical/commit/73b609264bb211c75ef94b4b9da6377df81158d6" target="_blank" rel="noopener noreferrer">73b60926</a>)</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Fixes to rolling and release CI linux build
-(<a href="https://github.com/pragtical/pragtical/pull/372" target="_blank" rel="noopener noreferrer">#372</a>)</p>
-</li>
-<li>
-<p>Disable uchardet tests compilation
-(<a href="https://github.com/pragtical/pragtical/pull/374" target="_blank" rel="noopener noreferrer">#374</a>)</p>
-</li>
-<li>
-<p>Update sdl to v3.2.28
-(<a href="https://github.com/pragtical/pragtical/pull/373" target="_blank" rel="noopener noreferrer">#373</a>)</p>
-</li>
-<li>
-<p>Update macOS x86 runner
-(<a href="https://github.com/pragtical/pragtical/commit/66c75376142a6440112ac4eabaeebaa83c5c693b" target="_blank" rel="noopener noreferrer">66c75376</a>)</p>
-</li>
-<li>
-<p>Initial support for <a href="https://github.com/muon-build/muon" target="_blank" rel="noopener noreferrer">muon</a> build
-(<a href="https://github.com/pragtical/pragtical/pull/380" target="_blank" rel="noopener noreferrer">#380</a>)</p>
-</li>
-<li>
-<p>Fix luajit crosscompilation for muon
-(<a href="https://github.com/pragtical/pragtical/pull/382" target="_blank" rel="noopener noreferrer">#382</a>)</p>
-</li>
-<li>
-<p>PPM subproject: download git submodules on demand
-(<a href="https://github.com/pragtical/pragtical/pull/385" target="_blank" rel="noopener noreferrer">#385</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="miscelaneous">Miscelaneous<a href="https://pragtical.dev/blog/pragtical-v380-release#miscelaneous" class="hash-link" aria-label="Direct link to Miscelaneous" title="Direct link to Miscelaneous">​</a></h3>
-<ul>
-<li>
-<p>Keep icon svg segments on repo
-(<a href="https://github.com/pragtical/pragtical/commit/16539334889e696ca5e1db9486fa6246661dea75" target="_blank" rel="noopener noreferrer">16539334</a>)</p>
-</li>
-<li>
-<p>GIT ignore subprojects/.wraplock
-(<a href="https://github.com/pragtical/pragtical/commit/b5017edcdd239baea1ab0b2ecdd775b011bc5a72" target="_blank" rel="noopener noreferrer">b5017edc</a>)</p>
-</li>
-<li>
-<p>Remove leftover print statement (from inherited changes)
-(<a href="https://github.com/pragtical/pragtical/commit/2b1c750a270da3c20301c4c36c6dfd7e42d899f2" target="_blank" rel="noopener noreferrer">2b1c750a</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lite-xl-inherited-changes-with-corrections-and-improvements">Lite XL Inherited Changes (with corrections and improvements)<a href="https://pragtical.dev/blog/pragtical-v380-release#lite-xl-inherited-changes-with-corrections-and-improvements" class="hash-link" aria-label="Direct link to Lite XL Inherited Changes (with corrections and improvements)" title="Direct link to Lite XL Inherited Changes (with corrections and improvements)">​</a></h3>
-<ul>
-<li>
-<p>Fixed timeout in process<!-- -->:wait<!-- -->; comparison
-(<a href="https://github.com/pragtical/pragtical/commit/5a36b3f07adeb3d5c0629c1f073c5931a471c355" target="_blank" rel="noopener noreferrer">5a36b3f0</a>)</p>
-</li>
-<li>
-<p>system: update window scale on scale changes
-(<a href="https://github.com/lite-xl/lite-xl/pull/2081" target="_blank" rel="noopener noreferrer">#2081</a>)</p>
-</li>
-<li>
-<p>Improve folder drag-and-drop experience
-(<a href="https://github.com/lite-xl/lite-xl/pull/1830" target="_blank" rel="noopener noreferrer">#1830</a>)</p>
-</li>
-<li>
-<p>Resolved some type-complaints that are detected by LuaLS
-(<a href="https://github.com/lite-xl/lite-xl/pull/2120" target="_blank" rel="noopener noreferrer">#2120</a>)</p>
-</li>
-<li>
-<p>Backporting ancient fix to allow for large amounts of reading.
-(<a href="https://github.com/lite-xl/lite-xl/pull/1547" target="_blank" rel="noopener noreferrer">#1547</a>)</p>
-</li>
-<li>
-<p>Update renwindow.lua
-(<a href="https://github.com/lite-xl/lite-xl/pull/2150" target="_blank" rel="noopener noreferrer">#2150</a>)</p>
-</li>
-<li>
-<p>Adjusted parameter order and docs for renwindow create.
-(<a href="https://github.com/lite-xl/lite-xl/pull/2155" target="_blank" rel="noopener noreferrer">#2155</a>)</p>
-</li>
-<li>
-<p>Fix wrong suggestion when creating file or folder in treeview
-(<a href="https://github.com/lite-xl/lite-xl/pull/2183" target="_blank" rel="noopener noreferrer">#2183</a>)</p>
-</li>
-<li>
-<p>fix(doc): don't modify doc with empty clipboard paste
-(<a href="https://github.com/lite-xl/lite-xl/pull/2185" target="_blank" rel="noopener noreferrer">#2185</a>)</p>
-</li>
-<li>
-<p>fix(treeview): avoid crashing if creating a new file errors out
-(<a href="https://github.com/lite-xl/lite-xl/pull/2184" target="_blank" rel="noopener noreferrer">#2184</a>)</p>
-</li>
-<li>
-<p>Rearrange Plugin Loading and SDL Initialization
-(<a href="https://github.com/lite-xl/lite-xl/pull/1881" target="_blank" rel="noopener noreferrer">#1881</a>)</p>
-</li>
-<li>
-<p>Added generic storage system and use on workspace plugin
-(<a href="https://github.com/lite-xl/lite-xl/pull/1929" target="_blank" rel="noopener noreferrer">#1929</a>)</p>
-</li>
-<li>
-<p>feat: add SDL file picker
-(<a href="https://github.com/lite-xl/lite-xl/pull/2072" target="_blank" rel="noopener noreferrer">#2072</a>)</p>
-</li>
-<li>
-<p>Allow for negative priority numbers.
-(<a href="https://github.com/pragtical/pragtical/commit/7d636075497dfbfa05fa2a9c89f018ddcbfdee29" target="_blank" rel="noopener noreferrer">7d636075</a>)</p>
-</li>
-<li>
-<p>fix: make get_custom_event_callback_by_name return NULL on invalid event name
-(<a href="https://github.com/lite-xl/lite-xl/pull/2154" target="_blank" rel="noopener noreferrer">#2154</a>)</p>
-</li>
-<li>
-<p>Added in check for the blink timer so that we don't needlessly redraw
-(<a href="https://github.com/lite-xl/lite-xl/pull/2053" target="_blank" rel="noopener noreferrer">#2053</a>)</p>
 </li>
 </ul>]]></content:encoded>
         </item>
