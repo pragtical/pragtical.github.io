@@ -30,6 +30,8 @@ function utf8extra.byte(s: string, i?: integer, j?: integer)
 
 UTF-8 equivalent of string.byte
 
+@*return* `...`: `unknown`
+
 ---
 
 ## char
@@ -59,6 +61,10 @@ charpos will be calculated, by add/subtract UTF-8 char index to current
 charpos. in all cases, it returns a new char position, and code point
 (a number) at this position.
 
+@*return* `charpos`: `integer`
+
+@*return* `codepoint`: `integer`
+
 ---
 
 ## clean
@@ -76,6 +82,10 @@ single copy of the replacement string unless the non_consecutive param is
 set to true. the 2nd return value is true if the original string was already
 valid (meaning no replacements were made).
 
+@*return* `cleaned_string`: `string`
+
+@*return* `was_valid`: `boolean`
+
 ---
 
 ## codepoint
@@ -89,7 +99,7 @@ Returns the codepoints (as integers) from all characters in s that start
 between byte position i and j (both included). The default for i is 1 and
 for j is i. It raises an error if it meets any invalid byte sequence.
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -108,7 +118,7 @@ will iterate over all characters in string s, with p being the position
 (in bytes) and c the code point of each character. It raises an error if
 it meets any invalid byte sequence.
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -134,6 +144,8 @@ print(u"%123%u123%\{123\}%u\{123\}%xABC%x\{ABC\}")
 print(u"%%123%?%d%%u")
 ```
 
+@*return* `utf8_string`: `string`
+
 ---
 
 ## find
@@ -147,11 +159,11 @@ function utf8extra.find(s: string, pattern: string, init?: integer, plain?: bool
 
 UTF-8 equivalent of string.find
 
-@*return* `start`
+@*return* `start`: `integer`
 
-@*return* `end`
+@*return* `end`: `integer`
 
-@*return* `...` — captured
+@*return* `...`: `unknown` — captured
 
 ---
 
@@ -165,6 +177,8 @@ function utf8extra.fold(s: string)
 Convert UTF-8 string s to folded case, used to compare by ignore case. if s
 is a number, it's treat as a code point and return a convert code point
 (number). utf8.lower/utf8.pper has the same extension.
+
+@*return* `new_string`: `string`
 
 ---
 
@@ -189,6 +203,8 @@ function utf8extra.gsub(s: string, pattern: string, repl: string|function|table,
 
 UTF-8 equivalent of string.gsub
 
+@*return* `count`: `integer`
+
 ---
 
 ## insert
@@ -200,6 +216,8 @@ function utf8extra.insert(s: string, idx?: integer, substring: string)
 
 Insert a substring to s. If idx is given, insert substring before char at
 this index, otherwise substring will concat to s. idx can be negative.
+
+@*return* `new_string`: `string`
 
 ---
 
@@ -214,6 +232,8 @@ Return the byte offset within s of the first invalid UTF-8 byte sequence.
 (1 is the first byte of the string.) if s is a valid UTF-8 string, return
 nil. the optional numeric argument init specifies where to start the search;
 its default value is 1 and can be negative.
+
+@*return* `offset`: `integer`
 
 ---
 
@@ -259,7 +279,7 @@ positions i and j (both inclusive). The default for i is 1 and for j is -1.
 If it finds any invalid byte sequence, returns a false value plus the
 position of the first invalid byte.
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -283,6 +303,8 @@ function utf8extra.match(s: string, pattern: string, init?: integer)
 
 UTF-8 equivalent of string.match
 
+@*return* `captured`: `string|number`
+
 ---
 
 ## ncasecmp
@@ -293,6 +315,8 @@ function utf8extra.ncasecmp(a: string, b: string)
 ```
 
 Compare a and b without case, -1 means a \< b, 0 means a == b and 1 means a \> b.
+
+@*return* `result`: `integer`
 
 ---
 
@@ -315,6 +339,10 @@ charpos and index is given, a new charpos will be calculated, by add/subtract
 UTF-8 char offset to current charpos. in all case, it return a new char
 position (in bytes), and code point (a number) at this position.
 
+@*return* `charpos`: `integer`
+
+@*return* `codepoint`: `integer`
+
 ---
 
 ## normalize_nfc
@@ -328,6 +356,10 @@ function utf8extra.normalize_nfc(s: string)
 Convert s to Normal Form C. the 2nd return value is true if the original
 string was already in NFC (meaning no modifications were made). an error
 will be raised if s is not a valid UTF-8 string.
+
+@*return* `normal_string`: `string`
+
+@*return* `was_n`: `boolean`
 
 ---
 
@@ -364,6 +396,8 @@ UTF-8 char in s, otherwise delete char from start to end of s. if stop is
 given, delete char from start to stop (include start and stop). start and
 stop can be negative.
 
+@*return* `new_string`: `string`
+
 ---
 
 ## reverse
@@ -375,7 +409,7 @@ function utf8extra.reverse(s: string, lax?: boolean)
 
 UTF-8 equivalent of string.reverse
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -400,6 +434,8 @@ function utf8extra.title(s: string)
 Convert UTF-8 string s to title-case, used to compare by ignore case. if s
 is a number, it's treat as a code point and return a convert code point
 (number). utf8.lower/utf8.pper has the same extension.
+
+@*return* `new_string`: `string`
 
 ---
 
@@ -428,6 +464,8 @@ given, it will be the width of unprintable character, used display a
 non-character mark for these characters. if s is a code point, return the
 width of this code point.
 
+@*return* `width`: `integer`
+
 ---
 
 ## widthindex
@@ -444,6 +482,12 @@ operation of utf8.width(). this function returns a index of location, and a
 offset in UTF-8 encoding. e.g. if cursor is at the second column (middle)
 of the wide char, offset will be 2. the width of character at idx is
 returned, also.
+
+@*return* `idx`: `integer`
+
+@*return* `offset`: `integer`
+
+@*return* `width`: `integer`
 
 ---
 

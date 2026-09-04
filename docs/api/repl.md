@@ -47,6 +47,8 @@ Adds string to the list of completions.
 All functions return nil on error; functions that don't have an obvious
 return value return true on success.
 
+@*param* `completions`: [`repl.completion`](/docs/api/repl#replcompletion) — A repl completions list object
+
 ---
 
 ## add_history
@@ -80,6 +82,10 @@ function repl.input(prompt: any)
 Prompts for a line of input, using prompt as the prompt string.
 Returns nil if no more input is available;
 Returns nil and an error string if an error occurred.
+
+@*return* `line`: `string?`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -134,6 +140,8 @@ set_completion(function(completion,str)
   end
 end)
 ```
+
+@*param* `callback`: `fun(completion: `[`repl.completion`](/docs/api/repl#replcompletion)`, str: string)`
 
 ---
 

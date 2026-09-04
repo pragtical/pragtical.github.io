@@ -42,6 +42,8 @@ function plugins.trimwhitespace.disable(doc: core.doc)
 
 Disable whitespace trimming for a specific document.
 
+@*param* `doc`: [`core.doc`](/docs/api/core.doc)
+
 ---
 
 ## enable
@@ -51,6 +53,8 @@ function plugins.trimwhitespace.enable(doc: core.doc)
 ```
 
 Re-enable whitespace trimming if previously disabled.
+
+@*param* `doc`: [`core.doc`](/docs/api/core.doc)
 
 ---
 
@@ -63,6 +67,8 @@ function plugins.trimwhitespace.trim(doc: core.doc)
 Perform whitespace trimming in all lines of a document except the
 line where the caret is currently positioned.
 
+@*param* `doc`: [`core.doc`](/docs/api/core.doc)
+
 ---
 
 ## trim_empty_end_lines
@@ -73,7 +79,9 @@ function plugins.trimwhitespace.trim_empty_end_lines(doc: core.doc, raw_remove?:
 
 Removes all empty new lines at the end of the document.
 
-@*param* `raw_remove` — Perform the removal not registering to undo stack
+@*param* `doc`: [`core.doc`](/docs/api/core.doc)
+
+@*param* `raw_remove?`: `boolean` — Perform the removal not registering to undo stack
 
 ---
 

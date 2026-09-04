@@ -153,6 +153,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ## __call
@@ -166,7 +168,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -214,6 +216,8 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
 
 ---
 
@@ -264,7 +268,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -279,9 +283,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -297,13 +301,13 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -318,9 +322,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -334,7 +338,7 @@ Accounts for scroll offset. Use for drawing content at correct position.
 Get the total scrollable width of the view's content.
 Used by horizontal scrollbar.
 
-@*return* `width` — Width in pixels (default: 0, no horizontal scroll)
+@*return* `width`: `number` — Width in pixels (default: 0, no horizontal scroll)
 
 ---
 
@@ -353,6 +357,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -364,6 +370,8 @@ is returned.
 
 Get the name displayed in the view's tab.
 Override to show document name, file path, etc.
+
+@*return* `name`: `string`
 
 ---
 
@@ -377,7 +385,7 @@ Override to show document name, file path, etc.
 Get the total scrollable height of the view's content.
 Used by scrollbar to calculate thumb size and position.
 
-@*return* `height` — Height in pixels (default: infinite)
+@*return* `height`: `number` — Height in pixels (default: infinite)
 
 ---
 
@@ -397,6 +405,8 @@ userdata, metatables, or cyclic references).
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
 
+@*return* `state`: `table?`
+
 ---
 
 ## is
@@ -410,9 +420,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -427,9 +437,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -444,9 +454,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -459,15 +469,15 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -489,13 +499,13 @@ Use this for animations instead of direct assignment.
 Handle file drop events (drag and drop from OS).
 Override to handle dropped files. Return true to consume event.
 
-@*param* `filename` — Absolute path to dropped file
+@*param* `filename`: `string` — Absolute path to dropped file
 
-@*param* `x` — Screen x where file was dropped
+@*param* `x`: `number` — Screen x where file was dropped
 
-@*param* `y` — Screen y where file was dropped
+@*param* `y`: `number` — Screen y where file was dropped
 
-@*return* `consumed` — True to consume event, false to propagate
+@*return* `consumed`: `boolean` — True to consume event, false to propagate
 
 ---
 
@@ -508,11 +518,11 @@ Override to handle dropped files. Return true to consume event.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -543,19 +553,19 @@ Handle mouse button press events.
 Override to handle clicks. Return true to consume event and prevent propagation.
 Base implementation handles scrollbar clicks.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of consecutive clicks (configurable with config.max_clicks)
-
-@*return* `consumed` — True to consume event, false/nil to propagate
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of consecutive clicks (configurable with config.max_clicks)
+
+@*return* `consumed`: `boolean?` — True to consume event, false/nil to propagate
 
 ---
 
@@ -577,11 +587,11 @@ button:
 Handle mouse wheel scroll events.
 Override for custom scroll behavior. Base implementation does nothing.
 
-@*param* `y` — Vertical scroll delta; positive is "up"
+@*param* `y`: `number` — Vertical scroll delta; positive is "up"
 
-@*param* `x` — Horizontal scroll delta; positive is "left"
+@*param* `x`: `number` — Horizontal scroll delta; positive is "left"
 
-@*return* `consumed` — True to consume event
+@*return* `consumed`: `boolean?` — True to consume event
 
 ---
 
@@ -602,7 +612,7 @@ Override for custom scroll behavior. Base implementation does nothing.
 Handle text input events (typing, IME composition).
 Override for text editing. Called after IME composition completes.
 
-@*param* `text` — Input text (may be multiple characters)
+@*param* `text`: `string` — Input text (may be multiple characters)
 
 ---
 
@@ -615,15 +625,15 @@ Override for text editing. Called after IME composition completes.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -636,7 +646,7 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -649,7 +659,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -663,11 +673,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -693,7 +703,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 

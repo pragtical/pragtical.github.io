@@ -87,17 +87,17 @@ function regex.cmatch(pattern: string|regex, subject: string, offset?: integer, 
 
 Search a string for valid matches and returns a list of matching offsets.
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
-
-@*param* `subject` — The string to search for valid matches.
-
-@*param* `offset` — The position on the subject to start searching.
-
-@*param* `options` — A bit field of matching options, eg:
-
 regex.NOTBOL | regex.NOTEMPTY
 
-@*return* `...` — List of offsets where a match was found.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
+
+@*param* `subject`: `string` — The string to search for valid matches.
+
+@*param* `offset?`: `integer` — The position on the subject to start searching.
+
+@*param* `options?`: `integer` — A bit field of matching options, eg:
+
+@*return* `...`: `integer?` — List of offsets where a match was found.
 
 ---
 
@@ -111,12 +111,7 @@ function regex.compile(pattern: string, options?: "i"|"m"|"s")
 
 Compiles a regular expression pattern that can be used to search in strings.
 
-@*param* `options` — A string of one or more pattern modifiers.
 
-
-@*return* `regex` — Ready to use regular expression object or nil on error.
-
-@*return* `error` — The error message if compiling the pattern failed.
 
 ```lua
 options:
@@ -124,6 +119,12 @@ options:
     | "m" -- Multiline matching
     | "s" -- Match all characters with dot (.) metacharacter even new lines
 ```
+
+@*param* `options?`: `"i"|"m"|"s"` — A string of one or more pattern modifiers.
+
+@*return* `regex`: [`regex`](/docs/api/regex)`?` — Ready to use regular expression object or nil on error.
+
+@*return* `error`: `string?` — The error message if compiling the pattern failed.
 
 ---
 
@@ -144,21 +145,21 @@ If the pattern has captures, the captured strings are returned,
 after the two indexes ones.
 If a capture is empty, its offset is returned instead.
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
-
-@*param* `subject` — The string to search for valid matches.
-
-@*param* `offset` — The position on the subject to start searching.
-
-@*param* `options` — A bit field of matching options, eg:
-
 regex.NOTBOL | regex.NOTEMPTY
 
-@*return* `start` — Offset where the first match was found; `nil` if no match.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
 
-@*return* `end` — Offset where the first match ends; `nil` if no match.
+@*param* `subject`: `string` — The string to search for valid matches.
 
-@*return* `...` — List of captured matches; if the match is empty, its offset is returned instead.
+@*param* `offset?`: `integer` — The position on the subject to start searching.
+
+@*param* `options?`: `integer` — A bit field of matching options, eg:
+
+@*return* `start`: `integer?` — Offset where the first match was found; `nil` if no match.
+
+@*return* `end`: `integer?` — Offset where the first match ends; `nil` if no match.
+
+@*return* `...`: `(string|integer)?` — List of captured matches; if the match is empty, its offset is returned instead.
 
 ---
 
@@ -177,21 +178,21 @@ starts and ends; otherwise, it returns `nil`.
 If the pattern has captures, the captured start and end indexes are returned,
 after the two initial ones.
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
-
-@*param* `subject` — The string to search for valid matches.
-
-@*param* `offset` — The position on the subject to start searching.
-
-@*param* `options` — A bit field of matching options, eg:
-
 regex.NOTBOL | regex.NOTEMPTY
 
-@*return* `start` — Offset where the first match was found; `nil` if no match.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
 
-@*return* `end` — Offset where the first match ends; `nil` if no match.
+@*param* `subject`: `string` — The string to search for valid matches.
 
-@*return* `...` — Captured matches offsets.
+@*param* `offset?`: `integer` — The position on the subject to start searching.
+
+@*param* `options?`: `integer` — A bit field of matching options, eg:
+
+@*return* `start`: `integer?` — Offset where the first match was found; `nil` if no match.
+
+@*return* `end`: `integer?` — Offset where the first match ends; `nil` if no match.
+
+@*return* `...`: `integer?` — Captured matches offsets.
 
 ---
 
@@ -213,7 +214,7 @@ Example:
     end
 ```
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
 
 ---
 
@@ -230,9 +231,13 @@ replacement, supports named captures ((?'name'\<pattern\>), $\{name\}) and
 $\[1-9\]\[0-9\]* substitutions. Raises an error when failing to compile the
 pattern or by a substitution mistake.
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
 
-@*param* `limit` — Limits the number of substitutions that will be done.
+@*param* `limit?`: `integer` — Limits the number of substitutions that will be done.
+
+@*return* `replaced_subject`: `string?`
+
+@*return* `total_replacements`: `integer?`
 
 ---
 
@@ -249,17 +254,17 @@ If it finds a match, it returns the matched string; otherwise, it returns `nil`.
 If the pattern has captures, only the captured strings are returned.
 If a capture is empty, its offset is returned instead.
 
-@*param* `pattern` — The regex pattern to use, either as a simple string or precompiled.
-
-@*param* `subject` — The string to search for valid matches.
-
-@*param* `offset` — The position on the subject to start searching.
-
-@*param* `options` — A bit field of matching options, eg:
-
 regex.NOTBOL | regex.NOTEMPTY
 
-@*return* `...` — List of captured matches; the entire match if no matches were specified; if the match is empty, its offset is returned instead.
+@*param* `pattern`: `string|`[`regex`](/docs/api/regex) — The regex pattern to use, either as a simple string or precompiled.
+
+@*param* `subject`: `string` — The string to search for valid matches.
+
+@*param* `offset?`: `integer` — The position on the subject to start searching.
+
+@*param* `options?`: `integer` — A bit field of matching options, eg:
+
+@*return* `...`: `(string|integer)?` — List of captured matches; the entire match if no matches were specified; if the match is empty, its offset is returned instead.
 
 ---
 

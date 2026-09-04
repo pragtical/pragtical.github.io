@@ -312,6 +312,8 @@ function core.docview.from_state(state: table)
   -> core.docview|unknown
 ```
 
+@*return*: [`core.docview`](/docs/api/core.docview)`|unknown`
+
 ---
 
 ## __call
@@ -325,7 +327,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -369,6 +371,8 @@ Renders background, gutters, text, selections, carets, and scrollbars.
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_caret
@@ -379,13 +383,13 @@ Commonly called at the start of draw() methods.
 
 Draw the caret at a position.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `line` — Line number (for overwrite mode char width)
+@*param* `line`: `integer` — Line number (for overwrite mode char width)
 
-@*param* `col` — Column number (for overwrite mode char width)
+@*param* `col`: `integer` — Column number (for overwrite mode char width)
 
 ---
 
@@ -397,13 +401,13 @@ Draw the caret at a position.
 
 Draw IME composition decoration (underline and selection).
 
-@*param* `line1` — Start line
+@*param* `line1`: `integer` — Start line
 
-@*param* `col1` — Start column
+@*param* `col1`: `integer` — Start column
 
-@*param* `line2` — End line
+@*param* `line2`: `integer` — End line
 
-@*param* `col2` — End column
+@*param* `col2`: `integer` — End column
 
 ---
 
@@ -416,13 +420,13 @@ Draw IME composition decoration (underline and selection).
 
 Draw a complete line including highlight and selections.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `height` — Line height
+@*return* `height`: `integer` — Line height
 
 ---
 
@@ -435,15 +439,15 @@ Draw a complete line including highlight and selections.
 
 Draw the gutter with line numbers.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `width` — Gutter width
+@*param* `width`: `number` — Gutter width
 
-@*return* `height` — Line height
+@*return* `height`: `integer` — Line height
 
 ---
 
@@ -455,9 +459,9 @@ Draw the gutter with line numbers.
 
 Draw the current line highlight bar.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -470,13 +474,13 @@ Draw the current line highlight bar.
 
 Draw the text content of a line with syntax highlighting.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `height` — Line height
+@*return* `height`: `integer` — Line height
 
 ---
 
@@ -523,6 +527,8 @@ Iterate visible rows as virtual offset plus real document position.
 Ensure a document line is visible in this view.
 Plugins that hide lines can override this to reveal the requested line.
 
+@*return* `line`: `integer`
+
 ---
 
 ## extend
@@ -536,7 +542,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -551,9 +557,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -567,11 +573,11 @@ Example: `view:extends(View)` returns true for View and all subclasses
 Get the horizontal pixel offset for a column position.
 Accounts for tabs, syntax highlighting fonts, and caches long lines.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `col` — Column number (byte offset)
+@*param* `col`: `integer` — Column number (byte offset)
 
-@*return* `offset` — Horizontal pixel offset
+@*return* `offset`: `number` — Horizontal pixel offset
 
 ---
 
@@ -587,13 +593,13 @@ Accounts for tabs, syntax highlighting fonts, and caches long lines.
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -608,9 +614,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -623,7 +629,7 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 Get the full filename path for display (with home directory encoded).
 
-@*return* `filename` — Full path or name with asterisk if modified
+@*return* `filename`: `string` — Full path or name with asterisk if modified
 
 ---
 
@@ -636,7 +642,7 @@ Get the full filename path for display (with home directory encoded).
 
 Get the font used for rendering text.
 
-@*return* `font` — The code font
+@*return* `font`: [`renderer.font`](/docs/api/renderer#rendererfont) — The code font
 
 ---
 
@@ -650,9 +656,9 @@ Get the font used for rendering text.
 
 Get the gutter width (line numbers area).
 
-@*return* `width` — Total gutter width
+@*return* `width`: `number` — Total gutter width
 
-@*return* `padding` — Padding within gutter
+@*return* `padding`: `number` — Padding within gutter
 
 ---
 
@@ -665,7 +671,7 @@ Get the gutter width (line numbers area).
 
 Get the scrollable width (infinite for horizontal scrolling).
 
-@*return* `width` — Always returns math.huge
+@*return* `width`: `number` — Always returns math.huge
 
 ---
 
@@ -678,6 +684,8 @@ Get the scrollable width (infinite for horizontal scrolling).
 
 Return plugin-provided hidden document lines.
 
+@*return* `hidden_lines`: `table<integer, boolean>?`
+
 ---
 
 ## get_line_height
@@ -689,7 +697,7 @@ Return plugin-provided hidden document lines.
 
 Get the line height in pixels.
 
-@*return* `height` — Line height including line spacing
+@*return* `height`: `integer` — Line height including line spacing
 
 ---
 
@@ -703,13 +711,13 @@ Get the line height in pixels.
 
 Get the screen position of a line (and optionally column).
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `col` — Optional column number
+@*param* `col?`: `integer` — Optional column number
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -722,7 +730,7 @@ Get the screen position of a line (and optionally column).
 
 Get the vertical offset for centering text within a line.
 
-@*return* `offset` — Y offset to center text in line height
+@*return* `offset`: `number` — Y offset to center text in line height
 
 ---
 
@@ -736,7 +744,9 @@ Get the vertical offset for centering text within a line.
 Get the visual height occupied by a real document line.
 Wrapped lines may span more than one row.
 
-@*param* `line` — Real document line
+@*param* `line`: `integer` — Real document line
+
+@*return* `height`: `number`
 
 ---
 
@@ -748,6 +758,8 @@ Wrapped lines may span more than one row.
 ```
 
 Return visual row start columns for a document line.
+
+@*return* `starts`: `integer[]?`
 
 ---
 
@@ -766,6 +778,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -777,7 +791,7 @@ is returned.
 
 Get the display name for the tab (filename with * if dirty).
 
-@*return* `name` — Document name with asterisk if modified
+@*return* `name`: `string` — Document name with asterisk if modified
 
 ---
 
@@ -790,7 +804,7 @@ Get the display name for the tab (filename with * if dirty).
 
 Get the total scrollable height of the document.
 
-@*return* `height` — Total height in pixels
+@*return* `height`: `number` — Total height in pixels
 
 ---
 
@@ -821,7 +835,15 @@ that perform drawing operations on them.
 It is good practice to set the `extra_cols` parameter to a value that leaves
 room for the differences in font sizes.
 
-@*param* `extra_cols` — Amount of columns to deduce on col1 and include on col2 (default: 100)
+@*param* `extra_cols?`: `integer` — Amount of columns to deduce on col1 and include on col2 (default: 100)
+
+@*return* `col1`: `integer`
+
+@*return* `col2`: `integer`
+
+@*return* `ucol1`: `integer`
+
+@*return* `ucol2`: `integer`
 
 ---
 
@@ -835,9 +857,9 @@ room for the differences in font sizes.
 
 Get the range of visible lines in the current viewport.
 
-@*return* `minline` — First visible line
+@*return* `minline`: `integer` — First visible line
 
-@*return* `maxline` — Last visible line
+@*return* `maxline`: `integer` — Last visible line
 
 ---
 
@@ -850,9 +872,11 @@ Get the range of visible lines in the current viewport.
 
 Resolve a visual row-local horizontal offset to a document column.
 
-@*param* `row` — Visual row
+@*param* `row`: `integer` — Visual row
 
-@*param* `x` — Horizontal offset from text origin
+@*param* `x`: `number` — Horizontal offset from text origin
+
+@*return* `col`: `integer`
 
 ---
 
@@ -875,11 +899,11 @@ Resolve a visual row-local horizontal offset to a document column.
 Get the column at a horizontal pixel offset.
 Inverse of get_col_x_offset. Accounts for variable-width fonts.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `x` — Horizontal pixel offset
+@*param* `x`: `number` — Horizontal pixel offset
 
-@*return* `col` — Column number (byte offset)
+@*return* `col`: `integer` — Column number (byte offset)
 
 ---
 
@@ -903,7 +927,7 @@ Views with wraps or other row expansions should override this.
 
 Mark the visual-line model dirty.
 
-@*param* `from_line` — First line that changed (reserved for incremental rebuilds)
+@*param* `from_line?`: `integer` — First line that changed (reserved for incremental rebuilds)
 
 ---
 
@@ -918,9 +942,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -935,9 +959,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -952,9 +976,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -981,25 +1005,25 @@ Return whether a document line contributes visual rows.
 
 Adjust selection based on snap type (word, line).
 
-@*param* `doc` — Document
+@*param* `doc`: [`core.doc`](/docs/api/core.doc) — Document
 
-@*param* `snap_type` — Snap type: "word" or "lines"
+@*param* `snap_type`: `string` — Snap type: "word" or "lines"
 
-@*param* `line1` — Start line
+@*param* `line1`: `integer` — Start line
 
-@*param* `col1` — Start column
+@*param* `col1`: `integer` — Start column
 
-@*param* `line2` — End line
+@*param* `line2`: `integer` — End line
 
-@*param* `col2` — End column
+@*param* `col2`: `integer` — End column
 
-@*return* `line1` — Adjusted start line
+@*return* `line1`: `integer` — Adjusted start line
 
-@*return* `col1` — Adjusted start column
+@*return* `col1`: `integer` — Adjusted start column
 
-@*return* `line2` — Adjusted end line
+@*return* `line2`: `integer` — Adjusted end line
 
-@*return* `col2` — Adjusted end column
+@*return* `col2`: `integer` — Adjusted end column
 
 ---
 
@@ -1012,15 +1036,15 @@ Adjust selection based on snap type (word, line).
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1032,7 +1056,7 @@ Use this for animations instead of direct assignment.
 
 Constructor - initializes a document view.
 
-@*param* `doc` — Document to display
+@*param* `doc`: [`core.doc`](/docs/api/core.doc) — Document to display
 
 ---
 
@@ -1045,11 +1069,11 @@ Constructor - initializes a document view.
 
 Convert a real document position to its composed visual line offset.
 
-@*param* `line` — Real document line
+@*param* `line`: `integer` — Real document line
 
-@*param* `col` — Optional column
+@*param* `col?`: `integer` — Optional column
 
-@*return* `offset` — Visual line index (1-based)
+@*return* `offset`: `integer` — Visual line index (1-based)
 
 ---
 
@@ -1063,13 +1087,13 @@ Convert a real document position to its composed visual line offset.
 Handle file drop events (drag and drop from OS).
 Override to handle dropped files. Return true to consume event.
 
-@*param* `filename` — Absolute path to dropped file
+@*param* `filename`: `string` — Absolute path to dropped file
 
-@*param* `x` — Screen x where file was dropped
+@*param* `x`: `number` — Screen x where file was dropped
 
-@*param* `y` — Screen y where file was dropped
+@*param* `y`: `number` — Screen y where file was dropped
 
-@*return* `consumed` — True to consume event, false to propagate
+@*return* `consumed`: `boolean` — True to consume event, false to propagate
 
 ---
 
@@ -1082,11 +1106,11 @@ Override to handle dropped files. Return true to consume event.
 Handle IME text composition events.
 Updates IME decoration and scrolls to keep composition visible.
 
-@*param* `text` — Composition text
+@*param* `text`: `string` — Composition text
 
-@*param* `start` — Selection start within composition
+@*param* `start`: `integer` — Selection start within composition
 
-@*param* `length` — Selection length within composition
+@*param* `length`: `integer` — Selection length within composition
 
 ---
 
@@ -1111,9 +1135,9 @@ inside the DocView.
 Handle mouse movement for cursor changes and text selection.
 Updates cursor icon, gutter hover state, and extends selection if dragging.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -1127,19 +1151,19 @@ Updates cursor icon, gutter hover state, and extends selection if dragging.
 Handle mouse press for text selection and gutter clicks.
 Supports single/double click, shift-selection, and gutter line selection.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of clicks
-
-@*return* `handled` — True if event was handled
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
+
+@*return* `handled`: `boolean?` — True if event was handled
 
 ---
 
@@ -1163,11 +1187,11 @@ Handle mouse release to end text selection.
 Handle mouse wheel scroll events.
 Override for custom scroll behavior. Base implementation does nothing.
 
-@*param* `y` — Vertical scroll delta; positive is "up"
+@*param* `y`: `number` — Vertical scroll delta; positive is "up"
 
-@*param* `x` — Horizontal scroll delta; positive is "left"
+@*param* `x`: `number` — Horizontal scroll delta; positive is "left"
 
-@*return* `consumed` — True to consume event
+@*return* `consumed`: `boolean?` — True to consume event
 
 ---
 
@@ -1180,9 +1204,9 @@ Override for custom scroll behavior. Base implementation does nothing.
 Called when DPI scale changes (display moved, zoom changed, etc.).
 Override to adjust sizes, padding, or other scale-dependent values.
 
-@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
+@*param* `new_scale`: `number` — New scale factor (e.g., 1.0, 1.5, 2.0)
 
-@*param* `prev_scale` — Previous scale factor
+@*param* `prev_scale`: `number` — Previous scale factor
 
 ---
 
@@ -1194,7 +1218,7 @@ Override to adjust sizes, padding, or other scale-dependent values.
 
 Handle text input from keyboard.
 
-@*param* `text` — Input text
+@*param* `text`: `string` — Input text
 
 ---
 
@@ -1207,15 +1231,15 @@ Handle text input from keyboard.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -1231,11 +1255,11 @@ Convert a visual line offset (from get_visible_line_range) to a real
 document position. Plugins that iterate visible rows should call this to get
 the real line and column represented by each composed visual row.
 
-@*param* `offset` — Visual line index (1-based)
+@*param* `offset`: `integer` — Visual line index (1-based)
 
-@*return* `line` — Real document line
+@*return* `line`: `integer` — Real document line
 
-@*return* `col` — Column where the visual row starts
+@*return* `col`: `integer` — Column where the visual row starts
 
 ---
 
@@ -1247,7 +1271,7 @@ the real line and column represented by each composed visual row.
 
 Rebuild the composed visual-line model.
 
-@*param* `from_line` — First document line that may have changed
+@*param* `from_line?`: `integer` — First document line that may have changed
 
 ---
 
@@ -1261,13 +1285,13 @@ Rebuild the composed visual-line model.
 
 Convert screen coordinates to document line/column.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `line` — Line number
+@*return* `line`: `integer` — Line number
 
-@*return* `col` — Column number
+@*return* `col`: `integer` — Column number
 
 ---
 
@@ -1279,11 +1303,11 @@ Convert screen coordinates to document line/column.
 
 Scroll to center a line in the viewport.
 
-@*param* `line` — Line number to scroll to
+@*param* `line`: `integer` — Line number to scroll to
 
-@*param* `ignore_if_visible` — Don't scroll if line already visible
+@*param* `ignore_if_visible?`: `boolean` — Don't scroll if line already visible
 
-@*param* `instant` — Jump immediately without animation
+@*param* `instant?`: `boolean` — Jump immediately without animation
 
 ---
 
@@ -1296,11 +1320,11 @@ Scroll to center a line in the viewport.
 Scroll to make a position visible with context padding.
 Ensures the position is visible with surrounding context lines.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `col` — Column number
+@*param* `col`: `integer` — Column number
 
-@*param* `instant` — Jump immediately without animation
+@*param* `instant?`: `boolean` — Jump immediately without animation
 
 ---
 
@@ -1313,7 +1337,7 @@ Ensures the position is visible with surrounding context lines.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1326,7 +1350,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1340,11 +1364,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1357,7 +1381,7 @@ Useful for determining cursor style or handling clicks.
 
 Check if this view accepts text input.
 
-@*return* `accepts` — Always returns true for DocView
+@*return* `accepts`: `boolean` — Always returns true for DocView
 
 ---
 
@@ -1370,7 +1394,7 @@ Check if this view accepts text input.
 Attempt to close the view, prompting to save if document is dirty.
 Shows "Unsaved Changes" dialog if this is the last view of a dirty document.
 
-@*param* `do_close` — Callback to execute when close is confirmed
+@*param* `do_close`: `function` — Callback to execute when close is confirmed
 
 ---
 
@@ -1416,6 +1440,8 @@ Called automatically by update(). Rarely needs to be called manually.
 
 Get the total number of visual rows.
 
+@*return* `count`: `integer`
+
 ---
 
 ## visual_position_from_row
@@ -1428,6 +1454,10 @@ Get the total number of visual rows.
 
 Convert a visual row to a real document position.
 
+@*return* `line`: `integer`
+
+@*return* `col`: `integer`
+
 ---
 
 ## visual_row_from_position
@@ -1438,6 +1468,8 @@ Convert a visual row to a real document position.
 ```
 
 Convert a real document position to a visual row.
+
+@*return* `row`: `integer`
 
 ---
 
@@ -1450,6 +1482,10 @@ Convert a real document position to a visual row.
 ```
 
 Get the first visual row and row count for a real document line.
+
+@*return* `first_row`: `integer?`
+
+@*return* `row_count`: `integer`
 
 ---
 

@@ -681,6 +681,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ## override_rootview
@@ -705,7 +707,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -739,6 +741,8 @@ Emitted to input_text widgets when clicked.
 Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
 
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
 ---
 
 ## add_item
@@ -748,6 +752,8 @@ them in reverse order for better events matching.
 ```
 
 Add new item to to tree list
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
 
 ---
 
@@ -759,7 +765,9 @@ Add new item to to tree list
 
 Registers a new animation to be ran on the update cycle.
 
-@*param* `target` — If nil assumes properties belong to widget it self.
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -772,7 +780,7 @@ Registers a new animation to be ran on the update cycle.
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
-@*param* `scrolling` — Capture for scrolling
+@*param* `scrolling?`: `boolean` — Capture for scrolling
 
 ---
 
@@ -866,6 +874,8 @@ Used internally when dragging is activated.
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_border
@@ -888,6 +898,8 @@ Draw the widget configured border or custom one.
   4. number
 ```
 
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
 ---
 
 ## draw_item_background
@@ -895,6 +907,8 @@ Draw the widget configured border or custom one.
 ```lua
 (method) widget.treelist:draw_item_background(item: widget.treelist.item, active: boolean, hovered: boolean, x: number, y: number, w: number, h: number)
 ```
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
 
 ---
 
@@ -908,6 +922,8 @@ Draw the widget configured border or custom one.
   4. number
 ```
 
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
 ---
 
 ## draw_item_chevron
@@ -917,6 +933,8 @@ Draw the widget configured border or custom one.
   -> number
 ```
 
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
 ---
 
 ## draw_item_icon
@@ -925,6 +943,8 @@ Draw the widget configured border or custom one.
 (method) widget.treelist:draw_item_icon(item: widget.treelist.item, active: boolean, hovered: boolean, x: number, y: number, w: number, h: number)
   -> number
 ```
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
 
 ---
 
@@ -937,6 +957,8 @@ Draw the widget configured border or custom one.
   3. number
   4. number
 ```
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
 
 ---
 
@@ -959,6 +981,12 @@ Draw the widget configured border or custom one.
 Render or calculate the size of the specified range of elements
 in a styled text elemet.
 
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ## draw_text_multiline
@@ -973,6 +1001,18 @@ in a styled text elemet.
 
 Taken from the logview and modified it a tiny bit.
 TODO: something similar should be on pragtical core.
+
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
 
 ---
 
@@ -993,6 +1033,8 @@ TODO: something similar should be on pragtical core.
 
 Allows iterating the currently visible items only.
 
+@*return*: `fun():`[`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)`, number, number, number, number`
+
 ---
 
 ## extend
@@ -1006,7 +1048,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -1021,9 +1063,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -1035,6 +1077,8 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Set which tree items to show using the specified match string or callback,
 if nil all items visibility is restored.
+
+@*param* `match?`: `string|fun(self: `[`widget.treelist`](/docs/api/widget.treelist)`, item: `[`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)`):(boolean|number)?`
 
 ---
 
@@ -1051,12 +1095,12 @@ Note: only "mouse_released" is implemented for the moment on floating views
 for use in the SelectBox, maybe a better system can be implemented on
 the future.
 
-@*param* `force` — If omitted is set to true by default
-
 ```lua
 name:
     | "mouse_released"
 ```
+
+@*param* `force`: `boolean` — If omitted is set to true by default
 
 ---
 
@@ -1081,6 +1125,10 @@ Get the bottom y coordinate relative to parent
 
 Get an item chevron starting and ending positions.
 
+@*return* `x1`: `number`
+
+@*return* `x2`: `number`
+
 ---
 
 ## get_content_bounds
@@ -1095,13 +1143,13 @@ Get an item chevron starting and ending positions.
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -1116,9 +1164,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -1130,6 +1178,10 @@ Accounts for scroll offset. Use for drawing content at correct position.
 ```
 
 Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -1164,6 +1216,18 @@ Get height including borders.
   5. h: number
 ```
 
+@*param* `item?`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
+@*return* `w`: `number`
+
+@*return* `h`: `number`
+
 ---
 
 ## get_item_height
@@ -1174,6 +1238,8 @@ Get height including borders.
 ```
 
 Get the height of a single item.
+
+@*return* `h`: `number`
 
 ---
 
@@ -1186,6 +1252,10 @@ Get the height of a single item.
   3. unknown
 ```
 
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
 ---
 
 ## get_item_text
@@ -1197,6 +1267,10 @@ Get the height of a single item.
   3. unknown
 ```
 
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
 ---
 
 ## get_items
@@ -1207,6 +1281,10 @@ Get the height of a single item.
 ```
 
 Retrieve the amount of visible items and also yield them.
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `items_count`: `integer`
 
 ---
 
@@ -1224,6 +1302,8 @@ class (for example `"core.view"`).
 
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
+
+@*return* `path`: `string?`
 
 ---
 
@@ -1249,6 +1329,18 @@ The name that is displayed on pragtical tabs.
   5. h: number
 ```
 
+@*param* `item?`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
+@*return* `w`: `number`
+
+@*return* `h`: `number`
+
 ---
 
 ## get_position
@@ -1259,6 +1351,8 @@ The name that is displayed on pragtical tabs.
 ```
 
 Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
 
 ---
 
@@ -1272,6 +1366,18 @@ Get the relative position in relation to parent
   4. w: number
   5. h: number
 ```
+
+@*param* `item?`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
+@*return* `w`: `number`
+
+@*return* `h`: `number`
 
 ---
 
@@ -1324,6 +1430,8 @@ Get the right x coordinate relative to parent
   -> widget.position
 ```
 
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
 ---
 
 ## get_state
@@ -1341,6 +1449,8 @@ userdata, metatables, or cyclic references).
 
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
+
+@*return* `state`: `table?`
 
 ---
 
@@ -1373,9 +1483,11 @@ Hide the widget.
 
 Perform an animated hide.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -1390,9 +1502,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -1407,9 +1519,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -1424,9 +1536,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -1461,15 +1573,15 @@ Check if the given mouse coordinate is hovering the widget
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1480,6 +1592,8 @@ Use this for animations instead of direct assignment.
 ```
 
 Constructor
+
+@*param* `parent?`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -1521,6 +1635,8 @@ button:
 
 Send file drop event to hovered child.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ## on_ime_text_editing
@@ -1532,11 +1648,11 @@ Send file drop event to hovered child.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -1547,6 +1663,8 @@ Override for IME support in text editors. Called during composition.
 ```
 
 Override to listen for item click events.
+
+@*param* `item`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
 
 ---
 
@@ -1610,6 +1728,8 @@ button:
     | "right"
 ```
 
+@*return* `processed`: `boolean`
+
 ---
 
 ## on_mouse_wheel
@@ -1640,6 +1760,8 @@ Keep the icon font size updated to match current scale.
 
 Redirects any text input to active child with the input_text flag.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ## on_touch_moved
@@ -1651,15 +1773,15 @@ Redirects any text input to active child with the input_text flag.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -1673,7 +1795,11 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 Retrieve an item by name using the query format:
 "parent_name\>child_name_2\>child_name_2\>etc..."
 
-@*param* `separator` — Use a different separator (default: \>)
+@*param* `items?`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)`[]`
+
+@*param* `separator?`: `string` — Use a different separator (default: \>)
+
+@*return*: `(`[`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)`)?`
 
 ---
 
@@ -1694,6 +1820,8 @@ Undo capture_mouse()
 ```
 
 Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -1728,7 +1856,7 @@ used when a re-update and re-draw is strictly needed.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1741,7 +1869,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1755,11 +1883,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1797,6 +1925,8 @@ Set the widget border size and appropriately re-set the widget size.
 
 Set the icon font used to render the items icon.
 
+@*param* `font`: [`renderer.font`](/docs/api/renderer#rendererfont)
+
 ---
 
 ## set_label
@@ -1806,6 +1936,8 @@ Set the icon font used to render the items icon.
 ```
 
 A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 ---
 
@@ -1827,6 +1959,8 @@ Set the position of the widget and updates the child absolute coordinates
 
 Set the active item.
 
+@*param* `selection`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
 ---
 
 ## set_selection_from_path
@@ -1841,15 +1975,15 @@ TODO: Not tested, idea is to allow query like selections using item names
 by introducing a get_item/set_item methods that accepts a string query,
 For the moment we leave this inherited TreeView function here.
 
-@*param* `path` — Absolute path of item to select
+@*param* `path`: `string` — Absolute path of item to select
 
-@*param* `expand` — Expand dirs leading to the item
+@*param* `expand`: `boolean` — Expand dirs leading to the item
 
-@*param* `scroll_to` — Scroll to make the item visible
+@*param* `scroll_to`: `boolean` — Scroll to make the item visible
 
-@*param* `instant` — Don't animate the scroll
+@*param* `instant`: `boolean` — Don't animate the scroll
 
-@*return* — The selected item
+@*return*: `table?` — The selected item
 
 ---
 
@@ -1888,6 +2022,8 @@ Text displayed when the widget is hovered.
 If a command name is also given its associated binding will be displayed
 as part of the tooltip.
 
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
 ---
 
 ## show
@@ -1908,9 +2044,11 @@ Show the widget.
 
 Perform an animated show.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -1936,7 +2074,7 @@ Replaces current active child with a new one and calls the
 activate/deactivate events of the child. This is especially
 used to send text input events to widgets with input_text support.
 
-@*param* `child` — If nil deactivates current child
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
 
 ---
 
@@ -1958,6 +2096,8 @@ When set to false the background rendering is disabled.
 
 Expand or collapse the currently selected or given item.
 
+@*param* `item?`: [`widget.treelist.item`](/docs/api/widget.treelist#widgettreelistitem)
+
 ---
 
 ## toggle_visible
@@ -1967,6 +2107,8 @@ Expand or collapse the currently selected or given item.
 ```
 
 Toggle visibility of widget.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -1980,7 +2122,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 

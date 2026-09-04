@@ -22,6 +22,8 @@ function bit.arshift(x: integer, n: integer)
 Returns either the bitwise logical arithmetic right-shift of its first
 argument by the number of bits given by the second argument.
 
+@*return* `y`: `integer`
+
 ---
 
 ## band

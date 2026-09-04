@@ -14,3 +14,35 @@ local codefold = require "plugins.codefold"
 
 Configuration for code folding plugin.
 
+### enabled
+
+```lua
+(field) enabled: boolean
+```
+
+---
+
+### extensions
+
+```lua
+(field) extensions: string[]
+```
+
+---
+
+### languages
+
+```lua
+(field) languages: table<string, boolean>
+```
+
+---
+
+### use_whitelist
+
+```lua
+(field) use_whitelist: boolean
+```
+
+---
+

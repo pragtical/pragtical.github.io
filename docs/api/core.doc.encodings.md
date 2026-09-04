@@ -59,6 +59,8 @@ function core.doc.encodings.get_all()
 
 Get a list of all encodings.
 
+@*return*: [`encodings.encoding`](/docs/api/core.doc.encodings#encodingsencoding)`[]|nil`
+
 ---
 
 ## get_group
@@ -70,6 +72,8 @@ function core.doc.encodings.get_group(label: string)
 
 Get the list of encodings associated to a region.
 
+@*return*: [`encodings.encoding`](/docs/api/core.doc.encodings#encodingsencoding)`[]|nil`
+
 ---
 
 ## select_encoding
@@ -80,7 +84,7 @@ function core.doc.encodings.select_encoding(title_label: string, callback: fun(c
 
 Open a commandview to select a charset and executes the given callback,
 
-@*param* `title_label` — Title displayed on the commandview
+@*param* `title_label`: `string` — Title displayed on the commandview
 
 ---
 

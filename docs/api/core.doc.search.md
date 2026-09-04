@@ -88,5 +88,9 @@ function core.doc.search.find(doc: core.doc, line: integer, col: integer, text: 
 
 Perform a search on a document with the given options.
 
+@*param* `doc`: [`core.doc`](/docs/api/core.doc)
+
+@*param* `opt`: [`core.doc.searchoptions`](/docs/api/core.doc.search#coredocsearchoptions) — Options used when performing a search.
+
 ---
 

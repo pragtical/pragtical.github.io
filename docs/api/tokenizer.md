@@ -223,12 +223,11 @@ function tokenizer.extract_subsyntaxes(base_syntax: core.syntax.syntax, state: s
 
 Return the list of syntaxes active for the given tokenizer state.
 
-@*param* `base_syntax` — The base syntax of the document.
+@*param* `base_syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The base syntax of the document.
 
-@*param* `state` — Tokenizer state previously returned by `tokenize`.
+@*param* `state`: `string` — Tokenizer state previously returned by `tokenize`.
 
-
-@*return* `syntaxes` — Array of syntaxes starting from the innermost one.
+@*return* `syntaxes`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax)`[]` — Array of syntaxes starting from the innermost one.
 
 ---
 
@@ -241,10 +240,9 @@ function tokenizer.get_syntax_stats(syntax: core.syntax.syntax)
 
 Return native tokenizer compilation and runtime counters for a syntax.
 
-@*param* `syntax` — The syntax to inspect.
+@*param* `syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The syntax to inspect.
 
-
-@*return* `stats` — Native compilation and runtime counters.
+@*return* `stats`: [`tokenizer.syntax_stats`](/docs/api/tokenizer#tokenizersyntax_stats) — Native compilation and runtime counters.
 
 ---
 
@@ -263,20 +261,19 @@ Returns tokens in the form `\{ type, text, ... \}`.
 If the tokenizer runs out of time, it returns a third value containing the
 resume data to continue tokenizing the same line later.
 
-@*param* `incoming_syntax` — The syntax to tokenize against.
+@*param* `incoming_syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The syntax to tokenize against.
 
-@*param* `text` — The line text to tokenize.
+@*param* `text`: `string` — The line text to tokenize.
 
-@*param* `state` — Current tokenizer state.
+@*param* `state?`: `string` — Current tokenizer state.
 
-@*param* `resume` — Resume data from a previous incomplete call.
+@*param* `resume?`: [`tokenizer.resume`](/docs/api/tokenizer#tokenizerresume) — Resume data from a previous incomplete call.
 
+@*return* `tokens`: `string[]` — Tokens in the form `\{ type, text, ... \}`.
 
-@*return* `tokens` — Tokens in the form `\{ type, text, ... \}`.
+@*return* `state`: `string` — Updated tokenizer state.
 
-@*return* `state` — Updated tokenizer state.
-
-@*return* `resume` — Resume data when tokenization yields before finishing.
+@*return* `resume`: `(`[`tokenizer.resume`](/docs/api/tokenizer#tokenizerresume)`)?` — Resume data when tokenization yields before finishing.
 
 ---
 

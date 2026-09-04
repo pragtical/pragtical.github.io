@@ -545,7 +545,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -569,7 +569,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -584,9 +584,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -600,6 +600,8 @@ Example: `view:extends(View)` returns true for View and all subclasses
 Generate the styled text for this item.
 Override this method or pass `get_item` in options.
 Ignored if `on_draw` is set.
+
+@*return*: `table<integer, string|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`>`
 
 ---
 
@@ -624,9 +626,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -641,9 +643,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -658,9 +660,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -671,6 +673,8 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 ```
 
 Create a new status bar item.
+
+@*param* `options`: [`core.statusview.item.options`](/docs/api/core.statusview#corestatusviewitemoptions) — Options for creating a status bar item.
 
 ---
 
@@ -840,6 +844,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ## __call
@@ -853,7 +859,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -875,7 +881,9 @@ Automatically creates instance and calls new() with provided arguments.
 
 Add a new item to the status bar.
 
-@*return* `item` — The created item
+@*param* `options`: [`core.statusview.item.options`](/docs/api/core.statusview#corestatusviewitemoptions) — Options for creating a status bar item.
+
+@*return* `item`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem) — The created item
 
 ---
 
@@ -898,7 +906,7 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 
 Enable or disable system messages on the status bar.
 
-@*param* `enable` — True to show messages, false to hide them
+@*param* `enable`: `boolean` — True to show messages, false to hide them
 
 ---
 
@@ -910,16 +918,16 @@ Enable or disable system messages on the status bar.
 
 Pan a status bar panel horizontally when content overflows.
 
-@*param* `panel` — Panel to drag ("left" or "right")
-
-@*param* `dx` — Horizontal drag distance in pixels
-
 ```lua
 -- Left or right alignment identifier.
 panel:
     | "left"
     | "right"
 ```
+
+@*param* `panel`: `"left"|"right"` — Panel to drag ("left" or "right")
+
+@*param* `dx`: `number` — Horizontal drag distance in pixels
 
 ---
 
@@ -942,6 +950,8 @@ Render the status bar with all active items, messages, and tooltips.
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_item_tooltip
@@ -952,7 +962,7 @@ Commonly called at the start of draw() methods.
 
 Draw a tooltip box above the status bar for an item.
 
-@*param* `item` — Item with tooltip text
+@*param* `item`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem) — Item with tooltip text
 
 ---
 
@@ -964,13 +974,13 @@ Draw a tooltip box above the status bar for an item.
 
 Draw styled text on the status bar with optional alignment.
 
-@*param* `items` — Styled text to render
+@*param* `items`: `table<integer, string|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`>` — Styled text to render
 
-@*param* `right_align` — True to right-align, false for left-align
+@*param* `right_align?`: `boolean` — True to right-align, false for left-align
 
-@*param* `xoffset` — Horizontal offset in pixels
+@*param* `xoffset?`: `number` — Horizontal offset in pixels
 
-@*param* `yoffset` — Vertical offset in pixels
+@*param* `yoffset?`: `number` — Vertical offset in pixels
 
 ---
 
@@ -996,7 +1006,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -1011,9 +1021,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -1029,13 +1039,13 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -1050,9 +1060,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -1066,7 +1076,7 @@ Accounts for scroll offset. Use for drawing content at correct position.
 Get the total scrollable width of the view's content.
 Used by horizontal scrollbar.
 
-@*return* `width` — Width in pixels (default: 0, no horizontal scroll)
+@*return* `width`: `number` — Width in pixels (default: 0, no horizontal scroll)
 
 ---
 
@@ -1079,11 +1089,11 @@ Used by horizontal scrollbar.
 
 Determine which panel (left or right) is under the cursor.
 
-@*param* `x` — Mouse x coordinate
+@*param* `x`: `number` — Mouse x coordinate
 
-@*param* `y` — Mouse y coordinate
+@*param* `y`: `number` — Mouse y coordinate
 
-@*return* `panel` — "left", "right", or "" if none
+@*return* `panel`: `string` — "left", "right", or "" if none
 
 ---
 
@@ -1096,9 +1106,9 @@ Determine which panel (left or right) is under the cursor.
 
 Get a status bar item by name.
 
-@*param* `name` — Unique item name
+@*param* `name`: `string` — Unique item name
 
-@*return* `item` — The item or nil if not found
+@*return* `item`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem)`|nil` — The item or nil if not found
 
 ---
 
@@ -1112,11 +1122,11 @@ Get a status bar item by name.
 
 Calculate the visible portion of an item considering panel overflow.
 
-@*param* `item` — Item to check
+@*param* `item`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem) — Item to check
 
-@*return* `x` — Visible x coordinate (0 if fully clipped)
+@*return* `x`: `number` — Visible x coordinate (0 if fully clipped)
 
-@*return* `w` — Visible width (0 if fully clipped)
+@*return* `w`: `number` — Visible width (0 if fully clipped)
 
 ---
 
@@ -1130,11 +1140,11 @@ Calculate the visible portion of an item considering panel overflow.
 
 Legacy method for retrieving status bar items.
 
-@*param* `nowarn` — Suppress deprecation warning if true
+@*param* `nowarn`: `boolean` — Suppress deprecation warning if true
 
-@*return* `left` — Left-aligned items
+@*return* `left`: `table` — Left-aligned items
 
-@*return* `right` — Right-aligned items
+@*return* `right`: `table` — Right-aligned items
 
 ---
 
@@ -1147,15 +1157,15 @@ Legacy method for retrieving status bar items.
 
 Get all items or items filtered by alignment.
 
-@*param* `alignment` — Filter by left or right alignment
-
-@*return* `items` — List of items
-
 ```lua
 alignment:
    -\> `StatusView.Item.LEFT`
     | `StatusView.Item.RIGHT`
 ```
+
+@*param* `alignment?`: ```StatusView.Item.LEFT`|`StatusView.Item.RIGHT``` — Filter by left or right alignment
+
+@*return* `items`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem)`[]` — List of items
 
 ---
 
@@ -1174,6 +1184,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -1185,6 +1197,8 @@ is returned.
 
 Get the name displayed in the view's tab.
 Override to show document name, file path, etc.
+
+@*return* `name`: `string`
 
 ---
 
@@ -1198,7 +1212,7 @@ Override to show document name, file path, etc.
 Get the total scrollable height of the view's content.
 Used by scrollbar to calculate thumb size and position.
 
-@*return* `height` — Height in pixels (default: infinite)
+@*return* `height`: `number` — Height in pixels (default: infinite)
 
 ---
 
@@ -1217,6 +1231,8 @@ userdata, metatables, or cyclic references).
 
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
+
+@*return* `state`: `table?`
 
 ---
 
@@ -1238,7 +1254,7 @@ Hide the status bar.
 
 Hide specific items or all items if no names provided.
 
-@*param* `names` — Single name or list of item names
+@*param* `names?`: `string|table<integer, string>` — Single name or list of item names
 
 ---
 
@@ -1253,9 +1269,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -1270,9 +1286,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -1287,9 +1303,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -1302,19 +1318,19 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
 Move an item to a different position.
 
-@*param* `name` — Item name to move
-
-@*param* `position` — New position (negative for reverse order)
-
-@*param* `alignment` — Optional new alignment
-
-@*return* `moved` — True if item was found and moved
-
 ```lua
 alignment:
    -\> `StatusView.Item.LEFT`
     | `StatusView.Item.RIGHT`
 ```
+
+@*param* `name`: `string` — Item name to move
+
+@*param* `position`: `integer` — New position (negative for reverse order)
+
+@*param* `alignment?`: ```StatusView.Item.LEFT`|`StatusView.Item.RIGHT``` — Optional new alignment
+
+@*return* `moved`: `boolean` — True if item was found and moved
 
 ---
 
@@ -1327,15 +1343,15 @@ alignment:
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1359,13 +1375,13 @@ Create a new status bar and register default items.
 Handle file drop events (drag and drop from OS).
 Override to handle dropped files. Return true to consume event.
 
-@*param* `filename` — Absolute path to dropped file
+@*param* `filename`: `string` — Absolute path to dropped file
 
-@*param* `x` — Screen x where file was dropped
+@*param* `x`: `number` — Screen x where file was dropped
 
-@*param* `y` — Screen y where file was dropped
+@*param* `y`: `number` — Screen y where file was dropped
 
-@*return* `consumed` — True to consume event, false to propagate
+@*return* `consumed`: `boolean` — True to consume event, false to propagate
 
 ---
 
@@ -1378,11 +1394,11 @@ Override to handle dropped files. Return true to consume event.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -1405,13 +1421,13 @@ Handle mouse leaving the status bar area.
 Handle mouse movement over the status bar.
 Updates hovered item, cursor, and handles panel dragging.
 
-@*param* `x` — Mouse x coordinate
+@*param* `x`: `number` — Mouse x coordinate
 
-@*param* `y` — Mouse y coordinate
+@*param* `y`: `number` — Mouse y coordinate
 
-@*param* `dx` — Delta x movement
+@*param* `dx`: `number` — Delta x movement
 
-@*param* `dy` — Delta y movement
+@*param* `dy`: `number` — Delta y movement
 
 ---
 
@@ -1425,13 +1441,13 @@ Updates hovered item, cursor, and handles panel dragging.
 Handle mouse button press events.
 Clicking on active message opens log view. Left-click enables panel dragging when content overflows.
 
-@*param* `button` — Mouse button identifier
+@*param* `button`: `string` — Mouse button identifier
 
-@*param* `x` — Mouse x coordinate
+@*param* `x`: `number` — Mouse x coordinate
 
-@*param* `y` — Mouse y coordinate
+@*param* `y`: `number` — Mouse y coordinate
 
-@*param* `clicks` — Number of clicks
+@*param* `clicks`: `number` — Number of clicks
 
 ---
 
@@ -1444,11 +1460,11 @@ Clicking on active message opens log view. Left-click enables panel dragging whe
 Handle mouse button release events.
 Executes item command or callback if clicked on an item.
 
-@*param* `button` — Mouse button identifier
+@*param* `button`: `string` — Mouse button identifier
 
-@*param* `x` — Mouse x coordinate
+@*param* `x`: `number` — Mouse x coordinate
 
-@*param* `y` — Mouse y coordinate
+@*param* `y`: `number` — Mouse y coordinate
 
 ---
 
@@ -1460,9 +1476,9 @@ Executes item command or callback if clicked on an item.
 
 Handle mouse wheel scrolling to pan overflowing panels.
 
-@*param* `y` — Vertical scroll amount
+@*param* `y`: `number` — Vertical scroll amount
 
-@*param* `x` — Horizontal scroll amount
+@*param* `x`: `number` — Horizontal scroll amount
 
 ---
 
@@ -1475,9 +1491,9 @@ Handle mouse wheel scrolling to pan overflowing panels.
 Called when DPI scale changes (display moved, zoom changed, etc.).
 Override to adjust sizes, padding, or other scale-dependent values.
 
-@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
+@*param* `new_scale`: `number` — New scale factor (e.g., 1.0, 1.5, 2.0)
 
-@*param* `prev_scale` — Previous scale factor
+@*param* `prev_scale`: `number` — Previous scale factor
 
 ---
 
@@ -1490,7 +1506,7 @@ Override to adjust sizes, padding, or other scale-dependent values.
 Handle text input events (typing, IME composition).
 Override for text editing. Called after IME composition completes.
 
-@*param* `text` — Input text (may be multiple characters)
+@*param* `text`: `string` — Input text (may be multiple characters)
 
 ---
 
@@ -1503,15 +1519,15 @@ Override for text editing. Called after IME composition completes.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -1524,7 +1540,7 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 Reorder items by the given name list.
 Items are placed at the beginning in the order specified.
 
-@*param* `names` — List of item names in desired order
+@*param* `names`: `table<integer, string>` — List of item names in desired order
 
 ---
 
@@ -1570,9 +1586,9 @@ Shows image filename, dimensions, and zoom level.
 
 Remove an item from the status bar.
 
-@*param* `name` — Item name to remove
+@*param* `name`: `string` — Item name to remove
 
-@*return* `removed_item` — The removed item or nil
+@*return* `removed_item`: [`core.statusview.item`](/docs/api/core.statusview#corestatusviewitem)`|nil` — The removed item or nil
 
 ---
 
@@ -1595,7 +1611,7 @@ Hide the persistent tooltip and restore normal status bar items.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1608,7 +1624,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1622,11 +1638,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1648,7 +1664,7 @@ Show the status bar.
 
 Show specific items or all items if no names provided.
 
-@*param* `names` — Single name or list of item names
+@*param* `names?`: `string|table<integer, string>` — Single name or list of item names
 
 ---
 
@@ -1661,11 +1677,11 @@ Show specific items or all items if no names provided.
 Display a temporary message in the status bar.
 Message duration is controlled by `config.message_timeout`.
 
-@*param* `icon` — Icon character to display
+@*param* `icon`: `string` — Icon character to display
 
-@*param* `icon_color` — Icon color
+@*param* `icon_color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Icon color
 
-@*param* `text` — Message text
+@*param* `text`: `string` — Message text
 
 ---
 
@@ -1678,7 +1694,7 @@ Message duration is controlled by `config.message_timeout`.
 Show a persistent tooltip replacing all status bar content.
 Remains visible until `remove_tooltip()` is called.
 
-@*param* `text` — Plain text or styled text array
+@*param* `text`: `string|table<integer, string|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`>` — Plain text or styled text array
 
 ---
 
@@ -1714,7 +1730,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 

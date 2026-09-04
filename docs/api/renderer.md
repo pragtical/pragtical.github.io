@@ -84,6 +84,12 @@ function renderer.font.get_metadata(font_or_path: string|renderer.font)
 Get a font file metadata. In case of a font group it will return an array
 of metadata results for each font on the group.
 
+@*param* `font_or_path`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)
+
+@*return*: [`renderer.font.metadata`](/docs/api/renderer#rendererfontmetadata)`|`[`renderer.font.metadata`](/docs/api/renderer#rendererfontmetadata)`[]|nil`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ### group
@@ -97,6 +103,10 @@ Combines an array of fonts into a single one for broader charset support,
 the order of the list determines the fonts precedence when retrieving
 a symbol from it.
 
+@*param* `fonts`: [`renderer.font`](/docs/api/renderer#rendererfont)`[]`
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
 ---
 
 ### load
@@ -107,6 +117,10 @@ function renderer.font.load(path: string, size: number, options?: renderer.fonto
 ```
 
 Create a new font object.
+
+@*param* `options?`: [`renderer.fontoptions`](/docs/api/renderer#rendererfontoptions) — Represent options that affect a font's rendering.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -119,7 +133,11 @@ Create a new font object.
 
 Clones a font object into a new one.
 
-@*param* `size` — Optional new size for cloned font.
+@*param* `size?`: `number` — Optional new size for cloned font.
+
+@*param* `options?`: [`renderer.fontoptions`](/docs/api/renderer#rendererfontoptions) — Represent options that affect a font's rendering.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -168,6 +186,8 @@ Get the current size of the font.
 Get the width in pixels of the given text when
 rendered with this font.
 
+@*param* `tab_data?`: [`renderer.tab_data`](/docs/api/renderer#renderertab_data)
+
 ---
 
 ### set_size
@@ -188,7 +208,7 @@ Set a new size for the font.
 
 Set the amount of characters that represent a tab.
 
-@*param* `chars` — Also known as tab width.
+@*param* `chars`: `integer` — Also known as tab width.
 
 ---
 
@@ -390,6 +410,8 @@ function renderer.begin_frame(window: renwindow)
 
 Tell the rendering system that we want to build a new frame to render.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## begin_frame_lua
@@ -408,6 +430,8 @@ function renderer.draw_canvas(canvas: canvas, x: integer, y: integer)
 
 Draw a Canvas.
 
+@*param* `canvas`: [`canvas`](/docs/api/canvas) — Core functionality that allows rendering into a separate surface.
+
 ---
 
 ## draw_pixels
@@ -418,7 +442,7 @@ function renderer.draw_pixels(pixels: string, x: integer, y: integer, width: int
 
 Draw RGBA pixels.
 
-@*param* `pixels` — RGBA32 bytes, at least width * height * 4 bytes.
+@*param* `pixels`: `string` — RGBA32 bytes, at least width * height * 4 bytes.
 
 ---
 
@@ -439,16 +463,17 @@ The function returns the control box of the polygon,
 which is greater than or equal to the dimensions of the rendered polygon.
 It is not guaranteed to the exact dimension of the rendered polygon.
 
-@*param* `poly` — the lines or curves to draw, up to 65535 points.
+@*param* `poly`: `integer[][]` — the lines or curves to draw, up to 65535 points.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
 
-@*return* `x` — the X coordinate of top left corner of the control box.
+@*return* `x`: `number` — the X coordinate of top left corner of the control box.
 
-@*return* `y` — the Y coordinate of the top left corner of the control box.
+@*return* `y`: `number` — the Y coordinate of the top left corner of the control box.
 
-@*return* `w` — the width of the control box.
+@*return* `w`: `number` — the width of the control box.
 
-@*return* `h` — the height of the control box.
+@*return* `h`: `number` — the height of the control box.
 
 ---
 
@@ -459,6 +484,8 @@ function renderer.draw_rect(x: number, y: number, width: number, height: number,
 ```
 
 Draw a rectangle.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
 
 ---
 
@@ -478,6 +505,14 @@ function renderer.draw_text(font: renderer.font, text: string, x: number, y: num
 ```
 
 Draw text and return the x coordinate where the text finished drawing.
+
+@*param* `font`: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*param* `tab_data?`: [`renderer.tab_data`](/docs/api/renderer#renderertab_data)
+
+@*return* `x`: `number`
 
 ---
 
@@ -516,6 +551,10 @@ function renderer.get_size()
 ```
 
 Get the size of the screen area been rendered.
+
+@*return* `width`: `number`
+
+@*return* `height`: `number`
 
 ---
 
@@ -556,6 +595,8 @@ function renderer.to_canvas(x: integer, y: integer, w: integer, h: integer)
 ```
 
 Copy a portion of the window to a new Canvas.
+
+@*return* `canvas`: [`canvas`](/docs/api/canvas)
 
 ---
 

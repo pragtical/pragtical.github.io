@@ -658,6 +658,16 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+### suggested_extension
+
+```lua
+(field) suggested_extension: string?
+```
+
+Extension hint for an untitled document.
+
+---
+
 ### super
 
 ```lua
@@ -695,7 +705,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -783,7 +793,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -798,9 +808,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -880,7 +890,7 @@ Note: when setting `symbol` param to true the characters property
 `symbol_non_word_chars` will be searched, if false `non_word_chars`. In both
 cases will fallback to `config.non_word_chars` when not found.
 
-@*param* `symbol` — Indicates if non word characters are for a symbol
+@*param* `symbol`: `boolean` — Indicates if non word characters are for a symbol
 
 ---
 
@@ -915,11 +925,19 @@ Cursor section. Cursor indices are *only* valid during a get_selections() call.
 
 Get the selection specified by `idx`
 
-@*param* `idx` — the index of the selection to retrieve
+@*param* `idx`: `integer` — the index of the selection to retrieve
 
-@*param* `sort` — whether to sort the selection returned
+@*param* `sort?`: `boolean` — whether to sort the selection returned
 
-@*return* — line1, col1, line2, col2, was the selection sorted
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `boolean?` — line1, col1, line2, col2, was the selection sorted
 
 ---
 
@@ -967,10 +985,9 @@ Get the lua pattern used to match symbols taking into account current subsyntax.
 Returns the content of the doc between two positions. 
 The positions will be sanitized and sorted. 
 The character at the "end" position is not included by default.
+See: [core.doc.sanitize_position](/docs/api/core.doc#sanitize_position)
 
-@*param* `inclusive` — Whether or not to return the character at the last position
-
-See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#409#9)
+@*param* `inclusive?`: `boolean` — Whether or not to return the character at the last position
 
 ---
 
@@ -1053,9 +1070,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -1070,9 +1087,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -1096,9 +1113,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -1333,6 +1350,17 @@ For plugins to add custom actions of document change
 ```lua
 (method) core.doc:set_selections(idx: any, line1: any, col1: any, line2: any, col2: any, swap: any, rm: any)
 ```
+
+---
+
+### set_suggested_extension
+
+```lua
+(method) core.doc:set_suggested_extension(extension?: string)
+```
+
+Set the extension suggested for an untitled document.
+A leading period is optional. Empty or path-like values clear the hint.
 
 ---
 
@@ -1703,6 +1731,8 @@ function core.docview.from_state(state: table)
   -> core.docview|unknown
 ```
 
+@*return*: [`core.docview`](/docs/api/core.docview)`|unknown`
+
 ---
 
 ### __call
@@ -1716,7 +1746,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -1759,6 +1789,8 @@ Overwrite this function just to disable the core.push_clip_rect
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ### draw_caret
@@ -1769,13 +1801,13 @@ Commonly called at the start of draw() methods.
 
 Draw the caret at a position.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `line` — Line number (for overwrite mode char width)
+@*param* `line`: `integer` — Line number (for overwrite mode char width)
 
-@*param* `col` — Column number (for overwrite mode char width)
+@*param* `col`: `integer` — Column number (for overwrite mode char width)
 
 ---
 
@@ -1787,13 +1819,13 @@ Draw the caret at a position.
 
 Draw IME composition decoration (underline and selection).
 
-@*param* `line1` — Start line
+@*param* `line1`: `integer` — Start line
 
-@*param* `col1` — Start column
+@*param* `col1`: `integer` — Start column
 
-@*param* `line2` — End line
+@*param* `line2`: `integer` — End line
 
-@*param* `col2` — End column
+@*param* `col2`: `integer` — End column
 
 ---
 
@@ -1806,13 +1838,13 @@ Draw IME composition decoration (underline and selection).
 
 Draw a complete line including highlight and selections.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `height` — Line height
+@*return* `height`: `integer` — Line height
 
 ---
 
@@ -1884,6 +1916,8 @@ Iterate visible rows as virtual offset plus real document position.
 Ensure a document line is visible in this view.
 Plugins that hide lines can override this to reveal the requested line.
 
+@*return* `line`: `integer`
+
 ---
 
 ### extend
@@ -1897,7 +1931,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -1912,9 +1946,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -1939,13 +1973,13 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -1960,9 +1994,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -1975,7 +2009,7 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 Get the full filename path for display (with home directory encoded).
 
-@*return* `filename` — Full path or name with asterisk if modified
+@*return* `filename`: `string` — Full path or name with asterisk if modified
 
 ---
 
@@ -1988,7 +2022,7 @@ Get the full filename path for display (with home directory encoded).
 
 Get the font used for rendering text.
 
-@*return* `font` — The code font
+@*return* `font`: [`renderer.font`](/docs/api/renderer#rendererfont) — The code font
 
 ---
 
@@ -2010,7 +2044,7 @@ Get the font used for rendering text.
 
 Get the scrollable width (infinite for horizontal scrolling).
 
-@*return* `width` — Always returns math.huge
+@*return* `width`: `number` — Always returns math.huge
 
 ---
 
@@ -2022,6 +2056,8 @@ Get the scrollable width (infinite for horizontal scrolling).
 ```
 
 Return plugin-provided hidden document lines.
+
+@*return* `hidden_lines`: `table<integer, boolean>?`
 
 ---
 
@@ -2044,13 +2080,13 @@ Return plugin-provided hidden document lines.
 
 Get the screen position of a line (and optionally column).
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `col` — Optional column number
+@*param* `col?`: `integer` — Optional column number
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -2063,7 +2099,7 @@ Get the screen position of a line (and optionally column).
 
 Get the vertical offset for centering text within a line.
 
-@*return* `offset` — Y offset to center text in line height
+@*return* `offset`: `number` — Y offset to center text in line height
 
 ---
 
@@ -2077,7 +2113,9 @@ Get the vertical offset for centering text within a line.
 Get the visual height occupied by a real document line.
 Wrapped lines may span more than one row.
 
-@*param* `line` — Real document line
+@*param* `line`: `integer` — Real document line
+
+@*return* `height`: `number`
 
 ---
 
@@ -2089,6 +2127,8 @@ Wrapped lines may span more than one row.
 ```
 
 Return visual row start columns for a document line.
+
+@*return* `starts`: `integer[]?`
 
 ---
 
@@ -2106,6 +2146,8 @@ class (for example `"core.view"`).
 
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
+
+@*return* `path`: `string?`
 
 ---
 
@@ -2163,7 +2205,15 @@ that perform drawing operations on them.
 It is good practice to set the `extra_cols` parameter to a value that leaves
 room for the differences in font sizes.
 
-@*param* `extra_cols` — Amount of columns to deduce on col1 and include on col2 (default: 100)
+@*param* `extra_cols?`: `integer` — Amount of columns to deduce on col1 and include on col2 (default: 100)
+
+@*return* `col1`: `integer`
+
+@*return* `col2`: `integer`
+
+@*return* `ucol1`: `integer`
+
+@*return* `ucol2`: `integer`
 
 ---
 
@@ -2177,9 +2227,9 @@ room for the differences in font sizes.
 
 Get the range of visible lines in the current viewport.
 
-@*return* `minline` — First visible line
+@*return* `minline`: `integer` — First visible line
 
-@*return* `maxline` — Last visible line
+@*return* `maxline`: `integer` — Last visible line
 
 ---
 
@@ -2192,9 +2242,11 @@ Get the range of visible lines in the current viewport.
 
 Resolve a visual row-local horizontal offset to a document column.
 
-@*param* `row` — Visual row
+@*param* `row`: `integer` — Visual row
 
-@*param* `x` — Horizontal offset from text origin
+@*param* `x`: `number` — Horizontal offset from text origin
+
+@*return* `col`: `integer`
 
 ---
 
@@ -2236,7 +2288,7 @@ Views with wraps or other row expansions should override this.
 
 Mark the visual-line model dirty.
 
-@*param* `from_line` — First line that changed (reserved for incremental rebuilds)
+@*param* `from_line?`: `integer` — First line that changed (reserved for incremental rebuilds)
 
 ---
 
@@ -2251,9 +2303,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -2268,9 +2320,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -2285,9 +2337,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -2314,25 +2366,25 @@ Return whether a document line contributes visual rows.
 
 Adjust selection based on snap type (word, line).
 
-@*param* `doc` — Document
+@*param* `doc`: [`core.doc`](/docs/api/core.doc) — Document
 
-@*param* `snap_type` — Snap type: "word" or "lines"
+@*param* `snap_type`: `string` — Snap type: "word" or "lines"
 
-@*param* `line1` — Start line
+@*param* `line1`: `integer` — Start line
 
-@*param* `col1` — Start column
+@*param* `col1`: `integer` — Start column
 
-@*param* `line2` — End line
+@*param* `line2`: `integer` — End line
 
-@*param* `col2` — End column
+@*param* `col2`: `integer` — End column
 
-@*return* `line1` — Adjusted start line
+@*return* `line1`: `integer` — Adjusted start line
 
-@*return* `col1` — Adjusted start column
+@*return* `col1`: `integer` — Adjusted start column
 
-@*return* `line2` — Adjusted end line
+@*return* `line2`: `integer` — Adjusted end line
 
-@*return* `col2` — Adjusted end column
+@*return* `col2`: `integer` — Adjusted end column
 
 ---
 
@@ -2345,15 +2397,15 @@ Adjust selection based on snap type (word, line).
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -2362,6 +2414,8 @@ Use this for animations instead of direct assignment.
 ```lua
 (method) widget.textbox.TextView:new(parent: core.doc, subparent: any)
 ```
+
+@*param* `parent`: [`core.doc`](/docs/api/core.doc)
 
 ---
 
@@ -2374,11 +2428,11 @@ Use this for animations instead of direct assignment.
 
 Convert a real document position to its composed visual line offset.
 
-@*param* `line` — Real document line
+@*param* `line`: `integer` — Real document line
 
-@*param* `col` — Optional column
+@*param* `col?`: `integer` — Optional column
 
-@*return* `offset` — Visual line index (1-based)
+@*return* `offset`: `integer` — Visual line index (1-based)
 
 ---
 
@@ -2392,13 +2446,13 @@ Convert a real document position to its composed visual line offset.
 Handle file drop events (drag and drop from OS).
 Override to handle dropped files. Return true to consume event.
 
-@*param* `filename` — Absolute path to dropped file
+@*param* `filename`: `string` — Absolute path to dropped file
 
-@*param* `x` — Screen x where file was dropped
+@*param* `x`: `number` — Screen x where file was dropped
 
-@*param* `y` — Screen y where file was dropped
+@*param* `y`: `number` — Screen y where file was dropped
 
-@*return* `consumed` — True to consume event, false to propagate
+@*return* `consumed`: `boolean` — True to consume event, false to propagate
 
 ---
 
@@ -2411,11 +2465,11 @@ Override to handle dropped files. Return true to consume event.
 Handle IME text composition events.
 Updates IME decoration and scrolls to keep composition visible.
 
-@*param* `text` — Composition text
+@*param* `text`: `string` — Composition text
 
-@*param* `start` — Selection start within composition
+@*param* `start`: `integer` — Selection start within composition
 
-@*param* `length` — Selection length within composition
+@*param* `length`: `integer` — Selection length within composition
 
 ---
 
@@ -2440,9 +2494,9 @@ inside the DocView.
 Handle mouse movement for cursor changes and text selection.
 Updates cursor icon, gutter hover state, and extends selection if dragging.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -2456,19 +2510,19 @@ Updates cursor icon, gutter hover state, and extends selection if dragging.
 Handle mouse press for text selection and gutter clicks.
 Supports single/double click, shift-selection, and gutter line selection.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of clicks
-
-@*return* `handled` — True if event was handled
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
+
+@*return* `handled`: `boolean?` — True if event was handled
 
 ---
 
@@ -2492,11 +2546,11 @@ Handle mouse release to end text selection.
 Handle mouse wheel scroll events.
 Override for custom scroll behavior. Base implementation does nothing.
 
-@*param* `y` — Vertical scroll delta; positive is "up"
+@*param* `y`: `number` — Vertical scroll delta; positive is "up"
 
-@*param* `x` — Horizontal scroll delta; positive is "left"
+@*param* `x`: `number` — Horizontal scroll delta; positive is "left"
 
-@*return* `consumed` — True to consume event
+@*return* `consumed`: `boolean?` — True to consume event
 
 ---
 
@@ -2509,9 +2563,9 @@ Override for custom scroll behavior. Base implementation does nothing.
 Called when DPI scale changes (display moved, zoom changed, etc.).
 Override to adjust sizes, padding, or other scale-dependent values.
 
-@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
+@*param* `new_scale`: `number` — New scale factor (e.g., 1.0, 1.5, 2.0)
 
-@*param* `prev_scale` — Previous scale factor
+@*param* `prev_scale`: `number` — Previous scale factor
 
 ---
 
@@ -2523,7 +2577,7 @@ Override to adjust sizes, padding, or other scale-dependent values.
 
 Handle text input from keyboard.
 
-@*param* `text` — Input text
+@*param* `text`: `string` — Input text
 
 ---
 
@@ -2536,15 +2590,15 @@ Handle text input from keyboard.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -2560,11 +2614,11 @@ Convert a visual line offset (from get_visible_line_range) to a real
 document position. Plugins that iterate visible rows should call this to get
 the real line and column represented by each composed visual row.
 
-@*param* `offset` — Visual line index (1-based)
+@*param* `offset`: `integer` — Visual line index (1-based)
 
-@*return* `line` — Real document line
+@*return* `line`: `integer` — Real document line
 
-@*return* `col` — Column where the visual row starts
+@*return* `col`: `integer` — Column where the visual row starts
 
 ---
 
@@ -2576,7 +2630,7 @@ the real line and column represented by each composed visual row.
 
 Rebuild the composed visual-line model.
 
-@*param* `from_line` — First document line that may have changed
+@*param* `from_line?`: `integer` — First document line that may have changed
 
 ---
 
@@ -2590,13 +2644,13 @@ Rebuild the composed visual-line model.
 
 Convert screen coordinates to document line/column.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `line` — Line number
+@*return* `line`: `integer` — Line number
 
-@*return* `col` — Column number
+@*return* `col`: `integer` — Column number
 
 ---
 
@@ -2608,11 +2662,11 @@ Convert screen coordinates to document line/column.
 
 Scroll to center a line in the viewport.
 
-@*param* `line` — Line number to scroll to
+@*param* `line`: `integer` — Line number to scroll to
 
-@*param* `ignore_if_visible` — Don't scroll if line already visible
+@*param* `ignore_if_visible?`: `boolean` — Don't scroll if line already visible
 
-@*param* `instant` — Jump immediately without animation
+@*param* `instant?`: `boolean` — Jump immediately without animation
 
 ---
 
@@ -2625,11 +2679,11 @@ Scroll to center a line in the viewport.
 Scroll to make a position visible with context padding.
 Ensures the position is visible with surrounding context lines.
 
-@*param* `line` — Line number
+@*param* `line`: `integer` — Line number
 
-@*param* `col` — Column number
+@*param* `col`: `integer` — Column number
 
-@*param* `instant` — Jump immediately without animation
+@*param* `instant?`: `boolean` — Jump immediately without animation
 
 ---
 
@@ -2642,7 +2696,7 @@ Ensures the position is visible with surrounding context lines.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -2655,7 +2709,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -2669,11 +2723,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -2694,7 +2748,7 @@ Useful for determining cursor style or handling clicks.
 
 Check if this view accepts text input.
 
-@*return* `accepts` — Always returns true for DocView
+@*return* `accepts`: `boolean` — Always returns true for DocView
 
 ---
 
@@ -2707,7 +2761,7 @@ Check if this view accepts text input.
 Attempt to close the view, prompting to save if document is dirty.
 Shows "Unsaved Changes" dialog if this is the last view of a dirty document.
 
-@*param* `do_close` — Callback to execute when close is confirmed
+@*param* `do_close`: `function` — Callback to execute when close is confirmed
 
 ---
 
@@ -2753,6 +2807,8 @@ Called automatically by update(). Rarely needs to be called manually.
 
 Get the total number of visual rows.
 
+@*return* `count`: `integer`
+
 ---
 
 ### visual_position_from_row
@@ -2765,6 +2821,10 @@ Get the total number of visual rows.
 
 Convert a visual row to a real document position.
 
+@*return* `line`: `integer`
+
+@*return* `col`: `integer`
+
 ---
 
 ### visual_row_from_position
@@ -2775,6 +2835,8 @@ Convert a visual row to a real document position.
 ```
 
 Convert a real document position to a visual row.
+
+@*return* `row`: `integer`
 
 ---
 
@@ -2787,6 +2849,10 @@ Convert a real document position to a visual row.
 ```
 
 Get the first visual row and row count for a real document line.
+
+@*return* `first_row`: `integer?`
+
+@*return* `row_count`: `integer`
 
 ---
 
@@ -2805,6 +2871,8 @@ Implementations are responsible for:
   * applying any persisted state
 
 If loading the instance failed nil will be returned.
+
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
 
 ---
 
@@ -2830,7 +2898,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -2862,6 +2930,8 @@ Useful for debugging.
 Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
 
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
 ---
 
 ## animate
@@ -2872,7 +2942,9 @@ them in reverse order for better events matching.
 
 Registers a new animation to be ran on the update cycle.
 
-@*param* `target` — If nil assumes properties belong to widget it self.
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -2885,7 +2957,7 @@ Registers a new animation to be ran on the update cycle.
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
-@*param* `scrolling` — Capture for scrolling
+@*param* `scrolling?`: `boolean` — Capture for scrolling
 
 ---
 
@@ -2967,6 +3039,8 @@ Used internally when dragging is activated.
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_border
@@ -2998,6 +3072,12 @@ Draw the widget configured border or custom one.
 Render or calculate the size of the specified range of elements
 in a styled text elemet.
 
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ## draw_text_multiline
@@ -3013,6 +3093,18 @@ in a styled text elemet.
 Taken from the logview and modified it a tiny bit.
 TODO: something similar should be on pragtical core.
 
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ## extend
@@ -3026,7 +3118,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -3041,9 +3133,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -3060,12 +3152,12 @@ Note: only "mouse_released" is implemented for the moment on floating views
 for use in the SelectBox, maybe a better system can be implemented on
 the future.
 
-@*param* `force` — If omitted is set to true by default
-
 ```lua
 name:
     | "mouse_released"
 ```
+
+@*param* `force`: `boolean` — If omitted is set to true by default
 
 ---
 
@@ -3092,13 +3184,13 @@ Get the bottom y coordinate relative to parent
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -3113,9 +3205,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -3127,6 +3219,10 @@ Accounts for scroll offset. Use for drawing content at correct position.
 ```
 
 Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -3168,6 +3264,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -3200,6 +3298,8 @@ Get whether password display mode is enabled.
 ```
 
 Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
 
 ---
 
@@ -3255,6 +3355,8 @@ widget or the size of the widget it self if greater.
   -> widget.position
 ```
 
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
 ---
 
 ## get_state
@@ -3272,6 +3374,8 @@ userdata, metatables, or cyclic references).
 
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
+
+@*return* `state`: `table?`
 
 ---
 
@@ -3315,9 +3419,11 @@ Hide the widget.
 
 Perform an animated hide.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -3332,9 +3438,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -3349,9 +3455,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -3366,9 +3472,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -3403,15 +3509,15 @@ Check if the given mouse coordinate is hovering the widget
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -3420,6 +3526,8 @@ Use this for animations instead of direct assignment.
 ```lua
 (method) widget.textbox:new(parent: widget, text: boolean, placeholder: any, options: any)
 ```
+
+@*param* `parent`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -3461,6 +3569,8 @@ button:
 
 Send file drop event to hovered child.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ## on_ime_text_editing
@@ -3472,11 +3582,11 @@ Send file drop event to hovered child.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -3562,13 +3672,12 @@ any neccesary changes in sizes, padding, etc...
 ```
 
 Event fired on any text change event.
-
-@*param* `action` — Can be "insert" or "remove",
-
 insert arguments (see Doc:raw_insert):
   line, col, text, undo_stack, time
 remove arguments (see Doc:raw_remove):
   line1, col1, line2, col2, undo_stack, time
+
+@*param* `action`: `string` — Can be "insert" or "remove",
 
 ---
 
@@ -3589,15 +3698,15 @@ remove arguments (see Doc:raw_remove):
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -3618,6 +3727,8 @@ Undo capture_mouse()
 ```
 
 Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -3652,7 +3763,7 @@ used when a re-update and re-draw is strictly needed.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -3665,7 +3776,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -3679,11 +3790,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -3704,6 +3815,8 @@ Set the widget border size and appropriately re-set the widget size.
 ```
 
 A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 ---
 
@@ -3772,6 +3885,8 @@ Text displayed when the widget is hovered.
 If a command name is also given its associated binding will be displayed
 as part of the tooltip.
 
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
 ---
 
 ## show
@@ -3792,9 +3907,11 @@ Show the widget.
 
 Perform an animated show.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -3820,7 +3937,7 @@ Replaces current active child with a new one and calls the
 activate/deactivate events of the child. This is especially
 used to send text input events to widgets with input_text support.
 
-@*param* `child` — If nil deactivates current child
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
 
 ---
 
@@ -3842,6 +3959,8 @@ When set to false the background rendering is disabled.
 
 Toggle visibility of widget.
 
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
 ---
 
 ## try_close
@@ -3854,7 +3973,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 

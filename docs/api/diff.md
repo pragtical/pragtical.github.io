@@ -43,6 +43,8 @@ function diff.diff(a: table<integer, string>, b: table<integer, string>)
 
 Generate the differences between two tables of strings.
 
+@*return*: [`diff.changes`](/docs/api/diff#diffchanges)`[]`
+
 ---
 
 ## diff_iter
@@ -54,6 +56,8 @@ function diff.diff_iter(a: table<integer, string>, b: table<integer, string>)
 
 Same as diff.diff(...) but in iterable mode.
 
+@*return*: `fun():`[`diff.changes`](/docs/api/diff#diffchanges)
+
 ---
 
 ## inline_diff
@@ -64,6 +68,8 @@ function diff.inline_diff(a: string, b: string)
 ```
 
 Generates the differences between two strings.
+
+@*return*: [`diff.changes`](/docs/api/diff#diffchanges)`[]`
 
 ---
 

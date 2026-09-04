@@ -605,6 +605,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ### override_rootview
@@ -629,7 +631,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -663,6 +665,8 @@ Emitted to input_text widgets when clicked.
 Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
 
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
 ---
 
 ### animate
@@ -673,7 +677,9 @@ them in reverse order for better events matching.
 
 Registers a new animation to be ran on the update cycle.
 
-@*param* `target` — If nil assumes properties belong to widget it self.
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -686,7 +692,7 @@ Registers a new animation to be ran on the update cycle.
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
-@*param* `scrolling` — Capture for scrolling
+@*param* `scrolling?`: `boolean` — Capture for scrolling
 
 ---
 
@@ -800,6 +806,12 @@ Draw the widget configured border or custom one.
 Render or calculate the size of the specified range of elements
 in a styled text elemet.
 
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ### draw_text_multiline
@@ -815,6 +827,18 @@ in a styled text elemet.
 Taken from the logview and modified it a tiny bit.
 TODO: something similar should be on pragtical core.
 
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ### extend
@@ -828,7 +852,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -843,9 +867,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -862,12 +886,12 @@ Note: only "mouse_released" is implemented for the moment on floating views
 for use in the SelectBox, maybe a better system can be implemented on
 the future.
 
-@*param* `force` — If omitted is set to true by default
-
 ```lua
 name:
     | "mouse_released"
 ```
+
+@*param* `force`: `boolean` — If omitted is set to true by default
 
 ---
 
@@ -894,13 +918,13 @@ Get the bottom y coordinate relative to parent
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -915,9 +939,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -929,6 +953,10 @@ Accounts for scroll offset. Use for drawing content at correct position.
 ```
 
 Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -970,6 +998,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ### get_name
@@ -991,6 +1021,8 @@ The name that is displayed on pragtical tabs.
 ```
 
 Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
 
 ---
 
@@ -1046,6 +1078,8 @@ widget or the size of the widget it self if greater.
   -> widget.position
 ```
 
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
 ---
 
 ### get_state
@@ -1063,6 +1097,8 @@ userdata, metatables, or cyclic references).
 
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
+
+@*return* `state`: `table?`
 
 ---
 
@@ -1095,9 +1131,11 @@ Hide the widget.
 
 Perform an animated hide.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -1112,9 +1150,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -1129,9 +1167,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -1146,9 +1184,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -1183,15 +1221,15 @@ Check if the given mouse coordinate is hovering the widget
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1203,7 +1241,9 @@ Use this for animations instead of direct assignment.
 
 Create a generated settings view from a config spec.
 
-@*param* `context` — Plugin name or standalone render context inherited from the opener.
+@*param* `spec`: [`settings.config_spec`](/docs/api/plugins.settings#settingsconfig_spec)`|`[`settings.option`](/docs/api/plugins.settings#settingsoption)`[]` — Represents a standalone settings specification.
+
+@*param* `context?`: `string|table` — Plugin name or standalone render context inherited from the opener.
 
 ---
 
@@ -1245,6 +1285,8 @@ button:
 
 Send file drop event to hovered child.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_ime_text_editing
@@ -1256,11 +1298,11 @@ Send file drop event to hovered child.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -1321,6 +1363,8 @@ button:
     | "right"
 ```
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_mouse_released
@@ -1338,6 +1382,8 @@ button:
     | "left"
     | "right"
 ```
+
+@*return* `processed`: `boolean`
 
 ---
 
@@ -1370,6 +1416,8 @@ any neccesary changes in sizes, padding, etc...
 
 Redirects any text input to active child with the input_text flag.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_touch_moved
@@ -1381,15 +1429,15 @@ Redirects any text input to active child with the input_text flag.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -1410,6 +1458,8 @@ Undo capture_mouse()
 ```
 
 Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -1444,7 +1494,7 @@ used when a re-update and re-draw is strictly needed.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1457,7 +1507,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1471,11 +1521,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1496,6 +1546,8 @@ Set the widget border size and appropriately re-set the widget size.
 ```
 
 A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 ---
 
@@ -1544,6 +1596,8 @@ Text displayed when the widget is hovered.
 If a command name is also given its associated binding will be displayed
 as part of the tooltip.
 
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
 ---
 
 ### show
@@ -1564,9 +1618,11 @@ Show the widget.
 
 Perform an animated show.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -1592,7 +1648,7 @@ Replaces current active child with a new one and calls the
 activate/deactivate events of the child. This is especially
 used to send text input events to widgets with input_text support.
 
-@*param* `child` — If nil deactivates current child
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
 
 ---
 
@@ -1614,6 +1670,8 @@ When set to false the background rendering is disabled.
 
 Toggle visibility of widget.
 
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
 ---
 
 ### try_close
@@ -1626,7 +1684,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 
@@ -1688,6 +1746,16 @@ initialized, scale has changed or a widget switched from hidden to visible.
 
 Represents a setting to render on a settings pane.
 
+### build_item
+
+```lua
+(field) build_item: fun(row: widget.widgetlist.item, item: any, value: any, commit: fun(value: any))?
+```
+
+Populate a LIST_WIDGETS row with child controls.
+
+---
+
 ### default
 
 ```lua
@@ -1713,6 +1781,26 @@ Description of the option eg: "Modifies the document indentation"
 ```lua
 (field) exists: boolean
 ```
+
+---
+
+### filter_placeholder
+
+```lua
+(field) filter_placeholder: string?
+```
+
+Placeholder displayed by a LIST_WIDGETS filter.
+
+---
+
+### filterable
+
+```lua
+(field) filterable: boolean?
+```
+
+Whether a LIST_WIDGETS includes a text filter. Defaults to true.
 
 ---
 
@@ -1764,6 +1852,26 @@ Optional function that is used to manipulate the current value on retrieval.
 ```
 
 The icon set for a BUTTON
+
+---
+
+### item_text
+
+```lua
+(field) item_text: (fun(item: any):string)?
+```
+
+Return the text used to filter a LIST_WIDGETS item.
+
+---
+
+### items
+
+```lua
+(field) items: (table|fun(value: any):table)?
+```
+
+Items displayed by a LIST_WIDGETS, or a function that generates them.
 
 ---
 
@@ -1868,7 +1976,7 @@ Used for NUMBER to indicate the increment/decrement amount
 ### type
 
 ```lua
-(field) type: integer|`settings.type.BUTTON`|`settings.type.COLOR`|`settings.type.DIRECTORY`|`settings.type.FILE`...(+7)
+(field) type: integer|`settings.type.BUTTON`|`settings.type.COLOR`|`settings.type.DIRECTORY`|`settings.type.FILE`...(+8)
 ```
 
 Type of option that will be used to render an appropriate control
@@ -1882,6 +1990,14 @@ Type of option that will be used to render an appropriate control
 ```
 
 Used in a SELECTION to provide the list of valid options
+
+---
+
+### visible_rows
+
+```lua
+(field) visible_rows: integer?
+```
 
 ---
 
@@ -1900,6 +2016,7 @@ settings.types:
     | `settings.type.DIRECTORY`
     | `settings.type.COLOR`
     | `settings.type.SUBCONFIG`
+    | `settings.type.LIST_WIDGETS`
 ```
 
 ## settings.ui
@@ -2461,6 +2578,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ### override_rootview
@@ -2485,7 +2604,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -2519,6 +2638,8 @@ Emitted to input_text widgets when clicked.
 Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
 
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
 ---
 
 ### animate
@@ -2529,7 +2650,9 @@ them in reverse order for better events matching.
 
 Registers a new animation to be ran on the update cycle.
 
-@*param* `target` — If nil assumes properties belong to widget it self.
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -2542,7 +2665,7 @@ Registers a new animation to be ran on the update cycle.
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
-@*param* `scrolling` — Capture for scrolling
+@*param* `scrolling?`: `boolean` — Capture for scrolling
 
 ---
 
@@ -2638,6 +2761,8 @@ If visible draw the widget and returns true.
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ### draw_border
@@ -2669,6 +2794,12 @@ Draw the widget configured border or custom one.
 Render or calculate the size of the specified range of elements
 in a styled text elemet.
 
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
 ---
 
 ### draw_text_multiline
@@ -2683,6 +2814,18 @@ in a styled text elemet.
 
 Taken from the logview and modified it a tiny bit.
 TODO: something similar should be on pragtical core.
+
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
 
 ---
 
@@ -2707,7 +2850,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -2722,9 +2865,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -2741,12 +2884,12 @@ Note: only "mouse_released" is implemented for the moment on floating views
 for use in the SelectBox, maybe a better system can be implemented on
 the future.
 
-@*param* `force` — If omitted is set to true by default
-
 ```lua
 name:
     | "mouse_released"
 ```
+
+@*param* `force`: `boolean` — If omitted is set to true by default
 
 ---
 
@@ -2773,13 +2916,13 @@ Get the bottom y coordinate relative to parent
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -2794,9 +2937,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -2808,6 +2951,10 @@ Accounts for scroll offset. Use for drawing content at correct position.
 ```
 
 Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -2849,6 +2996,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ### get_name
@@ -2870,6 +3019,8 @@ The name that is displayed on pragtical tabs.
 ```
 
 Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
 
 ---
 
@@ -2925,6 +3076,8 @@ widget or the size of the widget it self if greater.
   -> widget.position
 ```
 
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
 ---
 
 ### get_state
@@ -2942,6 +3095,8 @@ userdata, metatables, or cyclic references).
 
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
+
+@*return* `state`: `table?`
 
 ---
 
@@ -2974,9 +3129,11 @@ Hide the widget.
 
 Perform an animated hide.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -2991,9 +3148,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -3008,9 +3165,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -3025,9 +3182,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -3102,15 +3259,15 @@ Check if the given mouse coordinate is hovering the widget
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -3162,6 +3319,8 @@ button:
 
 Send file drop event to hovered child.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_ime_text_editing
@@ -3173,11 +3332,11 @@ Send file drop event to hovered child.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -3238,6 +3397,8 @@ button:
     | "right"
 ```
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_mouse_released
@@ -3255,6 +3416,8 @@ button:
     | "left"
     | "right"
 ```
+
+@*return* `processed`: `boolean`
 
 ---
 
@@ -3287,6 +3450,8 @@ any neccesary changes in sizes, padding, etc...
 
 Redirects any text input to active child with the input_text flag.
 
+@*return* `processed`: `boolean`
+
 ---
 
 ### on_touch_moved
@@ -3298,15 +3463,15 @@ Redirects any text input to active child with the input_text flag.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -3327,6 +3492,8 @@ Undo capture_mouse()
 ```
 
 Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -3361,7 +3528,7 @@ used when a re-update and re-draw is strictly needed.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -3374,7 +3541,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -3388,11 +3555,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -3413,6 +3580,8 @@ Set the widget border size and appropriately re-set the widget size.
 ```
 
 A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 ---
 
@@ -3461,6 +3630,8 @@ Text displayed when the widget is hovered.
 If a command name is also given its associated binding will be displayed
 as part of the tooltip.
 
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
 ---
 
 ### setup_about
@@ -3489,9 +3660,11 @@ Show the widget.
 
 Perform an animated show.
 
-@*param* `lock_x` — Do not resize width while animating
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
 
-@*param* `lock_y` — Do not resize height while animating
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -3517,7 +3690,7 @@ Replaces current active child with a new one and calls the
 activate/deactivate events of the child. This is especially
 used to send text input events to widgets with input_text support.
 
-@*param* `child` — If nil deactivates current child
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
 
 ---
 
@@ -3538,6 +3711,8 @@ When set to false the background rendering is disabled.
 ```
 
 Toggle visibility of widget.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
 
 ---
 
@@ -3613,9 +3788,11 @@ function plugins.settings.add(section: string, options: settings.option[], plugi
 
 Add a new settings section to the settings UI
 
-@*param* `plugin_name` — Optional name of plugin
+@*param* `options`: [`settings.option`](/docs/api/plugins.settings#settingsoption)`[]`
 
-@*param* `overwrite` — Overwrite previous section options
+@*param* `plugin_name?`: `string` — Optional name of plugin
+
+@*param* `overwrite?`: `boolean` — Overwrite previous section options
 
 ---
 
@@ -3628,7 +3805,11 @@ function plugins.settings.show_config(title: string, spec: settings.config_spec|
 
 Show a generated configuration view.
 
-@*param* `context` — Plugin name or standalone render context inherited from the opener.
+@*param* `spec`: [`settings.config_spec`](/docs/api/plugins.settings#settingsconfig_spec)`|`[`settings.option`](/docs/api/plugins.settings#settingsoption)`[]` — Represents a standalone settings specification.
+
+@*param* `context?`: `string|table` — Plugin name or standalone render context inherited from the opener.
+
+@*return* `view`: [`settings.configview`](/docs/api/plugins.settings#settingsconfigview)`|nil`
 
 ---
 

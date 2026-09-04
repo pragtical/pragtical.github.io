@@ -210,6 +210,10 @@ function websocket.client.new(url: any, options: websocket.connect.options)
   -> websocket.client
 ```
 
+@*param* `options`: [`websocket.connect.options`](/docs/api/core.websocket#websocketconnectoptions)
+
+@*return*: [`websocket.client`](/docs/api/core.websocket#websocketclient)
+
 ---
 
 ### _build_session_info
@@ -218,6 +222,10 @@ function websocket.client.new(url: any, options: websocket.connect.options)
 (method) websocket.client:_build_session_info(attempt: integer, previous_outcome?: websocket.disconnect_info)
   -> websocket.session_info
 ```
+
+@*param* `previous_outcome?`: [`websocket.disconnect_info`](/docs/api/core.websocket#websocketdisconnect_info)
+
+@*return*: [`websocket.session_info`](/docs/api/core.websocket#websocketsession_info)
 
 ---
 
@@ -257,6 +265,12 @@ function websocket.client.new(url: any, options: websocket.connect.options)
   3. err: string?
 ```
 
+@*return* `did_work`: `boolean`
+
+@*return* `should_stop`: `boolean`
+
+@*return* `err`: `string?`
+
 ---
 
 ### _pump_incoming
@@ -267,6 +281,12 @@ function websocket.client.new(url: any, options: websocket.connect.options)
   2. should_stop: boolean
   3. err: string?
 ```
+
+@*return* `did_work`: `boolean`
+
+@*return* `should_stop`: `boolean`
+
+@*return* `err`: `string?`
 
 ---
 
@@ -293,6 +313,10 @@ function websocket.client.new(url: any, options: websocket.connect.options)
   -> websocket.disconnect_info
 ```
 
+@*param* `session_info`: [`websocket.session_info`](/docs/api/core.websocket#websocketsession_info)
+
+@*return*: [`websocket.disconnect_info`](/docs/api/core.websocket#websocketdisconnect_info)
+
 ---
 
 ### _should_reconnect
@@ -301,6 +325,8 @@ function websocket.client.new(url: any, options: websocket.connect.options)
 (method) websocket.client:_should_reconnect(outcome: websocket.disconnect_info, attempt: integer)
   -> boolean
 ```
+
+@*param* `outcome`: [`websocket.disconnect_info`](/docs/api/core.websocket#websocketdisconnect_info)
 
 ---
 
@@ -343,6 +369,10 @@ status:
     | "closing"
     | "closed"
 ```
+
+@*return* `status`: `"closed"|"closing"|"connecting"|"open"|"reconnecting"`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -853,6 +883,10 @@ function core.websocket.connect(url: string, options?: websocket.connect.options
 ```
 
 Open a WebSocket connection asynchronously.
+
+@*param* `options?`: [`websocket.connect.options`](/docs/api/core.websocket#websocketconnectoptions)
+
+@*return* `client`: [`websocket.client`](/docs/api/core.websocket#websocketclient)
 
 ---
 

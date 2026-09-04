@@ -373,6 +373,8 @@ function system.absolute_path(path: string)
 
 Converts a relative path from current directory to the absolute one.
 
+@*return* `abspath`: `string?`
+
 ---
 
 ## chdir
@@ -394,6 +396,8 @@ function system.clear_ime(window: renwindow)
 
 Clears any ongoing composition on the IME
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## exec
@@ -407,7 +411,7 @@ executed command and executes the process in a non blocking way by
 forking it to the background.
 Note: Do not use this function, use the Process API instead.
 
-@*param* `command` — The command to execute.
+@*param* `command`: `string` — The command to execute.
 
 ---
 
@@ -421,13 +425,13 @@ function system.ftruncate(file: file*, length?: integer)
 
 Truncates a file to a set length.
 
-@*param* `file` — A file handle returned by io.open().
+@*param* `file`: `file*` — A file handle returned by io.open().
 
-@*param* `length` — Number of bytes to truncate to. Defaults to 0.
+@*param* `length?`: `integer` — Number of bytes to truncate to. Defaults to 0.
 
-@*return* `success` — True if the operation suceeded, false otherwise
+@*return* `success`: `boolean` — True if the operation suceeded, false otherwise
 
-@*return* `message` — An error message if the operation failed.
+@*return* `message`: `string?` — An error message if the operation failed.
 
 ---
 
@@ -441,10 +445,12 @@ function system.fuzzy_match(haystack: string, needle: string, file?: boolean)
 Generates a matching score depending on how well the value of the
 given needle compares to that of the value in the haystack.
 
-@*param* `file` — Reverse the algorithm to prioritize the end
-
 of the haystack, eg: with a haystack "/my/path/to/file" and a needle
 "file", will get better score than with this option not set to true.
+
+@*param* `file?`: `boolean` — Reverse the algorithm to prioritize the end
+
+@*return* `score`: `integer`
 
 ---
 
@@ -472,6 +478,16 @@ function system.get_display_info()
 
 Get the primary display details.
 
+@*return* `current_scale`: `number`
+
+@*return* `refresh_rate`: `number`
+
+@*return* `width`: `number`
+
+@*return* `height`: `number`
+
+@*return* `default_scale`: `number`
+
 ---
 
 ## get_file_info
@@ -484,12 +500,11 @@ function system.get_file_info(path: string)
 
 Get details about a given file or path.
 
-@*param* `path` — Can be a file or a directory path
+@*param* `path`: `string` — Can be a file or a directory path
 
+@*return* `info`: [`system.fileinfo`](/docs/api/system#systemfileinfo)`|nil` — Path details or nil if empty or error.
 
-@*return* `info` — Path details or nil if empty or error.
-
-@*return* `message` — Error message in case of error.
+@*return* `message`: `string?` — Error message in case of error.
 
 ---
 
@@ -502,8 +517,6 @@ function system.get_fs_type(path: string)
 
 Gets the filesystem type of a path.
 Note: This only works on Linux.
-
-@*param* `path` — Can be path to a directory or a file
 
 
 
@@ -519,6 +532,8 @@ return #1:
     | "ramfs"
     | "ntfs"
 ```
+
+@*param* `path`: `string` — Can be path to a directory or a file
 
 ---
 
@@ -575,6 +590,10 @@ function system.get_scale(window: renwindow)
 Retrieve current system scale for the given window. When the SDL renderer
 is enabled this function always returns 1 since scaling is peformed internally.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*return* `scale`: `number`
+
 ---
 
 ## get_time
@@ -616,6 +635,10 @@ mode:
     | "fullscreen"
 ```
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*return* `mode`: `"fullscreen"|"maximized"|"minimized"|"normal"`
+
 ---
 
 ## get_window_size
@@ -630,6 +653,16 @@ function system.get_window_size(window: renwindow)
 
 Get the size and coordinates of the window.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*return* `width`: `number`
+
+@*return* `height`: `number`
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
 ---
 
 ## getcwd
@@ -641,7 +674,7 @@ function system.getcwd()
 
 Get the current working directory.
 
-@*return* `directory` — Current working directgory.
+@*return* `directory`: `string` — Current working directgory.
 
 ---
 
@@ -656,7 +689,7 @@ Check whether there are any pending events in the internal event queue
 without blocking. Useful for detecting user-input bursts to temporarily
 boost rendering speed and reduce input lag.
 
-@*return* `pending` — True if at least one event is queued, false otherwise.
+@*return* `pending`: `boolean` — True if at least one event is queued, false otherwise.
 
 ---
 
@@ -678,10 +711,9 @@ function system.list_dir(path: string)
 
 Gets a list of files and directories for a given path.
 
+@*return* `list`: `table|nil` — List of directories or nil if empty or error.
 
-@*return* `list` — List of directories or nil if empty or error.
-
-@*return* `message` — Error message in case of error.
+@*return* `message`: `string?` — Error message in case of error.
 
 ---
 
@@ -695,11 +727,11 @@ function system.load_native_plugin(name: string, path: string)
 Loads a lua native module using the default Lua API or pragtical native plugin API.
 Note: Never use this function directly.
 
-@*param* `name` — the name of the module
+@*param* `name`: `string` — the name of the module
 
-@*param* `path` — the path to the shared library file
+@*param* `path`: `string` — the path to the shared library file
 
-@*return* `nargs` — the return value of the entrypoint
+@*return* `nargs`: `number` — the return value of the entrypoint
 
 ---
 
@@ -714,10 +746,9 @@ function system.mkdir(directory_path: string)
 Create a new directory, note that this function doesn't recursively
 creates the directories on the given path.
 
+@*return* `created`: `boolean` — True on success or false on failure.
 
-@*return* `created` — True on success or false on failure.
-
-@*return* `message` — The error message if the operation failed.
+@*return* `message`: `string?` — The error message if the operation failed.
 
 ---
 
@@ -736,6 +767,10 @@ Returns immediately.
 When the operation completes, an event will be received by the event loop,
 containing the results.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.opendirectory`](/docs/api/system#systemdialogoptionsopendirectory)
+
 ---
 
 ## open_file_dialog
@@ -753,6 +788,10 @@ Returns immediately.
 When the operation completes, an event will be received by the event loop,
 containing the results.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.openfile`](/docs/api/system#systemdialogoptionsopenfile)
+
 ---
 
 ## path_compare
@@ -764,7 +803,6 @@ function system.path_compare(path1: string, type1: "dir"|"file"|nil, path2: stri
 
 Compares two paths in the order used by TreeView.
 
-@*return* `compare_result` — True if path1 \< path2
 
 ```lua
 type1:
@@ -775,6 +813,8 @@ type2:
     | "file" -- It is a file.
     | "dir" -- It is a directory.
 ```
+
+@*return* `compare_result`: `boolean` — True if path1 \< path2
 
 ---
 
@@ -828,6 +868,16 @@ Touch events:
 Dialog events:
  * "dialogfinished" -\> id, status, result
 
+@*return* `type`: `string`
+
+@*return* `arg1`: `any`
+
+@*return* `arg2`: `any`
+
+@*return* `arg3`: `any`
+
+@*return* `arg4`: `any`
+
 ---
 
 ## raise_window
@@ -838,6 +888,8 @@ function system.raise_window(window: renwindow)
 
 Raise the main window and give it input focus.
 Note: may not always be obeyed by the users window manager.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
 
 ---
 
@@ -851,9 +903,9 @@ function system.rmdir(path: string)
 
 Deletes an empty directory.
 
-@*return* `success` — True if the operation suceeded, false otherwise
+@*return* `success`: `boolean` — True if the operation suceeded, false otherwise
 
-@*return* `message` — An error message if the operation failed
+@*return* `message`: `string?` — An error message if the operation failed
 
 ---
 
@@ -871,6 +923,10 @@ Returns immediately.
 
 When the operation completes, an event will be received by the event loop,
 containing the results.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.savefile`](/docs/api/system#systemdialogoptionssavefile)
 
 ---
 
@@ -922,6 +978,8 @@ function system.set_text_input_rect(window: renwindow, x: number, y: number, wid
 
 Sets the position of the IME composition window.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## set_window_bordered
@@ -931,6 +989,8 @@ function system.set_window_bordered(window: renwindow, bordered: boolean)
 ```
 
 Toggle between bordered and borderless.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
 
 ---
 
@@ -946,13 +1006,13 @@ for custom window management.
 To disable custom window management, call this function without any
 arguments
 
-@*param* `window` — Target window
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Target window
 
-@*param* `title_height` — Height of the window decoration
+@*param* `title_height?`: `number` — Height of the window decoration
 
-@*param* `controls_width` — Width of window controls (maximize,minimize and close buttons, etc).
+@*param* `controls_width?`: `number` — Width of window controls (maximize,minimize and close buttons, etc).
 
-@*param* `resize_border` — The amount of pixels reserved for resizing
+@*param* `resize_border?`: `number` — The amount of pixels reserved for resizing
 
 ---
 
@@ -973,6 +1033,8 @@ mode:
     | "fullscreen"
 ```
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## set_window_opacity
@@ -984,11 +1046,13 @@ function system.set_window_opacity(window: renwindow, opacity: number)
 
 Change the opacity (also known as transparency) of the window.
 
-@*param* `opacity` — A value from 0.0 to 1.0, the lower the value
-
 the less visible the window will be.
 
-@*return* `success` — True if the operation suceeded.
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `opacity`: `number` — A value from 0.0 to 1.0, the lower the value
+
+@*return* `success`: `boolean` — True if the operation suceeded.
 
 ---
 
@@ -1000,6 +1064,8 @@ function system.set_window_size(window: renwindow, width: number, height: number
 
 Sets the size and coordinates of the window.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## set_window_title
@@ -1010,19 +1076,22 @@ function system.set_window_title(window: renwindow, title: string)
 
 Change the window title.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## setenv
 
 ```lua
-function system.setenv(key: string, val: string)
+function system.setenv(key: string, val?: string)
   -> ok: boolean
 ```
 
 Sets an environment variable.
-The converse of os.getenv.
+The converse of os.getenv. If no value is provided, or if value is nil,
+the environment variable is unset.
 
-@*return* `ok` — True if call succeeded
+@*return* `ok`: `boolean` — True if call succeeded
 
 ---
 
@@ -1044,7 +1113,7 @@ function system.sleep(seconds: number)
 
 Sleep for the given amount of seconds.
 
-@*param* `seconds` — Also supports fractions of a second, eg: 0.01
+@*param* `seconds`: `number` — Also supports fractions of a second, eg: 0.01
 
 ---
 
@@ -1064,6 +1133,8 @@ function system.text_input(window: renwindow, enabled: boolean)
 
 Enables or disables text input.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
 ---
 
 ## wait_event
@@ -1075,11 +1146,11 @@ function system.wait_event(timeout?: number)
 
 Wait until an event is triggered.
 
-@*param* `timeout` — Amount of seconds, also supports fractions
-
 of a second, eg: 0.01. If not provided, waits forever.
 
-@*return* `status` — True on success or false if there was an error or if no event was received.
+@*param* `timeout?`: `number` — Amount of seconds, also supports fractions
+
+@*return* `status`: `boolean` — True on success or false if there was an error or if no event was received.
 
 ---
 
@@ -1091,6 +1162,8 @@ function system.window_has_focus(window: renwindow)
 ```
 
 Check if the window currently has focus.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
 
 ---
 

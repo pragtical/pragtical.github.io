@@ -248,6 +248,12 @@ fromcharset:
     | "WINDOWS-1258"
 ```
 
+@*param* `options?`: [`encoding.convert_options`](/docs/api/encoding#encodingconvert_options)
+
+@*return* `converted_text`: `string?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## detect
@@ -262,6 +268,12 @@ function encoding.detect(filename: string)
 Try and detect the encoding to best of capabilities for given file given or
 returns nil and error message on failure.
 
+@*return* `charset`: `string?`
+
+@*return* `bom`: `string?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## detect_string
@@ -274,6 +286,12 @@ function encoding.detect_string(text: string)
 ```
 
 Same as encoding.detect() but for strings.
+
+@*return* `charset`: `string?`
+
+@*return* `bom`: `string?`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -352,6 +370,8 @@ charset:
     | "WINDOWS-1258"
 ```
 
+@*return* `bom`: `string?`
+
 ---
 
 ## strip_bom
@@ -363,14 +383,6 @@ function encoding.strip_bom(text: string, charset?: "ARMSCII-8"|"BIG5"|"BIG5-HKS
 ```
 
 Remove the byte order marks from the given text.
-
-@*param* `text` — A string that may contain a byte order marks.
-
-@*param* `charset` — Charset to scan, if nil scan all charsets with bom.
-
-@*return* `cleaned_text`
-
-@*return* `bom` — The stripped bytes order mark.
 
 ```lua
 charset:
@@ -437,6 +449,14 @@ charset:
     | "WINDOWS-1257"
     | "WINDOWS-1258"
 ```
+
+@*param* `text`: `string` — A string that may contain a byte order marks.
+
+@*param* `charset?`: `"ARMSCII-8"|"BIG5"|"BIG5-HKSCS"|"CP866"|"CP932"...(+57)` — Charset to scan, if nil scan all charsets with bom.
+
+@*return* `cleaned_text`: `string`
+
+@*return* `bom`: `string?` — The stripped bytes order mark.
 
 ---
 

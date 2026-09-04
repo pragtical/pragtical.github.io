@@ -526,6 +526,8 @@ function plugins.ipc.current()
 
 Get the IPC session for the running pragtical instance.
 
+@*return*: [`plugins.ipc`](/docs/api/plugins.ipc)
+
 ---
 
 ## force_draw
@@ -550,7 +552,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -565,7 +567,7 @@ Get string representation of the object (for debugging/logging).
 Override in subclasses to provide meaningful names.
 Example: `function MyClass:__tostring() return "MyClass" end`
 
-@*return* `str` — String representation (default: "Object")
+@*return* `str`: `string` — String representation (default: "Object")
 
 ---
 
@@ -578,6 +580,8 @@ Example: `function MyClass:__tostring() return "MyClass" end`
 
 Call a method on another instance and wait for reply.
 
+@*return* `return_of_called_method`: `any`
+
 ---
 
 ## call_async
@@ -589,7 +593,9 @@ Call a method on another instance and wait for reply.
 
 Call a method on another instance asynchronously waiting for the replies.
 
-@*param* `callback` — Called with the returned values
+@*param* `callback`: `fun(id: string, ret: table)|nil` — Called with the returned values
+
+@*return* `message_id`: `string|nil`
 
 ---
 
@@ -604,7 +610,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -619,9 +625,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -634,6 +640,8 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get a list of running pragtical instances.
 
+@*return*: [`plugins.ipc.instance`](/docs/api/plugins.ipc#pluginsipcinstance)`[]`
+
 ---
 
 ## get_message
@@ -644,6 +652,8 @@ Get a list of running pragtical instances.
 ```
 
 Get a queued message.
+
+@*return*: [`plugins.ipc.message`](/docs/api/plugins.ipc#pluginsipcmessage)`|nil`
 
 ---
 
@@ -667,6 +677,8 @@ Retrieve the id of the primary instance if found.
 
 Get the reply sent to a specific message.
 
+@*return*: [`plugins.ipc.reply`](/docs/api/plugins.ipc#pluginsipcreply)`|nil`
+
 ---
 
 ## is
@@ -680,9 +692,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -697,9 +709,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -714,9 +726,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -736,6 +748,10 @@ message_type:
     | "signal"
 ```
 
+@*param* `callback`: `fun(message: `[`plugins.ipc.message`](/docs/api/plugins.ipc#pluginsipcmessage)`, reply: `[`plugins.ipc.reply`](/docs/api/plugins.ipc#pluginsipcreply)`)|nil`
+
+@*return* `listener_position`: `integer`
+
 ---
 
 ## listen_signal
@@ -747,6 +763,8 @@ message_type:
 
 Listen for a given signal.
 
+@*return* `listener_position`: `integer`
+
 ---
 
 ## new
@@ -757,7 +775,7 @@ Listen for a given signal.
 
 Constructor
 
-@*param* `id` — Defaults to current pragtical process id.
+@*param* `id?`: `string` — Defaults to current pragtical process id.
 
 ---
 
@@ -782,6 +800,8 @@ to the currently running instance and reply to them.
 Reads replies directed to messages sent by the currently running instance
 and if any returns them.
 
+@*return*: [`plugins.ipc.reply`](/docs/api/plugins.ipc#pluginsipcreply)`[]|nil`
+
 ---
 
 ## register_method
@@ -792,13 +812,13 @@ and if any returns them.
 
 Add a new method that can be invoked from other instances.
 
-@*param* `name` — A unique name for the method.
+@*param* `name`: `string` — A unique name for the method.
 
-@*param* `method` — Function invoked when the method is called.
+@*param* `method`: `fun(...any)` — Function invoked when the method is called.
 
-@*param* `params` — Parameters that are going to be passed into method.
+@*param* `params?`: [`plugins.ipc.vardecl`](/docs/api/plugins.ipc#pluginsipcvardecl)`[]` — Parameters that are going to be passed into method.
 
-@*param* `returns` — Return values of the method.
+@*param* `returns?`: [`plugins.ipc.vardecl`](/docs/api/plugins.ipc#pluginsipcvardecl)`[]` — Return values of the method.
 
 ---
 
@@ -810,9 +830,9 @@ Add a new method that can be invoked from other instances.
 
 Add a new signal that can be sent to other instances.
 
-@*param* `name` — A unique name for the signal.
+@*param* `name`: `string` — A unique name for the signal.
 
-@*param* `params` — Parameters that are going to be passed into callback.
+@*param* `params?`: [`plugins.ipc.vardecl`](/docs/api/plugins.ipc#pluginsipcvardecl)`[]` — Parameters that are going to be passed into callback.
 
 ---
 
@@ -841,6 +861,10 @@ message_type:
     | "method"
     | "signal"
 ```
+
+@*param* `options?`: [`plugins.ipc.sendmessageoptions`](/docs/api/plugins.ipc#pluginsipcsendmessageoptions)
+
+@*return* `message_id`: `string|nil`
 
 ---
 
@@ -904,6 +928,8 @@ be replied to.
 
 Blocks execution of current instance to wait for all replies by the
 specified message and when finished returns them.
+
+@*return*: [`plugins.ipc.reply`](/docs/api/plugins.ipc#pluginsipcreply)`[]|nil`
 
 ---
 

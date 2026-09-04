@@ -100,7 +100,7 @@ The frame rate is always assumed to be 60 FPS, thus
 a value of 100% would mean that the benchmark took
 1/60 of a second to execute.
 
-@*return* — The result returned by the function
+@*return*: `any` — The result returned by the function
 
 ---
 
@@ -112,6 +112,12 @@ function core.common.blend_colors(dst: renderer.color, src: renderer.color)
 ```
 
 Combine two colors to create a new color based on their transparency.
+
+@*param* `dst`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*param* `src`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `blended_color`: [`renderer.color`](/docs/api/renderer#renderercolor)
 
 ---
 
@@ -144,6 +150,14 @@ Only these formats are supported:
 * `#rrggbbaa`
 * `#rrggbb`
 
+@*return* `r`: `number`
+
+@*return* `g`: `number`
+
+@*return* `b`: `number`
+
+@*return* `a`: `number`
+
 ---
 
 ## darken_color
@@ -154,6 +168,10 @@ function core.common.darken_color(rgba: renderer.color, percent: integer)
 ```
 
 Makes a color darker by the given percentage.
+
+@*param* `rgba`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return*: [`renderer.color`](/docs/api/renderer#renderercolor)
 
 ---
 
@@ -166,9 +184,9 @@ function core.common.dir_list_suggest(text: string, dir_list: string[])
 
 Filters a list of paths to find those that are related to the input path.
 
-@*param* `text` — The input path.
+@*param* `text`: `string` — The input path.
 
-@*param* `dir_list` — A list of paths to filter.
+@*param* `dir_list`: `string[]` — A list of paths to filter.
 
 ---
 
@@ -181,9 +199,9 @@ function core.common.dir_path_suggest(text: string, root: string)
 
 Returns a list of directories that are related to a path.
 
-@*param* `text` — The input path.
+@*param* `text`: `string` — The input path.
 
-@*param* `root` — The path to relate to.
+@*param* `root`: `string` — The path to relate to.
 
 ---
 
@@ -231,6 +249,18 @@ align:
     | "center" -- Center text in the bounding box
 ```
 
+@*param* `font`: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `x_advance`: `number`
+
+@*return* `y_advance`: `number`
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
 ---
 
 ## find_index
@@ -258,7 +288,7 @@ If the haystack is a string, a score ranging from 0 to 1 is returned.
 If the haystack is a table, a table containing the haystack sorted in ascending
 order of similarity is returned.
 
-@*param* `files` — If true, the matching process will be performed in reverse to better match paths.
+@*param* `files?`: `boolean` — If true, the matching process will be performed in reverse to better match paths.
 
 ---
 
@@ -296,7 +326,7 @@ Stack levels:
   2 = the function that called get_caller_info()
   3 = that function’s caller (default)
 
-@*param* `stacklevel` — The stack frame to inspect. Defaults to 3.
+@*param* `stacklevel?`: `integer` — The stack frame to inspect. Defaults to 3.
 
 ---
 
@@ -320,7 +350,7 @@ function core.common.home_encode_list(paths: string[])
 
 Returns a list of paths where the user's home directory is replaced by `"~"`.
 
-@*param* `paths` — A list of paths to encode
+@*param* `paths`: `string[]` — A list of paths to encode
 
 ---
 
@@ -348,15 +378,15 @@ adapted from http://en.wikipedia.org/wiki/HSV_color_space.
 Assumes h, s, and v are contained in the set \[0, 1\] and
 returns r, g, and b in the set \[0, 255\].
 
-@*param* `h` — The hue
+@*param* `h`: `number` — The hue
 
-@*param* `s` — The saturation
+@*param* `s`: `number` — The saturation
 
-@*param* `v` — The brightness
+@*param* `v`: `number` — The brightness
 
-@*param* `a` — The alpha
+@*param* `a`: `number` — The alpha
 
-@*return* `rgba` — The RGB representation
+@*return* `rgba`: [`renderer.color`](/docs/api/renderer#renderercolor) — The RGB representation
 
 ---
 
@@ -383,7 +413,7 @@ Checks if the byte at offset is a UTF-8 continuation byte.
 UTF-8 encodes code points in 1 to 4 bytes.
 For a multi-byte sequence, each byte following the start byte is a continuation byte.
 
-@*param* `offset` — The offset of the string to start searching. Defaults to 1.
+@*param* `offset?`: `integer` — The offset of the string to start searching. Defaults to 1.
 
 ---
 
@@ -411,6 +441,10 @@ function core.common.lighten_color(rgba: renderer.color, percent: integer)
 
 Makes a color brighter by the given percentage.
 
+@*param* `rgba`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return*: [`renderer.color`](/docs/api/renderer#renderercolor)
+
 ---
 
 ## match_ignore_rule
@@ -421,6 +455,10 @@ function core.common.match_ignore_rule(path: string, info: system.fileinfo, igno
 ```
 
 Checks if a path matches one of the given ignore rules.
+
+@*param* `info`: [`system.fileinfo`](/docs/api/system#systemfileinfo)
+
+@*param* `ignore_rules`: [`core.ignore_file_rule`](/docs/api/core#coreignore_file_rule)`[]`
 
 ---
 
@@ -437,7 +475,11 @@ Matches a string against a list of patterns.
 If a match was found, its start and end index is returned.
 Otherwise, false is returned.
 
-@*param* `...` — Other options for string.find().
+@*param*: `any` — Other options for string.find().
+
+@*return* `start_index`: `boolean|number`
+
+@*return* `end_index`: `number|nil`
 
 ---
 
@@ -463,11 +505,11 @@ function core.common.mkdirp(path: string)
 
 Creates a directory recursively if necessary.
 
-@*return* `success`
+@*return* `success`: `boolean`
 
-@*return* `error`
+@*return* `error`: `string|nil`
 
-@*return* `path` — The path where an error occured.
+@*return* `path`: `string|nil` — The path where an error occured.
 
 ---
 
@@ -499,7 +541,7 @@ This function expects an absolute path, e.g. a path from `system.absolute_path`.
 This function is needed because the path returned by `system.absolute_path`
 may contain drive letters in upper or lowercase.
 
-@*param* `filename` — The input path.
+@*param* `filename`: `string|nil` — The input path.
 
 ---
 
@@ -513,6 +555,8 @@ function core.common.open_in_system(resource: string)
 Open the given resource using the system launcher.
 The resource can be an url, file or directory in most cases...
 
+@*return* `success`: `boolean`
+
 ---
 
 ## path_belongs_to
@@ -524,9 +568,9 @@ function core.common.path_belongs_to(filename: string, path: string)
 
 Checks whether a path belongs to a parent directory.
 
-@*param* `filename` — The path to check.
+@*param* `filename`: `string` — The path to check.
 
-@*param* `path` — The parent path.
+@*param* `path`: `string` — The parent path.
 
 ---
 
@@ -542,9 +586,9 @@ Returns a list of paths that are relative to the input path.
 If a root directory is specified, the function returns paths
 that are relative to the root directory.
 
-@*param* `text` — The input path.
+@*param* `text`: `string` — The input path.
 
-@*param* `root` — The root directory.
+@*param* `root?`: `string` — The root directory.
 
 ---
 
@@ -557,9 +601,9 @@ function core.common.relative_path(ref_dir: string, dir: string)
 
 Makes a path relative to the given reference directory when possible.
 
-@*param* `ref_dir` — The path to check against.
+@*param* `ref_dir`: `string` — The path to check against.
 
-@*param* `dir` — The input path.
+@*param* `dir`: `string` — The input path.
 
 ---
 
@@ -575,7 +619,9 @@ adapted from http://en.wikipedia.org/wiki/HSV_color_space.
 Assumes r, g, and b are contained in the set \[0, 255\] and
 returns h, s, and v in the set \[0, 1\].
 
-@*return* `hsva` — The HSV representation
+@*param* `rgba`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `hsva`: `table` — The HSV representation
 
 ---
 
@@ -590,13 +636,13 @@ function core.common.rm(path: string, recursively: boolean)
 
 Removes a path.
 
-@*param* `recursively` — If true, the function will attempt to remove everything in the specified path.
+@*param* `recursively`: `boolean` — If true, the function will attempt to remove everything in the specified path.
 
-@*return* `success`
+@*return* `success`: `boolean`
 
-@*return* `error`
+@*return* `error`: `string|nil`
 
-@*return* `path` — The path where the error occured.
+@*return* `path`: `string|nil` — The path where the error occured.
 
 ---
 
@@ -628,6 +674,8 @@ Only these basic types are supported:
 * string
 * table
 
+@*param* `opts?`: [`common.serializeoptions`](/docs/api/core.common#commonserializeoptions)
+
 ---
 
 ## splice
@@ -639,11 +687,11 @@ function core.common.splice(t: any[], at: number, remove: number, insert?: any[]
 Splices a numerically indexed table.
 This function mutates the original table.
 
-@*param* `at` — Index at which to start splicing.
+@*param* `at`: `number` — Index at which to start splicing.
 
-@*param* `remove` — Number of elements to remove.
+@*param* `remove`: `number` — Number of elements to remove.
 
-@*param* `insert` — A table containing elements to insert after splicing.
+@*param* `insert?`: `any[]` — A table containing elements to insert after splicing.
 
 ---
 

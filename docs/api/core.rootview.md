@@ -388,6 +388,8 @@ Implementations are responsible for:
 
 If loading the instance failed nil will be returned.
 
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
 ---
 
 ## on_view_mouse_pressed
@@ -400,17 +402,17 @@ Hook function called before mouse pressed events reach the active view.
 Override this to intercept or modify mouse press behavior globally.
 Default implementation does nothing.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of clicks
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
 
 ---
 
@@ -425,7 +427,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -458,7 +460,7 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 Close all document views in the node tree.
 Used when closing a project or switching workspaces.
 
-@*param* `keep_active` — If true, keeps the currently active view open
+@*param* `keep_active`: `boolean` — If true, keeps the currently active view open
 
 ---
 
@@ -471,9 +473,9 @@ Used when closing a project or switching workspaces.
 Queue a drawing operation to execute after main scene is rendered.
 Useful for overlays, tooltips, or drag indicators that should draw on top.
 
-@*param* `fn` — Function to call for drawing
+@*param* `fn`: `function` — Function to call for drawing
 
-@*param* `...` — Arguments to pass to the function
+@*param*: `any` — Arguments to pass to the function
 
 ---
 
@@ -497,6 +499,8 @@ Draw order: 1) node tree, 2) deferred draws, 3) drag overlays, 4) cursor update
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_drag_overlay
@@ -508,7 +512,7 @@ Commonly called at the start of draw() methods.
 Draw a drag overlay rectangle with current opacity.
 Shows where tab/split will land when dropped.
 
-@*param* `ov` — The overlay to draw
+@*param* `ov`: [`core.rootview.overlay`](/docs/api/core.rootview#corerootviewoverlay) — The overlay to draw
 
 ---
 
@@ -545,7 +549,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -560,9 +564,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -576,7 +580,7 @@ Example: `view:extends(View)` returns true for View and all subclasses
 Get the node containing the currently active view.
 Falls back to primary node if active view not found.
 
-@*return* `node` — Node containing active view or primary node
+@*return* `node`: [`core.node`](/docs/api/core.node) — Node containing active view or primary node
 
 ---
 
@@ -591,7 +595,7 @@ Get the active node, ensuring it's not locked.
 If active node is locked, switches to primary node instead.
 Use this when adding new views to ensure they go to an editable node.
 
-@*return* `node` — Unlocked node suitable for adding views
+@*return* `node`: [`core.node`](/docs/api/core.node) — Unlocked node suitable for adding views
 
 ---
 
@@ -607,13 +611,13 @@ Use this when adding new views to ensure they go to an editable node.
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -628,9 +632,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -644,7 +648,7 @@ Accounts for scroll offset. Use for drawing content at correct position.
 Get the total scrollable width of the view's content.
 Used by horizontal scrollbar.
 
-@*return* `width` — Width in pixels (default: 0, no horizontal scroll)
+@*return* `width`: `number` — Width in pixels (default: 0, no horizontal scroll)
 
 ---
 
@@ -663,6 +667,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -674,6 +680,8 @@ is returned.
 
 Get the name displayed in the view's tab.
 Override to show document name, file path, etc.
+
+@*return* `name`: `string`
 
 ---
 
@@ -687,9 +695,9 @@ Override to show document name, file path, etc.
 Get the base color for a drag overlay.
 Internal helper to fetch color from style based on overlay type.
 
-@*param* `overlay` — The overlay to get color for
+@*param* `overlay`: [`core.rootview.overlay`](/docs/api/core.rootview#corerootviewoverlay) — The overlay to get color for
 
-@*return* `color` — The base color from style
+@*return* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — The base color from style
 
 ---
 
@@ -703,7 +711,7 @@ Internal helper to fetch color from style based on overlay type.
 Get the primary node (main document editing area).
 Primary node is where documents are opened by default.
 
-@*return* `node` — The primary node
+@*return* `node`: [`core.node`](/docs/api/core.node) — The primary node
 
 ---
 
@@ -717,7 +725,7 @@ Primary node is where documents are opened by default.
 Get the total scrollable height of the view's content.
 Used by scrollbar to calculate thumb size and position.
 
-@*return* `height` — Height in pixels (default: infinite)
+@*return* `height`: `number` — Height in pixels (default: infinite)
 
 ---
 
@@ -737,6 +745,8 @@ userdata, metatables, or cyclic references).
 Returning `nil` indicates that this view should NOT be restored when
 reloading the workspace.
 
+@*return* `state`: `table?`
+
 ---
 
 ## grab_mouse
@@ -751,15 +761,15 @@ even when the mouse moves outside the view's bounds.
 Only one grab can be active per button at a time.
 Common use: drag operations, scrollbar dragging, text selection.
 
-@*param* `button` — Button to grab
-
-@*param* `view` — View that should receive mouse events
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `button`: `'left'|'right'` — Button to grab
+
+@*param* `view`: [`core.view`](/docs/api/core.view) — View that should receive mouse events
 
 ---
 
@@ -772,7 +782,7 @@ button:
 Animate drag overlay position and opacity smoothly.
 Internal helper for tab/split drag visual feedback.
 
-@*param* `overlay` — The overlay to animate
+@*param* `overlay`: [`core.rootview.overlay`](/docs/api/core.rootview#corerootviewoverlay) — The overlay to animate
 
 ---
 
@@ -787,9 +797,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -804,9 +814,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -821,9 +831,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -836,15 +846,15 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -870,13 +880,13 @@ Handle file/folder drop events from OS.
 Supports: opening files, adding projects, showing dialogs.
 Files are deferred if nagview is visible to avoid locked node errors.
 
-@*param* `filename` — Absolute path to dropped file/folder
+@*param* `filename`: `string` — Absolute path to dropped file/folder
 
-@*param* `x` — Screen x where dropped
+@*param* `x`: `number` — Screen x where dropped
 
-@*param* `y` — Screen y where dropped
+@*param* `y`: `number` — Screen y where dropped
 
-@*return* `handled` — True if event was handled
+@*return* `handled`: `boolean` — True if event was handled
 
 ---
 
@@ -923,13 +933,13 @@ Handle mouse movement events and route appropriately.
 Manages: grabbed view routing, divider dragging, tab drag start, cursor changes.
 Updates overlapping_view for hover state tracking.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `dx` — Delta x since last move
+@*param* `dx`: `number` — Delta x since last move
 
-@*param* `dy` — Delta y since last move
+@*param* `dy`: `number` — Delta y since last move
 
 ---
 
@@ -944,19 +954,19 @@ Handle mouse press events and route to appropriate targets.
 Manages: divider dragging, tab clicking/dragging, view activation, event routing.
 Overrides base View implementation to handle complex UI interactions.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of clicks
-
-@*return* `handled` — True if event was handled
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
+
+@*return* `handled`: `boolean` — True if event was handled
 
 ---
 
@@ -970,15 +980,15 @@ Handle mouse button release events.
 Manages: mouse grab release, divider drag completion, tab drop/rearrange.
 Handles complex tab drag-and-drop logic (split, move, reorder).
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -1001,9 +1011,9 @@ Forward mouse wheel events to the view under the mouse.
 Called when DPI scale changes (display moved, zoom changed, etc.).
 Override to adjust sizes, padding, or other scale-dependent values.
 
-@*param* `new_scale` — New scale factor (e.g., 1.0, 1.5, 2.0)
+@*param* `new_scale`: `number` — New scale factor (e.g., 1.0, 1.5, 2.0)
 
-@*param* `prev_scale` — Previous scale factor
+@*param* `prev_scale`: `number` — Previous scale factor
 
 ---
 
@@ -1061,9 +1071,9 @@ Open a document in the active node.
 If document is already open, switches to that view instead.
 Creates a new DocView and adds it as a tab in the active node.
 
-@*param* `doc` — Document to open
+@*param* `doc`: [`core.doc`](/docs/api/core.doc) — Document to open
 
-@*return* `view` — The view displaying the document
+@*return* `view`: [`core.docview`](/docs/api/core.docview) — The view displaying the document
 
 ---
 
@@ -1087,7 +1097,7 @@ Called during update() to safely open files when nagview is dismissed.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1100,7 +1110,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1114,11 +1124,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1132,7 +1142,7 @@ Useful for determining cursor style or handling clicks.
 Select a new primary node from available unlocked nodes.
 Used when closing the current primary node.
 
-@*return* `node` — Next available unlocked node to be primary
+@*return* `node`: [`core.node`](/docs/api/core.node) — Next available unlocked node to be primary
 
 ---
 
@@ -1145,17 +1155,17 @@ Used when closing the current primary node.
 Set drag overlay target position and size.
 If immediate is true, jumps to position instantly instead of animating.
 
-@*param* `overlay` — The overlay to position
+@*param* `overlay`: [`core.rootview.overlay`](/docs/api/core.rootview#corerootviewoverlay) — The overlay to position
 
-@*param* `x` — Target x coordinate
+@*param* `x`: `number` — Target x coordinate
 
-@*param* `y` — Target y coordinate
+@*param* `y`: `number` — Target y coordinate
 
-@*param* `w` — Target width
+@*param* `w`: `number` — Target width
 
-@*param* `h` — Target height
+@*param* `h`: `number` — Target height
 
-@*param* `immediate` — If true, jump to position without animation
+@*param* `immediate?`: `boolean` — If true, jump to position without animation
 
 ---
 
@@ -1168,9 +1178,9 @@ If immediate is true, jumps to position instantly instead of animating.
 Show or hide a drag overlay with color reset.
 Internal helper for managing drag visual feedback state.
 
-@*param* `overlay` — The overlay to show/hide
+@*param* `overlay`: [`core.rootview.overlay`](/docs/api/core.rootview#corerootviewoverlay) — The overlay to show/hide
 
-@*param* `status` — True to show, false to hide
+@*param* `status`: `boolean` — True to show, false to hide
 
 ---
 
@@ -1196,7 +1206,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 
@@ -1210,13 +1220,13 @@ Release mouse grab for the specified button.
 Button must match the button that was grabbed.
 After release, normal mouse event routing resumes.
 
-@*param* `button` — Button to release (must match grabbed button)
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `button`: `'left'|'right'` — Button to release (must match grabbed button)
 
 ---
 

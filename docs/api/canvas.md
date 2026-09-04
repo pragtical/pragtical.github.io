@@ -26,6 +26,10 @@ function canvas.load_image(path: string)
 
 Loads an image into a new canvas.
 
+@*return* `canvas`: [`canvas`](/docs/api/canvas)`?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## load_svg_image
@@ -38,6 +42,10 @@ function canvas.load_svg_image(path: string, width: integer, height: integer)
 
 Loads an svg image with the specified width and height.
 
+@*return* `canvas`: [`canvas`](/docs/api/canvas)`?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## new
@@ -49,9 +57,11 @@ function canvas.new(width: integer, height: integer, color: renderer.color, tran
 
 Creates a new canvas.
 
-@*param* `color` — Background color to initialize the Canvas with
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Background color to initialize the Canvas with
 
-@*param* `transparent` — Make the canvas transparent
+@*param* `transparent?`: `boolean` — Make the canvas transparent
+
+@*return*: [`canvas`](/docs/api/canvas)
 
 ---
 
@@ -64,7 +74,7 @@ Creates a new canvas.
 Clean the canvas, content will be replaced with transparent pixels,
 or a full opaque color if the canvas is not transparent.
 
-@*param* `color` — Optional color used to fill the surface.
+@*param* `color?`: [`renderer.color`](/docs/api/renderer#renderercolor) — Optional color used to fill the surface.
 
 ---
 
@@ -81,13 +91,14 @@ If no arguments are passed, the Canvas is duplicated as-is.
 
 `new_width` and `new_height` specify the new size of the copied region.
 
-@*return* `copied_canvas` — A copy of the Canvas
 
 ```lua
 scale_mode:
     | "linear"
     | "nearest"
 ```
+
+@*return* `copied_canvas`: [`canvas`](/docs/api/canvas) — A copy of the Canvas
 
 ---
 
@@ -99,7 +110,9 @@ scale_mode:
 
 Draw a Canvas.
 
-@*param* `blend` — Whether to blend the Canvas, or replace the pixels
+@*param* `canvas`: [`canvas`](/docs/api/canvas) — Core functionality that allows rendering into a separate surface.
+
+@*param* `blend`: `boolean` — Whether to blend the Canvas, or replace the pixels
 
 ---
 
@@ -120,16 +133,17 @@ The function returns the control box of the polygon,
 which is greater than or equal to the dimensions of the rendered polygon.
 It is not guaranteed to the exact dimension of the rendered polygon.
 
-@*param* `poly` — the lines or curves to draw, up to 65535 points.
+@*param* `poly`: `integer[][]` — the lines or curves to draw, up to 65535 points.
 
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
 
-@*return* `x` — the X coordinate of top left corner of the control box.
+@*return* `x`: `number` — the X coordinate of top left corner of the control box.
 
-@*return* `y` — the Y coordinate of the top left corner of the control box.
+@*return* `y`: `number` — the Y coordinate of the top left corner of the control box.
 
-@*return* `w` — the width of the control box.
+@*return* `w`: `number` — the width of the control box.
 
-@*return* `h` — the height of the control box.
+@*return* `h`: `number` — the height of the control box.
 
 ---
 
@@ -141,7 +155,9 @@ It is not guaranteed to the exact dimension of the rendered polygon.
 
 Draw a rectangle.
 
-@*param* `replace` — Overwrite the content with the specified color. Useful when dealing with alpha.
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*param* `replace`: `boolean` — Overwrite the content with the specified color. Useful when dealing with alpha.
 
 ---
 
@@ -153,6 +169,14 @@ Draw a rectangle.
 ```
 
 Draw text and return the x coordinate where the text finished drawing.
+
+@*param* `font`: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*param* `tab_data?`: [`renderer.tab_data`](/docs/api/renderer#renderertab_data)
+
+@*return* `x`: `number`
 
 ---
 
@@ -168,6 +192,8 @@ Returns the pixels of the specified portion of the Canvas.
 If the coordinates are not specified, the whole Canvas is considered.
 The pixel format is RGBA32.
 
+@*return* `pixels`: `string`
+
 ---
 
 ## get_size
@@ -179,6 +205,10 @@ The pixel format is RGBA32.
 ```
 
 Returns the Canvas size.
+
+@*return* `w`: `integer`
+
+@*return* `h`: `integer`
 
 ---
 
@@ -203,10 +233,6 @@ without having to render the canvas into a window first.
 
 Save the current canvas as an image.
 
-@*param* `type` — Defaults to "png"
-
-@*param* `quality` — A number from 1 to 100 used for jpg and avif. Defaults to 100
-
 
 
 ```lua
@@ -215,6 +241,14 @@ type:
     | "jpg"
     | "avif"
 ```
+
+@*param* `type?`: `"avif"|"jpg"|"png"` — Defaults to "png"
+
+@*param* `quality?`: `integer` — A number from 1 to 100 used for jpg and avif. Defaults to 100
+
+@*return* `saved`: `boolean`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -227,13 +261,14 @@ type:
 
 Returns a scaled copy of the Canvas.
 
-@*return* `scaled_canvas` — A scaled copy of the Canvas
 
 ```lua
 scale_mode:
     | "linear"
     | "nearest"
 ```
+
+@*return* `scaled_canvas`: [`canvas`](/docs/api/canvas) — A scaled copy of the Canvas
 
 ---
 

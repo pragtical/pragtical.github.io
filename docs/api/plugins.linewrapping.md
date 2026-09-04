@@ -108,6 +108,20 @@ breaks are held in a single table that contains n*2 elements, where n is the
 
 ---
 
+## set_enabled
+
+```lua
+function plugins.linewrapping.set_enabled(docview: core.docview, enabled: boolean)
+```
+
+Enable or disable wrapping for a document view.
+
+@*param* `docview`: [`core.docview`](/docs/api/core.docview) — View for editing documents with syntax highlighting and text editing.
+Extends View to provide text editing capabilities including selection,
+scrolling, IME support, and rendering with syntax highlighting.
+
+---
+
 ## update_breaks
 
 ```lua

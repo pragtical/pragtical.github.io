@@ -160,6 +160,16 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## suggested_extension
+
+```lua
+(field) suggested_extension: string?
+```
+
+Extension hint for an untitled document.
+
+---
+
 ## super
 
 ```lua
@@ -200,7 +210,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -288,7 +298,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -303,9 +313,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -385,7 +395,7 @@ Note: when setting `symbol` param to true the characters property
 `symbol_non_word_chars` will be searched, if false `non_word_chars`. In both
 cases will fallback to `config.non_word_chars` when not found.
 
-@*param* `symbol` — Indicates if non word characters are for a symbol
+@*param* `symbol`: `boolean` — Indicates if non word characters are for a symbol
 
 ---
 
@@ -420,11 +430,19 @@ Cursor section. Cursor indices are *only* valid during a get_selections() call.
 
 Get the selection specified by `idx`
 
-@*param* `idx` — the index of the selection to retrieve
+@*param* `idx`: `integer` — the index of the selection to retrieve
 
-@*param* `sort` — whether to sort the selection returned
+@*param* `sort?`: `boolean` — whether to sort the selection returned
 
-@*return* — line1, col1, line2, col2, was the selection sorted
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `integer` — line1, col1, line2, col2, was the selection sorted
+
+@*return*: `boolean?` — line1, col1, line2, col2, was the selection sorted
 
 ---
 
@@ -472,10 +490,9 @@ Get the lua pattern used to match symbols taking into account current subsyntax.
 Returns the content of the doc between two positions. 
 The positions will be sanitized and sorted. 
 The character at the "end" position is not included by default.
+See: [core.doc.sanitize_position](/docs/api/core.doc#sanitize_position)
 
-@*param* `inclusive` — Whether or not to return the character at the last position
-
-See: \[core.doc.sanitize_position\](file:///usr/share/pragtical/core/doc/init.lua#409#9)
+@*param* `inclusive?`: `boolean` — Whether or not to return the character at the last position
 
 ---
 
@@ -558,9 +575,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -575,9 +592,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -601,9 +618,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -838,6 +855,17 @@ For plugins to add custom actions of document change
 ```lua
 (method) core.doc:set_selections(idx: any, line1: any, col1: any, line2: any, col2: any, swap: any, rm: any)
 ```
+
+---
+
+## set_suggested_extension
+
+```lua
+(method) core.doc:set_suggested_extension(extension?: string)
+```
+
+Set the extension suggested for an untitled document.
+A leading period is optional. Empty or path-like values clear the hint.
 
 ---
 

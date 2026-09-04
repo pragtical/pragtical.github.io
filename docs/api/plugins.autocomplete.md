@@ -308,6 +308,8 @@ function plugins.autocomplete.add(t: plugins.autocomplete.symbols, manually_trig
 
 Register a symbols table used for autocompletion.
 
+@*param* `t`: [`plugins.autocomplete.symbols`](/docs/api/plugins.autocomplete#pluginsautocompletesymbols)
+
 ---
 
 ## add_icon
@@ -318,7 +320,9 @@ function plugins.autocomplete.add_icon(name: string, character: string, font?: r
 
 Register a font icon that can be assigned to completion items.
 
-@*param* `color` — A style.syntax\[\] name or specific color
+@*param* `font?`: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+@*param* `color?`: `string|`[`renderer.color`](/docs/api/renderer#renderercolor) — A style.syntax\[\] name or specific color
 
 ---
 
@@ -352,6 +356,10 @@ function plugins.autocomplete.complete(completions: plugins.autocomplete.symbols
 
 Manually invoke the completion list using the provided symbols.
 
+@*param* `completions`: [`plugins.autocomplete.symbols`](/docs/api/plugins.autocomplete#pluginsautocompletesymbols)
+
+@*param* `on_close?`: `fun(doc: `[`core.doc`](/docs/api/core.doc)`, item: `[`plugins.autocomplete.symbolinfo`](/docs/api/plugins.autocomplete#pluginsautocompletesymbolinfo)`)`
+
 ---
 
 ## get_partial_symbol
@@ -366,6 +374,16 @@ function plugins.autocomplete.get_partial_symbol()
 ```
 
 Retrieve the current document partial symbol.
+
+@*return* `partial`: `string`
+
+@*return* `line1`: `integer`
+
+@*return* `col1`: `integer`
+
+@*return* `line2`: `integer`
+
+@*return* `col2`: `integer`
 
 ---
 
@@ -387,6 +405,8 @@ function plugins.autocomplete.open(on_close?: fun(doc: core.doc, item: plugins.a
 ```
 
 Manually invoke the completion list using already registered symbols.
+
+@*param* `on_close?`: `fun(doc: `[`core.doc`](/docs/api/core.doc)`, item: `[`plugins.autocomplete.symbolinfo`](/docs/api/plugins.autocomplete#pluginsautocompletesymbolinfo)`)`
 
 ---
 

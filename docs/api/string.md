@@ -16,6 +16,8 @@ function string.ubyte(s: string, i?: integer, j?: integer)
 
 UTF-8 equivalent of string.byte
 
+@*return* `...`: `unknown`
+
 ---
 
 ## string.uchar
@@ -27,6 +29,8 @@ function string.uchar(byte: integer, ...integer)
 ```
 
 UTF-8 equivalent of string.char
+
+@*return* `...`: `unknown`
 
 ---
 
@@ -40,6 +44,10 @@ function string.ucharpos(s: string, charpos?: integer, index?: integer)
 
 Equivalent to utf8extra.charpos()
 
+@*return* `charpos`: `integer`
+
+@*return* `codepoint`: `integer`
+
 ---
 
 ## string.uclean
@@ -51,6 +59,10 @@ function string.uclean(s: string, replacement_string?: string, non_consecutive?:
 ```
 
 Equivalent to utf8extra.clean()
+
+@*return* `cleaned_string`: `string`
+
+@*return* `was_valid`: `boolean`
 
 ---
 
@@ -64,7 +76,11 @@ function string.ucodepoint(s: string, i?: integer, j?: integer, lax?: boolean)
 
 Equivalent to utf8.codepoint()
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
+
+@*return* `code`: `integer`
+
+@*return* `...`: `unknown`
 
 ---
 
@@ -77,7 +93,7 @@ function string.ucodes(s: string, lax?: boolean)
 
 Equivalent to utf8.codes()
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -89,6 +105,8 @@ function string.uescape(s: string)
 ```
 
 Equivalent to utf8extra.escape()
+
+@*return* `utf8_string`: `string`
 
 ---
 
@@ -103,11 +121,11 @@ function string.ufind(s: string, pattern: string, init?: integer, plain?: boolea
 
 UTF-8 equivalent of string.find
 
-@*return* `start`
+@*return* `start`: `integer`
 
-@*return* `end`
+@*return* `end`: `integer`
 
-@*return* `...` — captured
+@*return* `...`: `unknown` — captured
 
 ---
 
@@ -119,6 +137,8 @@ function string.ufold(s: string)
 ```
 
 Equivalent to utf8extra.fold()
+
+@*return* `new_string`: `string`
 
 ---
 
@@ -143,6 +163,8 @@ function string.ugsub(s: string, pattern: string, repl: string|function|table, n
 
 UTF-8 equivalent of string.gsub
 
+@*return* `count`: `integer`
+
 ---
 
 ## string.uinsert
@@ -154,6 +176,8 @@ function string.uinsert(s: string, idx?: integer, substring: string)
 
 Equivalent to utf8extra.insert()
 
+@*return* `new_string`: `string`
+
 ---
 
 ## string.uinvalidoffset
@@ -164,6 +188,8 @@ function string.uinvalidoffset(s: string, init?: integer)
 ```
 
 Equivalent to utf8extra.invalidoffset()
+
+@*return* `offset`: `integer`
 
 ---
 
@@ -198,7 +224,7 @@ function string.ulen(s: string, i?: integer, j?: integer, lax?: boolean)
 
 UTF-8 equivalent of string.len
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -222,6 +248,8 @@ function string.umatch(s: string, pattern: string, init?: integer)
 
 UTF-8 equivalent of string.match
 
+@*return* `captured`: `string|number`
+
 ---
 
 ## string.uncasecmp
@@ -232,6 +260,8 @@ function string.uncasecmp(a: string, b: string)
 ```
 
 Equivalent to utf8extra.ncasecmp()
+
+@*return* `result`: `integer`
 
 ---
 
@@ -245,6 +275,10 @@ function string.unext(s: string, charpos?: integer, index?: integer)
 
 Equivalent to utf8extra.next()
 
+@*return* `charpos`: `integer`
+
+@*return* `codepoint`: `integer`
+
 ---
 
 ## string.unormalize_nfc
@@ -257,6 +291,10 @@ function string.unormalize_nfc(s: string)
 
 Equivalent to utf8extra.normalize_nfc()
 
+@*return* `normal_string`: `string`
+
+@*return* `was_n`: `boolean`
+
 ---
 
 ## string.uoffset
@@ -267,6 +305,8 @@ function string.uoffset(s: string, n: integer, i?: integer)
 ```
 
 Equivalent to utf8.offset()
+
+@*return* `position_in_bytes`: `integer`
 
 ---
 
@@ -279,6 +319,8 @@ function string.uremove(s: string, start?: integer, stop?: integer)
 
 Equivalent to utf8extra.remove()
 
+@*return* `new_string`: `string`
+
 ---
 
 ## string.ureverse
@@ -290,7 +332,7 @@ function string.ureverse(s: string, lax?: boolean)
 
 UTF-8 equivalent of string.reverse
 
-@*param* `lax` — Do not check if string is invalid utf8
+@*param* `lax?`: `boolean` — Do not check if string is invalid utf8
 
 ---
 
@@ -314,6 +356,8 @@ function string.utitle(s: string)
 
 Equivalent to utf8extra.title()
 
+@*return* `new_string`: `string`
+
 ---
 
 ## string.uupper
@@ -336,6 +380,8 @@ function string.uwidth(s: string, ambi_is_double?: boolean, default_width?: inte
 
 Equivalent to utf8extra.width()
 
+@*return* `width`: `integer`
+
 ---
 
 ## string.uwidthindex
@@ -348,6 +394,12 @@ function string.uwidthindex(s: string, location: integer, ambi_is_double?: boole
 ```
 
 Equivalent to utf8extra.widthindex()
+
+@*return* `idx`: `integer`
+
+@*return* `offset`: `integer`
+
+@*return* `width`: `integer`
 
 ---
 

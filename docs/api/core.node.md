@@ -209,9 +209,9 @@ function core.node.copy_position_and_size(dst: core.node, src: core.node)
 
 Copy position and size from one node to another.
 
-@*param* `dst` — Destination node
+@*param* `dst`: [`core.node`](/docs/api/core.node) — Destination node
 
-@*param* `src` — Source node
+@*param* `src`: [`core.node`](/docs/api/core.node) — Source node
 
 ---
 
@@ -226,7 +226,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -249,9 +249,9 @@ Add a view to this leaf node as a new tab.
 Automatically removes EmptyView if present.
 Sets the new view as active.
 
-@*param* `view` — View to add
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to add
 
-@*param* `idx` — Optional position to insert (default: end)
+@*param* `idx?`: `integer` — Optional position to insert (default: end)
 
 ---
 
@@ -263,7 +263,7 @@ Sets the new view as active.
 
 Close the currently active view in this node.
 
-@*param* `root` — The root node of the tree
+@*param* `root`: [`core.node`](/docs/api/core.node) — The root node of the tree
 
 ---
 
@@ -276,7 +276,7 @@ Close the currently active view in this node.
 Close all document views (views with context="session").
 Used when closing a project. May collapse empty nodes.
 
-@*param* `keep_active` — If true, keep the active view open
+@*param* `keep_active`: `boolean` — If true, keep the active view open
 
 ---
 
@@ -289,9 +289,9 @@ Used when closing a project. May collapse empty nodes.
 Close a view with confirmation.
 Calls view:try_close() which may show save dialogs before removing.
 
-@*param* `root` — The root node of the tree
+@*param* `root`: [`core.node`](/docs/api/core.node) — The root node of the tree
 
-@*param* `view` — View to close
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to close
 
 ---
 
@@ -305,7 +305,7 @@ Replace this node's contents with another node's contents.
 Transfers all properties from source node to this node.
 Used during split/merge operations to restructure the tree.
 
-@*param* `node` — Source node to consume
+@*param* `node`: [`core.node`](/docs/api/core.node) — Source node to consume
 
 ---
 
@@ -329,23 +329,23 @@ For split nodes: draws divider and recursively draws children.
 
 Draw a complete tab (borders, title, close button).
 
-@*param* `view` — View for this tab
+@*param* `view`: [`core.view`](/docs/api/core.view) — View for this tab
 
-@*param* `is_active` — Whether this is the active tab
+@*param* `is_active`: `boolean` — Whether this is the active tab
 
-@*param* `is_hovered` — Whether mouse is over this tab
+@*param* `is_hovered`: `boolean` — Whether mouse is over this tab
 
-@*param* `is_close_hovered` — Whether mouse is over close button
+@*param* `is_close_hovered`: `boolean` — Whether mouse is over close button
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `w` — Width
+@*param* `w`: `number` — Width
 
-@*param* `h` — Height
+@*param* `h`: `number` — Height
 
-@*param* `standalone` — If true, draw standalone tab (during drag)
+@*param* `standalone`: `boolean` — If true, draw standalone tab (during drag)
 
 ---
 
@@ -361,29 +361,29 @@ Draw a complete tab (borders, title, close button).
 
 Draw tab borders and background.
 
-@*param* `view` — View for this tab
+@*param* `view`: [`core.view`](/docs/api/core.view) — View for this tab
 
-@*param* `is_active` — Whether this is the active tab
+@*param* `is_active`: `boolean` — Whether this is the active tab
 
-@*param* `is_hovered` — Whether mouse is over this tab
+@*param* `is_hovered`: `boolean` — Whether mouse is over this tab
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `w` — Width
+@*param* `w`: `number` — Width
 
-@*param* `h` — Height
+@*param* `h`: `number` — Height
 
-@*param* `standalone` — If true, draw standalone tab (during drag)
+@*param* `standalone`: `boolean` — If true, draw standalone tab (during drag)
 
-@*return* `x` — Adjusted x for content area
+@*return* `x`: `number` — Adjusted x for content area
 
-@*return* `y` — Adjusted y for content area
+@*return* `y`: `number` — Adjusted y for content area
 
-@*return* `w` — Adjusted width for content area
+@*return* `w`: `number` — Adjusted width for content area
 
-@*return* `h` — Adjusted height for content area
+@*return* `h`: `number` — Adjusted height for content area
 
 ---
 
@@ -395,21 +395,21 @@ Draw tab borders and background.
 
 Draw a tab's title text with ellipsis if needed.
 
-@*param* `view` — View whose name to display
+@*param* `view`: [`core.view`](/docs/api/core.view) — View whose name to display
 
-@*param* `font` — Font to use
+@*param* `font`: [`renderer.font`](/docs/api/renderer#rendererfont) — Font to use
 
-@*param* `is_active` — Whether this is the active tab
+@*param* `is_active`: `boolean` — Whether this is the active tab
 
-@*param* `is_hovered` — Whether mouse is over this tab
+@*param* `is_hovered`: `boolean` — Whether mouse is over this tab
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `w` — Width
+@*param* `w`: `number` — Width
 
-@*param* `h` — Height
+@*param* `h`: `number` — Height
 
 ---
 
@@ -434,7 +434,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -449,9 +449,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -465,11 +465,11 @@ Example: `view:extends(View)` returns true for View and all subclasses
 Find the deepest leaf node at a screen point.
 Recursively traverses split nodes to find the leaf under the point.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `node` — The leaf node at this point
+@*return* `node`: [`core.node`](/docs/api/core.node) — The leaf node at this point
 
 ---
 
@@ -483,9 +483,9 @@ Recursively traverses split nodes to find the leaf under the point.
 Collect all views from this node and its children.
 Recursively gathers views from the entire subtree.
 
-@*param* `t` — Optional table to append results to
+@*param* `t?`: `table` — Optional table to append results to
 
-@*return* `views` — List of all views in this subtree
+@*return* `views`: `table` — List of all views in this subtree
 
 ---
 
@@ -499,11 +499,11 @@ Recursively gathers views from the entire subtree.
 Check if a point overlaps any resizable divider in the tree.
 Recursively searches for dividers that can be dragged.
 
-@*param* `px` — Screen x coordinate
+@*param* `px`: `number` — Screen x coordinate
 
-@*param* `py` — Screen y coordinate
+@*param* `py`: `number` — Screen y coordinate
 
-@*return* `node` — The node whose divider is under the point, or nil
+@*return* `node`: `(`[`core.node`](/docs/api/core.node)`)?` — The node whose divider is under the point, or nil
 
 ---
 
@@ -519,13 +519,13 @@ Recursively searches for dividers that can be dragged.
 
 Get the rectangle for this node's divider (for split nodes).
 
-@*return* `x` — Screen x coordinate, or nil for leaf nodes
+@*return* `x`: `number?` — Screen x coordinate, or nil for leaf nodes
 
-@*return* `y` — Screen y coordinate, or nil for leaf nodes
+@*return* `y`: `number?` — Screen y coordinate, or nil for leaf nodes
 
-@*return* `w` — Width, or nil for leaf nodes
+@*return* `w`: `number?` — Width, or nil for leaf nodes
 
-@*return* `h` — Height, or nil for leaf nodes
+@*return* `h`: `number?` — Height, or nil for leaf nodes
 
 ---
 
@@ -543,23 +543,23 @@ Get the rectangle for this node's divider (for split nodes).
 Calculate where a dragged tab would be inserted.
 Returns the tab index and overlay position for visual feedback.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `dragged_node` — Node being dragged from
+@*param* `dragged_node`: [`core.node`](/docs/api/core.node) — Node being dragged from
 
-@*param* `dragged_index` — Index of tab being dragged
+@*param* `dragged_index`: `integer` — Index of tab being dragged
 
-@*return* `tab_index` — Index where tab would be inserted
+@*return* `tab_index`: `integer` — Index where tab would be inserted
 
-@*return* `tab_x` — Overlay x position
+@*return* `tab_x`: `number` — Overlay x position
 
-@*return* `tab_y` — Overlay y position
+@*return* `tab_y`: `number` — Overlay y position
 
-@*return* `tab_w` — Overlay width
+@*return* `tab_w`: `number` — Overlay width
 
-@*return* `tab_h` — Overlay height
+@*return* `tab_h`: `number` — Overlay height
 
 ---
 
@@ -575,9 +575,9 @@ Get the locked size of this node.
 Returns fixed sizes for locked nodes, nil for proportionally-sized nodes.
 For split nodes, combines child locked sizes.
 
-@*return* `sx` — Locked width, or nil if not locked on x-axis
+@*return* `sx`: `number?` — Locked width, or nil if not locked on x-axis
 
-@*return* `sy` — Locked height, or nil if not locked on y-axis
+@*return* `sy`: `number?` — Locked height, or nil if not locked on y-axis
 
 ---
 
@@ -591,9 +591,9 @@ For split nodes, combines child locked sizes.
 Find the node containing a specific view.
 Recursively searches this node and its children.
 
-@*param* `view` — View to search for
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to search for
 
-@*return* `node` — The node containing the view, or nil if not found
+@*return* `node`: `(`[`core.node`](/docs/api/core.node)`)?` — The node containing the view, or nil if not found
 
 ---
 
@@ -606,9 +606,9 @@ Recursively searches this node and its children.
 
 Find the parent node of this node in the tree.
 
-@*param* `root` — Root node to search from
+@*param* `root`: [`core.node`](/docs/api/core.node) — Root node to search from
 
-@*return* `parent` — The parent node, or nil if this is root or not found
+@*return* `parent`: `(`[`core.node`](/docs/api/core.node)`)?` — The parent node, or nil if this is root or not found
 
 ---
 
@@ -621,11 +621,11 @@ Find the parent node of this node in the tree.
 
 Get which scroll button (left/right) is under a point.
 
-@*param* `px` — Screen x coordinate
+@*param* `px`: `number` — Screen x coordinate
 
-@*param* `py` — Screen y coordinate
+@*param* `py`: `number` — Screen y coordinate
 
-@*return* `idx` — Button index (1=left, 2=right), or nil
+@*return* `idx`: `integer?` — Button index (1=left, 2=right), or nil
 
 ---
 
@@ -642,17 +642,17 @@ Get which scroll button (left/right) is under a point.
 
 Get the rectangle for a scroll button.
 
-@*param* `index` — Button index (1=left, 2=right)
+@*param* `index`: `integer` — Button index (1=left, 2=right)
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
-@*return* `w` — Width
+@*return* `w`: `number` — Width
 
-@*return* `h` — Height
+@*return* `h`: `number` — Height
 
-@*return* `pad` — Padding amount
+@*return* `pad`: `number` — Padding amount
 
 ---
 
@@ -666,11 +666,11 @@ Get the rectangle for a scroll button.
 Determine where a point falls for drag-to-split operations.
 Divides the node into regions: tab, left, right, up, down, middle.
 
-@*param* `mouse_x` — Screen x coordinate
+@*param* `mouse_x`: `number` — Screen x coordinate
 
-@*param* `mouse_y` — Screen y coordinate
+@*param* `mouse_y`: `number` — Screen y coordinate
 
-@*return* `split_type` — One of: "tab", "left", "right", "up", "down", "middle"
+@*return* `split_type`: `string` — One of: "tab", "left", "right", "up", "down", "middle"
 
 ---
 
@@ -683,11 +683,11 @@ Divides the node into regions: tab, left, right, up, down, middle.
 
 Get the index of the tab under a screen point.
 
-@*param* `px` — Screen x coordinate
+@*param* `px`: `number` — Screen x coordinate
 
-@*param* `py` — Screen y coordinate
+@*param* `py`: `number` — Screen y coordinate
 
-@*return* `idx` — Tab index, or nil if not over any tab
+@*return* `idx`: `integer?` — Tab index, or nil if not over any tab
 
 ---
 
@@ -704,17 +704,17 @@ Get the index of the tab under a screen point.
 
 Get the rectangle for a tab.
 
-@*param* `idx` — Tab index
+@*param* `idx`: `integer` — Tab index
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
-@*return* `w` — Width
+@*return* `w`: `number` — Width
 
-@*return* `h` — Height
+@*return* `h`: `number` — Height
 
-@*return* `margin_y` — Top margin
+@*return* `margin_y`: `number` — Top margin
 
 ---
 
@@ -727,9 +727,9 @@ Get the rectangle for a tab.
 
 Get the index of a view in this node's view list.
 
-@*param* `view` — View to find
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to find
 
-@*return* `idx` — Index of the view, or nil if not found
+@*return* `idx`: `integer?` — Index of the view, or nil if not found
 
 ---
 
@@ -742,7 +742,7 @@ Get the index of a view in this node's view list.
 
 Get the number of tabs currently visible (not scrolled out of view).
 
-@*return* `count` — Number of visible tabs
+@*return* `count`: `integer` — Number of visible tabs
 
 ---
 
@@ -757,9 +757,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -774,9 +774,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -789,7 +789,7 @@ Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
 Check if this node is empty (no views or only EmptyView).
 
-@*return* `empty` — True if node contains no real content
+@*return* `empty`: `boolean` — True if node contains no real content
 
 ---
 
@@ -804,9 +804,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -819,11 +819,11 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
 Check if a point is in the tab bar area.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `in_tabs` — True if point is over the tab bar
+@*return* `in_tabs`: `boolean` — True if point is over the tab bar
 
 ---
 
@@ -836,9 +836,9 @@ Check if a point is in the tab bar area.
 
 Check if this is a locked node that can be resized by the user.
 
-@*param* `axis` — Axis to check: "x" or "y"
+@*param* `axis`: `string` — Axis to check: "x" or "y"
 
-@*return* `resizable` — True if locked and resizable on this axis
+@*return* `resizable`: `boolean` — True if locked and resizable on this axis
 
 ---
 
@@ -852,9 +852,9 @@ Check if this is a locked node that can be resized by the user.
 Check if this node can be resized along an axis.
 Returns true for proportional nodes or locked resizable nodes.
 
-@*param* `axis` — Axis to check: "x" or "y"
+@*param* `axis`: `string` — Axis to check: "x" or "y"
 
-@*return* `resizable` — True if node accepts resize on this axis
+@*return* `resizable`: `boolean` — True if node accepts resize on this axis
 
 ---
 
@@ -874,7 +874,7 @@ function
 
 Constructor - creates a new node.
 
-@*param* `type` — Node type: "leaf" (contains views), "hsplit", or "vsplit"
+@*param* `type?`: `string` — Node type: "leaf" (contains views), "hsplit", or "vsplit"
 
 ---
 
@@ -918,9 +918,9 @@ Constructor - creates a new node.
 
 Call a method on both child nodes (for split nodes only).
 
-@*param* `fn` — Method name to call on children
+@*param* `fn`: `string` — Method name to call on children
 
-@*param* `...` — Arguments to pass to the method
+@*param*: `any` — Arguments to pass to the method
 
 ---
 
@@ -934,9 +934,9 @@ Remove a view from this node.
 If this is the last view, may collapse the node or replace with EmptyView.
 Handles primary node logic and tree restructuring.
 
-@*param* `root` — The root node of the tree
+@*param* `root`: [`core.node`](/docs/api/core.node) — The root node of the tree
 
-@*param* `view` — View to remove
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to remove
 
 ---
 
@@ -950,9 +950,9 @@ Resize this node to a target size.
 For locked nodes, calls view:set_target_size().
 For proportional nodes, adjusts divider position.
 
-@*param* `axis` — Axis to resize: "x" or "y"
+@*param* `axis`: `string` — Axis to resize: "x" or "y"
 
-@*param* `value` — Target size in pixels
+@*param* `value`: `number` — Target size in pixels
 
 ---
 
@@ -965,7 +965,7 @@ For proportional nodes, adjusts divider position.
 Scroll the tab bar left or right.
 Used when clicking scroll buttons.
 
-@*param* `dir` — Direction: 1=left, 2=right
+@*param* `dir`: `integer` — Direction: 1=left, 2=right
 
 ---
 
@@ -989,7 +989,7 @@ Adjusts tab_offset if needed to bring active tab into view.
 Set the active view in this leaf node.
 Updates global active view and notifies the previously active view.
 
-@*param* `view` — View to make active
+@*param* `view`: [`core.view`](/docs/api/core.view) — View to make active
 
 ---
 
@@ -1003,7 +1003,7 @@ Updates global active view and notifies the previously active view.
 Determine if tabs should be shown for this node.
 Based on config settings, number of views, and drag state.
 
-@*return* `show` — True if tabs should be displayed
+@*return* `show`: `boolean` — True if tabs should be displayed
 
 ---
 
@@ -1018,15 +1018,15 @@ Split this leaf node in a direction, creating two child nodes.
 Converts this node from "leaf" to "hsplit" or "vsplit" containing two children.
 The original content stays in one child, new view (if provided) goes in the other.
 
-@*param* `dir` — Direction to split: "up", "down", "left", or "right"
+@*param* `dir`: `string` — Direction to split: "up", "down", "left", or "right"
 
-@*param* `view` — Optional view to add to the new split
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Optional view to add to the new split
 
-@*param* `locked` — Optional \{x=boolean, y=boolean\} to lock the new node's size
+@*param* `locked?`: `table` — Optional \{x=boolean, y=boolean\} to lock the new node's size
 
-@*param* `resizable` — If true, locked node can be resized by user (needs set_target_size)
+@*param* `resizable?`: `boolean` — If true, locked node can be resized by user (needs set_target_size)
 
-@*return* `new_node` — The newly created child node
+@*return* `new_node`: [`core.node`](/docs/api/core.node) — The newly created child node
 
 ---
 
@@ -1039,9 +1039,9 @@ The original content stays in one child, new view (if provided) goes in the othe
 Update hover state for tabs, close buttons, and scroll buttons.
 Sets hovered_tab, hovered_close, and hovered_scroll_button fields.
 
-@*param* `px` — Screen x coordinate
+@*param* `px`: `number` — Screen x coordinate
 
-@*param* `py` — Screen y coordinate
+@*param* `py`: `number` — Screen y coordinate
 
 ---
 
@@ -1055,7 +1055,7 @@ Sets hovered_tab, hovered_close, and hovered_scroll_button fields.
 Calculate the target width for tabs.
 Adjusts based on number of visible tabs and available space.
 
-@*return* `width` — Target tab width in pixels
+@*return* `width`: `number` — Target tab width in pixels
 
 ---
 

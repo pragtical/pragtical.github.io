@@ -22,9 +22,9 @@ function storage.clear(module: string, key?: string)
 
 Clears data for a particular module and optionally key.
 
-@*param* `module` — The module under which the data is stored.
+@*param* `module`: `string` — The module under which the data is stored.
 
-@*param* `key` — The key under which the data is stored. If omitted, will clear the entire store for this module.
+@*param* `key?`: `string` — The key under which the data is stored. If omitted, will clear the entire store for this module.
 
 ---
 
@@ -37,9 +37,9 @@ function storage.keys(module: string)
 
 Gets the list of keys saved under a module.
 
-@*param* `module` — The module under which the data is stored.
+@*param* `module`: `string` — The module under which the data is stored.
 
-@*return* `A` — table of keys under which data is stored for this module.
+@*return* `A`: `table` — table of keys under which data is stored for this module.
 
 ---
 
@@ -52,11 +52,11 @@ function storage.load(module: string, key: string)
 
 Loads data from a persistent storage file.
 
-@*param* `module` — The module under which the data is stored.
+@*param* `module`: `string` — The module under which the data is stored.
 
-@*param* `key` — The key under which the data is stored.
+@*param* `key`: `string` — The key under which the data is stored.
 
-@*return* `data` — The stored data present for this module, at this key.
+@*return* `data`: `(string|number|table)?` — The stored data present for this module, at this key.
 
 ---
 
@@ -68,11 +68,11 @@ function storage.save(module: string, key: string, value: string|number|table)
 
 Saves data to a persistent storage file.
 
-@*param* `module` — The module under which the data is stored.
+@*param* `module`: `string` — The module under which the data is stored.
 
-@*param* `key` — The key under which the data is stored.
+@*param* `key`: `string` — The key under which the data is stored.
 
-@*param* `value` — The value to store.
+@*param* `value`: `string|number|table` — The value to store.
 
 ---
 

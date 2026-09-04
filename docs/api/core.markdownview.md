@@ -561,6 +561,8 @@ function core.markdownview.__index(self: core.markdownview, key: any)
   -> string|unknown
 ```
 
+@*param* `self`: [`core.markdownview`](/docs/api/core.markdownview)
+
 ---
 
 ## append_markdown
@@ -579,6 +581,10 @@ function core.markdownview.from_state(state: core.markdownview.state)
 ```
 
 Restores a file-backed markdown preview from saved state.
+
+@*param* `state`: [`core.markdownview.state`](/docs/api/core.markdownview#coremarkdownviewstate)
+
+@*return*: `(`[`core.markdownview`](/docs/api/core.markdownview)`)?`
 
 ---
 
@@ -623,7 +629,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -649,7 +655,7 @@ Markdown can continue the previous block across a line boundary. When the
 existing text and appended text do not meet at a blank block boundary, this
 falls back to `set_text` so the rendered document remains equivalent.
 
-@*return* `incremental` — True when only appended blocks were parsed.
+@*return* `incremental`: `boolean` — True when only appended blocks were parsed.
 
 ---
 
@@ -693,7 +699,7 @@ Clears the active text selection.
 
 Commits the partial text by appending final markdown to the document.
 
-@*return* `incremental` — True when only appended blocks were parsed.
+@*return* `incremental`: `boolean` — True when only appended blocks were parsed.
 
 ---
 
@@ -705,6 +711,8 @@ Commits the partial text by appending final markdown to the document.
 ```
 
 Copies the selected rendered text to the system clipboard.
+
+@*return* `copied`: `boolean`
 
 ---
 
@@ -726,6 +734,8 @@ Draws the markdown preview contents and scrollbars.
 
 Draws the markdown contents at an arbitrary rectangle.
 
+@*param* `background?`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
 ---
 
 ## draw_background
@@ -736,6 +746,8 @@ Draws the markdown contents at an arbitrary rectangle.
 
 Draw a solid background color for the entire view.
 Commonly called at the start of draw() methods.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
 
 ---
 
@@ -794,7 +806,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -809,9 +821,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -827,13 +839,13 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get the content bounds in content coordinates (accounting for scroll).
 
-@*return* `x1` — Left edge
+@*return* `x1`: `number` — Left edge
 
-@*return* `y1` — Top edge
+@*return* `y1`: `number` — Top edge
 
-@*return* `x2` — Right edge
+@*return* `x2`: `number` — Right edge
 
-@*return* `y2` — Bottom edge
+@*return* `y2`: `number` — Bottom edge
 
 ---
 
@@ -848,9 +860,9 @@ Get the content bounds in content coordinates (accounting for scroll).
 Get the top-left corner of content area in screen coordinates.
 Accounts for scroll offset. Use for drawing content at correct position.
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -911,6 +923,8 @@ class (for example `"core.view"`).
 If the view class cannot be associated with any loaded module, `nil`
 is returned.
 
+@*return* `path`: `string?`
+
 ---
 
 ## get_name
@@ -932,6 +946,10 @@ is returned.
 
 Returns the rendered size for the given outer width.
 
+@*return* `width`: `number`
+
+@*return* `height`: `number`
+
 ---
 
 ## get_scaled_image
@@ -944,6 +962,12 @@ Returns the rendered size for the given outer width.
 ```
 
 Returns a scaled canvas for an image entry constrained to the given width.
+
+@*return* `image`: [`canvas`](/docs/api/canvas)`?`
+
+@*return* `width`: `number?`
+
+@*return* `height`: `number?`
 
 ---
 
@@ -976,6 +1000,8 @@ Returns the selected rendered text.
 
 Returns the persisted view state for file-backed previews.
 
+@*return*: `(`[`core.markdownview.state`](/docs/api/core.markdownview#coremarkdownviewstate)`)?`
+
 ---
 
 ## get_text
@@ -986,6 +1012,8 @@ Returns the persisted view state for file-backed previews.
 ```
 
 Returns the full markdown source text, materializing appended chunks lazily.
+
+@*return* `text`: `string`
 
 ---
 
@@ -1032,9 +1060,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -1049,9 +1077,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -1066,9 +1094,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -1093,6 +1121,10 @@ Returns whether markdown parsing and layout work is currently settled.
 
 Loads markdown contents from disk into the view.
 
+@*return* `loaded`: `boolean`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## load_image_from_path
@@ -1114,15 +1146,15 @@ Loads an image entry from a local file path.
 Smoothly animate a value towards a destination.
 Use this for animations instead of direct assignment.
 
-@*param* `t` — Table containing the value
+@*param* `t`: `table` — Table containing the value
 
-@*param* `k` — Key in table
+@*param* `k`: `string|number` — Key in table
 
-@*param* `dest` — Target value
+@*param* `dest`: `number` — Target value
 
-@*param* `rate` — Animation speed (0-1, default 0.5, higher = faster)
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
 
-@*param* `name` — Transition name (for config.disabled_transitions)
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
 
 ---
 
@@ -1133,6 +1165,8 @@ Use this for animations instead of direct assignment.
 ```
 
 Constructor.
+
+@*param* `source?`: `string|`[`core.markdownview.source`](/docs/api/core.markdownview#coremarkdownviewsource)
 
 ---
 
@@ -1146,13 +1180,13 @@ Constructor.
 Handle file drop events (drag and drop from OS).
 Override to handle dropped files. Return true to consume event.
 
-@*param* `filename` — Absolute path to dropped file
+@*param* `filename`: `string` — Absolute path to dropped file
 
-@*param* `x` — Screen x where file was dropped
+@*param* `x`: `number` — Screen x where file was dropped
 
-@*param* `y` — Screen y where file was dropped
+@*param* `y`: `number` — Screen y where file was dropped
 
-@*return* `consumed` — True to consume event, false to propagate
+@*return* `consumed`: `boolean` — True to consume event, false to propagate
 
 ---
 
@@ -1165,11 +1199,11 @@ Override to handle dropped files. Return true to consume event.
 Handle IME (Input Method Editor) text composition events.
 Override for IME support in text editors. Called during composition.
 
-@*param* `text` — Composition text being edited
+@*param* `text`: `string` — Composition text being edited
 
-@*param* `start` — Start position of selection within composition
+@*param* `start`: `number` — Start position of selection within composition
 
-@*param* `length` — Length of selection within composition
+@*param* `length`: `number` — Length of selection within composition
 
 ---
 
@@ -1220,11 +1254,11 @@ Clears hover state when the mouse leaves the preview.
 Handle mouse wheel scroll events.
 Override for custom scroll behavior. Base implementation does nothing.
 
-@*param* `y` — Vertical scroll delta; positive is "up"
+@*param* `y`: `number` — Vertical scroll delta; positive is "up"
 
-@*param* `x` — Horizontal scroll delta; positive is "left"
+@*param* `x`: `number` — Horizontal scroll delta; positive is "left"
 
-@*return* `consumed` — True to consume event
+@*return* `consumed`: `boolean?` — True to consume event
 
 ---
 
@@ -1247,7 +1281,7 @@ Clears cached font and layout data after a scale change.
 Handle text input events (typing, IME composition).
 Override for text editing. Called after IME composition completes.
 
-@*param* `text` — Input text (may be multiple characters)
+@*param* `text`: `string` — Input text (may be multiple characters)
 
 ---
 
@@ -1260,15 +1294,15 @@ Override for text editing. Called after IME composition completes.
 Handle touch move events (touchscreen/trackpad gestures).
 Override for touch-specific behavior. Base implementation handles scrolling.
 
-@*param* `x` — Current touch x coordinate
+@*param* `x`: `number` — Current touch x coordinate
 
-@*param* `y` — Current touch y coordinate
+@*param* `y`: `number` — Current touch y coordinate
 
-@*param* `dx` — Delta x since last position
+@*param* `dx`: `number` — Delta x since last position
 
-@*param* `dy` — Delta y since last position
+@*param* `dy`: `number` — Delta y since last position
 
-@*param* `i` — Touch finger/pointer index
+@*param* `i`: `number` — Touch finger/pointer index
 
 ---
 
@@ -1312,7 +1346,7 @@ Resolves a markdown link to a project-local absolute path when possible.
 
 Check if user is currently dragging either scrollbar.
 
-@*return* `dragging` — True if scrollbar drag is in progress
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
 
 ---
 
@@ -1325,7 +1359,7 @@ Check if user is currently dragging either scrollbar.
 
 Check if mouse is hovering over either scrollbar track.
 
-@*return* `hovering` — True if mouse is over scrollbar
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
 
 ---
 
@@ -1339,11 +1373,11 @@ Check if mouse is hovering over either scrollbar track.
 Check if a screen point overlaps either scrollbar.
 Useful for determining cursor style or handling clicks.
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*return* `overlaps` — True if point is over vertical or horizontal scrollbar
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
 
 ---
 
@@ -1354,6 +1388,8 @@ Useful for determining cursor style or handling clicks.
 ```
 
 Sets a fixed font object for all rendered markdown fonts.
+
+@*param* `font?`: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -1422,7 +1458,7 @@ Called when view is requested to close (e.g., tab close button).
 Override to show confirmation dialogs for unsaved changes.
 Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
-@*param* `do_close` — Call this function to actually close the view
+@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 
@@ -1454,6 +1490,8 @@ Called automatically by update(). Rarely needs to be called manually.
 ```
 
 Runs a callback once current asynchronous parsing/layout work has settled.
+
+@*param* `callback`: `fun(view: `[`core.markdownview`](/docs/api/core.markdownview)`)`
 
 ---
 

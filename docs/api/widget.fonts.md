@@ -19,6 +19,8 @@ function widget.fonts.cache_is_building()
 
 Check if the font cache is been built.
 
+@*return* `building`: `boolean`
+
 ---
 
 ## clean_cache
@@ -30,7 +32,7 @@ function widget.fonts.clean_cache()
 
 Remove current fonts cache file and regenerates a fresh one.
 
-@*return* `started` — False if cache is already been built
+@*return* `started`: `boolean` — False if cache is already been built
 
 ---
 

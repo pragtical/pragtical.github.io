@@ -418,6 +418,8 @@ submit_type:
     | "text/plain"
 ```
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## download
@@ -428,7 +430,9 @@ function core.http.download(url: string, options: http.download.options)
 
 Download a file asynchronously with optional progress tracking.
 
-@*param* `url` — File URL
+@*param* `url`: `string` — File URL
+
+@*param* `options`: [`http.download.options`](/docs/api/core.http#httpdownloadoptions)
 
 ---
 
@@ -440,6 +444,8 @@ function core.http.get(url: string, params?: table<string, string>, options: htt
 
 HTTP GET
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## head
@@ -450,6 +456,8 @@ function core.http.head(url: string, params?: table<string, string>, options: ht
 
 HTTP HEAD
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## options
@@ -459,6 +467,8 @@ function core.http.options(url: string, params?: table<string, string>, options:
 ```
 
 HTTP OPTIONS
+
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
 
 ---
 
@@ -478,6 +488,8 @@ submit_type:
     | "text/plain"
 ```
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## post
@@ -496,6 +508,8 @@ submit_type:
     | "text/plain"
 ```
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## put
@@ -513,6 +527,8 @@ submit_type:
     | "application/json"
     | "text/plain"
 ```
+
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
 
 ---
 
@@ -535,6 +551,8 @@ method:
     | "OPTIONS"
 ```
 
+@*param* `options`: [`http.request.options`](/docs/api/core.http#httprequestoptions)
+
 ---
 
 ## sse
@@ -545,6 +563,8 @@ function core.http.sse(url: string, options: http.sse.options)
 
 Open a Server-Sent Events stream.
 Supports normal SSE GET requests as well as POST-based SSE APIs.
+
+@*param* `options`: [`http.sse.options`](/docs/api/core.http#httpsseoptions)
 
 ---
 

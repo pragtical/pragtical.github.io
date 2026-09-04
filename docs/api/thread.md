@@ -95,6 +95,8 @@ Remove the first element of a channel.
 
 Add a new element to the end of a channel list.
 
+@*return* `errorMessage`: `string`
+
 ---
 
 ### supply
@@ -106,6 +108,8 @@ Add a new element to the end of a channel list.
 ```
 
 Add a new element to the end of a channel list and waits for thread to read it.
+
+@*return* `errorMessage`: `string`
 
 ---
 
@@ -132,6 +136,10 @@ A thread object.
 ```
 
 Metamethod to automatically compare two threads.
+
+@*param* `thread1`: [`thread.Thread`](/docs/api/thread#threadthread) — A thread object.
+
+@*param* `thread2`: [`thread.Thread`](/docs/api/thread#threadthread) — A thread object.
 
 ---
 
@@ -242,6 +250,8 @@ Remove the first element of a channel.
 
 Add a new element to the end of a channel list.
 
+@*return* `errorMessage`: `string`
+
 ---
 
 ## thread.Channel.supply
@@ -253,6 +263,8 @@ Add a new element to the end of a channel list.
 ```
 
 Add a new element to the end of a channel list and waits for thread to read it.
+
+@*return* `errorMessage`: `string`
 
 ---
 
@@ -275,6 +287,10 @@ Wait until the channel has one element and return it.
 ```
 
 Metamethod to automatically compare two threads.
+
+@*param* `thread1`: [`thread.Thread`](/docs/api/thread#threadthread) — A thread object.
+
+@*param* `thread2`: [`thread.Thread`](/docs/api/thread#threadthread) — A thread object.
 
 ---
 
@@ -332,7 +348,11 @@ function thread.create(name: string, callback: function, ...boolean|string|numbe
 
 Create a new thread and starts it.
 
-@*param* `...` — Optional arguments passed to callback
+@*param*: `boolean|string|number|table|nil` — Optional arguments passed to callback
+
+@*return*: [`thread.Thread`](/docs/api/thread#threadthread)`|nil`
+
+@*return* `errorMessage`: `string`
 
 ---
 
@@ -345,6 +365,10 @@ function thread.get_channel(name: string)
 ```
 
 Creates a new channel or retrieve existing one.
+
+@*return*: [`thread.Channel`](/docs/api/thread#threadchannel)`|nil`
+
+@*return* `errorMessage`: `string`
 
 ---
 

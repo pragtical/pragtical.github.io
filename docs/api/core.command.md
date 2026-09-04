@@ -90,8 +90,22 @@ The function accepts a table containing a list of commands
 and their functions. 
 If a command already exists, it will be replaced.
 See:
-  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
-  * \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
+  * [core.command.predicate](/docs/api/core.command#corecommandpredicate)
+  * [core.command.command_name](/docs/api/core.command#corecommandcommand_name)
+
+@*param* `predicate?`: `string|`[`core.object`](/docs/api/core.object)`|fun(...any):boolean, ...unknown` — A predicate is a string, an Object or a function, that is used to determine
+whether a command should be executed.
+
+If the predicate is a string, it is resolved into an `Object` via `require()`
+and checked against the active view with `Object:extends()`. 
+For example, `"core.docview"` will match any view that inherits from `DocView`. 
+A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
+instead of matching any view that inherits the predicate.
+
+If the predicate is a table, it is checked against the active view with `Object:extends()`.
+Strict matching via `Object:is()` is not available.
+
+If the predicate is a function, it must behave like a predicate function.
 
 ---
 
@@ -116,10 +130,9 @@ This function takes in a predicate and produces a predicate function
 that is internally used to dispatch and execute commands.
 
 This function should not be called manually.
+See: [core.command.predicate](/docs/api/core.command#corecommandpredicate)
 
-@*param* `predicate` — If nil, the predicate always evaluates to true.
-
-See: \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
+@*param* `predicate`: `string|`[`core.object`](/docs/api/core.object)`|fun(...any):boolean, ...unknown|nil` — If nil, the predicate always evaluates to true.
 
 ---
 
@@ -143,6 +156,12 @@ function core.command.is_valid(name: string, ...any)
 
 Checks whether a command can be executed (its predicate evaluates to true).
 
+@*param* `name`: `string` — A command is identified by a command name.
+The command name contains a category and the name itself, separated by a colon (':').
+
+All commands should be in lowercase and should not contain whitespaces; instead
+they should be replaced by a dash ('-').
+
 ---
 
 ## perform
@@ -160,12 +179,17 @@ to the command.
 
 Otherwise, the arguments passed into this function are passed directly
 to the command.
-
-@*return* — true if the command is performed successfully.
-
 See:
-  * \[core.command.predicate\](file:///usr/share/pragtical/core/command.lua#28#10)
-  * \[core.command.predicate_function\](file:///usr/share/pragtical/core/command.lua#12#10)
+  * [core.command.predicate](/docs/api/core.command#corecommandpredicate)
+  * [core.command.predicate_function](/docs/api/core.command#corecommandpredicate_function)
+
+@*param* `name`: `string` — A command is identified by a command name.
+The command name contains a category and the name itself, separated by a colon (':').
+
+All commands should be in lowercase and should not contain whitespaces; instead
+they should be replaced by a dash ('-').
+
+@*return*: `boolean` — true if the command is performed successfully.
 
 ---
 
@@ -180,7 +204,13 @@ Prettifies the command name.
 
 This function adds a space between the colon and the command name,
 replaces dashes with spaces and capitalizes the command appropriately.
-See: \[core.command.command_name\](file:///usr/share/pragtical/core/command.lua#35#10)
+See: [core.command.command_name](/docs/api/core.command#corecommandcommand_name)
+
+@*param* `name`: `string` — A command is identified by a command name.
+The command name contains a category and the name itself, separated by a colon (':').
+
+All commands should be in lowercase and should not contain whitespaces; instead
+they should be replaced by a dash ('-').
 
 ---
 

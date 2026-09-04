@@ -22,6 +22,8 @@ A network address.
 
 String representation of the address (same as get_hostname).
 
+@*return* `hostname`: `string`
+
 ---
 
 ### get_hostname
@@ -33,6 +35,8 @@ String representation of the address (same as get_hostname).
 
 Get initial hostname or ip address if hostname not available.
 
+@*return* `hostname`: `string`
+
 ---
 
 ### get_ip
@@ -43,6 +47,8 @@ Get initial hostname or ip address if hostname not available.
 ```
 
 Get ip address of resolved address.
+
+@*return* `ip`: `string?`
 
 ---
 
@@ -56,9 +62,6 @@ Get ip address of resolved address.
 
 Get the current resolve status of the address without waiting.
 
-@*return* `status`
-
-@*return* `errmsg` — Error message on case of 'failure'.
 
 ```lua
 status:
@@ -66,6 +69,10 @@ status:
     | "waiting"
     | "failure"
 ```
+
+@*return* `status`: `"failure"|"success"|"waiting"`
+
+@*return* `errmsg`: `string?` — Error message on case of 'failure'.
 
 ---
 
@@ -83,11 +90,6 @@ If the specified timeout is -1 it will wait until it resolves, if
 0 will not wait and just return current status, any value longer than 0
 will be the maximum wait time in milliseconds.
 
-@*param* `timeout` — Timeout in milliseconds. Default: 0
-
-@*return* `status`
-
-@*return* `errmsg` — Error message on case of 'failure'.
 
 ```lua
 status:
@@ -95,6 +97,12 @@ status:
     | "waiting"
     | "failure"
 ```
+
+@*param* `timeout?`: `integer` — Timeout in milliseconds. Default: 0
+
+@*return* `status`: `"failure"|"success"|"waiting"`
+
+@*return* `errmsg`: `string?` — Error message on case of 'failure'.
 
 ---
 
@@ -111,6 +119,8 @@ A UDP datagram.
 
 Get the address associated to a UDP datagram.
 
+@*return* `address`: [`net.address`](/docs/api/net#netaddress)
+
 ---
 
 ### get_data
@@ -122,6 +132,8 @@ Get the address associated to a UDP datagram.
 
 Get the data associated to a UDP datagram.
 
+@*return* `data`: `string`
+
 ---
 
 ### get_port
@@ -132,6 +144,8 @@ Get the data associated to a UDP datagram.
 ```
 
 Get the port associated to a UDP datagram.
+
+@*return* `port`: `integer`
 
 ---
 
@@ -149,6 +163,10 @@ A network server that can accept connections.
 
 Check for new client connections and if found return it.
 
+@*return* `client`: `(`[`net.tcp`](/docs/api/net#nettcp)`)?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ### get_port
@@ -159,6 +177,8 @@ Check for new client connections and if found return it.
 ```
 
 Get the listening port of the server.
+
+@*return* `port`: `integer`
 
 ---
 
@@ -199,6 +219,10 @@ If the specified timeout is -1 it will wait until connected, if
 0 will not wait and just return current status, any value longer than 0
 will be the maximum wait time in milliseconds.
 
+@*return* `address`: `(`[`net.address`](/docs/api/net#netaddress)`)?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ### get_pending_writes
@@ -211,9 +235,9 @@ will be the maximum wait time in milliseconds.
 
 Get total amount of bytes that haven't been written yet.
 
-@*return* `bytes`
+@*return* `bytes`: `integer?`
 
-@*return* `errmsg` — Error message on error.
+@*return* `errmsg`: `string?` — Error message on error.
 
 ---
 
@@ -227,9 +251,6 @@ Get total amount of bytes that haven't been written yet.
 
 Get the current connection status without waiting.
 
-@*return* `address`
-
-@*return* `errmsg` — Error message on case of 'failure'.
 
 ```lua
 address:
@@ -237,6 +258,10 @@ address:
     | "waiting"
     | "failure"
 ```
+
+@*return* `address`: `"failure"|"success"|"waiting"`
+
+@*return* `errmsg`: `string?` — Error message on case of 'failure'.
 
 ---
 
@@ -254,11 +279,11 @@ Note: This function will usually return empty string if no data is
 available yet and nil if conneciton is closed or an error occurred,
 if an error occurred it will also return an error message string.
 
-@*param* `amount` — Total amount of bytes to read.
+@*param* `amount`: `integer` — Total amount of bytes to read.
 
-@*return* `data`
+@*return* `data`: `string?`
 
-@*return* `errmsg` — Error message on error.
+@*return* `errmsg`: `string?` — Error message on error.
 
 ---
 
@@ -276,11 +301,6 @@ If the specified timeout is -1 it will wait until connected, if
 0 will not wait and just return current status, any value longer than 0
 will be the maximum wait time in milliseconds.
 
-@*param* `timeout` — Timeout in milliseconds. Default: 0
-
-@*return* `status`
-
-@*return* `errmsg` — Error message on case of 'failure'.
 
 ```lua
 status:
@@ -288,6 +308,12 @@ status:
     | "waiting"
     | "failure"
 ```
+
+@*param* `timeout?`: `integer` — Timeout in milliseconds. Default: 0
+
+@*return* `status`: `"failure"|"success"|"waiting"`
+
+@*return* `errmsg`: `string?` — Error message on case of 'failure'.
 
 ---
 
@@ -305,11 +331,11 @@ If the specified timeout is -1 it will wait until all is written, if
 0 will not wait and just return pending bytes, any value longer than 0
 will be the maximum wait time in milliseconds.
 
-@*param* `timeout` — Timeout in milliseconds. Default: 0
+@*param* `timeout?`: `integer` — Timeout in milliseconds. Default: 0
 
-@*return* `pending_bytes`
+@*return* `pending_bytes`: `integer?`
 
-@*return* `errmsg` — Error message on error.
+@*return* `errmsg`: `string?` — Error message on error.
 
 ---
 
@@ -327,9 +353,9 @@ This may write only part of the provided data. A return value of 0 means the
 connection is not ready to accept more bytes yet; retry later. On error this
 returns nil and an error message.
 
-@*return* `bytes_written`
+@*return* `bytes_written`: `integer?`
 
-@*return* `errmsg` — Error message on error.
+@*return* `errmsg`: `string?` — Error message on error.
 
 ---
 
@@ -361,9 +387,9 @@ Note: This function will usually return nil if no data is available yet
 and nil also if an error occurred which will be accompanied of the error
 message string.
 
-@*return* `datagram`
+@*return* `datagram`: `(`[`net.datagram`](/docs/api/net#netdatagram)`)?`
 
-@*return* `errmsg` — Error message on error.
+@*return* `errmsg`: `string?` — Error message on error.
 
 ---
 
@@ -377,6 +403,12 @@ message string.
 
 Send data on a UDP connection.
 
+@*param* `address`: [`net.address`](/docs/api/net#netaddress) — A network address.
+
+@*return* `sent`: `boolean`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## create_server
@@ -389,6 +421,12 @@ function net.create_server(address: net.address, port: integer)
 
 Creates a new network server that listen for connections on the specified
 port. If the address is not specified it will listen on all interfaces.
+
+@*param* `address`: [`net.address`](/docs/api/net#netaddress) — A network address.
+
+@*return* `connection`: `(`[`net.server`](/docs/api/net#netserver)`)?`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -407,6 +445,8 @@ this will always return nil so you will need to set a CA bundle manually,
 transmission of data thru a ssl connection will still work but, validation
 of certificates authenticity will not be performed.
 
+@*return* `cacert_bundle_path`: `string?`
+
 ---
 
 ## get_local_addresses
@@ -418,6 +458,10 @@ function net.get_local_addresses()
 ```
 
 Get a list of available local addresses.
+
+@*return* `addresses`: [`net.address`](/docs/api/net#netaddress)`[]?`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -431,6 +475,12 @@ function net.open_tcp(address: net.address, port: integer, ssl?: boolean)
 
 Opens a new TCP connection.
 
+@*param* `address`: [`net.address`](/docs/api/net#netaddress) — A network address.
+
+@*return* `connection`: `(`[`net.tcp`](/docs/api/net#nettcp)`)?`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## open_udp
@@ -442,6 +492,12 @@ function net.open_udp(address: net.address, port: integer)
 ```
 
 Opens a new UDP connection.
+
+@*param* `address`: [`net.address`](/docs/api/net#netaddress) — A network address.
+
+@*return* `connection`: `(`[`net.udp`](/docs/api/net#netudp)`)?`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -455,7 +511,11 @@ function net.resolve_address(address: string)
 
 Solve a domain or ip to a valid network address.
 
-@*param* `address` — Can be a domain or ip.
+@*param* `address`: `string` — Can be a domain or ip.
+
+@*return* `address`: `(`[`net.address`](/docs/api/net#netaddress)`)?`
+
+@*return* `errmsg`: `string?`
 
 ---
 

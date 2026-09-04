@@ -26,7 +26,7 @@ Clear cached native syntax userdata for known syntaxes.
 This should be called when switching tokenizer backends so syntax tables are
 reimported by the native tokenizer on their next use.
 
-@*param* `root_syntax` — Optional syntax table to clear before clearing the global syntax registries.
+@*param* `root_syntax?`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — Optional syntax table to clear before clearing the global syntax registries.
 
 ---
 
@@ -42,9 +42,15 @@ function core.tokenizer.each_token(t: string[], scol?: integer)
 Iterator for a sequence of tokens in the form \{type, token, ...\},
 returning each pair of token type and token string.
 
-@*param* `t` — List of tokens in the form \{type, token, ...\}
+@*param* `t`: `string[]` — List of tokens in the form \{type, token, ...\}
 
-@*param* `scol` — The starting offset of all combined tokens.
+@*param* `scol?`: `integer` — The starting offset of all combined tokens.
+
+@*return* `iterator`: `fun(state: any, idx: any):integer, string, string`
+
+@*return* `state`: `table`
+
+@*return* `idx`: `integer`
 
 ---
 
@@ -57,11 +63,11 @@ function core.tokenizer.extract_subsyntaxes(base_syntax: core.syntax.syntax, sta
 
 Return the list of syntaxes active for a tokenizer state.
 
-@*param* `base_syntax` — The base syntax of the document.
+@*param* `base_syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The base syntax of the document.
 
-@*param* `state` — Tokenizer state previously returned by `tokenize`.
+@*param* `state`: `string` — Tokenizer state previously returned by `tokenize`.
 
-@*return* `syntaxes` — Array of syntaxes starting from the innermost one.
+@*return* `syntaxes`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax)`[]` — Array of syntaxes starting from the innermost one.
 
 ---
 
@@ -77,6 +83,8 @@ Return native tokenizer compilation and runtime counters for a syntax.
 The pure Lua backend has no compiled representation, so this returns nil
 unless the native backend is active.
 
+@*param* `syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — A language syntax definition used by syntax plugins and tokenizers.
+
 ---
 
 ## is_using_native
@@ -88,7 +96,7 @@ function core.tokenizer.is_using_native()
 
 Check whether tokenization is currently using the native backend.
 
-@*return* `enabled` — True when the native tokenizer is active.
+@*return* `enabled`: `boolean` — True when the native tokenizer is active.
 
 ---
 
@@ -104,7 +112,7 @@ Enable or disable the native tokenizer backend.
 When enabled, tokenization is delegated to the native module. When disabled,
 the pure Lua implementation in this file is used instead.
 
-@*return* `enabled` — True when the native backend is active after the call.
+@*return* `enabled`: `boolean` — True when the native backend is active after the call.
 
 ---
 
@@ -123,19 +131,19 @@ Returns tokens in the form `\{ type, text, ... \}`. When the tokenizer runs
 out of time, a third return value is included with resume information that
 can be passed back into this function to continue tokenizing the same line.
 
-@*param* `incoming_syntax` — The syntax to tokenize against.
+@*param* `incoming_syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The syntax to tokenize against.
 
-@*param* `text` — The line text to tokenize.
+@*param* `text`: `string` — The line text to tokenize.
 
-@*param* `state` — Current tokenizer state.
+@*param* `state?`: `string` — Current tokenizer state.
 
-@*param* `resume` — Resume information returned by a previous incomplete call.
+@*param* `resume?`: `table` — Resume information returned by a previous incomplete call.
 
-@*return* `tokens` — Tokens in the form `\{ type, text, ... \}`.
+@*return* `tokens`: `string[]` — Tokens in the form `\{ type, text, ... \}`.
 
-@*return* `state` — Updated tokenizer state.
+@*return* `state`: `string` — Updated tokenizer state.
 
-@*return* `resume` — Resume data when tokenization yields before finishing.
+@*return* `resume`: `table?` — Resume data when tokenization yields before finishing.
 
 ---
 

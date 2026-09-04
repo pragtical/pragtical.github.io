@@ -18,6 +18,10 @@ function shmem.open(namespace: string, capacity: integer)
 
 Open a shared memory container.
 
+@*return*: [`shmem`](/docs/api/shmem)`|nil`
+
+@*return* `errmsg`: `string`
+
 ---
 
 ## __pairs
@@ -61,6 +65,8 @@ Remove all elements from the shared memory container.
 
 Retrieve the element data from the shared memory container.
 
+@*return* `data`: `string?`
+
 ---
 
 ## remove
@@ -81,6 +87,8 @@ Removes the specified element from the shared memory container.
 ```
 
 Adds or edits an existing element on the shared memory container.
+
+@*return* `updated`: `boolean`
 
 ---
 

@@ -175,7 +175,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -207,7 +207,7 @@ Hides the context menu and performs the command if an item is selected.
 Draws the context menu.
 
 This wraps `ContextMenu:draw_context_menu()`.
-See: \[core.contextmenu.draw_context_menu\](file:///usr/share/pragtical/core/contextmenu.lua#276#9)
+See: [core.contextmenu.draw_context_menu](/docs/api/core.contextmenu#draw_context_menu)
 
 ---
 
@@ -230,6 +230,8 @@ Draws the context menu.
 
 Returns an iterator that iterates over each context menu item and their dimensions.
 
+@*return*: `fun():number, `[`core.contextmenu.item`](/docs/api/core.contextmenu#corecontextmenuitem)`, number, number, number, number`
+
 ---
 
 ## extend
@@ -243,7 +245,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -258,9 +260,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -293,6 +295,8 @@ Selects the the previous item.
 
 Gets the currently selected item.
 
+@*return*: [`core.contextmenu.item`](/docs/api/core.contextmenu#corecontextmenuitem)`|nil`
+
 ---
 
 ## hide
@@ -316,9 +320,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -333,9 +337,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -350,9 +354,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -375,7 +379,7 @@ Creates a new context menu.
 
 Event handler for mouse movements.
 
-@*return* — true if the event is caught.
+@*return*: `boolean` — true if the event is caught.
 
 ---
 
@@ -388,13 +392,13 @@ Event handler for mouse movements.
 
 Event handler for mouse press.
 
-@*return* — true if the event is caught.
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*return*: `boolean` — true if the event is caught.
 
 ---
 
@@ -406,6 +410,8 @@ button:
 
 Event handler for when the selection is confirmed.
 
+@*param* `item`: [`core.contextmenu.item`](/docs/api/core.contextmenu#corecontextmenuitem) — An item in the context menu.
+
 ---
 
 ## register
@@ -415,6 +421,22 @@ Event handler for when the selection is confirmed.
 ```
 
 Registers a list of items into the context menu with a predicate.
+
+@*param* `predicate`: `string|`[`core.object`](/docs/api/core.object)`|fun(...any):boolean, ...unknown` — A predicate is a string, an Object or a function, that is used to determine
+whether a command should be executed.
+
+If the predicate is a string, it is resolved into an `Object` via `require()`
+and checked against the active view with `Object:extends()`. 
+For example, `"core.docview"` will match any view that inherits from `DocView`. 
+A `!` can be appended to the predicate to strictly match the current view via `Object:is()`,
+instead of matching any view that inherits the predicate.
+
+If the predicate is a table, it is checked against the active view with `Object:extends()`.
+Strict matching via `Object:is()` is not available.
+
+If the predicate is a function, it must behave like a predicate function.
+
+@*param* `items`: [`core.contextmenu.item`](/docs/api/core.contextmenu#corecontextmenuitem)`[]`
 
 ---
 
@@ -427,7 +449,7 @@ Registers a list of items into the context menu with a predicate.
 
 Shows the context menu.
 
-@*return* — If true, the context menu is shown.
+@*return*: `boolean` — If true, the context menu is shown.
 
 ---
 

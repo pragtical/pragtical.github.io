@@ -1,13 +1,13 @@
 ---
-sidebar_position: 85
+sidebar_position: 103
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
-# widget.fontslist
+# widget.widgetlist
 
 ```lua
-local fontslist = require "widget.fontslist"
+local widgetlist = require "widget.widgetlist"
 ```
 
 ## NEWLINE
@@ -28,14 +28,6 @@ Indicates on a widget.styledtext that a new line follows.
 
 Base class providing OOP functionality for Lua.
 All classes in Pragtical inherit from Object.
-
----
-
-## add
-
-```lua
-(field) add: widget.button
-```
 
 ---
 
@@ -103,6 +95,14 @@ A base widget
 
 ---
 
+## content_height
+
+```lua
+(field) content_height: number
+```
+
+---
+
 ## context
 
 ```lua
@@ -135,22 +135,6 @@ A base widget
 
 ---
 
-## dialog
-
-```lua
-(field) dialog: boolean
-```
-
----
-
-## down
-
-```lua
-(field) down: widget.button
-```
-
----
-
 ## draggable
 
 ```lua
@@ -172,6 +156,24 @@ A base widget
 ```lua
 (field) explicit_update: boolean
 ```
+
+---
+
+## filter_value
+
+```lua
+(field) filter_value: string|function|nil
+```
+
+---
+
+## font
+
+```lua
+(field) font: string|renderer.font|widget.fontreference
+```
+
+Represents a reference to a font stored elsewhere.
 
 ---
 
@@ -233,6 +235,14 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
+## items
+
+```lua
+(field) items: widget.widgetlist.entry[]
+```
+
+---
+
 ## label
 
 ```lua
@@ -241,10 +251,10 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
-## list
+## layout_dirty
 
 ```lua
-(field) list: widget.listbox
+(field) layout_dirty: boolean
 ```
 
 ---
@@ -296,16 +306,6 @@ Represents the position of a widget.
 ```lua
 (field) next_zindex: integer
 ```
-
----
-
-## options
-
-```lua
-(field) options: renderer.fontoptions
-```
-
-Represent options that affect a font's rendering.
 
 ---
 
@@ -371,10 +371,10 @@ Represents the position of a widget.
 
 ---
 
-## remove
+## previous_width
 
 ```lua
-(field) remove: widget.button
+(field) previous_width: number
 ```
 
 ---
@@ -477,14 +477,6 @@ A base widget
 
 ---
 
-## up
-
-```lua
-(field) up: widget.button
-```
-
----
-
 ## updated
 
 ```lua
@@ -509,6 +501,14 @@ A base widget
 
 ---
 
+## visible_row_count
+
+```lua
+(field) visible_row_count: integer|nil
+```
+
+---
+
 ## zindex
 
 ```lua
@@ -517,7 +517,49 @@ A base widget
 
 ---
 
-## widget.fontslist.font
+## widget.widgetlist.entry
+
+### data
+
+```lua
+(field) data: any
+```
+
+---
+
+### filter_text
+
+```lua
+(field) filter_text: string
+```
+
+---
+
+### matched
+
+```lua
+(field) matched: boolean
+```
+
+---
+
+### row
+
+```lua
+(field) row: widget.widgetlist.item
+```
+
+---
+
+### y
+
+```lua
+(field) y: number
+```
+
+---
+
+## widget.widgetlist.item
 
 ### NEWLINE
 
@@ -628,6 +670,14 @@ A base widget
 
 ---
 
+### data
+
+```lua
+(field) data: any
+```
+
+---
+
 ### defer_draw
 
 ```lua
@@ -704,6 +754,14 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
+### hovered
+
+```lua
+(field) hovered: boolean
+```
+
+---
+
 ### hovered_scrollbar
 
 ```lua
@@ -732,6 +790,14 @@ Array of bytes that represents a color used by the rendering functions.
 
 ```lua
 (field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
+```
+
+---
+
+### layout_childs
+
+```lua
+(field) layout_childs: widget[]
 ```
 
 ---
@@ -786,6 +852,14 @@ Represents the position of a widget.
 
 ---
 
+### padding
+
+```lua
+(field) padding: table
+```
+
+---
+
 ### parent
 
 ```lua
@@ -793,14 +867,6 @@ Represents the position of a widget.
 ```
 
 A base widget
-
----
-
-### path
-
-```lua
-(field) path: string
-```
 
 ---
 
@@ -907,6 +973,14 @@ Modifying this property directly is not advised, use set_size() instead.
 By default is set to true to allow ctrl+wheel or cmd+wheel on mac to scale
 the interface, you can set it to false on your parent widget to allow
 manually intercepting ctrl+wheel.
+
+---
+
+### spacing
+
+```lua
+(field) spacing: number
+```
 
 ---
 
@@ -1056,11 +1130,8 @@ Emitted to input_text widgets when clicked.
 ### add_child
 
 ```lua
-(method) widget:add_child(child: widget)
+(method) widget.widgetlist.item:add_child(child: widget)
 ```
-
-Add a child widget, automatically assign a zindex if non set and sorts
-them in reverse order for better events matching.
 
 @*param* `child`: [`widget`](/docs/api/widget) — A base widget
 
@@ -1158,11 +1229,9 @@ Used internally when dragging is activated.
 ### draw
 
 ```lua
-(method) widget:draw()
+(method) widget.widgetlist.item:draw()
   -> boolean
 ```
-
-If visible draw the widget and returns true.
 
 ---
 
@@ -1638,13 +1707,10 @@ Use this for animations instead of direct assignment.
 ### new
 
 ```lua
-(method) widget:new(parent?: widget, floating?: boolean)
+(method) widget.widgetlist.item:new(parent: widget.widgetlist, data: any)
 ```
 
-When no parent is given to the widget constructor it will automatically
-overwrite RootView methods to intercept system events.
-
-@*param* `parent?`: [`widget`](/docs/api/widget) — A base widget
+@*param* `parent`: [`widget.widgetlist`](/docs/api/widget.widgetlist)
 
 ---
 
@@ -1710,20 +1776,16 @@ Override for IME support in text editors. Called during composition.
 ### on_mouse_enter
 
 ```lua
-(method) widget:on_mouse_enter(x: any, y: any, dx: any, dy: any)
+(method) widget.widgetlist.item:on_mouse_enter(...any)
 ```
-
-Emitted once when the mouse hovers the widget.
 
 ---
 
 ### on_mouse_leave
 
 ```lua
-(method) widget:on_mouse_leave(x: any, y: any, dx: any, dy: any)
+(method) widget.widgetlist.item:on_mouse_leave(...any)
 ```
-
-Emitted once when the mouse leaves the widget.
 
 ---
 
@@ -1940,6 +2002,18 @@ Set the widget border size and appropriately re-set the widget size.
 
 ---
 
+### set_child_properties
+
+```lua
+(method) widget.widgetlist.item:set_child_properties(child: widget, properties?: widget.widgetlist.item.properties)
+```
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+@*param* `properties?`: [`widget.widgetlist.item.properties`](/docs/api/widget.widgetlist#widgetwidgetlistitemproperties)
+
+---
+
 ### set_label
 
 ```lua
@@ -2135,12 +2209,38 @@ Called automatically by update(). Rarely needs to be called manually.
 ### update_size_position
 
 ```lua
-(method) widget:update_size_position()
+(method) widget.widgetlist.item:update_size_position()
 ```
 
-Similar to update, but here you should perform expensive calculations that
-will get executed for a predefined period of time when a widget is
-initialized, scale has changed or a widget switched from hidden to visible.
+---
+
+## widget.widgetlist.item.properties
+
+### min_size
+
+```lua
+(field) min_size: { x: number, y: number }?
+```
+
+Minimum child dimensions.
+
+---
+
+### padding
+
+```lua
+(field) padding: { top: number, right: number, bottom: number, left: number }?
+```
+
+---
+
+### stretch
+
+```lua
+(field) stretch: number?
+```
+
+Relative share of the remaining row width.
 
 ---
 
@@ -2224,15 +2324,16 @@ them in reverse order for better events matching.
 
 ---
 
-## add_font
+## add_item
 
 ```lua
-(method) widget.fontslist:add_font(font: widget.fontslist.font)
+(method) widget.widgetlist:add_item(data: any, builder?: fun(row: widget.widgetlist.item, data: any), filter_text?: string)
+  -> row: widget.widgetlist.item
 ```
 
-Add a new font into the list.
+@*param* `builder?`: `fun(row: `[`widget.widgetlist.item`](/docs/api/widget.widgetlist#widgetwidgetlistitem)`, data: any)`
 
-@*param* `font`: [`widget.fontslist.font`](/docs/api/widget.fontslist#widgetfontslistfont)
+@*return* `row`: [`widget.widgetlist.item`](/docs/api/widget.widgetlist#widgetwidgetlistitem)
 
 ---
 
@@ -2281,6 +2382,14 @@ Center the widget horizontally and vertically to the screen or parent widget.
 
 Clamp scroll position to valid range (0 to max scrollable size).
 Called automatically by update(). Override get_scrollable_size() to customize.
+
+---
+
+## clear
+
+```lua
+(method) widget.widgetlist:clear()
+```
 
 ---
 
@@ -2413,15 +2522,14 @@ TODO: something similar should be on pragtical core.
 
 ---
 
-## edit_font
+## each_item
 
 ```lua
-(method) widget.fontslist:edit_font(idx: integer, font: widget.fontslist.font)
+(method) widget.widgetlist:each_item()
+  -> fun():integer, any, widget.widgetlist.item
 ```
 
-Edit an existing font on the list.
-
-@*param* `font`: [`widget.fontslist.font`](/docs/api/widget.fontslist#widgetfontslistfont)
+@*return*: `fun():integer, any, `[`widget.widgetlist.item`](/docs/api/widget.widgetlist#widgetwidgetlistitem)
 
 ---
 
@@ -2454,6 +2562,14 @@ Example: `view:extends(View)` returns true for View and all subclasses
 @*param* `T`: `any` — Class to check inheritance from
 
 @*return* `extends`: `boolean` — True if object is T or inherits from T
+
+---
+
+## filter
+
+```lua
+(method) widget.widgetlist:filter(match?: string|fun(data: any, index: integer, text: string):boolean)
+```
 
 ---
 
@@ -2544,26 +2660,12 @@ Get the real renderer.font associated with a widget.font.
 
 ---
 
-## get_fonts
-
-```lua
-(method) widget.fontslist:get_fonts()
-  -> table<integer, string>
-```
-
-Return the fonts from the list.
-
----
-
 ## get_h_scrollable_size
 
 ```lua
-(method) widget:get_h_scrollable_size()
+(method) widget.widgetlist:get_h_scrollable_size()
   -> number
 ```
-
-Calculates the x scrollable size taking into account the right most
-widget or the size of the widget it self if greater.
 
 ---
 
@@ -2575,6 +2677,20 @@ widget or the size of the widget it self if greater.
 ```
 
 Get height including borders.
+
+---
+
+## get_item
+
+```lua
+(method) widget.widgetlist:get_item(index: integer)
+  -> data: any
+  2. row: (widget.widgetlist.item)?
+```
+
+@*return* `data`: `any`
+
+@*return* `row`: `(`[`widget.widgetlist.item`](/docs/api/widget.widgetlist#widgetwidgetlistitem)`)?`
 
 ---
 
@@ -2605,19 +2721,6 @@ is returned.
 ```
 
 The name that is displayed on pragtical tabs.
-
----
-
-## get_options
-
-```lua
-(method) widget.fontslist:get_options()
-  -> renderer.fontoptions
-```
-
-Get the global options for the font group
-
-@*return*: [`renderer.fontoptions`](/docs/api/renderer#rendererfontoptions)
 
 ---
 
@@ -2670,12 +2773,9 @@ Get the right x coordinate relative to parent
 ## get_scrollable_size
 
 ```lua
-(method) widget:get_scrollable_size()
+(method) widget.widgetlist:get_scrollable_size()
   -> number
 ```
-
-Calculates the y scrollable size taking into account the bottom most
-widget or the size of the widget it self if greater.
 
 ---
 
@@ -2844,12 +2944,10 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) widget.fontslist:new(parent: widget)
+(method) widget.widgetlist:new(parent?: widget)
 ```
 
-Constructor
-
-@*param* `parent`: [`widget`](/docs/api/widget) — A base widget
+@*param* `parent?`: [`widget`](/docs/api/widget) — A base widget
 
 ---
 
@@ -3005,11 +3103,8 @@ button:
 ## on_scale_change
 
 ```lua
-(method) widget:on_scale_change(new_scale: number, prev_scale: number)
+(method) widget.widgetlist:on_scale_change(...any)
 ```
-
-Can be overriden by widgets to listen for scale change events to apply
-any neccesary changes in sizes, padding, etc...
 
 ---
 
@@ -3047,6 +3142,14 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 ---
 
+## relayout
+
+```lua
+(method) widget.widgetlist:relayout()
+```
+
+---
+
 ## release_mouse
 
 ```lua
@@ -3069,13 +3172,14 @@ Remove a child widget.
 
 ---
 
-## remove_font
+## remove_item
 
 ```lua
-(method) widget.fontslist:remove_font(idx: integer)
+(method) widget.widgetlist:remove_item(index: integer)
+  -> removed: boolean
 ```
 
-Remove the given font from the list.
+@*return* `removed`: `boolean`
 
 ---
 
@@ -3167,18 +3271,6 @@ A text label for the widget, not all widgets support this.
 
 ---
 
-## set_options
-
-```lua
-(method) widget.fontslist:set_options(options: renderer.fontoptions)
-```
-
-Set the global options for the fonts group
-
-@*param* `options`: [`renderer.fontoptions`](/docs/api/renderer#rendererfontoptions) — Represent options that affect a font's rendering.
-
----
-
 ## set_position
 
 ```lua
@@ -3225,6 +3317,14 @@ If a command name is also given its associated binding will be displayed
 as part of the tooltip.
 
 @*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+## set_visible_row_count
+
+```lua
+(method) widget.widgetlist:set_visible_row_count(count: integer)
+```
 
 ---
 
@@ -3319,11 +3419,9 @@ Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 ## update
 
 ```lua
-(method) widget:update()
+(method) widget.widgetlist:update()
   -> boolean
 ```
-
-If visible execute the widget calculations and returns true.
 
 ---
 
@@ -3362,7 +3460,27 @@ Called automatically by update(). Rarely needs to be called manually.
 ## update_size_position
 
 ```lua
-(method) widget.fontslist:update_size_position()
+(method) widget:update_size_position()
+```
+
+Similar to update, but here you should perform expensive calculations that
+will get executed for a predefined period of time when a widget is
+initialized, scale has changed or a widget switched from hidden to visible.
+
+---
+
+## update_visible_items
+
+```lua
+(method) widget.widgetlist:update_visible_items(update_new?: boolean)
+```
+
+---
+
+## update_visible_row_size
+
+```lua
+(method) widget.widgetlist:update_visible_row_size()
 ```
 
 ---

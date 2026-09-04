@@ -278,7 +278,7 @@ global get_current_require_path: function
 ```
 
 Returns the current `require` path.
-See: \[require\](file:///tmp/lua-language-server-1000/instance.kU8I/meta/Lua%205.4%20en-us%20utf8/package.lua#11#9) for details and caveats
+See: require for details and caveats
 
 ---
 

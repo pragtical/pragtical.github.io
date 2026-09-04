@@ -108,16 +108,18 @@ function process.stream.new(proc: process, fd: `process.STREAM_STDERR`|`process.
 
 Creates a stream from a process.
 
-@*param* `proc` — The process to wrap.
-
-@*param* `fd` — The standard stream of the process to wrap.
-
 ```lua
 fd:
     | `process.STREAM_STDIN`
     | `process.STREAM_STDOUT`
     | `process.STREAM_STDERR`
 ```
+
+@*param* `proc`: [`process`](/docs/api/process) — The process to wrap.
+
+@*param* `fd`: ```process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT``` — The standard stream of the process to wrap.
+
+@*return*: [`process.stream`](/docs/api/core.process#processstream)
 
 ---
 
@@ -132,12 +134,6 @@ fd:
 
 Closes the stream and its underlying resources.
 
-@*return* `success` — True when closed, or nil on error.
-
-@*return* `errmsg` — The error message when closing fails.
-
-@*return* `errcode` — The error code when closing fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -146,6 +142,12 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*return* `success`: `boolean|nil` — True when closed, or nil on error.
+
+@*return* `errmsg`: `string?` — The error message when closing fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when closing fails.
 
 ---
 
@@ -165,16 +167,6 @@ the function yields to the main thread occasionally to avoid blocking the editor
 If the function is not called inside the coroutine, the function returns immediately
 without waiting for more data.
 
-@*param* `bytes` — The format or number of bytes to read.
-
-@*param* `options` — Options for reading from the stream.
-
-@*return* `data` — The string read from the stream, nil if no data could be read or an error occurred.
-
-@*return* `errmsg` — The error message when reading fails.
-
-@*return* `errcode` — The error code when reading fails.
-
 ```lua
 bytes:
     | `"line"` -- Reads a single line
@@ -188,6 +180,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `bytes`: ``integer|`"L"`|`"all"`|`"line"``` — The format or number of bytes to read.
+
+@*param* `options?`: [`process.stream.readoption`](/docs/api/core.process#processstreamreadoption) — Options for reading from the stream.
+
+@*return* `data`: `string|nil` — The string read from the stream, nil if no data could be read or an error occurred.
+
+@*return* `errmsg`: `string?` — The error message when reading fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when reading fails.
 
 ---
 
@@ -207,16 +209,6 @@ the function yields to the main thread occasionally to avoid blocking the editor
 If the function is not called inside the coroutine,
 the function writes as much data as possible before returning.
 
-@*param* `bytes` — The bytes to write into the stream.
-
-@*param* `options` — Options for writing to the stream.
-
-@*return* `num_bytes` — The number of bytes written to the stream, or nil on error.
-
-@*return* `errmsg` — The error message when writing fails.
-
-@*return* `errcode` — The error code when writing fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -225,6 +217,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `bytes`: `string` — The bytes to write into the stream.
+
+@*param* `options?`: [`process.stream.writeoption`](/docs/api/core.process#processstreamwriteoption) — Options for writing to the stream.
+
+@*return* `num_bytes`: `integer|nil` — The number of bytes written to the stream, or nil on error.
+
+@*return* `errmsg`: `string?` — The error message when writing fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when writing fails.
 
 ---
 
@@ -299,14 +301,6 @@ When `options.env` is a table, values are merged over the system environment.
 On Windows, environment keys are compared case-insensitively and sorted for
 the environment block passed to the native process API.
 
-@*param* `command` — First index is the command to execute and subsequent elements are parameters.
-
-@*return* `proc` — The wrapped process, or nil on error.
-
-@*return* `errmsg` — The error message when process creation fails.
-
-@*return* `errcode` — The error code when process creation fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -315,6 +309,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `command`: `string|table` — First index is the command to execute and subsequent elements are parameters.
+
+@*param* `options?`: [`process.options`](/docs/api/process#processoptions) — Options that can be passed to process.start()
+
+@*return* `proc`: [`process`](/docs/api/process)`|nil` — The wrapped process, or nil on error.
+
+@*return* `errmsg`: `string?` — The error message when process creation fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when process creation fails.
 
 ---
 
@@ -329,12 +333,6 @@ errcode:
 
 Closes the stream and its underlying resources.
 
-@*return* `success` — True when closed, or nil on error.
-
-@*return* `errmsg` — The error message when closing fails.
-
-@*return* `errcode` — The error code when closing fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -343,6 +341,12 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*return* `success`: `boolean|nil` — True when closed, or nil on error.
+
+@*return* `errmsg`: `string?` — The error message when closing fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when closing fails.
 
 ---
 
@@ -355,16 +359,18 @@ function process.stream.new(proc: process, fd: `process.STREAM_STDERR`|`process.
 
 Creates a stream from a process.
 
-@*param* `proc` — The process to wrap.
-
-@*param* `fd` — The standard stream of the process to wrap.
-
 ```lua
 fd:
     | `process.STREAM_STDIN`
     | `process.STREAM_STDOUT`
     | `process.STREAM_STDERR`
 ```
+
+@*param* `proc`: [`process`](/docs/api/process) — The process to wrap.
+
+@*param* `fd`: ```process.STREAM_STDERR`|`process.STREAM_STDIN`|`process.STREAM_STDOUT``` — The standard stream of the process to wrap.
+
+@*return*: [`process.stream`](/docs/api/core.process#processstream)
 
 ---
 
@@ -384,16 +390,6 @@ the function yields to the main thread occasionally to avoid blocking the editor
 If the function is not called inside the coroutine, the function returns immediately
 without waiting for more data.
 
-@*param* `bytes` — The format or number of bytes to read.
-
-@*param* `options` — Options for reading from the stream.
-
-@*return* `data` — The string read from the stream, nil if no data could be read or an error occurred.
-
-@*return* `errmsg` — The error message when reading fails.
-
-@*return* `errcode` — The error code when reading fails.
-
 ```lua
 bytes:
     | `"line"` -- Reads a single line
@@ -407,6 +403,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `bytes`: ``integer|`"L"`|`"all"`|`"line"``` — The format or number of bytes to read.
+
+@*param* `options?`: [`process.stream.readoption`](/docs/api/core.process#processstreamreadoption) — Options for reading from the stream.
+
+@*return* `data`: `string|nil` — The string read from the stream, nil if no data could be read or an error occurred.
+
+@*return* `errmsg`: `string?` — The error message when reading fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when reading fails.
 
 ---
 
@@ -426,16 +432,6 @@ the function yields to the main thread occasionally to avoid blocking the editor
 If the function is not called inside the coroutine,
 the function writes as much data as possible before returning.
 
-@*param* `bytes` — The bytes to write into the stream.
-
-@*param* `options` — Options for writing to the stream.
-
-@*return* `num_bytes` — The number of bytes written to the stream, or nil on error.
-
-@*return* `errmsg` — The error message when writing fails.
-
-@*return* `errcode` — The error code when writing fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -444,6 +440,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `bytes`: `string` — The bytes to write into the stream.
+
+@*param* `options?`: [`process.stream.writeoption`](/docs/api/core.process#processstreamwriteoption) — Options for writing to the stream.
+
+@*return* `num_bytes`: `integer|nil` — The number of bytes written to the stream, or nil on error.
+
+@*return* `errmsg`: `string?` — The error message when writing fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when writing fails.
 
 ---
 
@@ -461,16 +467,6 @@ When called inside a coroutine such as `core.add_thread()`,
 the function yields to the main thread occasionally to avoid blocking the editor.
 Otherwise, the function blocks the editor until the process exited or the timeout has expired.
 
-@*param* `timeout` — The amount of milliseconds to wait. If omitted, the function will wait indefinitely.
-
-@*param* `scan` — The amount of seconds to yield while scanning. If omitted, the scan rate will be the FPS.
-
-@*return* `exit_code` — The exit code for this process, or nil if the wait timed out or an error occurred.
-
-@*return* `errmsg` — The error message when the native wait fails.
-
-@*return* `errcode` — The error code when the native wait fails.
-
 ```lua
 errcode:
     | `process.ERROR_PIPE`
@@ -479,6 +475,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `timeout?`: `number` — The amount of milliseconds to wait. If omitted, the function will wait indefinitely.
+
+@*param* `scan?`: `number` — The amount of seconds to yield while scanning. If omitted, the scan rate will be the FPS.
+
+@*return* `exit_code`: `integer|nil` — The exit code for this process, or nil if the wait timed out or an error occurred.
+
+@*return* `errmsg`: `string?` — The error message when the native wait fails.
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?`` — The error code when the native wait fails.
 
 ---
 

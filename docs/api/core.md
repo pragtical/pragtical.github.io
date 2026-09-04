@@ -479,11 +479,11 @@ If the given path does not belongs to any of the opened projects a new
 project object will be created and returned using the directory of the
 given filename path.
 
-@*return* `project`
+@*return* `project`: `(`[`core.project`](/docs/api/core.project)`)?`
 
-@*return* `is_open` — The returned project is open
+@*return* `is_open`: `boolean` — The returned project is open
 
-@*return* `belongs` — The file belongs to the returned project
+@*return* `belongs`: `boolean` — The file belongs to the returned project
 
 ---
 
@@ -550,6 +550,8 @@ function core.get_ignore_file_rules()
 
 Gets a list of pre-processed config.ignore_files patterns for usage in
 combination of common.match_ignore_rule()
+
+@*return*: [`core.ignore_file_rule`](/docs/api/core#coreignore_file_rule)`[]`
 
 ---
 
@@ -670,6 +672,10 @@ Open the system directory picker.
 Returns immediately.
 The callback will be called with the result.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.opendirectory`](/docs/api/system#systemdialogoptionsopendirectory)
+
 ---
 
 ## open_doc
@@ -692,7 +698,9 @@ Opens the given file path in the root view.
 If the given file is a supported image, it will open it in the image viewer;
 otherwise, it will open it as a normal text file.
 
-@*param* `filename` — Path to the file to open
+@*param* `filename`: `string` — Path to the file to open
+
+@*return*: [`core.docview`](/docs/api/core.docview)`|`[`core.imageview`](/docs/api/core.imageview)
 
 ---
 
@@ -707,6 +715,10 @@ Open the system file picker.
 Returns immediately.
 The callback will be called with the result.
 
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.openfile`](/docs/api/system#systemdialogoptionsopenfile)
+
 ---
 
 ## open_image
@@ -716,6 +728,8 @@ function core.open_image(filename: string)
   -> image_view: (core.imageview)?
 ```
 
+@*return* `image_view`: `(`[`core.imageview`](/docs/api/core.imageview)`)?`
+
 ---
 
 ## open_markdown
@@ -724,6 +738,8 @@ function core.open_image(filename: string)
 function core.open_markdown(filename: string)
   -> markdown_view: (core.markdownview)?
 ```
+
+@*return* `markdown_view`: `(`[`core.markdownview`](/docs/api/core.markdownview)`)?`
 
 ---
 
@@ -862,7 +878,7 @@ Execute one frame of the main loop.
 
 Called by C's SDL_AppIterate on every frame.
 
-@*return* `true` — to keep running, false to quit or restart.
+@*return* `true`: `boolean` — to keep running, false to quit or restart.
 
 ---
 
@@ -876,6 +892,10 @@ Open the system save file picker.
 
 Returns immediately.
 The callback will be called with the result.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*param* `options?`: [`system.dialogoptions.savefile`](/docs/api/system#systemdialogoptionssavefile)
 
 ---
 

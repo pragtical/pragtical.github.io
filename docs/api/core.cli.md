@@ -301,6 +301,8 @@ color:
     | "gray"
 ```
 
+@*return* `colorized_text`: `string`
+
 ---
 
 ## get_default
@@ -311,6 +313,8 @@ function core.cli.get_default()
 ```
 
 Get the default command used by the CLI parser.
+
+@*return*: `(`[`core.cli.command`](/docs/api/core.cli#coreclicommand)`)?`
 
 ---
 
@@ -332,6 +336,8 @@ function core.cli.print_help(command?: core.cli.command)
 
 Display the generated application help or a specific command help.
 
+@*param* `command?`: [`core.cli.command`](/docs/api/core.cli#coreclicommand) — Representation of a command line subcommand.
+
 ---
 
 ## register
@@ -342,6 +348,8 @@ function core.cli.register(command: core.cli.command, overwrite?: boolean)
 
 Add a new command to the cli parser.
 
+@*param* `command`: [`core.cli.command`](/docs/api/core.cli#coreclicommand) — Representation of a command line subcommand.
+
 ---
 
 ## set_default
@@ -351,6 +359,8 @@ function core.cli.set_default(command: core.cli.command)
 ```
 
 Set the default command used by the CLI parser.
+
+@*param* `command`: [`core.cli.command`](/docs/api/core.cli#coreclicommand) — Representation of a command line subcommand.
 
 ---
 

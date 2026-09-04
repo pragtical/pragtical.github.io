@@ -478,6 +478,33 @@ Defaults to true.
 
 ---
 
+## new_file_extension
+
+```lua
+(field) new_file_extension: string
+```
+
+The extension assigned to new untitled documents for syntax detection and
+as the suggested filename when saving. A leading period is optional. An
+empty string disables the configured extension, but "current" mode can
+still inherit an extension from the active document.
+
+Defaults to an empty string.
+
+---
+
+## new_file_extension_mode
+
+```lua
+(field) new_file_extension_mode: "configured"|"current"
+```
+
+How the extension for new untitled documents is selected.
+
+Defaults to "configured".
+
+---
+
 ## non_word_chars
 
 ```lua
@@ -697,6 +724,14 @@ config.markdownpreviewmode:
     | "bottom"
     | "top"
     | "left"
+```
+
+## config.newfileextensionmode
+
+```lua
+config.newfileextensionmode:
+    | "configured" -- Always use `config.new_file_extension`.
+    | "current" -- Follow the active document, falling back to the configured extension.
 ```
 
 ## config.scrollbartype

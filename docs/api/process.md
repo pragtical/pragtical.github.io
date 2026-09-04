@@ -297,8 +297,6 @@ function process.start(command_and_params: string|table, options?: process.optio
 
 Create and start a new process
 
-@*param* `command_and_params` — First index is the command to execute
-
 and subsequent elements are parameters for the command.
 
 
@@ -310,6 +308,16 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `command_and_params`: `string|table` — First index is the command to execute
+
+@*param* `options?`: [`process.options`](/docs/api/process#processoptions) — Options that can be passed to process.start()
+
+@*return*: [`process`](/docs/api/process)`|nil`
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 
@@ -360,6 +368,10 @@ errcode:
     | `process.ERROR_NOMEM`
 ```
 
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
+
 ---
 
 ## interrupt
@@ -382,6 +394,10 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 
@@ -406,6 +422,10 @@ errcode:
     | `process.ERROR_NOMEM`
 ```
 
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
+
 ---
 
 ## pid
@@ -417,7 +437,7 @@ errcode:
 
 Get the process id.
 
-@*return* `id` — Process id or 0 if not running.
+@*return* `id`: `integer` — Process id or 0 if not running.
 
 ---
 
@@ -431,8 +451,6 @@ Get the process id.
 ```
 
 Read from the given stream type.
-
-@*param* `len` — Amount of bytes to read, defaults to 2048.
 
 
 
@@ -450,6 +468,12 @@ errcode:
     | `process.ERROR_NOMEM`
 ```
 
+@*param* `len?`: `integer` — Amount of bytes to read, defaults to 2048.
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
+
 ---
 
 ## read_stderr
@@ -463,8 +487,6 @@ errcode:
 
 Read from stderr.
 
-@*param* `len` — Amount of bytes to read, defaults to 2048.
-
 
 
 ```lua
@@ -475,6 +497,12 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `len?`: `integer` — Amount of bytes to read, defaults to 2048.
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 
@@ -489,8 +517,6 @@ errcode:
 
 Read from stdout.
 
-@*param* `len` — Amount of bytes to read, defaults to 2048.
-
 
 
 ```lua
@@ -501,6 +527,12 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `len?`: `integer` — Amount of bytes to read, defaults to 2048.
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 
@@ -552,6 +584,10 @@ errcode:
     | `process.ERROR_NOMEM`
 ```
 
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
+
 ---
 
 ## wait
@@ -565,15 +601,8 @@ errcode:
 
 Wait the specified amount of time for the process to exit.
 
-@*param* `timeout` — Time to wait in milliseconds,
-
 if 0, the function will only check if process is running without waiting.
 
-@*return* `exit_status` — The process exit status or nil on error.
-
-@*return* `errmsg`
-
-@*return* `errcode`
 
 ```lua
 timeout:
@@ -587,6 +616,14 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*param* `timeout`: ``integer|`process.WAIT_DEADLINE`|`process.WAIT_INFINITE``` — Time to wait in milliseconds,
+
+@*return* `exit_status`: `integer|nil` — The process exit status or nil on error.
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 
@@ -606,11 +643,6 @@ process is not ready to accept more bytes yet; retry later. On error this
 returns nil and an error message.
 
 
-@*return* `bytes` — The amount of bytes written, or nil if error.
-
-@*return* `errmsg`
-
-@*return* `errcode`
 
 ```lua
 errcode:
@@ -620,6 +652,12 @@ errcode:
     | `process.ERROR_INVAL`
     | `process.ERROR_NOMEM`
 ```
+
+@*return* `bytes`: `integer|nil` — The amount of bytes written, or nil if error.
+
+@*return* `errmsg`: `string?`
+
+@*return* `errcode`: ``(integer|`process.ERROR_INVAL`|`process.ERROR_NOMEM`|`process.ERROR_PIPE`|`process.ERROR_TIMEDOUT`...(+1))?``
 
 ---
 

@@ -383,6 +383,8 @@ Default treeview width.
   3. unknown
 ```
 
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
 ---
 
 ## get_item_text
@@ -393,6 +395,8 @@ Default treeview width.
   2. renderer.font
   3. unknown
 ```
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
 
 ---
 
@@ -528,15 +532,15 @@ Default treeview width.
 
 Sets the selection to the file with the specified path.
 
-@*param* `path` — Absolute path of item to select
+@*param* `path`: `string` — Absolute path of item to select
 
-@*param* `expand` — Expand dirs leading to the item
+@*param* `expand`: `boolean` — Expand dirs leading to the item
 
-@*param* `scroll_to` — Scroll to make the item visible
+@*param* `scroll_to`: `boolean` — Scroll to make the item visible
 
-@*param* `instant` — Don't animate the scroll
+@*param* `instant`: `boolean` — Don't animate the scroll
 
-@*return* — The selected item
+@*return*: `table?` — The selected item
 
 ---
 

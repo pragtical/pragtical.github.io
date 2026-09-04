@@ -383,6 +383,8 @@ Register a hook executed after every test in the current suite.
 
 After hooks execute in reverse registration order.
 
+@*param* `fn`: `fun(context: `[`core.test.context`](/docs/api/core.test#coretestcontext)`)`
+
 ---
 
 ## before_each
@@ -392,6 +394,8 @@ function core.test.before_each(fn: fun(context: core.test.context))
 ```
 
 Register a hook executed before every test in the current suite.
+
+@*param* `fn`: `fun(context: `[`core.test.context`](/docs/api/core.test#coretestcontext)`)`
 
 ---
 
@@ -417,6 +421,8 @@ Create a named suite and register all tests declared within its callback.
 Nested suites inherit `before_each()` and `after_each()` hooks from their
 ancestors and contribute to the reported full test name.
 
+@*return* `suite`: `table`
+
 ---
 
 ## discover
@@ -431,6 +437,10 @@ Discover Lua test files inside the given path.
 
 If `path` points to a file, it is returned when it has a `.lua` extension.
 Directories are walked recursively and sorted lexicographically.
+
+@*return* `files`: `string[]|nil`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -456,6 +466,8 @@ Assert that a function raises an error.
 
 When `expected` is a string it must be contained in the error text. When it
 is a function it is called with the raised error and must return truthy.
+
+@*return* `err`: `any`
 
 ---
 
@@ -497,6 +509,10 @@ function core.test.load_file(path: string)
 
 Load a Lua test file and return its registered root suite.
 
+@*return* `root`: `table|nil`
+
+@*return* `errmsg`: `string?`
+
 ---
 
 ## match
@@ -508,7 +524,7 @@ function core.test.match(value: string, pattern: string, message?: string, plain
 
 Assert that a string matches a pattern.
 
-@*param* `plain` — Treat `pattern` as a plain substring.
+@*param* `plain?`: `boolean` — Treat `pattern` as a plain substring.
 
 ---
 
@@ -585,6 +601,12 @@ function core.test.report(results: core.test.results, options?: core.test.report
 
 Write a formatted report for a full test run.
 
+@*param* `results`: [`core.test.results`](/docs/api/core.test#coretestresults) — Represents the aggregated results for a test run.
+
+@*param* `options?`: [`core.test.report_options`](/docs/api/core.test#coretestreport_options) — Options used when reporting test results.
+
+@*return* `success`: `boolean`
+
 ---
 
 ## report_item
@@ -594,6 +616,10 @@ function core.test.report_item(item: core.test.item_result, options?: core.test.
 ```
 
 Write a formatted line for a single test result item.
+
+@*param* `item`: [`core.test.item_result`](/docs/api/core.test#coretestitem_result) — Represents a single reported test result.
+
+@*param* `options?`: [`core.test.report_options`](/docs/api/core.test#coretestreport_options) — Options used when reporting test results.
 
 ---
 
@@ -609,6 +635,12 @@ Run the given test file or directory asynchronously.
 
 The returned runner is updated as the background thread advances and the
 optional callbacks in `options` are invoked as items complete.
+
+@*param* `options?`: [`core.test.run_options`](/docs/api/core.test#coretestrun_options) — Options used when running a test suite.
+
+@*return* `runner`: [`core.test.runner`](/docs/api/core.test#coretestrunner)`|nil`
+
+@*return* `errmsg`: `string?`
 
 ---
 
@@ -631,6 +663,8 @@ function core.test.skip(name: string, reason?: string)
 ```
 
 Register a skipped test case in the current suite.
+
+@*return* `case`: `table`
 
 ---
 
@@ -662,6 +696,10 @@ function core.test.test(name: string, fn: fun(context: core.test.context))
 ```
 
 Register a test case in the current suite.
+
+@*param* `fn`: `fun(context: `[`core.test.context`](/docs/api/core.test#coretestcontext)`)`
+
+@*return* `case`: `table`
 
 ---
 

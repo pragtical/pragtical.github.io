@@ -32,7 +32,9 @@ function dirmonitor.new(backend?: string)
 
 Creates a new dirmonitor object.
 
-@*param* `backend` — Name of the dirmonitor backend to be used
+@*param* `backend?`: `string` — Name of the dirmonitor backend to be used
+
+@*return*: [`dirmonitor`](/docs/api/dirmonitor)
 
 ---
 
@@ -53,8 +55,7 @@ callback in "multiple" mode or a path in "single" mode.
 If an error occurred during the callback execution, the error callback will be called with the error object.
 This callback should not manipulate coroutines to avoid deadlocks.
 
-
-@*return* `changes` — True when changes were detected.
+@*return* `changes`: `boolean?` — True when changes were detected.
 
 ---
 
@@ -91,7 +92,7 @@ return #1:
 Stops monitoring a file descriptor in "multiple" mode
 or in "single" mode a directory path.
 
-@*param* `fd_or_path` — A file descriptor or path.
+@*param* `fd_or_path`: `string|integer` — A file descriptor or path.
 
 ---
 
@@ -111,9 +112,9 @@ In "single" mode you will only need to call this method for the parent
 directory and every sub directory and files will get automatically monitored.
 
 
-@*return* `fd` — The file descriptor id assigned to the monitored path when
-
 the mode is "multiple", in "single" mode: 1 for success or -1 on failure.
+
+@*return* `fd`: `integer` — The file descriptor id assigned to the monitored path when
 
 ---
 

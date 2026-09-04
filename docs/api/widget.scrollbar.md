@@ -200,7 +200,7 @@ Metamethod allowing class to be called like a constructor.
 Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
 Automatically creates instance and calls new() with provided arguments.
 
-@*return* `obj` — The new instance of the class
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
 
 ---
 
@@ -226,13 +226,13 @@ Automatically creates instance and calls new() with provided arguments.
 Get thumb rectangle in normalized coordinates.
 Internal helper - use get_thumb_rect() for real coordinates.
 
-@*return* `x` — Normalized x coordinate
+@*return* `x`: `number` — Normalized x coordinate
 
-@*return* `y` — Normalized y coordinate
+@*return* `y`: `number` — Normalized y coordinate
 
-@*return* `w` — Normalized width
+@*return* `w`: `number` — Normalized width
 
-@*return* `h` — Normalized height
+@*return* `h`: `number` — Normalized height
 
 ---
 
@@ -249,13 +249,13 @@ Internal helper - use get_thumb_rect() for real coordinates.
 Get track rectangle in normalized coordinates.
 Internal helper - use get_track_rect() for real coordinates.
 
-@*return* `x` — Normalized x coordinate
+@*return* `x`: `number` — Normalized x coordinate
 
-@*return* `y` — Normalized y coordinate
+@*return* `y`: `number` — Normalized y coordinate
 
-@*return* `w` — Normalized width
+@*return* `w`: `number` — Normalized width
 
-@*return* `h` — Normalized height
+@*return* `h`: `number` — Normalized height
 
 ---
 
@@ -269,15 +269,15 @@ Internal helper - use get_track_rect() for real coordinates.
 Handle mouse movement in normalized coordinates.
 Internal helper - use on_mouse_moved() for real coordinates.
 
-@*param* `x` — Normalized x coordinate
+@*param* `x`: `number` — Normalized x coordinate
 
-@*param* `y` — Normalized y coordinate
+@*param* `y`: `number` — Normalized y coordinate
 
-@*param* `dx` — Normalized delta x
+@*param* `dx`: `number` — Normalized delta x
 
-@*param* `dy` — Normalized delta y
+@*param* `dy`: `number` — Normalized delta y
 
-@*return* `result` — True if hovering, 0-1 percent if dragging, falsy otherwise
+@*return* `result`: `boolean|number` — True if hovering, 0-1 percent if dragging, falsy otherwise
 
 ---
 
@@ -291,19 +291,19 @@ Internal helper - use on_mouse_moved() for real coordinates.
 Handle mouse press in normalized coordinates.
 Internal helper - use on_mouse_pressed() for real coordinates.
 
-@*param* `x` — Normalized x coordinate
-
-@*param* `y` — Normalized y coordinate
-
-@*param* `clicks` — Number of clicks
-
-@*return* `result` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Normalized x coordinate
+
+@*param* `y`: `number` — Normalized y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
+
+@*return* `result`: `boolean|number` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
 
 ---
 
@@ -317,17 +317,17 @@ button:
 Handle mouse release in normalized coordinates.
 Internal helper - use on_mouse_released() for real coordinates.
 
-@*param* `x` — Normalized x coordinate
-
-@*param* `y` — Normalized y coordinate
-
-@*return* `hovering` — True if hovering track or thumb
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `x`: `number` — Normalized x coordinate
+
+@*param* `y`: `number` — Normalized y coordinate
+
+@*return* `hovering`: `boolean` — True if hovering track or thumb
 
 ---
 
@@ -341,17 +341,17 @@ button:
 Check what part of scrollbar overlaps a point in normalized coordinates.
 Internal helper - use overlaps() for real coordinates.
 
-@*param* `x` — Normalized x coordinate
-
-@*param* `y` — Normalized y coordinate
-
-@*return* `part` — What was hit, or nil if nothing
-
 ```lua
 part:
     | "thumb"
     | "track"
 ```
+
+@*param* `x`: `number` — Normalized x coordinate
+
+@*param* `y`: `number` — Normalized y coordinate
+
+@*return* `part`: `"thumb"|"track"|nil` — What was hit, or nil if nothing
 
 ---
 
@@ -365,11 +365,11 @@ part:
 Update hover status in normalized coordinates.
 Internal helper called by other mouse methods.
 
-@*param* `x` — Normalized x coordinate
+@*param* `x`: `number` — Normalized x coordinate
 
-@*param* `y` — Normalized y coordinate
+@*param* `y`: `number` — Normalized y coordinate
 
-@*return* `hovering` — True if hovering track or thumb
+@*return* `hovering`: `boolean` — True if hovering track or thumb
 
 ---
 
@@ -418,7 +418,7 @@ Create a new class that inherits from this one.
 Returns a new class with this class as its parent.
 Example: `local MyClass = Object:extend()`
 
-@*return* `cls` — The new class table
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
 
 ---
 
@@ -433,9 +433,9 @@ Check if object inherits from the given type (inheritance-aware).
 Use this to check class hierarchy.
 Example: `view:extends(View)` returns true for View and all subclasses
 
-@*param* `T` — Class to check inheritance from
+@*param* `T`: `any` — Class to check inheritance from
 
-@*return* `extends` — True if object is T or inherits from T
+@*return* `extends`: `boolean` — True if object is T or inherits from T
 
 ---
 
@@ -451,13 +451,13 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 Get the thumb rectangle (the draggable part of the scrollbar).
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
-@*return* `w` — Width in pixels
+@*return* `w`: `number` — Width in pixels
 
-@*return* `h` — Height in pixels
+@*return* `h`: `number` — Height in pixels
 
 ---
 
@@ -473,13 +473,13 @@ Get the thumb rectangle (the draggable part of the scrollbar).
 
 Get the track rectangle (the background of the scrollbar).
 
-@*return* `x` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate
 
-@*return* `y` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate
 
-@*return* `w` — Width in pixels
+@*return* `w`: `number` — Width in pixels
 
-@*return* `h` — Height in pixels
+@*return* `h`: `number` — Height in pixels
 
 ---
 
@@ -494,9 +494,9 @@ Check if object is exactly of the given type (no inheritance check).
 Use this for strict type matching.
 Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
 
-@*param* `T` — Class to check against
+@*param* `T`: `any` — Class to check against
 
-@*return* `is_exact` — True if object is exactly type T
+@*return* `is_exact`: `boolean` — True if object is exactly type T
 
 ---
 
@@ -511,9 +511,9 @@ Check if the given object is exactly an instance of this class.
 Inverse of is() - checks if T is an instance of self.
 Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
 
-@*param* `T` — Object to check
+@*param* `T`: `any` — Object to check
 
-@*return* `is_instance` — True if T is exactly an instance of this class
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
 
 ---
 
@@ -528,9 +528,9 @@ Check if the given object/class inherits from this class.
 Inverse of extends() - checks if T is a subclass of self.
 Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
-@*param* `T` — Object or class to check
+@*param* `T`: `any` — Object or class to check
 
-@*return* `is_extended` — True if T inherits from this class
+@*return* `is_extended`: `boolean` — True if T inherits from this class
 
 ---
 
@@ -539,6 +539,8 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 ```lua
 (method) widget.scrollbar:new(parent: core.scrollbar.options, options: any)
 ```
+
+@*param* `parent`: [`core.scrollbar.options`](/docs/api/core.scrollbar#corescrollbaroptions) — Configuration options for creating a scrollbar.
 
 ---
 
@@ -555,21 +557,21 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 Transform normalized coordinates back to real coordinate system.
 Internal helper for orientation/alignment handling.
 
-@*param* `x` — Normalized x coordinate
+@*param* `x?`: `number` — Normalized x coordinate
 
-@*param* `y` — Normalized y coordinate
+@*param* `y?`: `number` — Normalized y coordinate
 
-@*param* `w` — Normalized width
+@*param* `w?`: `number` — Normalized width
 
-@*param* `h` — Normalized height
+@*param* `h?`: `number` — Normalized height
 
-@*return* `x` — Real x
+@*return* `x`: `number` — Real x
 
-@*return* `y` — Real y
+@*return* `y`: `number` — Real y
 
-@*return* `w` — Real width
+@*return* `w`: `number` — Real width
 
-@*return* `h` — Real height
+@*return* `h`: `number` — Real height
 
 ---
 
@@ -595,15 +597,15 @@ Handle mouse movement events on the scrollbar.
 Updates hover status and returns drag position if dragging.
 Does NOT automatically update scroll position - caller must use set_percent().
 
-@*param* `x` — Screen x coordinate
+@*param* `x`: `number` — Screen x coordinate
 
-@*param* `y` — Screen y coordinate
+@*param* `y`: `number` — Screen y coordinate
 
-@*param* `dx` — Delta x since last move
+@*param* `dx`: `number` — Delta x since last move
 
-@*param* `dy` — Delta y since last move
+@*param* `dy`: `number` — Delta y since last move
 
-@*return* `result` — True if hovering, 0-1 percent if dragging, falsy otherwise
+@*return* `result`: `(boolean|number)?` — True if hovering, 0-1 percent if dragging, falsy otherwise
 
 ---
 
@@ -618,21 +620,21 @@ Handle mouse press events on the scrollbar.
 Sets dragging state if thumb is clicked.
 Does NOT automatically update scroll position - caller must use set_percent().
 
-@*param* `button` — Mouse button
-
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*param* `clicks` — Number of clicks
-
-@*return* `result` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `button`: `'left'|'right'` — Mouse button
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `clicks`: `integer` — Number of clicks
+
+@*return* `result`: `(boolean|number)?` — True if thumb clicked, 0-1 percent if track clicked, falsy otherwise
 
 ---
 
@@ -646,19 +648,19 @@ button:
 Handle mouse release events on the scrollbar.
 Clears dragging state and updates hover status.
 
-@*param* `button` — Mouse button
-
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*return* `hovering` — True if hovering track or thumb
-
 ```lua
 button:
     | 'left'
     | 'right'
 ```
+
+@*param* `button`: `'left'|'right'` — Mouse button
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `hovering`: `boolean?` — True if hovering track or thumb
 
 ---
 
@@ -671,17 +673,17 @@ button:
 
 Check what part of the scrollbar overlaps a screen point.
 
-@*param* `x` — Screen x coordinate
-
-@*param* `y` — Screen y coordinate
-
-@*return* `part` — What was hit, or nil if nothing
-
 ```lua
 part:
     | "thumb"
     | "track"
 ```
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `part`: `"thumb"|"track"|nil` — What was hit, or nil if nothing
 
 ---
 
@@ -698,21 +700,21 @@ part:
 Transform real coordinates to normalized coordinate system.
 Internal helper for orientation/alignment handling.
 
-@*param* `x` — Real x coordinate
+@*param* `x?`: `number` — Real x coordinate
 
-@*param* `y` — Real y coordinate
+@*param* `y?`: `number` — Real y coordinate
 
-@*param* `w` — Real width
+@*param* `w?`: `number` — Real width
 
-@*param* `h` — Real height
+@*param* `h?`: `number` — Real height
 
-@*return* `x` — Normalized x
+@*return* `x`: `number` — Normalized x
 
-@*return* `y` — Normalized y
+@*return* `y`: `number` — Normalized y
 
-@*return* `w` — Normalized width
+@*return* `w`: `number` — Normalized width
 
-@*return* `h` — Normalized height
+@*return* `h`: `number` — Normalized height
 
 ---
 
@@ -732,7 +734,7 @@ Internal helper for orientation/alignment handling.
 
 Set the scrollbar thumb position.
 
-@*param* `percent` — Position from 0-1 (0 = top/left, 1 = bottom/right)
+@*param* `percent`: `number` — Position from 0-1 (0 = top/left, 1 = bottom/right)
 
 ---
 
@@ -745,15 +747,15 @@ Set the scrollbar thumb position.
 Set the bounding box of the view this scrollbar belongs to.
 Must be called when view size or scrollable area changes.
 
-@*param* `x` — View x position
+@*param* `x`: `number` — View x position
 
-@*param* `y` — View y position
+@*param* `y`: `number` — View y position
 
-@*param* `w` — View width
+@*param* `w`: `number` — View width
 
-@*param* `h` — View height
+@*param* `h`: `number` — View height
 
-@*param* `scrollable` — Total scrollable size (height for vertical, width for horizontal)
+@*param* `scrollable`: `number` — Total scrollable size (height for vertical, width for horizontal)
 
 ---
 

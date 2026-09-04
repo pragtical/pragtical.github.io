@@ -199,7 +199,7 @@ precedence when file or header patterns have the same match length. Syntax
 patterns are validated before registration; malformed token patterns are
 disabled and reported with `core.warn`.
 
-@*param* `t` — Syntax definition to register.
+@*param* `t`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — Syntax definition to register.
 
 ---
 
@@ -215,11 +215,11 @@ Return the best syntax for a file path or header.
 File path patterns are checked first, followed by header patterns. When no
 registered syntax matches, this returns `syntax.plain_text_syntax`.
 
-@*param* `filename` — File path or name used for `files` pattern matching.
+@*param* `filename?`: `string` — File path or name used for `files` pattern matching.
 
-@*param* `header` — Initial file contents used for `headers` pattern matching.
+@*param* `header?`: `string` — Initial file contents used for `headers` pattern matching.
 
-@*return* `syntax` — Best matching syntax, or plain text.
+@*return* `syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — Best matching syntax, or plain text.
 
 ---
 

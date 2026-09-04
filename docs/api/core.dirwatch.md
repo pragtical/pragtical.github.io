@@ -105,11 +105,11 @@ Unwatch all files/directories that weren't manually unwatch.
 Checks each watched paths for changes.
 This function must be called in a coroutine, e.g. inside a thread created with `core.add_thread()`.
 
-@*param* `scan_time` — Maximum amount of time, in seconds, before the function yields execution.
+@*param* `scan_time?`: `number` — Maximum amount of time, in seconds, before the function yields execution.
 
-@*param* `wait_time` — The duration to yield execution (in seconds).
+@*param* `wait_time?`: `number` — The duration to yield execution (in seconds).
 
-@*return* — If true, a path had changed.
+@*return*: `boolean` — If true, a path had changed.
 
 ---
 
@@ -135,7 +135,7 @@ should not be used unless necessary.
 
 Adding a directory using this function will not report child changes.
 
-@*param* `watch` — If false, remove this directory from the watch list.
+@*param* `watch?`: `boolean` — If false, remove this directory from the watch list.
 
 ---
 
@@ -147,7 +147,7 @@ Adding a directory using this function will not report child changes.
 
 Removes a path from the watch or scan list.
 
-@*param* `path` — The path to remove. This should be an absolute path.
+@*param* `path`: `string` — The path to remove. This should be an absolute path.
 
 ---
 
@@ -166,9 +166,9 @@ cross-platform compatibility.
 Using this function on individual files is possible, but discouraged as it can cause
 system resource exhaustion.
 
-@*param* `path` — The path to watch. This should be an absolute path.
+@*param* `path`: `string` — The path to watch. This should be an absolute path.
 
-@*param* `watch` — If false, the path is removed from the watch list.
+@*param* `watch?`: `boolean` — If false, the path is removed from the watch list.
 
 ---
 
