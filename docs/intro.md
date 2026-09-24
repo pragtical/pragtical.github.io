@@ -161,6 +161,10 @@ with support for a decent amount of image formats. Some of its features include
 zoom in/out and toggleable background mode (none, solid and grid) for transparent
 images.
 
+* **Built-in [Audio Player]** - Listen to local audio files inside the editor,
+or scan a folder and its subfolders into a playlist. Includes playback and
+volume controls, repeat, shuffle, and an optional waveform and level display.
+
 * **Built-in [Markdown Preview]** - Render Markdown documents directly in the
 editor with live updates, syntax-highlighted code blocks, tables, links, and
 local or remote images.
@@ -171,6 +175,7 @@ local or remote images.
 [Color Emoji]:               /docs/user-guide/color-emoji
 [Diff Viewer]:               /docs/user-guide/diff-viewer
 [Image Viewer]:              /docs/user-guide/image-viewer
+[Audio Player]:              /docs/user-guide/audio-player
 [Markdown Preview]:          /docs/user-guide/markdown-preview
 [SDL]:                       https://www.libsdl.org/
 [SDL_Image]:                 https://github.com/libsdl-org/SDL_image/
