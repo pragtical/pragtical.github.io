@@ -125,6 +125,12 @@ graphical interface to adjust your preferences out of the box. But don't
 worry, configuring the editor through Lua will keep working because it is also
 pragtical 😉
 
+* **[Font Ligatures]** - enable ligatures on compatible fonts to render operators
+like `!=`, `=>` and `>=` as joined symbols, while keeping the original text intact.
+
+* **[Color Emoji]** - display emoji in full color by adding an emoji font to your
+font fallbacks, both for code and interface text.
+
 * **Encoding** - while UTF-8 has overtaken as the preferred encoding for text
 documents for its convenience, we can sometimes encounter a document in another
 encoding. Loading and saving documents with different encodings will be
@@ -161,6 +167,8 @@ local or remote images.
 
 [CLI]:                       /docs/user-guide/cli
 [Code Folding]:              /docs/user-guide/code-folding
+[Font Ligatures]:            /docs/user-guide/font-ligatures
+[Color Emoji]:               /docs/user-guide/color-emoji
 [Diff Viewer]:               /docs/user-guide/diff-viewer
 [Image Viewer]:              /docs/user-guide/image-viewer
 [Markdown Preview]:          /docs/user-guide/markdown-preview

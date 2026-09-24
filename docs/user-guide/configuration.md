@@ -57,6 +57,10 @@ The settings plugin provides a GUI to configure Pragtical.
 
 Pragtical comes with JetBrains Mono and Fira Sans by default.
 
+You can also enable [font ligatures](font-ligatures.md) and add
+[color emoji](color-emoji.md). These guides include Settings UI instructions
+and Lua examples.
+
 To change the fonts used by the editor, you can change the
 variable `style.font` and `style.code_font`.
 These variables are responsible for the UI font and code
@@ -135,6 +139,10 @@ To change the hinting settings of the font, click on the dropdown
 to the right.
 The changes will be reflected automatically on the preview window.
 Press "Save" to add the font or "Cancel" to go back.
+
+To edit an existing font, double-click its entry in the list.
+The "Ligatures" checkbox enables shaping for fonts that support it.
+The size and font options in this dialog apply to all fonts in the list.
 
 If you have more than one fonts set up, you can change
 the fallback order by pressing the "‹" and "›" buttons.
