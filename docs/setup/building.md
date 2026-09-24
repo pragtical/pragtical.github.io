@@ -9,7 +9,11 @@ Pragtical is built with Meson. You can either build directly with Meson or use
 the helper scripts in `scripts/` that mirror the commands used by CI and release
 automation.
 
-Meson 0.63 or newer is required.
+Use a current Meson release, Ninja, a C/C++ compiler, and pkg-config. CMake is
+also needed for the bundled SDL3 build. Although the top-level project declares
+Meson 0.63, its compiler-standard fallback list needs Meson 1.3 or newer;
+dependency subprojects can have additional requirements. See
+[Meson's compiler options](https://mesonbuild.com/Builtin-options.html#compiler-options).
 
 The recommended local build uses Meson subproject fallbacks so the editor is
 built against the dependency versions tested by the project:
@@ -29,6 +33,7 @@ The following libraries are required when not using Meson fallbacks:
 - LuaJIT or Lua 5.4
 - SDL3
 - SDL3_image
+- SDL3_mixer 3.2.4 or newer (audio API and player)
 - FreeType
 - HarfBuzz
 - PCRE2
@@ -41,14 +46,20 @@ Networking support is enabled by default and also needs:
 
 If dependencies are missing, use `--wrap-mode=forcefallback` so Meson downloads
 and builds the bundled subprojects.
+The project defaults to `--wrap-mode=nofallback`, so dependency fallbacks are
+not automatic unless you change that option. Use `--wrap-mode=default` to
+allow fallbacks when a compatible system dependency is missing, or
+`--wrap-mode=forcefallback` for the bundled dependency set.
+SDL3 itself is an exception: this project's CMake-based SDL3 subproject is
+selected only with `forcefallback`; other wrap modes require system SDL3.
 
 :::note LuaJIT is preferred by default
 Pragtical uses the LuaJIT Meson subproject by default when `-Djit=true`, which
 is the default. This keeps runtime behavior consistent across distributions.
 
 To disable LuaJIT and use standard Lua instead, configure with `-Djit=false`.
-To prefer a compatible system Lua over the Lua Meson subproject, also pass
-`-Duse_system_lua=true`.
+To prefer system LuaJIT, use `-Djit=true -Duse_system_lua=true`. To prefer
+standard system Lua instead, use `-Djit=false -Duse_system_lua=true`.
 :::
 
 ## Building with Meson
@@ -133,6 +144,11 @@ Useful options include:
 - `--pgo` to build with profile-guided optimization.
 - `--cross-platform`, `--cross-arch`, or `--cross-file` for cross builds.
 
+The helper does not forward arbitrary `-D` options. Use Meson directly for
+custom settings such as `renderer_backend`, or reconfigure the helper's build
+directory with `meson configure` and compile it again. Do not rerun the helper
+just to change an option: it recreates the build directory.
+
 ### `scripts/package.sh`
 
 `scripts/package.sh` installs a configured build and creates release-style
@@ -140,7 +156,7 @@ packages:
 
 ```bash
 bash scripts/package.sh --builddir build --binary --release \
-  --version v3.12.1
+  --version v3.13.0
 ```
 
 It can also create source archives, AppImages, DMGs, and Windows InnoSetup
@@ -151,7 +167,7 @@ packages when the platform supports them.
 Linux AppImages can be built directly with:
 
 ```bash
-bash scripts/appimage.sh --static --release --version v3.12.1
+bash scripts/appimage.sh --static --release --version v3.13.0
 ```
 
 The script downloads the AppImage tools it needs, builds Pragtical, installs it
@@ -173,25 +189,62 @@ Unix-like systems and `%USERPROFILE%\.config\pragtical` on Windows.
 
 ## Renderer Selection
 
-Pragtical builds all renderer backends into the same binary. The default backend
-is selected at configure time:
+Pragtical builds Surface, SDLRenderer, and SDL GPU into the same binary.
+`renderer_backend` selects the **startup default**, not which backends are
+compiled. Choose one of these values for a new build:
 
 ```bash
-meson setup -Drenderer_backend=surface build
-meson setup -Drenderer_backend=sdlrenderer build
-meson setup -Drenderer_backend=sdlgpu build
+meson setup --wrap-mode=forcefallback -Drenderer_backend=surface build
+# Or use -Drenderer_backend=sdlrenderer or -Drenderer_backend=sdlgpu.
+meson compile -C build
 ```
 
-At runtime, users and developers can override the backend with:
+To change the default in an existing build:
 
 ```bash
-PRAGTICAL_RENDERER=surface pragtical
-PRAGTICAL_RENDERER=sdlrenderer pragtical
-PRAGTICAL_RENDERER=sdlgpu pragtical
+meson configure build -Drenderer_backend=sdlgpu
+meson compile -C build
 ```
 
-The surface renderer is the conservative default. SDL renderer and SDL GPU are
-available for testing and development.
+Reinstall or run the rebuilt executable to use the change. The Meson default
+is `surface`. The legacy boolean `-Drenderer=true` is still accepted but is no
+longer used by the build; use `renderer_backend` instead.
+
+At runtime, `PRAGTICAL_RENDERER` takes precedence over **Settings > Core >
+Graphics > Renderer**, which takes precedence over this build default. Select
+**Default** in Settings and unset the environment override when testing the
+compiled default. Runtime changes require closing and reopening Pragtical.
+See the [Renderer Backends guide] for screenshots, platform-specific launch
+commands, GPU selection, and diagnostic environment variables.
+
+Bundled SDL3 builds enable both the 2D renderer and GPU support regardless of
+this default. They enable Metal on macOS and Vulkan on other platforms, with
+DirectX support on Windows. System SDL3 builds need the corresponding support
+and working runtime graphics drivers. Shader binaries are included in the
+sources; selecting a different default does not require regenerating them.
+
+## Audio Support
+
+The native audio API and built-in player require SDL3_mixer 3.2.4 or newer.
+Audio is part of the normal build: there is no `-Daudio` toggle and `-Dnet=false`
+does not disable it. The bundled mixer requires SDL3 3.4.0 or newer.
+
+The fallback includes WAV, AIFF, AU, VOC, FLAC, MP3, Vorbis, and Opus decoding.
+Opus uses static opusfile, Opus, and Ogg dependencies; the other decoders are
+included in SDL_mixer. System SDL3_mixer builds use that library's decoder set.
+There are no project-level Meson switches for individual codecs.
+
+To use the bundled mixer while keeping compatible system dependencies elsewhere:
+
+```bash
+meson setup --wrap-mode=default --force-fallback-for=sdl3_mixer \
+  -Dppm=false build-system-sdl
+meson compile -C build-system-sdl
+```
+
+For an entirely bundled dependency build, use `--wrap-mode=forcefallback`.
+The optional playback patch discussed in the
+[SDL3_mixer build notes] is disabled by default and is not a Meson option.
 
 ## Networking Support
 
@@ -238,11 +291,11 @@ current project options can be passed to `meson setup` with
 | `bundle` | boolean | `false` | Build a macOS application bundle |
 | `source-only` | boolean | `false` | Configure source files only without dependency checks |
 | `portable` | boolean | `false` | Use the portable install layout |
-| `renderer` | boolean | `false` | Legacy SDL renderer option |
+| `renderer` | boolean | `false` | Legacy option, currently unused; use `renderer_backend` |
 | `renderer_backend` | combo | `surface` | Default renderer backend: `surface`, `sdlrenderer`, or `sdlgpu` |
 | `dirmonitor_backends` | array | `[]` | Directory monitor backends: `inotify`, `fsevents`, `kqueue`, `inodewatcher`, `win32`, `dummy` |
 | `arch_tuple` | string | `''` | Custom architecture tuple |
-| `use_system_lua` | boolean | `false` | Prefer system Lua over the Lua Meson subproject when LuaJIT is disabled or unavailable |
+| `use_system_lua` | boolean | `false` | Prefer system LuaJIT when `jit=true`, or system Lua when LuaJIT is disabled or unavailable |
 | `extra_colors` | boolean | `true` | Include additional color themes |
 | `extra_languages` | boolean | `true` | Include additional language plugins |
 | `ppm` | boolean | `true` | Include the plugin manager |
@@ -250,6 +303,38 @@ current project options can be passed to `meson setup` with
 | `export_all_symbols` | boolean | `false` | Export all executable symbols for LuaJIT FFI access on Linux |
 | `repl_history` | boolean | `true` | Enable history and completion support in the REPL |
 | `net` | boolean | `true` | Enable networking support through SDL3_net and mbedtls |
+
+These are all current project-defined options. For an existing build, inspect
+its effective values (including available dependency and compiler options) with:
+
+```bash
+meson configure build
+```
+
+### Common Meson Options
+
+These are Meson options, separate from Pragtical's project flags. The
+[Meson built-in option reference] lists platform and compiler restrictions.
+
+| Option | Use |
+| ------ | --- |
+| `--buildtype=release` | Optimize a release build; `debugoptimized` retains debug information. |
+| `--prefix=/usr` | Choose an installation prefix, for example for a Linux system install. |
+| `--wrap-mode=default` | Allow dependency fallbacks. Pragtical's project default is `nofallback`. |
+| `--wrap-mode=forcefallback` | Prefer the bundled dependency builds. |
+| `--force-fallback-for=sdl3_mixer` | Force the named fallback without forcing every dependency. |
+| `-Db_lto=true` | Enable link-time optimization when supported by the toolchain. |
+| `-Db_pgo=generate` / `-Db_pgo=use` | Instrument a build or consume its collected profile; the helper's `--pgo` manages the multi-stage workflow. |
+| `--cross-file=path/to/file.ini` | Use a cross-compilation toolchain definition. |
+
+For example, a release build with SDL GPU as the default and without the
+bundled plugin manager:
+
+```bash
+meson setup --buildtype=release --wrap-mode=forcefallback \
+  -Db_lto=true -Dportable=true -Dppm=false -Drenderer_backend=sdlgpu build
+meson compile -C build
+```
 
 ## Environment Setup
 
@@ -265,6 +350,7 @@ On Debian-based systems with SDL3 packages available:
 ```bash
 sudo apt install \
   build-essential \
+  cmake \
   meson \
   ninja-build \
   pkg-config \
@@ -275,24 +361,27 @@ sudo apt install \
   libpcre2-dev \
   libsdl3-dev \
   libsdl3-image-dev \
+  libsdl3-mixer-dev \
   libsdl3-net-dev \
   libuchardet-dev \
   libmbedtls-dev
 ```
 
-On older Debian or Ubuntu releases, some SDL3 packages may be unavailable. In
-that case, use `--wrap-mode=forcefallback`.
+The [SDL3_mixer development package] must meet the version requirement above.
+On older Debian or Ubuntu releases, some SDL3 packages may be unavailable or
+too old. In that case, use `--wrap-mode=forcefallback`.
 
 ### macOS
 
 On macOS, install dependencies with [Homebrew](https://brew.sh/):
 
 ```bash
-brew install meson ninja pkg-config freetype harfbuzz luajit pcre2 sdl3 \
-  sdl3_image sdl3_net uchardet mbedtls
+brew install cmake meson ninja pkg-config freetype harfbuzz luajit pcre2 sdl3 \
+  sdl3_image sdl3_mixer sdl3_net uchardet mbedtls
 ```
 
-You can also skip system dependencies and use `--wrap-mode=forcefallback`.
+Homebrew provides [sdl3_mixer]. You can also skip system library dependencies
+and use `--wrap-mode=forcefallback`, keeping the build tools installed.
 
 ### Windows MSYS2
 
@@ -305,6 +394,7 @@ The supported Windows build environment is [MSYS2][2].
 
 ```bash
 pacman -S \
+  ${MINGW_PACKAGE_PREFIX}-cmake \
   ${MINGW_PACKAGE_PREFIX}-freetype \
   ${MINGW_PACKAGE_PREFIX}-gcc \
   ${MINGW_PACKAGE_PREFIX}-harfbuzz \
@@ -323,5 +413,14 @@ pacman -S \
 `${MINGW_PACKAGE_PREFIX}` expands to the package prefix for the current MSYS2
 shell, such as `mingw-w64-x86_64` or `mingw-w64-i686`.
 
+You also need SDL3_mixer 3.2.4 or newer. If your MSYS2 repository does not
+provide it, use the mixer fallback shown under [Audio Support](#audio-support),
+or use `--wrap-mode=forcefallback` for the release-style bundled build.
+
 [1]: https://github.com/pragtical/pragtical/blob/master/meson_options.txt
 [2]: https://www.msys2.org/
+[Renderer Backends guide]: /docs/user-guide/renderer-backends
+[SDL3_mixer build notes]: https://github.com/pragtical/pragtical/blob/master/subprojects/packagefiles/sdl3_mixer/README.pragtical.md
+[Meson built-in option reference]: https://mesonbuild.com/Builtin-options.html
+[SDL3_mixer development package]: https://packages.debian.org/sid/libsdl3-mixer-dev
+[sdl3_mixer]: https://formulae.brew.sh/formula/sdl3_mixer

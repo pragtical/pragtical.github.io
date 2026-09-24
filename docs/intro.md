@@ -71,9 +71,10 @@ the number of builds to choose from and adopting a more frequent release approac
 Over time, Pragtical has adopted various enhancements for better editor
 performance, some of them are:
 
-* **Modular Renderer Backends** - Pragtical includes multiple renderer backends
+* **[Modular Renderer Backends]** - Pragtical includes multiple renderer backends
 in the same binary. The conservative surface renderer remains available, while
-SDL renderer and SDL GPU can be selected at startup with `PRAGTICAL_RENDERER`.
+SDLRenderer and SDL GPU can be selected in **Settings > Core > Graphics** or
+at startup with `PRAGTICAL_RENDERER`.
 This makes renderer testing and deployment possible without rebuilding the
 editor.
 
@@ -170,6 +171,7 @@ editor with live updates, syntax-highlighted code blocks, tables, links, and
 local or remote images.
 
 [CLI]:                       /docs/user-guide/cli
+[Modular Renderer Backends]:  /docs/user-guide/renderer-backends
 [Code Folding]:              /docs/user-guide/code-folding
 [Font Ligatures]:            /docs/user-guide/font-ligatures
 [Color Emoji]:               /docs/user-guide/color-emoji
