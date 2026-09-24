@@ -1,5 +1,5 @@
 ---
-sidebar_position: 99
+sidebar_position: 101
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -313,14 +313,6 @@ A base widget
 
 ---
 
-## password
-
-```lua
-(field) password: boolean
-```
-
----
-
 ## perform_update_size_position
 
 ```lua
@@ -554,6 +546,14 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+### change_id
+
+```lua
+(field) change_id: integer
+```
+
+---
+
 ### clean_change_id
 
 ```lua
@@ -574,6 +574,22 @@ All classes in Pragtical inherit from Object.
 
 ```lua
 (field) crlf: boolean
+```
+
+---
+
+### edit_depth
+
+```lua
+(field) edit_depth: integer
+```
+
+---
+
+### edit_start
+
+```lua
+(field) edit_start: unknown
 ```
 
 ---
@@ -626,6 +642,14 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+### next_change_id
+
+```lua
+(field) next_change_id: integer
+```
+
+---
+
 ### overwrite
 
 ```lua
@@ -638,6 +662,22 @@ All classes in Pragtical inherit from Object.
 
 ```lua
 (field) redo_stack: table
+```
+
+---
+
+### replay_change_id
+
+```lua
+(field) replay_change_id: unknown
+```
+
+---
+
+### replaying
+
+```lua
+(field) replaying: unknown
 ```
 
 ---
@@ -820,6 +860,9 @@ Example: `view:extends(View)` returns true for View and all subclasses
 (method) core.doc:get_change_id()
   -> integer
 ```
+
+Return the text state's identity, restored by undo/redo and never reused
+for a different edit after undoing back past a saved state.
 
 ---
 
@@ -1868,7 +1911,6 @@ Draw a complete line including highlight and selections.
 
 ```lua
 (method) widget.textbox.TextView:draw_line_text(line: integer, x: number, y: number)
-  -> integer
 ```
 
 ---
@@ -1955,9 +1997,18 @@ Example: `view:extends(View)` returns true for View and all subclasses
 ### get_col_x_offset
 
 ```lua
-(method) widget.textbox.TextView:get_col_x_offset(line: integer, col: integer)
-  -> number
+(method) core.docview:get_col_x_offset(line: integer, col: integer)
+  -> offset: number
 ```
+
+Get the horizontal pixel offset for a column position.
+Accounts for tabs, syntax highlighting fonts, and caches long lines.
+
+@*param* `line`: `integer` — Line number
+
+@*param* `col`: `integer` — Column number (byte offset)
+
+@*return* `offset`: `number` — Horizontal pixel offset
 
 ---
 
@@ -2262,9 +2313,18 @@ Resolve a visual row-local horizontal offset to a document column.
 ### get_x_offset_col
 
 ```lua
-(method) widget.textbox.TextView:get_x_offset_col(line: integer, x: number)
-  -> integer
+(method) core.docview:get_x_offset_col(line: integer, x: number)
+  -> col: integer
 ```
+
+Get the column at a horizontal pixel offset.
+Inverse of get_col_x_offset. Accounts for variable-width fonts.
+
+@*param* `line`: `integer` — Line number
+
+@*param* `x`: `number` — Horizontal pixel offset
+
+@*return* `col`: `integer` — Column number (byte offset)
 
 ---
 
@@ -3279,17 +3339,6 @@ The name that is displayed on pragtical tabs.
 
 ---
 
-## get_password_mode
-
-```lua
-(method) widget.textbox:get_password_mode()
-  -> boolean
-```
-
-Get whether password display mode is enabled.
-
----
-
 ## get_position
 
 ```lua
@@ -3524,7 +3573,7 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) widget.textbox:new(parent: widget, text: boolean, placeholder: any, options: any)
+(method) widget.textbox:new(parent: widget, text: boolean, placeholder: any)
 ```
 
 @*param* `parent`: [`widget`](/docs/api/widget) — A base widget
@@ -3817,16 +3866,6 @@ Set the widget border size and appropriately re-set the widget size.
 A text label for the widget, not all widgets support this.
 
 @*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
-
----
-
-## set_password_mode
-
-```lua
-(method) widget.textbox:set_password_mode(enabled: boolean)
-```
-
-Enable or disable password display mode.
 
 ---
 

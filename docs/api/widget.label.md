@@ -1,5 +1,5 @@
 ---
-sidebar_position: 89
+sidebar_position: 91
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -876,22 +876,6 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 ---
 
-## get_content_size
-
-```lua
-(method) widget.label:get_content_size()
-  -> width: number
-  2. height: number
-```
-
-Calculate the dimensions of the current label contents.
-
-@*return* `width`: `number`
-
-@*return* `height`: `number`
-
----
-
 ## get_font
 
 ```lua
@@ -910,9 +894,12 @@ Get the real renderer.font associated with a widget.font.
 ## get_h_scrollable_size
 
 ```lua
-(method) widget.label:get_h_scrollable_size()
+(method) widget:get_h_scrollable_size()
   -> number
 ```
+
+Calculates the x scrollable size taking into account the right most
+widget or the size of the widget it self if greater.
 
 ---
 
@@ -1006,9 +993,12 @@ Get the right x coordinate relative to parent
 ## get_scrollable_size
 
 ```lua
-(method) widget.label:get_scrollable_size()
+(method) widget:get_scrollable_size()
   -> number
 ```
+
+Calculates the y scrollable size taking into account the bottom most
+widget or the size of the widget it self if greater.
 
 ---
 

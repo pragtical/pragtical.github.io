@@ -661,6 +661,20 @@ function core.on_event(type: any, ...any)
 
 ---
 
+## open_audio
+
+```lua
+function core.open_audio(path?: string)
+  -> core.audioview
+```
+
+Open the audio player, optionally scanning a directory or playing a file.
+Reuses the existing player tab. An empty path skips the default directory.
+
+@*return*: [`core.audioview`](/docs/api/core.audioview)
+
+---
+
 ## open_directory_dialog
 
 ```lua
@@ -691,16 +705,16 @@ function core.open_doc(filename: any)
 
 ```lua
 function core.open_file(filename: string)
-  -> core.docview|core.imageview
+  -> core.audioview|core.docview|core.imageview
 ```
 
 Opens the given file path in the root view.
-If the given file is a supported image, it will open it in the image viewer;
-otherwise, it will open it as a normal text file.
+Supported images and audio open in their respective views; other files open
+as text. Media files are never read into a document before dispatching.
 
 @*param* `filename`: `string` — Path to the file to open
 
-@*return*: [`core.docview`](/docs/api/core.docview)`|`[`core.imageview`](/docs/api/core.imageview)
+@*return*: [`core.audioview`](/docs/api/core.audioview)`|`[`core.docview`](/docs/api/core.docview)`|`[`core.imageview`](/docs/api/core.imageview)
 
 ---
 

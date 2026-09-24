@@ -1,5 +1,5 @@
 ---
-sidebar_position: 25
+sidebar_position: 26
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -59,6 +59,16 @@ Defaults to 1.
 The type of algorithm employed on general transitions.
 
 Defaults to "constant".
+
+---
+
+## audio_player
+
+```lua
+(field) audio_player: table
+```
+
+Defaults for new audio player tabs. Directory scans do not start playback.
 
 ---
 
@@ -530,6 +540,18 @@ configuration when a plugin is initially configured.
 Each plugins will then call `common.merge()` to get the finalized
 plugin config.
 Do not use raw operations on this table.
+
+---
+
+## renderer
+
+```lua
+(field) renderer: "default"|"sdlgpu"|"sdlrenderer"|"surface"
+```
+
+Saved renderer preference managed by Settings through USERDIR/renderer.
+Requires closing and reopening Pragtical; assigning this field alone does not
+switch backends. "default" uses the compiled-in default backend.
 
 ---
 

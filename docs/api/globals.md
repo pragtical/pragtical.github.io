@@ -205,6 +205,73 @@ The application version.
 
 ---
 
+## audio
+
+```lua
+global audio: audio
+```
+
+Independent mixers, persistent playback groups, reusable encoded/PCM sounds,
+file-streamed music, generated PCM voices, recording, and offline mixing/PCM
+conversion. Playback supports loop regions, panning, and synchronized layers.
+SDL3_mixer handles playback/decoding; SDL3 handles capture and PCM conversion.
+Bundled codecs include WAV, AIFF, AU, VOC, Ogg Vorbis, MP3, FLAC, and Opus. get_decoders()
+reports the actual build/runtime capabilities. No audio encoder is exposed.
+
+Builds follow upstream SDL3_mixer by default. The optional, disabled
+subprojects/packagefiles/sdl3_mixer-playback.patch provides stricter offline
+resampling/count behavior and tiny-loop fixes for the pinned library version.
+Without it, use ordinary playback-sized buffers, avoid one-frame loops, and
+do not depend on exact resampled mixer output or counts (see mixer:render()).
+
+Initialization is internal. Device enumeration, device-backed mixers, recording,
+and their handles are main-thread operations. Sound loading, PCM generation,
+extraction, offline mixers, and conversion can run in workers without hardware.
+Each userdata belongs to its creating Lua state; exchange PCM strings and spec
+tables between states, not handles. No Lua function runs on an audio callback.
+
+Operational failures return nil, errmsg unless documented otherwise. Invalid
+arguments raise Lua errors.
+close() and immediate stop() are idempotent. Opening/loading/seeking can block;
+"streaming" does not mean asynchronous opening. PCM I/O never waits for hardware
+but may allocate, copy, lock, or convert. No promise of real-time execution.
+
+Retain a mixer while it is needed. Closing/collecting it stops its voices and
+releases its device, without affecting other mixers. Groups/voices do not keep
+the mixer open. Dropping a voice handle does not stop it; completion is cleaned
+up natively. Playback retains the needed sound data even after sound:close().
+Recording streams own their devices; close/collection releases microphone use.
+
+No update() pump is required for files, loaded sounds, loops, fades, or cleanup.
+Optional completion callbacks are queued, then dispatched by the editor on the
+main thread. Workers using offline mixers call mixer:dispatch_events() instead.
+Offline mixers advance only through render(), never through elapsed wall time.
+Generated streams need a producer; capture streams need a consumer. Ordinary
+Lua coroutine producers can underrun during long editor stalls. Use a worker
+for expensive synthesis, transfer PCM, and keep a measured amount buffered.
+
+Positions/start offsets use seconds on the source timeline. Fades also use
+source-audio seconds: voice AND mixer rates change their wall-clock duration.
+Loop starts and fade durations must fit in 2^31-1 source frames.
+Offsets/boundaries are rounded down to source sample frames. Pauses
+freeze progress. Gain is a finite nonnegative multiplier; rate is a finite
+speed AND pitch ratio in \[0.01, 100\], not independent pitch shifting.
+Already submitted hardware samples cannot be recalled; "finished", queue sizes,
+and positions are not exact measurements of what the listener currently hears.
+
+Removed: audio.init(), open_device(), audio.device, load_wav(), decode_wav().
+Replacements: create_mixer(), open_recording(), load(), and load_memory().
+There is one audio.sound type, not a separate clip type. Groups are our
+persistent control abstraction, not a direct exposure of SDL_mixer tags.
+Numeric play_options.loops replaces the earlier draft's boolean loop option.
+
+References: https://wiki.libsdl.org/SDL3_mixer/CategoryAPI
+            https://wiki.libsdl.org/SDL3/CategoryAudio
+
+[\[View Library\]](/docs/api/audio)
+
+---
+
 ## bit
 
 ```lua
@@ -341,6 +408,14 @@ Core functionality to render or draw elements into the screen.
 Renderer backend selection can be overridden at startup with:
 `PRAGTICAL_RENDERER=surface|sdlrenderer|sdlgpu`.
 
+Settings \> Core \> Graphics \> Renderer saves a preference in `USERDIR/renderer`.
+The file contains `surface`, `sdlrenderer`, or `sdlgpu`; surrounding whitespace
+is ignored. Missing, unreadable, or invalid files use the compiled-in default.
+A non-empty `PRAGTICAL_RENDERER` takes precedence over the saved preference.
+Selecting Default removes the file. Changes require closing and reopening
+Pragtical, not the in-process restart command. Backend fallback still applies;
+`renwindow:get_renderer_info()` reports the actual backend in use.
+
 When using the `sdlgpu` backend, GPU device selection can be influenced with:
 `PRAGTICAL_SDLGPU_POWER=auto|low|high`.
 The default `auto` mode tries the low-power GPU first, then high-performance
@@ -421,6 +496,15 @@ global thread: thread
 ```
 
 Provides threading capabilities.
+Workers have independent Lua states, but belong to the editor session that
+created them, including workers created by other workers. Completed worker
+states are closed even while their Thread handles are retained.
+
+Restart and normal exit request shutdown and wait for all workers to finish
+before closing the editor state. Channel operations interrupt workers during
+shutdown. Computation and native I/O must finish or reach a channel operation;
+a worker that never does so can prevent restart. Cancellation is not a forced
+termination of native code.
 
 [\[View Library\]](/docs/api/thread)
 

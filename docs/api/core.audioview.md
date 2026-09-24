@@ -1,13 +1,15 @@
 ---
-sidebar_position: 90
+sidebar_position: 21
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
 
-# widget.keybinddialog
+# core.audioview
+
+A streaming audio player with a recursive playlist and optional visualization.
 
 ```lua
-local keybinddialog = require "widget.keybinddialog"
+local audioview = require "core.audioview"
 ```
 
 ## NEWLINE
@@ -31,10 +33,10 @@ All classes in Pragtical inherit from Object.
 
 ---
 
-## add
+## analysis
 
 ```lua
-(field) add: widget.button
+(field) analysis: table
 ```
 
 ---
@@ -57,14 +59,6 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
-## binding
-
-```lua
-(field) binding: widget.label
-```
-
----
-
 ## border
 
 ```lua
@@ -72,14 +66,6 @@ Array of bytes that represents a color used by the rendering functions.
 ```
 
 Represents the border of a widget.
-
----
-
-## cancel
-
-```lua
-(field) cancel: widget.button
-```
 
 ---
 
@@ -119,10 +105,10 @@ A base widget
 
 ---
 
-## close
+## closed
 
 ```lua
-(field) close: widget.button
+(field) closed: boolean
 ```
 
 ---
@@ -131,6 +117,22 @@ A base widget
 
 ```lua
 (field) context: 'application'|'session'
+```
+
+---
+
+## controls
+
+```lua
+(field) controls: table
+```
+
+---
+
+## current
+
+```lua
+(field) current: any
 ```
 
 ---
@@ -175,10 +177,50 @@ A base widget
 
 ---
 
+## duration
+
+```lua
+(field) duration: number?
+```
+
+---
+
+## error
+
+```lua
+(field) error: string
+```
+
+---
+
 ## explicit_update
 
 ```lua
 (field) explicit_update: boolean
+```
+
+---
+
+## filter
+
+```lua
+(field) filter: widget.textbox
+```
+
+---
+
+## filter_due
+
+```lua
+(field) filter_due: number
+```
+
+---
+
+## folder
+
+```lua
+(field) folder: widget.filepicker
 ```
 
 ---
@@ -208,6 +250,30 @@ Represents a reference to a font stored elsewhere.
 ```
 
 Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## generation
+
+```lua
+(field) generation: integer
+```
+
+---
+
+## graph_h
+
+```lua
+(field) graph_h: number
+```
+
+---
+
+## graph_y
+
+```lua
+(field) graph_y: number
+```
 
 ---
 
@@ -259,19 +325,46 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
-## line
+## list
 
 ```lua
-(field) line: widget.line
+(field) list: widget.listbox
 ```
 
 ---
 
-## message
+## list_height
 
 ```lua
-(field) message: widget.label
+(field) list_height: number
 ```
+
+---
+
+## list_row_count
+
+```lua
+(field) list_row_count: integer
+```
+
+---
+
+## list_width
+
+```lua
+(field) list_width: integer
+```
+
+---
+
+## mixer
+
+```lua
+(field) mixer: audio.mixer
+```
+
+Independent device-backed or offline playback owner. Initially unpaused with
+gain 1 and rate 1. Groups and voices use the same operations in either mode.
 
 ---
 
@@ -282,14 +375,6 @@ Array of bytes that represents a color used by the rendering functions.
 ```
 
 Represents the position of a widget.
-
----
-
-## mouse_intercept
-
-```lua
-(field) mouse_intercept: widget.label
-```
 
 ---
 
@@ -325,21 +410,19 @@ Represents the position of a widget.
 
 ---
 
+## next
+
+```lua
+(field) next: widget.button
+```
+
+---
+
 ## next_zindex
 
 ```lua
 (field) next_zindex: integer
 ```
-
----
-
-## panel
-
-```lua
-(field) panel: widget
-```
-
-A base widget
 
 ---
 
@@ -361,6 +444,14 @@ A base widget
 
 ---
 
+## play_button
+
+```lua
+(field) play_button: widget.button
+```
+
+---
+
 ## position
 
 ```lua
@@ -368,6 +459,14 @@ A base widget
 ```
 
 Represents the position of a widget.
+
+---
+
+## position_seconds
+
+```lua
+(field) position_seconds: number
+```
 
 ---
 
@@ -405,10 +504,10 @@ Represents the position of a widget.
 
 ---
 
-## remove
+## previous
 
 ```lua
-(field) remove: widget.button
+(field) previous: widget.button
 ```
 
 ---
@@ -421,18 +520,42 @@ Represents the position of a widget.
 
 ---
 
-## reset
+## repeat_all
 
 ```lua
-(field) reset: widget.button
+(field) repeat_all: any
 ```
 
 ---
 
-## save
+## repeat_button
 
 ```lua
-(field) save: widget.button
+(field) repeat_button: widget.togglebutton
+```
+
+---
+
+## resume_position
+
+```lua
+(field) resume_position: unknown
+```
+
+---
+
+## scan_skipped
+
+```lua
+(field) scan_skipped: integer
+```
+
+---
+
+## scanning
+
+```lua
+(field) scanning: boolean
 ```
 
 ---
@@ -453,11 +576,14 @@ Represents the position of a widget.
 
 ---
 
-## selected
+## seek
 
 ```lua
-(field) selected: integer
+(field) seek: core.object
 ```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
 
 ---
 
@@ -469,10 +595,42 @@ Represents the position of a widget.
 
 ---
 
-## shortcuts
+## shuffle
 
 ```lua
-(field) shortcuts: widget.listbox
+(field) shuffle: any
+```
+
+---
+
+## shuffle_button
+
+```lua
+(field) shuffle_button: widget.togglebutton
+```
+
+---
+
+## shuffle_history
+
+```lua
+(field) shuffle_history: table
+```
+
+---
+
+## shuffle_index
+
+```lua
+(field) shuffle_index: any
+```
+
+---
+
+## shuffle_remaining
+
+```lua
+(field) shuffle_remaining: table
 ```
 
 ---
@@ -499,11 +657,37 @@ manually intercepting ctrl+wheel.
 
 ---
 
+## state
+
+```lua
+(field) state: string|"finished"|"paused"|"playing"|"stopped"
+```
+
+---
+
+## stop_after_track
+
+```lua
+(field) stop_after_track: boolean
+```
+
+---
+
+## stop_button
+
+```lua
+(field) stop_button: widget.button
+```
+
+---
+
 ## super
 
 ```lua
-(field) super: widget.dialog
+(field) super: widget
 ```
+
+A base widget
 
 ---
 
@@ -517,10 +701,18 @@ A base widget
 
 ---
 
-## title
+## time_y
 
 ```lua
-(field) title: widget.label
+(field) time_y: number
+```
+
+---
+
+## title_y
+
+```lua
+(field) title_y: number
 ```
 
 ---
@@ -537,6 +729,22 @@ A base widget
 
 ```lua
 (field) tooltip_command: string?
+```
+
+---
+
+## tracks
+
+```lua
+(field) tracks: table
+```
+
+---
+
+## tracks_by_path
+
+```lua
+(field) tracks_by_path: table
 ```
 
 ---
@@ -573,6 +781,52 @@ A base widget
 
 ---
 
+## visualization
+
+```lua
+(field) visualization: any
+```
+
+---
+
+## visualization_button
+
+```lua
+(field) visualization_button: widget.togglebutton
+```
+
+---
+
+## voice
+
+```lua
+(field) voice: audio.voice
+```
+
+One loaded-sound, file, or generated-stream playback instance. A finished/stopped
+voice cannot restart; request a new voice. Status remains readable after it ends.
+
+---
+
+## volume
+
+```lua
+(field) volume: any
+```
+
+---
+
+## volume_slider
+
+```lua
+(field) volume_slider: core.object
+```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
+---
+
 ## zindex
 
 ```lua
@@ -584,20 +838,29 @@ A base widget
 ## from_state
 
 ```lua
-function core.view.from_state(state: table)
-  -> view: (core.view)?
+function core.audioview.from_state(state: table)
+  -> core.audioview
 ```
 
-Create and initialize a new view instance from a previously saved state.
+Restore a player without scanning directories or starting audio playback.
 
-This function is called when restoring workspace/session state.
-Implementations are responsible for:
-  * creating the view instance
-  * applying any persisted state
+@*return*: [`core.audioview`](/docs/api/core.audioview)
 
-If loading the instance failed nil will be returned.
+---
 
-@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+## is_supported
+
+```lua
+function core.audioview.is_supported(path: string)
+  -> supported: boolean
+  2. extension: string?
+```
+
+Check whether a filename's extension has an available decoder.
+
+@*return* `supported`: `boolean`
+
+@*return* `extension`: `string?`
 
 ---
 
@@ -630,11 +893,9 @@ Automatically creates instance and calls new() with provided arguments.
 ## __tostring
 
 ```lua
-(method) widget:__tostring()
+(method) core.audioview:__tostring()
   -> string
 ```
-
-Useful for debugging.
 
 ---
 
@@ -658,6 +919,31 @@ Add a child widget, automatically assign a zindex if non set and sorts
 them in reverse order for better events matching.
 
 @*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+---
+
+## add_row
+
+```lua
+(method) core.audioview:add_row(track: any)
+```
+
+---
+
+## add_track
+
+```lua
+(method) core.audioview:add_track(track: any)
+  -> unknown
+```
+
+---
+
+## advance
+
+```lua
+(method) core.audioview:advance(direction: any, automatic: any)
+```
 
 ---
 
@@ -753,11 +1039,8 @@ Used internally when dragging is activated.
 ## draw
 
 ```lua
-(method) widget.dialog:draw()
-  -> boolean
+(method) core.audioview:draw()
 ```
-
-We overwrite default draw function to draw the title background.
 
 ---
 
@@ -870,6 +1153,14 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 ---
 
+## filter_tracks
+
+```lua
+(method) core.audioview:filter_tracks()
+```
+
+---
+
 ## force_event
 
 ```lua
@@ -889,15 +1180,6 @@ name:
 ```
 
 @*param* `force`: `boolean` — If omitted is set to true by default
-
----
-
-## get_bindings
-
-```lua
-(method) widget.keybinddialog:get_bindings()
-  -> table<integer, string>
-```
 
 ---
 
@@ -1019,19 +1301,6 @@ The name that is displayed on pragtical tabs.
 
 ---
 
-## get_panel
-
-```lua
-(method) widget.dialog:get_panel()
-  -> widget
-```
-
-Returns the widget where you can add child widgets to this dialog.
-
-@*return*: [`widget`](/docs/api/widget)
-
----
-
 ## get_position
 
 ```lua
@@ -1104,20 +1373,11 @@ widget or the size of the widget it self if greater.
 ## get_state
 
 ```lua
-(method) core.view:get_state()
-  -> state: table?
+(method) core.audioview:get_state()
+  -> table
 ```
 
-Serialize this view into a persistable state table.
-
-This method is called when the editor is saving workspace/session state.
-The returned table must contain only plain Lua data (no functions,
-userdata, metatables, or cyclic references).
-
-Returning `nil` indicates that this view should NOT be restored when
-reloading the workspace.
-
-@*return* `state`: `table?`
+Return workspace state without retaining widgets or native audio handles.
 
 ---
 
@@ -1135,10 +1395,10 @@ Get width including borders.
 ## hide
 
 ```lua
-(method) widget.keybinddialog:hide()
+(method) widget:hide()
 ```
 
-Hide the dialog and disable key interceptions
+Hide the widget.
 
 ---
 
@@ -1255,10 +1515,8 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) widget.keybinddialog:new()
+(method) core.audioview:new()
 ```
-
-Constructor
 
 ---
 
@@ -1291,26 +1549,12 @@ button:
 
 ---
 
-## on_close
-
-```lua
-(method) widget.dialog:on_close()
-```
-
-Called when the user clicks the close button of the dialog.
-
----
-
 ## on_file_dropped
 
 ```lua
-(method) widget:on_file_dropped(filename: string, x: number, y: number)
-  -> processed: boolean
+(method) core.audioview:on_file_dropped(path: string)
+  -> boolean
 ```
-
-Send file drop event to hovered child.
-
-@*return* `processed`: `boolean`
 
 ---
 
@@ -1421,26 +1665,6 @@ button:
 
 ---
 
-## on_reset
-
-```lua
-(method) widget.keybinddialog:on_reset()
-```
-
-Called when the user clicks on reset
-
----
-
-## on_save
-
-```lua
-(method) widget.keybinddialog:on_save(bindings: string)
-```
-
-Called when the user clicks on save
-
----
-
 ## on_scale_change
 
 ```lua
@@ -1486,6 +1710,40 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 ---
 
+## open_file
+
+```lua
+(method) core.audioview:open_file(path: string)
+```
+
+Play only this file, preserving playback when reopening the current track.
+
+---
+
+## play
+
+```lua
+(method) core.audioview:play(track: any, history_index: any)
+```
+
+---
+
+## play_selected
+
+```lua
+(method) core.audioview:play_selected()
+```
+
+---
+
+## poll
+
+```lua
+(method) core.audioview:poll()
+```
+
+---
+
 ## release_mouse
 
 ```lua
@@ -1508,6 +1766,22 @@ Remove a child widget.
 
 ---
 
+## report
+
+```lua
+(method) core.audioview:report(err: any)
+```
+
+---
+
+## reset_shuffle
+
+```lua
+(method) core.audioview:reset_shuffle()
+```
+
+---
+
 ## run_animations
 
 ```lua
@@ -1515,6 +1789,14 @@ Remove a child widget.
 ```
 
 Runs all registered animations removing duplicated and finished ones.
+
+---
+
+## scan
+
+```lua
+(method) core.audioview:scan(path: any)
+```
 
 ---
 
@@ -1574,10 +1856,26 @@ Useful for determining cursor style or handling clicks.
 
 ---
 
-## set_bindings
+## seek_by
 
 ```lua
-(method) widget.keybinddialog:set_bindings(bindings: table<integer, string>)
+(method) core.audioview:seek_by(seconds: any)
+```
+
+---
+
+## seek_to
+
+```lua
+(method) core.audioview:seek_to(seconds: any)
+```
+
+---
+
+## select_row
+
+```lua
+(method) core.audioview:select_row(direction: any)
 ```
 
 ---
@@ -1639,18 +1937,6 @@ axis:
 
 ---
 
-## set_title
-
-```lua
-(method) widget.dialog:set_title(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
-```
-
-Change the dialog title.
-
-@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
-
----
-
 ## set_tooltip
 
 ```lua
@@ -1665,13 +1951,21 @@ as part of the tooltip.
 
 ---
 
+## set_visualization
+
+```lua
+(method) core.audioview:set_visualization(enabled: any)
+```
+
+---
+
 ## show
 
 ```lua
-(method) widget.keybinddialog:show()
+(method) widget:show()
 ```
 
-Show the dialog and enable key interceptions
+Show the widget.
 
 ---
 
@@ -1688,6 +1982,14 @@ Perform an animated show.
 @*param* `lock_y?`: `boolean` — Do not resize height while animating
 
 @*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## stop
+
+```lua
+(method) core.audioview:stop()
+```
 
 ---
 
@@ -1727,6 +2029,14 @@ When set to false the background rendering is disabled.
 
 ---
 
+## toggle_play
+
+```lua
+(method) core.audioview:toggle_play()
+```
+
+---
+
 ## toggle_visible
 
 ```lua
@@ -1742,25 +2052,16 @@ Toggle visibility of widget.
 ## try_close
 
 ```lua
-(method) core.view:try_close(do_close: function)
+(method) core.audioview:try_close(do_close: function)
 ```
-
-Called when view is requested to close (e.g., tab close button).
-Override to show confirmation dialogs for unsaved changes.
-Example: `core.command_view:enter("Save?", \{submit = do_close\})`
-
-@*param* `do_close`: `function` — Call this function to actually close the view
 
 ---
 
 ## update
 
 ```lua
-(method) widget:update()
-  -> boolean
+(method) core.audioview:update()
 ```
-
-If visible execute the widget calculations and returns true.
 
 ---
 
@@ -1799,8 +2100,12 @@ Called automatically by update(). Rarely needs to be called manually.
 ## update_size_position
 
 ```lua
-(method) widget.keybinddialog:update_size_position()
+(method) widget:update_size_position()
 ```
+
+Similar to update, but here you should perform expensive calculations that
+will get executed for a predefined period of time when a widget is
+initialized, scale has changed or a widget switched from hidden to visible.
 
 ---
 

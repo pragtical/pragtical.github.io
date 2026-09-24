@@ -1,5 +1,5 @@
 ---
-sidebar_position: 68
+sidebar_position: 70
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -1938,10 +1938,11 @@ Config path in the config table, eg: section.myoption, myoption, etc...
 ### set_value
 
 ```lua
-(field) set_value: fun(value: any):any|nil
+(field) set_value: fun(value: any):any, string?|nil
 ```
 
 Optional function that is used to manipulate the saved value on save.
+Return nil and an error as the second result to reject the change.
 
 ---
 

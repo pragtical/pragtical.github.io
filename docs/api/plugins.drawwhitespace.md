@@ -1,5 +1,5 @@
 ---
-sidebar_position: 60
+sidebar_position: 62
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -99,6 +99,16 @@ Show white spaces on selected text only.
 ```
 
 Show white spaces at the end of a line.
+
+---
+
+### show_trailing_error
+
+```lua
+(field) show_trailing_error: boolean
+```
+
+Replace trailing space markers with error-colored blocks.
 
 ---
 
@@ -216,6 +226,16 @@ Show white spaces at the end of a line.
 
 ---
 
+### show_trailing_error
+
+```lua
+(field) show_trailing_error: boolean
+```
+
+Replace trailing space markers with error-colored blocks.
+
+---
+
 ### trailing_color
 
 ```lua
@@ -327,6 +347,16 @@ Show white spaces on selected text only.
 ```
 
 Show white spaces at the end of a line.
+
+---
+
+### show_trailing_error
+
+```lua
+(field) show_trailing_error: boolean
+```
+
+Replace trailing space markers with error-colored blocks.
 
 ---
 

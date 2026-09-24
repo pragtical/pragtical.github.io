@@ -1,5 +1,5 @@
 ---
-sidebar_position: 91
+sidebar_position: 93
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -1246,17 +1246,6 @@ Get the right x coordinate relative to parent
 
 ---
 
-## get_row_at_position
-
-```lua
-(method) widget.listbox:get_row_at_position(x: number, y: number)
-  -> integer?
-```
-
-Get the row at a screen position.
-
----
-
 ## get_row_data
 
 ```lua
@@ -1601,9 +1590,19 @@ Emitted once when the mouse hovers the widget.
 ## on_mouse_pressed
 
 ```lua
-(method) widget.listbox:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
-  -> boolean
+(method) widget:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
+  -> processed: boolean
 ```
+
+Send mouse pressed events to hovered child or starts dragging if enabled.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+@*return* `processed`: `boolean`
 
 ---
 

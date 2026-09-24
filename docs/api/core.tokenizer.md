@@ -1,5 +1,5 @@
 ---
-sidebar_position: 52
+sidebar_position: 53
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -15,16 +15,38 @@ native tokenizer implementation at runtime.
 local tokenizer = require "core.tokenizer"
 ```
 
+## core.tokenizer.options
+
+### first_line
+
+```lua
+(field) first_line: boolean?
+```
+
+Whether this is the first line of the input document.
+
+---
+
+### resume
+
+```lua
+(field) resume: table?
+```
+
+Resume information from an incomplete call on the same line.
+
+---
+
 ## clear_native_cache
 
 ```lua
 function core.tokenizer.clear_native_cache(root_syntax?: core.syntax.syntax)
 ```
 
-Clear cached native syntax userdata for known syntaxes.
+Clear cached native syntax userdata and Lua opening-rule lists.
 
 This should be called when switching tokenizer backends so syntax tables are
-reimported by the native tokenizer on their next use.
+reimported on their next use. Also call it after changing syntax rules.
 
 @*param* `root_syntax?`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — Optional syntax table to clear before clearing the global syntax registries.
 
@@ -119,7 +141,7 @@ the pure Lua implementation in this file is used instead.
 ## tokenize
 
 ```lua
-function core.tokenizer.tokenize(incoming_syntax: core.syntax.syntax, text: string, state?: string, resume?: table)
+function core.tokenizer.tokenize(incoming_syntax: core.syntax.syntax, text: string, state?: string, options?: table|core.tokenizer.options)
   -> tokens: string[]
   2. state: string
   3. resume: table?
@@ -130,6 +152,9 @@ Tokenize a single line of text for the given syntax and state.
 Returns tokens in the form `\{ type, text, ... \}`. When the tokenizer runs
 out of time, a third return value is included with resume information that
 can be passed back into this function to continue tokenizing the same line.
+The fourth argument accepts either options or a legacy raw resume table.
+First-line context defaults to false, or to the saved context when resuming;
+an explicit options.first_line overrides it. Nested syntaxes share this context.
 
 @*param* `incoming_syntax`: [`core.syntax.syntax`](/docs/api/core.syntax#coresyntaxsyntax) — The syntax to tokenize against.
 
@@ -137,7 +162,7 @@ can be passed back into this function to continue tokenizing the same line.
 
 @*param* `state?`: `string` — Current tokenizer state.
 
-@*param* `resume?`: `table` — Resume information returned by a previous incomplete call.
+@*param* `options?`: `table|`[`core.tokenizer.options`](/docs/api/core.tokenizer#coretokenizeroptions) — Options or a legacy raw resume table.
 
 @*return* `tokens`: `string[]` — Tokens in the form `\{ type, text, ... \}`.
 

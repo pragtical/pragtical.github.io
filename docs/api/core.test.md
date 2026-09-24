@@ -1,5 +1,5 @@
 ---
-sidebar_position: 50
+sidebar_position: 51
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -361,6 +361,15 @@ Represents the aggregated results for a test run.
 ```
 
 Provides threading capabilities.
+Workers have independent Lua states, but belong to the editor session that
+created them, including workers created by other workers. Completed worker
+states are closed even while their Thread handles are retained.
+
+Restart and normal exit request shutdown and wait for all workers to finish
+before closing the editor state. Channel operations interrupt workers during
+shutdown. Computation and native I/O must finish or reach a channel operation;
+a worker that never does so can prevent restart. Cancellation is not a forced
+termination of native code.
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 28
+sidebar_position: 29
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -53,6 +53,14 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## change_id
+
+```lua
+(field) change_id: integer
+```
+
+---
+
 ## clean_change_id
 
 ```lua
@@ -73,6 +81,22 @@ All classes in Pragtical inherit from Object.
 
 ```lua
 (field) crlf: boolean
+```
+
+---
+
+## edit_depth
+
+```lua
+(field) edit_depth: integer
+```
+
+---
+
+## edit_start
+
+```lua
+(field) edit_start: unknown
 ```
 
 ---
@@ -128,6 +152,14 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## next_change_id
+
+```lua
+(field) next_change_id: integer
+```
+
+---
+
 ## overwrite
 
 ```lua
@@ -140,6 +172,22 @@ All classes in Pragtical inherit from Object.
 
 ```lua
 (field) redo_stack: table
+```
+
+---
+
+## replay_change_id
+
+```lua
+(field) replay_change_id: unknown
+```
+
+---
+
+## replaying
+
+```lua
+(field) replaying: unknown
 ```
 
 ---
@@ -325,6 +373,9 @@ Example: `view:extends(View)` returns true for View and all subclasses
 (method) core.doc:get_change_id()
   -> integer
 ```
+
+Return the text state's identity, restored by undo/redo and never reused
+for a different edit after undoing back past a saved state.
 
 ---
 

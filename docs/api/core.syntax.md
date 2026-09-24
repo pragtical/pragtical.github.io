@@ -1,5 +1,5 @@
 ---
-sidebar_position: 49
+sidebar_position: 50
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -47,6 +47,16 @@ for a multi-token region that may optionally enter a nested syntax.
 ```
 
 True when the rule should be ignored by tokenizers.
+
+---
+
+### first_line
+
+```lua
+(field) first_line: boolean?
+```
+
+Only allow this rule to start on the first document line; paired regions may continue and close on later lines.
 
 ---
 
