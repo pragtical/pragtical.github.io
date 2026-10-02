@@ -253,6 +253,14 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+## visual_lines_doc_lines
+
+```lua
+(field) visual_lines_doc_lines: table
+```
+
+---
+
 ## visual_lines_invalid_from
 
 ```lua

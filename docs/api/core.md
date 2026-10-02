@@ -207,7 +207,7 @@ Multiple dialogs queue automatically.
 ## prev_window_mode
 
 ```lua
-(field) prev_window_mode: any
+(field) prev_window_mode: string|"fullscreen"|"maximized"|"minimized"|"normal"
 ```
 
 ---
@@ -332,15 +332,17 @@ Access the global instance via `core.status_view`.
 ## window
 
 ```lua
-(field) window: number
+(field) window: renwindow
 ```
+
+Functionality to create and manage windows.
 
 ---
 
 ## window_mode
 
 ```lua
-(field) window_mode: any
+(field) window_mode: string|"fullscreen"|"maximized"|"minimized"|"normal"
 ```
 
 ---
@@ -979,6 +981,25 @@ function core.trust_project(project: any)
 function core.try(fn: any, ...any)
   -> boolean
   2. unknown
+```
+
+---
+
+## update_window_state
+
+```lua
+function core.update_window_state()
+  -> "fullscreen"|"maximized"|"minimized"|"normal"
+```
+
+Refresh the native mode without losing the windowed restore state.
+
+```lua
+return #1:
+    | "normal"
+    | "minimized"
+    | "maximized"
+    | "fullscreen"
 ```
 
 ---

@@ -843,6 +843,8 @@ Window events:
  * "minimized"
  * "maximized"
  * "restored"
+ * "enterfullscreen"
+ * "leavefullscreen"
  * "focuslost"
 
 File events:
