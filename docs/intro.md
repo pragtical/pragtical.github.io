@@ -107,6 +107,12 @@ provide a 20X to 30X performance improvement.
 
 Some of the additional features and enhancements include:
 
+* **[Command Palette](user-guide/command-palette.md)** - run actions by name
+with command prompts at the bottom, top, or center of the editor.
+
+* **[Application Menus](user-guide/application-menus.md)** - access editor and
+plugin actions through a responsive menu bar with keyboard navigation.
+
 * **Project Module Trust** - project-local Lua modules are gated behind trust
 prompts, making it explicit when a project is allowed to execute editor-side Lua
 code.
