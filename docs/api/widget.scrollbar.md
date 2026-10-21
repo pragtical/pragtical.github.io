@@ -1,5 +1,5 @@
 ---
-sidebar_position: 98
+sidebar_position: 102
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -334,24 +334,9 @@ button:
 ## _overlaps_normal
 
 ```lua
-(method) core.scrollbar:_overlaps_normal(x: number, y: number)
-  -> part: "thumb"|"track"|nil
+(method) widget.scrollbar:_overlaps_normal(x: number, y: number)
+  -> unknown|nil
 ```
-
-Check what part of scrollbar overlaps a point in normalized coordinates.
-Internal helper - use overlaps() for real coordinates.
-
-```lua
-part:
-    | "thumb"
-    | "track"
-```
-
-@*param* `x`: `number` — Normalized x coordinate
-
-@*param* `y`: `number` — Normalized y coordinate
-
-@*return* `part`: `"thumb"|"track"|nil` — What was hit, or nil if nothing
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 67
+sidebar_position: 69
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -23,6 +23,18 @@ local projectsearch = require "plugins.projectsearch"
 ```lua
 (field) _test: table
 ```
+
+---
+
+## config.plugins.projectsearch
+
+### position
+
+```lua
+(field) position: "center"|"left"|"right"
+```
+
+Placement of the reusable global search view
 
 ---
 
@@ -85,6 +97,24 @@ Represents the border of a widget.
 
 ---
 
+### capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
+
+---
+
+### captured_button
+
+```lua
+(field) captured_button: ('left'|'right')?
+```
+
+---
+
 ### captured_widget
 
 ```lua
@@ -143,7 +173,7 @@ A base widget
 (field) context_menu: core.contextmenu
 ```
 
-A context menu.
+Floating command menu with predicate filtering, scrolling, and nested submenus.
 
 ---
 
@@ -158,7 +188,7 @@ A context menu.
 ### cursor
 
 ```lua
-(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizenesw'...(+2)
 ```
 
 ---
@@ -168,6 +198,16 @@ A context menu.
 ```lua
 (field) defer_draw: boolean
 ```
+
+---
+
+### display_position
+
+```lua
+(field) display_position: ("center"|"left"|"right")?
+```
+
+Applied global placement
 
 ---
 
@@ -243,6 +283,106 @@ A context menu.
 
 ---
 
+### floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+### floating_closing
+
+```lua
+(field) floating_closing: boolean?
+```
+
+Whether input is disabled while a closing slide runs
+
+---
+
+### floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+### floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+### floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+### floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+### floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+### floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+### floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
+
+---
+
+### focus_generation
+
+```lua
+(field) focus_generation: integer
+```
+
+Invalidates queued focus when hiding or reopening
+
+---
+
 ### font
 
 ```lua
@@ -250,14 +390,6 @@ A context menu.
 ```
 
 Represents a reference to a font stored elsewhere.
-
----
-
-### force_events
-
-```lua
-(field) force_events: table
-```
 
 ---
 
@@ -284,6 +416,16 @@ Array of bytes that represents a color used by the rendering functions.
 ```lua
 (field) has_focus: boolean
 ```
+
+---
+
+### hovered_child
+
+```lua
+(field) hovered_child: widget?
+```
+
+Child that last received hover motion
 
 ---
 
@@ -324,6 +466,8 @@ Array of bytes that represents a color used by the rendering functions.
 ```lua
 (field) is_global: boolean
 ```
+
+Whether this is the reusable global search panel
 
 ---
 
@@ -369,10 +513,18 @@ Represents the position of a widget.
 
 ---
 
-### mouse_pressed_outside
+### mouse_press
 
 ```lua
-(field) mouse_pressed_outside: boolean
+(field) mouse_press: { button: 'left'|'right', child: widget? }?
+```
+
+---
+
+### mouse_selecting
+
+```lua
+(field) mouse_selecting: unknown
 ```
 
 ---
@@ -390,6 +542,16 @@ Represents the position of a widget.
 ```lua
 (field) next_zindex: integer
 ```
+
+---
+
+### node
+
+```lua
+(field) node: (core.node)?
+```
+
+Docked placement, absent in centered mode
 
 ---
 
@@ -475,14 +637,6 @@ Represents the position of a widget.
 
 ```lua
 (field) queue_search: boolean
-```
-
----
-
-### queue_skip_draw
-
-```lua
-(field) queue_skip_draw: boolean
 ```
 
 ---
@@ -626,6 +780,16 @@ the search was completed
 ```lua
 (field) set_focus: any
 ```
+
+---
+
+### sidebar_width
+
+```lua
+(field) sidebar_width: number
+```
+
+Remembered docked width in scale-independent units
 
 ---
 
@@ -805,17 +969,6 @@ If loading the instance failed nil will be returned.
 
 ---
 
-### override_rootview
-
-```lua
-function widget.override_rootview()
-```
-
-Called when initializing a floating widget to generate RootView overrides,
-this function will only override the events once.
-
----
-
 ### __call
 
 ```lua
@@ -887,6 +1040,25 @@ Registers a new animation to be ran on the update cycle.
 
 ---
 
+### apply_position
+
+```lua
+(method) plugins.projectsearch.resultsview:apply_position(position: "center"|"left"|"right")
+```
+
+Move the global view without recreating its inputs, results or document panes.
+
+```lua
+position:
+    | "left"
+    | "right"
+    | "center"
+```
+
+@*param* `position`: `"center"|"left"|"right"` — Requested placement
+
+---
+
 ### begin_replace
 
 ```lua
@@ -914,16 +1086,37 @@ search_type:
 
 ---
 
+### bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
 ### capture_mouse
 
 ```lua
-(method) widget:capture_mouse(scrolling?: boolean)
+(method) widget:capture_mouse(scrolling?: boolean, button?: 'left'|'right')
 ```
 
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
+```lua
+button:
+    | 'left'
+    | 'right'
+```
+
 @*param* `scrolling?`: `boolean` — Capture for scrolling
+
+@*param* `button?`: `'left'|'right'` — Defaults to left
 
 ---
 
@@ -964,8 +1157,7 @@ Emitted to input_text widgets on lost focus.
 (method) widget:destroy()
 ```
 
-If floating, remove the widget from the floating widgets list
-to allow proper garbage collection.
+Hide the widget, release its floating placement, and recursively destroy its children.
 
 ---
 
@@ -1107,25 +1299,14 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 ---
 
-### force_event
+### focus_results
 
 ```lua
-(method) widget:force_event(name: "mouse_released", force: boolean)
+(method) plugins.projectsearch.resultsview:focus_results()
 ```
 
-Toggle the forced interception of given event even if all the conditions
-for emitting it are not met.
-
-Note: only "mouse_released" is implemented for the moment on floating views
-for use in the SelectBox, maybe a better system can be implemented on
-the future.
-
-```lua
-name:
-    | "mouse_released"
-```
-
-@*param* `force`: `boolean` — If omitted is set to true by default
+Focus the result list and reveal its selection without focusing any text input.
+Choose the first match if no result has been selected yet.
 
 ---
 
@@ -1165,17 +1346,76 @@ Get the content bounds in content coordinates (accounting for scroll).
 ### get_content_offset
 
 ```lua
-(method) core.view:get_content_offset()
+(method) widget:get_content_offset()
   -> x: number
   2. y: number
 ```
 
-Get the top-left corner of content area in screen coordinates.
-Accounts for scroll offset. Use for drawing content at correct position.
+Get the content origin while preserving fractional layout coordinates.
+Snap only the scroll displacement so descendants move by whole pixels
+together without shifting their borders relative to the parent's viewport.
 
-@*return* `x`: `number` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate after horizontal scrolling
 
-@*return* `y`: `number` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate after vertical scrolling
+
+---
+
+### get_floating_bounds
+
+```lua
+(method) widget:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the widget's outer screen rectangle, including its border.
+
+@*return* `x`: `number` — Outer screen x coordinate
+
+@*return* `y`: `number` — Outer screen y coordinate
+
+@*return* `w`: `number` — Width including the border
+
+@*return* `h`: `number` — Height including the border
+
+---
+
+### get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+### get_focus_target
+
+```lua
+(method) widget:get_focus_target()
+  -> target: core.view
+```
+
+Focus the active child or its TextView, falling back to this widget's input or itself.
+
+@*return* `target`: [`core.view`](/docs/api/core.view) — View that should receive keyboard focus
 
 ---
 
@@ -1373,6 +1613,40 @@ Perform an animated hide.
 
 ---
 
+### hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### hit_test
+
+```lua
+(method) widget:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Reuse widget hit testing for RootView's floating pointer routing.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the point lies over the widget
+
+---
+
 ### is
 
 ```lua
@@ -1421,6 +1695,21 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 @*param* `T`: `any` — Object or class to check
 
 @*return* `is_extended`: `boolean` — True if T inherits from this class
+
+---
+
+### is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
 
 ---
 
@@ -1525,6 +1814,37 @@ Send file drop event to hovered child.
 
 ---
 
+### on_floating_dismiss
+
+```lua
+(method) plugins.projectsearch.resultsview:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Dismiss centered global search through its normal visibility and focus lifecycle.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Cause supplied by RootView
+
+---
+
+### on_floating_visibility_changed
+
+```lua
+(method) widget:on_floating_visibility_changed(visible: boolean)
+```
+
+Synchronize widget visibility with RootView, including owner-driven popup removal.
+
+@*param* `visible`: `boolean` — Whether the floating widget remains shown
+
+---
+
 ### on_ime_text_editing
 
 ```lua
@@ -1539,6 +1859,31 @@ Override for IME support in text editors. Called during composition.
 @*param* `start`: `number` — Start position of selection within composition
 
 @*param* `length`: `number` — Length of selection within composition
+
+---
+
+### on_key_pressed
+
+```lua
+(method) plugins.projectsearch.resultsview:on_key_pressed(stroke: string)
+  -> consumed: boolean
+```
+
+Close centered search on Escape only while it owns keyboard focus.
+
+@*param* `stroke`: `string` — Normalized key binding
+
+@*return* `consumed`: `boolean` — Whether the search popup handled Escape
+
+---
+
+### on_mouse_capture_lost
+
+```lua
+(method) widget:on_mouse_capture_lost()
+```
+
+End a pointer gesture without emitting a click. Override to clear drag state.
 
 ---
 
@@ -1573,9 +1918,14 @@ Emitted once when the mouse leaves the widget.
 ### on_mouse_moved
 
 ```lua
-(method) plugins.projectsearch.resultsview:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+(method) widget:on_mouse_moved(x: number, y: number, dx: number, dy: number)
   -> boolean
 ```
+
+Besides the on_mouse_moved this event emits on_mouse_enter
+and on_mouse_leave for easy hover effects. Also, if the
+widget is scrollable and pressed this will drag it unless
+there is an active input_text child active.
 
 ---
 
@@ -1595,8 +1945,7 @@ Emitted once when the mouse leaves the widget.
   -> processed: boolean
 ```
 
-Send mouse released events to hovered child, ends dragging if enabled and
-emits on click events if applicable.
+Send release to the pressed target, even outside its bounds.
 
 ```lua
 button:
@@ -1622,6 +1971,12 @@ button:
 ```lua
 (method) plugins.projectsearch.resultsview:on_scale_change(new_scale: number, prev_scale: number)
 ```
+
+Scale docked width while centered placement follows the available viewport.
+
+@*param* `new_scale`: `number` — Updated interface scale
+
+@*param* `prev_scale`: `number` — Previous interface scale
 
 ---
 
@@ -1670,6 +2025,22 @@ Opens a DocView of the user selected match.
 
 ---
 
+### owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
+
+---
+
 ### queue_refresh
 
 ```lua
@@ -1691,10 +2062,12 @@ Re-perform the search procedure using previous search options.
 ### release_mouse
 
 ```lua
-(method) widget:release_mouse()
+(method) widget:release_mouse(skip_cancel?: boolean)
 ```
 
-Undo capture_mouse()
+Release this widget's capture and clear capture state on its ancestors.
+
+@*param* `skip_cancel?`: `boolean` — Skip the cancellation callback when already handling capture loss
 
 ---
 
@@ -1786,6 +2159,44 @@ Set the widget border size and appropriately re-set the widget size.
 
 ---
 
+### set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### set_floating_bounds
+
+```lua
+(method) widget:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Apply outer popup bounds using the widget's border-aware size and position setters.
+Pass dimensions unchanged: set_size() already accounts for the border.
+
+@*param* `x`: `number` — Outer screen x coordinate
+
+@*param* `y`: `number` — Outer screen y coordinate
+
+@*param* `w`: `number` — Width including the border
+
+@*param* `h`: `number` — Height including the border
+
+---
+
 ### set_label
 
 ```lua
@@ -1873,6 +2284,21 @@ Perform an animated show.
 
 ---
 
+### show_floating
+
+```lua
+(method) plugins.projectsearch.resultsview:show_floating(options?: core.view.floating_transition)
+  -> view: plugins.projectsearch.resultsview
+```
+
+Slide centered global search down from the top using the core floating transition.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Explicit transition overriding the default slide
+
+@*return* `view`: [`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview) — This view
+
+---
+
 ### stop_search
 
 ```lua
@@ -1954,6 +2380,17 @@ Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 
 ---
 
+### update_floating
+
+```lua
+(method) plugins.projectsearch.resultsview:update_floating()
+```
+
+Fit centered global search inside the viewport on scale or window-size changes.
+RootView calls this before updating and drawing a shown floating view.
+
+---
+
 ### update_if_scaled
 
 ```lua
@@ -1968,10 +2405,12 @@ the widget is not visible.
 ### update_position
 
 ```lua
-(method) widget:update_position()
+(method) widget:update_position(recursive?: boolean)
 ```
 
 Called on the update function to be able to scroll the child widgets.
+
+@*param* `recursive?`: `boolean` — Update descendants; defaults to true.
 
 ---
 
@@ -2086,14 +2525,15 @@ initialized, scale has changed or a widget switched from hidden to visible.
 
 ```lua
 function plugins.projectsearch.hide(options?: plugins.projectsearch.resultsview.options)
-  -> (plugins.projectsearch.resultsview)?
+  -> view: (plugins.projectsearch.resultsview)?
 ```
 
-Hide the global project search view.
+Hide global search and restore focus synchronously before outside clicks continue.
+A queued show must not later focus an input that has already been hidden.
 
 @*param* `options?`: [`plugins.projectsearch.resultsview.options`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsviewoptions)
 
-@*return*: `(`[`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview)`)?`
+@*return* `view`: `(`[`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview)`)?` — Reusable global search, if created
 
 ---
 
@@ -2123,18 +2563,38 @@ Start a regex search.
 
 ---
 
+## set_position
+
+```lua
+function plugins.projectsearch.set_position(position: "center"|"left"|"right")
+```
+
+Configure global search placement, moving an existing view immediately.
+The preference is saved by Settings when its position selector is used.
+
+```lua
+position:
+    | "left"
+    | "right"
+    | "center"
+```
+
+@*param* `position`: `"center"|"left"|"right"` — Docking edge or floating popup
+
+---
+
 ## show
 
 ```lua
 function plugins.projectsearch.show(options?: plugins.projectsearch.resultsview.options)
-  -> plugins.projectsearch.resultsview
+  -> view: plugins.projectsearch.resultsview
 ```
 
-Show the global project search view.
+Show or focus global search, preserving its query and result state.
 
 @*param* `options?`: [`plugins.projectsearch.resultsview.options`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsviewoptions)
 
-@*return*: [`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview)
+@*return* `view`: [`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview) — Reusable global search
 
 ---
 
@@ -2142,14 +2602,14 @@ Show the global project search view.
 
 ```lua
 function plugins.projectsearch.toggle(options?: plugins.projectsearch.resultsview.options)
-  -> plugins.projectsearch.resultsview
+  -> view: plugins.projectsearch.resultsview
 ```
 
-Toggle the global project search view.
+Toggle the global project search view, or focus it when invoked from the editor.
 
 @*param* `options?`: [`plugins.projectsearch.resultsview.options`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsviewoptions)
 
-@*return*: [`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview)
+@*return* `view`: [`plugins.projectsearch.resultsview`](/docs/api/plugins.projectsearch#pluginsprojectsearchresultsview) — Reusable global search
 
 ---
 

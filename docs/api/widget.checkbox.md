@@ -1,5 +1,5 @@
 ---
-sidebar_position: 76
+sidebar_position: 80
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -75,6 +75,24 @@ Represents the border of a widget.
 
 ---
 
+## capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
+
+---
+
+## captured_button
+
+```lua
+(field) captured_button: ('left'|'right')?
+```
+
+---
+
 ## captured_widget
 
 ```lua
@@ -138,7 +156,7 @@ A base widget
 ## cursor
 
 ```lua
-(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizenesw'...(+2)
 ```
 
 ---
@@ -175,6 +193,96 @@ A base widget
 
 ---
 
+## floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+## floating_closing
+
+```lua
+(field) floating_closing: boolean?
+```
+
+Whether input is disabled while a closing slide runs
+
+---
+
+## floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+## floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+## floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+## floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+## floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+## floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+## floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
+
+---
+
 ## font
 
 ```lua
@@ -182,14 +290,6 @@ A base widget
 ```
 
 Represents a reference to a font stored elsewhere.
-
----
-
-## force_events
-
-```lua
-(field) force_events: table
-```
 
 ---
 
@@ -235,6 +335,16 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
+## hovered_child
+
+```lua
+(field) hovered_child: widget?
+```
+
+Child that last received hover motion
+
+---
+
 ## hovered_scrollbar
 
 ```lua
@@ -267,6 +377,14 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
+## label_lines
+
+```lua
+(field) label_lines: table
+```
+
+---
+
 ## mouse
 
 ```lua
@@ -293,10 +411,18 @@ Represents the position of a widget.
 
 ---
 
-## mouse_pressed_outside
+## mouse_press
 
 ```lua
-(field) mouse_pressed_outside: boolean
+(field) mouse_press: { button: 'left'|'right', child: widget? }?
+```
+
+---
+
+## mouse_selecting
+
+```lua
+(field) mouse_selecting: unknown
 ```
 
 ---
@@ -501,6 +627,14 @@ A base widget
 
 ---
 
+## wrap_width
+
+```lua
+(field) wrap_width: number?
+```
+
+---
+
 ## zindex
 
 ```lua
@@ -526,17 +660,6 @@ Implementations are responsible for:
 If loading the instance failed nil will be returned.
 
 @*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
-
----
-
-## override_rootview
-
-```lua
-function widget.override_rootview()
-```
-
-Called when initializing a floating widget to generate RootView overrides,
-this function will only override the events once.
 
 ---
 
@@ -603,16 +726,37 @@ Registers a new animation to be ran on the update cycle.
 
 ---
 
+## bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
 ## capture_mouse
 
 ```lua
-(method) widget:capture_mouse(scrolling?: boolean)
+(method) widget:capture_mouse(scrolling?: boolean, button?: 'left'|'right')
 ```
 
 All mouse events will be directly sent to the widget even if mouse moves
 outside the widget region.
 
+```lua
+button:
+    | 'left'
+    | 'right'
+```
+
 @*param* `scrolling?`: `boolean` — Capture for scrolling
+
+@*param* `button?`: `'left'|'right'` — Defaults to left
 
 ---
 
@@ -653,8 +797,7 @@ Emitted to input_text widgets on lost focus.
 (method) widget:destroy()
 ```
 
-If floating, remove the widget from the floating widgets list
-to allow proper garbage collection.
+Hide the widget, release its floating placement, and recursively destroy its children.
 
 ---
 
@@ -796,28 +939,6 @@ Example: `view:extends(View)` returns true for View and all subclasses
 
 ---
 
-## force_event
-
-```lua
-(method) widget:force_event(name: "mouse_released", force: boolean)
-```
-
-Toggle the forced interception of given event even if all the conditions
-for emitting it are not met.
-
-Note: only "mouse_released" is implemented for the moment on floating views
-for use in the SelectBox, maybe a better system can be implemented on
-the future.
-
-```lua
-name:
-    | "mouse_released"
-```
-
-@*param* `force`: `boolean` — If omitted is set to true by default
-
----
-
 ## get_bottom
 
 ```lua
@@ -866,17 +987,76 @@ Get the content bounds in content coordinates (accounting for scroll).
 ## get_content_offset
 
 ```lua
-(method) core.view:get_content_offset()
+(method) widget:get_content_offset()
   -> x: number
   2. y: number
 ```
 
-Get the top-left corner of content area in screen coordinates.
-Accounts for scroll offset. Use for drawing content at correct position.
+Get the content origin while preserving fractional layout coordinates.
+Snap only the scroll displacement so descendants move by whole pixels
+together without shifting their borders relative to the parent's viewport.
 
-@*return* `x`: `number` — Screen x coordinate
+@*return* `x`: `number` — Screen x coordinate after horizontal scrolling
 
-@*return* `y`: `number` — Screen y coordinate
+@*return* `y`: `number` — Screen y coordinate after vertical scrolling
+
+---
+
+## get_floating_bounds
+
+```lua
+(method) widget:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the widget's outer screen rectangle, including its border.
+
+@*return* `x`: `number` — Outer screen x coordinate
+
+@*return* `y`: `number` — Outer screen y coordinate
+
+@*return* `w`: `number` — Width including the border
+
+@*return* `h`: `number` — Height including the border
+
+---
+
+## get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+## get_focus_target
+
+```lua
+(method) widget:get_focus_target()
+  -> target: core.view
+```
+
+Focus the active child or its TextView, falling back to this widget's input or itself.
+
+@*return* `target`: [`core.view`](/docs/api/core.view) — View that should receive keyboard focus
 
 ---
 
@@ -1074,6 +1254,40 @@ Perform an animated hide.
 
 ---
 
+## hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## hit_test
+
+```lua
+(method) widget:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Reuse widget hit testing for RootView's floating pointer routing.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the point lies over the widget
+
+---
+
 ## is
 
 ```lua
@@ -1133,6 +1347,21 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 @*param* `T`: `any` — Object or class to check
 
 @*return* `is_extended`: `boolean` — True if T inherits from this class
+
+---
+
+## is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
 
 ---
 
@@ -1234,6 +1463,37 @@ Send file drop event to hovered child.
 
 ---
 
+## on_floating_dismiss
+
+```lua
+(method) widget:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Dismiss through the widget's normal hide lifecycle and subclass hooks.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Event requesting dismissal
+
+---
+
+## on_floating_visibility_changed
+
+```lua
+(method) widget:on_floating_visibility_changed(visible: boolean)
+```
+
+Synchronize widget visibility with RootView, including owner-driven popup removal.
+
+@*param* `visible`: `boolean` — Whether the floating widget remains shown
+
+---
+
 ## on_ime_text_editing
 
 ```lua
@@ -1248,6 +1508,34 @@ Override for IME support in text editors. Called during composition.
 @*param* `start`: `number` — Start position of selection within composition
 
 @*param* `length`: `number` — Length of selection within composition
+
+---
+
+## on_key_pressed
+
+```lua
+(method) core.view:on_key_pressed(stroke: string, ...any)
+  -> consumed: boolean?
+```
+
+Handle a floating view's keyboard input before command dispatch.
+Override and return true to consume the normalized key binding.
+
+@*param* `stroke`: `string` — Normalized key binding, such as "ctrl+return"
+
+@*param*: `any` — Additional arguments forwarded by the keyboard handler
+
+@*return* `consumed`: `boolean?` — Whether the event was handled
+
+---
+
+## on_mouse_capture_lost
+
+```lua
+(method) widget:on_mouse_capture_lost()
+```
+
+End a pointer gesture without emitting a click. Override to clear drag state.
 
 ---
 
@@ -1315,8 +1603,7 @@ button:
   -> processed: boolean
 ```
 
-Send mouse released events to hovered child, ends dragging if enabled and
-emits on click events if applicable.
+Send release to the pressed target, even outside its bounds.
 
 ```lua
 button:
@@ -1382,13 +1669,31 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 ---
 
+## owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
+
+---
+
 ## release_mouse
 
 ```lua
-(method) widget:release_mouse()
+(method) widget:release_mouse(skip_cancel?: boolean)
 ```
 
-Undo capture_mouse()
+Release this widget's capture and clear capture state on its ancestors.
+
+@*param* `skip_cancel?`: `boolean` — Skip the cancellation callback when already handling capture loss
 
 ---
 
@@ -1490,6 +1795,44 @@ Change the status of the checkbox.
 
 ---
 
+## set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## set_floating_bounds
+
+```lua
+(method) widget:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Apply outer popup bounds using the widget's border-aware size and position setters.
+Pass dimensions unchanged: set_size() already accounts for the border.
+
+@*param* `x`: `number` — Outer screen x coordinate
+
+@*param* `y`: `number` — Outer screen y coordinate
+
+@*param* `w`: `number` — Width including the border
+
+@*param* `h`: `number` — Height including the border
+
+---
+
 ## set_label
 
 ```lua
@@ -1549,6 +1892,16 @@ as part of the tooltip.
 
 ---
 
+## set_wrap_width
+
+```lua
+(method) widget.checkbox:set_wrap_width(width?: number)
+```
+
+Constrain label width with word wrapping; nil restores single-line labels.
+
+---
+
 ## show
 
 ```lua
@@ -1572,6 +1925,24 @@ Perform an animated show.
 @*param* `lock_y?`: `boolean` — Do not resize height while animating
 
 @*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## show_floating
+
+```lua
+(method) core.view:show_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Show or raise the view in RootView's floating layer and apply its focus policy.
+Requires a view detached from its node and parent container.
+Reopening cancels a pending close and its completion callback.
+Disabled transitions apply placement and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
 
 ---
 
@@ -1648,6 +2019,18 @@ If visible execute the widget calculations and returns true.
 
 ---
 
+## update_floating
+
+```lua
+(method) core.view:update_floating()
+```
+
+Update anchor placement or advance an opening or closing slide.
+RootView calls this before update() for each shown floating view.
+Completes removal and invokes the transition callback when a slide finishes.
+
+---
+
 ## update_if_scaled
 
 ```lua
@@ -1662,10 +2045,12 @@ the widget is not visible.
 ## update_position
 
 ```lua
-(method) widget:update_position()
+(method) widget:update_position(recursive?: boolean)
 ```
 
 Called on the update function to be able to scroll the child widgets.
+
+@*param* `recursive?`: `boolean` — Update descendants; defaults to true.
 
 ---
 

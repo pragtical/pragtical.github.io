@@ -1,0 +1,4176 @@
+---
+sidebar_position: 21
+---
+
+<!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
+
+# core.aboutview
+
+Application information displayed in the About dialog.
+
+```lua
+local aboutview = require "core.aboutview"
+```
+
+## NEWLINE
+
+```lua
+(field) NEWLINE: integer
+```
+
+Indicates on a widget.styledtext that a new line follows.
+
+---
+
+## __index
+
+```lua
+(field) __index: core.object
+```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
+---
+
+## animations
+
+```lua
+(field) animations: widget.animation[]
+```
+
+---
+
+## background_color
+
+```lua
+(field) background_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## border
+
+```lua
+(field) border: widget.border
+```
+
+Represents the border of a widget.
+
+---
+
+## capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
+
+---
+
+## captured_button
+
+```lua
+(field) captured_button: ('left'|'right')?
+```
+
+---
+
+## captured_widget
+
+```lua
+(field) captured_widget: widget
+```
+
+Widget that captured mouse events
+
+---
+
+## child_active
+
+```lua
+(field) child_active: widget|nil
+```
+
+A base widget
+
+---
+
+## childs
+
+```lua
+(field) childs: table<integer, widget>
+```
+
+---
+
+## clickable
+
+```lua
+(field) clickable: boolean
+```
+
+---
+
+## context
+
+```lua
+(field) context: 'application'|'session'
+```
+
+---
+
+## contributors
+
+```lua
+(field) contributors: widget.listbox
+```
+
+Contributor names, roles and website links
+
+---
+
+## current_scale
+
+```lua
+(field) current_scale: number
+```
+
+---
+
+## cursor
+
+```lua
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizenesw'...(+2)
+```
+
+---
+
+## defer_draw
+
+```lua
+(field) defer_draw: boolean
+```
+
+---
+
+## description
+
+```lua
+(field) description: widget.label
+```
+
+Application description
+
+---
+
+## draggable
+
+```lua
+(field) draggable: boolean
+```
+
+---
+
+## dragged
+
+```lua
+(field) dragged: boolean
+```
+
+---
+
+## explicit_update
+
+```lua
+(field) explicit_update: boolean
+```
+
+---
+
+## floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+## floating_closing
+
+```lua
+(field) floating_closing: boolean?
+```
+
+Whether input is disabled while a closing slide runs
+
+---
+
+## floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+## floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+## floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+## floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+## floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+## floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+## floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
+
+---
+
+## font
+
+```lua
+(field) font: string|renderer.font|widget.fontreference
+```
+
+Represents a reference to a font stored elsewhere.
+
+---
+
+## foreground_color
+
+```lua
+(field) foreground_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## h_scrollbar
+
+```lua
+(field) h_scrollbar: widget.scrollbar
+```
+
+---
+
+## has_focus
+
+```lua
+(field) has_focus: boolean
+```
+
+---
+
+## hovered_child
+
+```lua
+(field) hovered_child: widget?
+```
+
+Child that last received hover motion
+
+---
+
+## hovered_scrollbar
+
+```lua
+(field) hovered_scrollbar: boolean
+```
+
+---
+
+## input_text
+
+```lua
+(field) input_text: boolean
+```
+
+---
+
+## is_scrolling
+
+```lua
+(field) is_scrolling: boolean
+```
+
+---
+
+## label
+
+```lua
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
+```
+
+---
+
+## license
+
+```lua
+(field) license: widget
+```
+
+Scrollable license pane
+
+---
+
+## license_content
+
+```lua
+(field) license_content: widget
+```
+
+License text container with space reserved for the scrollbar
+
+---
+
+## license_labels
+
+```lua
+(field) license_labels: widget.label[]
+```
+
+Wrapped license paragraphs and copyright notices
+
+---
+
+## license_text
+
+```lua
+(field) license_text: string
+```
+
+Full application license text
+
+---
+
+## mouse
+
+```lua
+(field) mouse: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+## mouse_is_hovering
+
+```lua
+(field) mouse_is_hovering: boolean
+```
+
+---
+
+## mouse_is_pressed
+
+```lua
+(field) mouse_is_pressed: boolean
+```
+
+---
+
+## mouse_press
+
+```lua
+(field) mouse_press: { button: 'left'|'right', child: widget? }?
+```
+
+---
+
+## mouse_selecting
+
+```lua
+(field) mouse_selecting: unknown
+```
+
+---
+
+## name
+
+```lua
+(field) name: string
+```
+
+---
+
+## next_zindex
+
+```lua
+(field) next_zindex: integer
+```
+
+---
+
+## notebook
+
+```lua
+(field) notebook: widget.notebook
+```
+
+Contributors and license tabs
+
+---
+
+## parent
+
+```lua
+(field) parent: widget|nil
+```
+
+A base widget
+
+---
+
+## perform_update_size_position
+
+```lua
+(field) perform_update_size_position: boolean
+```
+
+---
+
+## position
+
+```lua
+(field) position: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+## prev_height
+
+```lua
+(field) prev_height: number?
+```
+
+---
+
+## prev_size
+
+```lua
+(field) prev_size: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+## prev_view
+
+```lua
+(field) prev_view: unknown
+```
+
+---
+
+## prev_width
+
+```lua
+(field) prev_width: number?
+```
+
+---
+
+## render_background
+
+```lua
+(field) render_background: boolean
+```
+
+---
+
+## renderer_info
+
+```lua
+(field) renderer_info: widget.label
+```
+
+Active renderer details
+
+---
+
+## scroll
+
+```lua
+(field) scroll: core.view.scroll
+```
+
+---
+
+## scrollable
+
+```lua
+(field) scrollable: boolean
+```
+
+---
+
+## set_focus
+
+```lua
+(field) set_focus: any
+```
+
+---
+
+## size
+
+```lua
+(field) size: widget.position
+```
+
+Modifying this property directly is not advised, use set_size() instead.
+
+---
+
+## skip_scroll_ctrl
+
+```lua
+(field) skip_scroll_ctrl: boolean
+```
+
+By default is set to true to allow ctrl+wheel or cmd+wheel on mac to scale
+the interface, you can set it to false on your parent widget to allow
+manually intercepting ctrl+wheel.
+
+---
+
+## super
+
+```lua
+(field) super: widget
+```
+
+A base widget
+
+---
+
+## textview
+
+```lua
+(field) textview: widget
+```
+
+A base widget
+
+---
+
+## title
+
+```lua
+(field) title: widget.label
+```
+
+Application name
+
+---
+
+## tooltip
+
+```lua
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
+```
+
+---
+
+## tooltip_command
+
+```lua
+(field) tooltip_command: string?
+```
+
+---
+
+## type_name
+
+```lua
+(field) type_name: string
+```
+
+---
+
+## updated
+
+```lua
+(field) updated: boolean
+```
+
+---
+
+## v_scrollbar
+
+```lua
+(field) v_scrollbar: widget.scrollbar
+```
+
+---
+
+## version
+
+```lua
+(field) version: widget.label
+```
+
+Build version
+
+---
+
+## visible
+
+```lua
+(field) visible: boolean
+```
+
+---
+
+## website
+
+```lua
+(field) website: widget.button
+```
+
+Application website link
+
+---
+
+## zindex
+
+```lua
+(field) zindex: integer
+```
+
+---
+
+## core.aboutview.dialog
+
+Dialog host for the About contents.
+
+### NEWLINE
+
+```lua
+(field) NEWLINE: integer
+```
+
+Indicates on a widget.styledtext that a new line follows.
+
+---
+
+### __index
+
+```lua
+(field) __index: core.object
+```
+
+Base class providing OOP functionality for Lua.
+All classes in Pragtical inherit from Object.
+
+---
+
+### animations
+
+```lua
+(field) animations: widget.animation[]
+```
+
+---
+
+### background_color
+
+```lua
+(field) background_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+### border
+
+```lua
+(field) border: widget.border
+```
+
+Represents the border of a widget.
+
+---
+
+### capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
+
+---
+
+### captured_button
+
+```lua
+(field) captured_button: ('left'|'right')?
+```
+
+---
+
+### captured_widget
+
+```lua
+(field) captured_widget: widget
+```
+
+Widget that captured mouse events
+
+---
+
+### child_active
+
+```lua
+(field) child_active: widget|nil
+```
+
+A base widget
+
+---
+
+### childs
+
+```lua
+(field) childs: table<integer, widget>
+```
+
+---
+
+### clickable
+
+```lua
+(field) clickable: boolean
+```
+
+---
+
+### close
+
+```lua
+(field) close: widget.button
+```
+
+---
+
+### context
+
+```lua
+(field) context: 'application'|'session'
+```
+
+---
+
+### current_scale
+
+```lua
+(field) current_scale: number
+```
+
+---
+
+### cursor
+
+```lua
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizenesw'...(+2)
+```
+
+---
+
+### defer_draw
+
+```lua
+(field) defer_draw: boolean
+```
+
+---
+
+### draggable
+
+```lua
+(field) draggable: boolean
+```
+
+---
+
+### dragged
+
+```lua
+(field) dragged: boolean
+```
+
+---
+
+### explicit_update
+
+```lua
+(field) explicit_update: boolean
+```
+
+---
+
+### floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+### floating_closing
+
+```lua
+(field) floating_closing: boolean?
+```
+
+Whether input is disabled while a closing slide runs
+
+---
+
+### floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+### floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+### floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+### floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+### floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+### floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+### floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
+
+---
+
+### font
+
+```lua
+(field) font: string|renderer.font|widget.fontreference
+```
+
+Represents a reference to a font stored elsewhere.
+
+---
+
+### foreground_color
+
+```lua
+(field) foreground_color: renderer.color
+```
+
+Array of bytes that represents a color used by the rendering functions.
+
+---
+
+### h_scrollbar
+
+```lua
+(field) h_scrollbar: widget.scrollbar
+```
+
+---
+
+### has_focus
+
+```lua
+(field) has_focus: boolean
+```
+
+---
+
+### hovered_child
+
+```lua
+(field) hovered_child: widget?
+```
+
+Child that last received hover motion
+
+---
+
+### hovered_scrollbar
+
+```lua
+(field) hovered_scrollbar: boolean
+```
+
+---
+
+### input_text
+
+```lua
+(field) input_text: boolean
+```
+
+---
+
+### is_scrolling
+
+```lua
+(field) is_scrolling: boolean
+```
+
+---
+
+### label
+
+```lua
+(field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
+```
+
+---
+
+### mouse
+
+```lua
+(field) mouse: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+### mouse_is_hovering
+
+```lua
+(field) mouse_is_hovering: boolean
+```
+
+---
+
+### mouse_is_pressed
+
+```lua
+(field) mouse_is_pressed: boolean
+```
+
+---
+
+### mouse_press
+
+```lua
+(field) mouse_press: { button: 'left'|'right', child: widget? }?
+```
+
+---
+
+### mouse_selecting
+
+```lua
+(field) mouse_selecting: unknown
+```
+
+---
+
+### name
+
+```lua
+(field) name: string
+```
+
+---
+
+### next_zindex
+
+```lua
+(field) next_zindex: integer
+```
+
+---
+
+### panel
+
+```lua
+(field) panel: widget
+```
+
+A base widget
+
+---
+
+### parent
+
+```lua
+(field) parent: widget|nil
+```
+
+A base widget
+
+---
+
+### perform_update_size_position
+
+```lua
+(field) perform_update_size_position: boolean
+```
+
+---
+
+### position
+
+```lua
+(field) position: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+### prev_height
+
+```lua
+(field) prev_height: number?
+```
+
+---
+
+### prev_size
+
+```lua
+(field) prev_size: widget.position
+```
+
+Represents the position of a widget.
+
+---
+
+### prev_view
+
+```lua
+(field) prev_view: unknown
+```
+
+---
+
+### prev_width
+
+```lua
+(field) prev_width: number?
+```
+
+---
+
+### render_background
+
+```lua
+(field) render_background: boolean
+```
+
+---
+
+### scroll
+
+```lua
+(field) scroll: core.view.scroll
+```
+
+---
+
+### scrollable
+
+```lua
+(field) scrollable: boolean
+```
+
+---
+
+### set_focus
+
+```lua
+(field) set_focus: any
+```
+
+---
+
+### size
+
+```lua
+(field) size: widget.position
+```
+
+Modifying this property directly is not advised, use set_size() instead.
+
+---
+
+### skip_scroll_ctrl
+
+```lua
+(field) skip_scroll_ctrl: boolean
+```
+
+By default is set to true to allow ctrl+wheel or cmd+wheel on mac to scale
+the interface, you can set it to false on your parent widget to allow
+manually intercepting ctrl+wheel.
+
+---
+
+### super
+
+```lua
+(field) super: widget
+```
+
+A base widget
+
+---
+
+### textview
+
+```lua
+(field) textview: widget
+```
+
+A base widget
+
+---
+
+### title
+
+```lua
+(field) title: widget.label
+```
+
+---
+
+### tooltip
+
+```lua
+(field) tooltip: (string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)?
+```
+
+---
+
+### tooltip_command
+
+```lua
+(field) tooltip_command: string?
+```
+
+---
+
+### type_name
+
+```lua
+(field) type_name: string
+```
+
+---
+
+### updated
+
+```lua
+(field) updated: boolean
+```
+
+---
+
+### v_scrollbar
+
+```lua
+(field) v_scrollbar: widget.scrollbar
+```
+
+---
+
+### visible
+
+```lua
+(field) visible: boolean
+```
+
+---
+
+### zindex
+
+```lua
+(field) zindex: integer
+```
+
+---
+
+### from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
+---
+
+### __call
+
+```lua
+(method) core.object:__call(...any)
+  -> obj: core.object
+```
+
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
+
+---
+
+### __tostring
+
+```lua
+(method) widget:__tostring()
+  -> string
+```
+
+Useful for debugging.
+
+---
+
+### activate
+
+```lua
+(method) widget:activate()
+```
+
+Emitted to input_text widgets when clicked.
+
+---
+
+### add_child
+
+```lua
+(method) widget:add_child(child: widget)
+```
+
+Add a child widget, automatically assign a zindex if non set and sorts
+them in reverse order for better events matching.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+---
+
+### animate
+
+```lua
+(method) widget:animate(target?: table, properties: table<string, number>, options?: widget.animation.options)
+```
+
+Registers a new animation to be ran on the update cycle.
+
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+### bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### capture_mouse
+
+```lua
+(method) widget:capture_mouse(scrolling?: boolean, button?: 'left'|'right')
+```
+
+All mouse events will be directly sent to the widget even if mouse moves
+outside the widget region.
+
+```lua
+button:
+    | 'left'
+    | 'right'
+```
+
+@*param* `scrolling?`: `boolean` — Capture for scrolling
+
+@*param* `button?`: `'left'|'right'` — Defaults to left
+
+---
+
+### centered
+
+```lua
+(method) widget:centered()
+```
+
+Center the widget horizontally and vertically to the screen or parent widget.
+
+---
+
+### clamp_scroll_position
+
+```lua
+(method) core.view:clamp_scroll_position()
+```
+
+Clamp scroll position to valid range (0 to max scrollable size).
+Called automatically by update(). Override get_scrollable_size() to customize.
+
+---
+
+### deactivate
+
+```lua
+(method) widget:deactivate()
+```
+
+Emitted to input_text widgets on lost focus.
+
+---
+
+### destroy
+
+```lua
+(method) widget:destroy()
+```
+
+Hide the widget, release its floating placement, and recursively destroy its children.
+
+---
+
+### destroy_childs
+
+```lua
+(method) widget:destroy_childs()
+```
+
+Recursively destroy all childs from the widget.
+
+---
+
+### drag
+
+```lua
+(method) widget:drag(x: number, y: number)
+```
+
+Used internally when dragging is activated.
+
+---
+
+### draw
+
+```lua
+(method) widget:draw()
+  -> boolean
+```
+
+If visible draw the widget and returns true.
+
+---
+
+### draw_background
+
+```lua
+(method) widget.dialog:draw_background(color: renderer.color)
+```
+
+Paint the title as part of the normal Widget background pass.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Dialog background color
+
+---
+
+### draw_border
+
+```lua
+(method) widget:draw_border(x?: number, y?: number, w?: number, h?: number)
+```
+
+Draw the widget configured border or custom one.
+
+---
+
+### draw_scrollbar
+
+```lua
+(method) widget:draw_scrollbar()
+```
+
+---
+
+### draw_styled_text
+
+```lua
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+  -> width: integer
+  2. height: integer
+```
+
+Render or calculate the size of the specified range of elements
+in a styled text elemet.
+
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
+---
+
+### draw_text_multiline
+
+```lua
+(method) widget:draw_text_multiline(font: string|renderer.font|widget.fontreference, text: string, x: integer, y: integer, color: renderer.color, only_calc: boolean)
+  -> resx: integer
+  2. resy: integer
+  3. width: integer
+  4. height: integer
+```
+
+Taken from the logview and modified it a tiny bit.
+TODO: something similar should be on pragtical core.
+
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
+---
+
+### extend
+
+```lua
+(method) core.object:extend()
+  -> cls: core.object
+```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
+
+---
+
+### extends
+
+```lua
+(method) core.object:extends(T: any)
+  -> extends: boolean
+```
+
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T`: `any` — Class to check inheritance from
+
+@*return* `extends`: `boolean` — True if object is T or inherits from T
+
+---
+
+### fit_to_window
+
+```lua
+(method) core.aboutview.dialog:fit_to_window()
+```
+
+Fit the scaled outer size inside the editor window and center the dialog.
+Preserve the current tab, contents and keyboard focus.
+
+---
+
+### get_bottom
+
+```lua
+(method) widget:get_bottom()
+  -> number
+```
+
+Get the bottom y coordinate relative to parent
+
+---
+
+### get_content_bounds
+
+```lua
+(method) core.view:get_content_bounds()
+  -> x1: number
+  2. y1: number
+  3. x2: number
+  4. y2: number
+```
+
+Get the content bounds in content coordinates (accounting for scroll).
+
+@*return* `x1`: `number` — Left edge
+
+@*return* `y1`: `number` — Top edge
+
+@*return* `x2`: `number` — Right edge
+
+@*return* `y2`: `number` — Bottom edge
+
+---
+
+### get_content_offset
+
+```lua
+(method) widget:get_content_offset()
+  -> x: number
+  2. y: number
+```
+
+Get the content origin while preserving fractional layout coordinates.
+Snap only the scroll displacement so descendants move by whole pixels
+together without shifting their borders relative to the parent's viewport.
+
+@*return* `x`: `number` — Screen x coordinate after horizontal scrolling
+
+@*return* `y`: `number` — Screen y coordinate after vertical scrolling
+
+---
+
+### get_floating_bounds
+
+```lua
+(method) widget:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the widget's outer screen rectangle, including its border.
+
+@*return* `x`: `number` — Outer screen x coordinate
+
+@*return* `y`: `number` — Outer screen y coordinate
+
+@*return* `w`: `number` — Width including the border
+
+@*return* `h`: `number` — Height including the border
+
+---
+
+### get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+### get_focus_target
+
+```lua
+(method) widget:get_focus_target()
+  -> target: core.view
+```
+
+Focus the active child or its TextView, falling back to this widget's input or itself.
+
+@*return* `target`: [`core.view`](/docs/api/core.view) — View that should receive keyboard focus
+
+---
+
+### get_font
+
+```lua
+(method) widget:get_font(font?: string|renderer.font|widget.fontreference)
+  -> renderer.font
+```
+
+Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+---
+
+### get_h_scrollable_size
+
+```lua
+(method) widget:get_h_scrollable_size()
+  -> number
+```
+
+Calculates the x scrollable size taking into account the right most
+widget or the size of the widget it self if greater.
+
+---
+
+### get_height
+
+```lua
+(method) widget:get_height()
+  -> number
+```
+
+Get height including borders.
+
+---
+
+### get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+@*return* `path`: `string?`
+
+---
+
+### get_name
+
+```lua
+(method) widget:get_name()
+  -> string
+```
+
+The name that is displayed on pragtical tabs.
+
+---
+
+### get_panel
+
+```lua
+(method) widget.dialog:get_panel()
+  -> widget
+```
+
+Returns the widget where you can add child widgets to this dialog.
+
+@*return*: [`widget`](/docs/api/widget)
+
+---
+
+### get_position
+
+```lua
+(method) widget:get_position()
+  -> widget.position
+```
+
+Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
+---
+
+### get_real_height
+
+```lua
+(method) widget:get_real_height()
+  -> number
+```
+
+Overall height of the widget accounting all visible child widgets.
+
+---
+
+### get_real_width
+
+```lua
+(method) widget:get_real_width()
+  -> number
+```
+
+Overall width of the widget accounting all visible child widgets.
+
+---
+
+### get_right
+
+```lua
+(method) widget:get_right()
+  -> number
+```
+
+Get the right x coordinate relative to parent
+
+---
+
+### get_scrollable_size
+
+```lua
+(method) widget:get_scrollable_size()
+  -> number
+```
+
+Calculates the y scrollable size taking into account the bottom most
+widget or the size of the widget it self if greater.
+
+---
+
+### get_size
+
+```lua
+(method) widget:get_size()
+  -> widget.position
+```
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
+---
+
+### get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
+
+@*return* `state`: `table?`
+
+---
+
+### get_width
+
+```lua
+(method) widget:get_width()
+  -> number
+```
+
+Get width including borders.
+
+---
+
+### hide
+
+```lua
+(method) core.aboutview.dialog:hide()
+```
+
+Slide the dialog upward when closing and release modal input immediately.
+
+---
+
+### hide_animated
+
+```lua
+(method) widget:hide_animated(lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Perform an animated hide.
+
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
+
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+### hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### hit_test
+
+```lua
+(method) widget:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Reuse widget hit testing for RootView's floating pointer routing.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the point lies over the widget
+
+---
+
+### is
+
+```lua
+(method) core.object:is(T: any)
+  -> is_exact: boolean
+```
+
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T`: `any` — Class to check against
+
+@*return* `is_exact`: `boolean` — True if object is exactly type T
+
+---
+
+### is_class_of
+
+```lua
+(method) core.object:is_class_of(T: any)
+  -> is_instance: boolean
+```
+
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T`: `any` — Object to check
+
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
+
+---
+
+### is_extended_by
+
+```lua
+(method) core.object:is_extended_by(T: any)
+  -> is_extended: boolean
+```
+
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T`: `any` — Object or class to check
+
+@*return* `is_extended`: `boolean` — True if T inherits from this class
+
+---
+
+### is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
+
+---
+
+### is_visible
+
+```lua
+(method) widget:is_visible()
+  -> boolean
+```
+
+Check if the widget is visible also recursing to the parent visibility.
+
+---
+
+### mouse_on_top
+
+```lua
+(method) widget:mouse_on_top(x: number, y: number)
+  -> boolean
+```
+
+Check if the given mouse coordinate is hovering the widget
+
+---
+
+### move_towards
+
+```lua
+(method) core.view:move_towards(t: table, k: string|number, dest: number, rate?: number, name?: string)
+```
+
+Smoothly animate a value towards a destination.
+Use this for animations instead of direct assignment.
+
+@*param* `t`: `table` — Table containing the value
+
+@*param* `k`: `string|number` — Key in table
+
+@*param* `dest`: `number` — Target value
+
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
+
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
+
+---
+
+### new
+
+```lua
+(method) core.aboutview.dialog:new()
+```
+
+Create a modal dialog that restores editor focus when dismissed.
+
+---
+
+### on_change
+
+```lua
+(method) widget:on_change(value: any)
+```
+
+Event emitted when the value of the widget changes.
+If applicable, child widgets should call this method
+when its value changes.
+
+---
+
+### on_click
+
+```lua
+(method) widget:on_click(button: "left"|"right", x: number, y: number)
+```
+
+Click event emitted on a succesful on_mouse_pressed
+and on_mouse_released events combo.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+---
+
+### on_close
+
+```lua
+(method) widget.dialog:on_close()
+```
+
+Called when the user clicks the close button of the dialog.
+
+---
+
+### on_file_dropped
+
+```lua
+(method) widget:on_file_dropped(filename: string, x: number, y: number)
+  -> processed: boolean
+```
+
+Send file drop event to hovered child.
+
+@*return* `processed`: `boolean`
+
+---
+
+### on_floating_dismiss
+
+```lua
+(method) widget:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Dismiss through the widget's normal hide lifecycle and subclass hooks.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Event requesting dismissal
+
+---
+
+### on_floating_visibility_changed
+
+```lua
+(method) core.aboutview.dialog:on_floating_visibility_changed(visible: boolean)
+```
+
+Prepare the dialog bounds before core places it or starts its opening slide.
+
+@*param* `visible`: `boolean` — Whether the floating dialog is shown
+
+---
+
+### on_ime_text_editing
+
+```lua
+(method) core.view:on_ime_text_editing(text: string, start: number, length: number)
+```
+
+Handle IME (Input Method Editor) text composition events.
+Override for IME support in text editors. Called during composition.
+
+@*param* `text`: `string` — Composition text being edited
+
+@*param* `start`: `number` — Start position of selection within composition
+
+@*param* `length`: `number` — Length of selection within composition
+
+---
+
+### on_key_pressed
+
+```lua
+(method) core.view:on_key_pressed(stroke: string, ...any)
+  -> consumed: boolean?
+```
+
+Handle a floating view's keyboard input before command dispatch.
+Override and return true to consume the normalized key binding.
+
+@*param* `stroke`: `string` — Normalized key binding, such as "ctrl+return"
+
+@*param*: `any` — Additional arguments forwarded by the keyboard handler
+
+@*return* `consumed`: `boolean?` — Whether the event was handled
+
+---
+
+### on_mouse_capture_lost
+
+```lua
+(method) widget:on_mouse_capture_lost()
+```
+
+End a pointer gesture without emitting a click. Override to clear drag state.
+
+---
+
+### on_mouse_enter
+
+```lua
+(method) widget:on_mouse_enter(x: any, y: any, dx: any, dy: any)
+```
+
+Emitted once when the mouse hovers the widget.
+
+---
+
+### on_mouse_leave
+
+```lua
+(method) widget:on_mouse_leave(x: any, y: any, dx: any, dy: any)
+```
+
+Emitted once when the mouse leaves the widget.
+
+---
+
+### on_mouse_left
+
+```lua
+(method) widget:on_mouse_left()
+```
+
+---
+
+### on_mouse_moved
+
+```lua
+(method) widget:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+  -> boolean
+```
+
+Besides the on_mouse_moved this event emits on_mouse_enter
+and on_mouse_leave for easy hover effects. Also, if the
+widget is scrollable and pressed this will drag it unless
+there is an active input_text child active.
+
+---
+
+### on_mouse_pressed
+
+```lua
+(method) widget:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
+  -> processed: boolean
+```
+
+Send mouse pressed events to hovered child or starts dragging if enabled.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+@*return* `processed`: `boolean`
+
+---
+
+### on_mouse_released
+
+```lua
+(method) widget:on_mouse_released(button: "left"|"right", x: number, y: number)
+  -> processed: boolean
+```
+
+Send release to the pressed target, even outside its bounds.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+@*return* `processed`: `boolean`
+
+---
+
+### on_mouse_wheel
+
+```lua
+(method) widget:on_mouse_wheel(y: number, x: number)
+  -> boolean
+```
+
+---
+
+### on_scale_change
+
+```lua
+(method) core.aboutview.dialog:on_scale_change(new_scale: number, prev_scale: number)
+```
+
+Resize and recenter the shown dialog before laying out its scaled controls.
+
+@*param* `new_scale`: `number` — Updated editor scale
+
+@*param* `prev_scale`: `number` — Previous editor scale
+
+---
+
+### on_text_input
+
+```lua
+(method) widget:on_text_input(text: string)
+  -> processed: boolean
+```
+
+Redirects any text input to active child with the input_text flag.
+
+@*return* `processed`: `boolean`
+
+---
+
+### on_touch_moved
+
+```lua
+(method) core.view:on_touch_moved(x: number, y: number, dx: number, dy: number, i: number)
+```
+
+Handle touch move events (touchscreen/trackpad gestures).
+Override for touch-specific behavior. Base implementation handles scrolling.
+
+@*param* `x`: `number` — Current touch x coordinate
+
+@*param* `y`: `number` — Current touch y coordinate
+
+@*param* `dx`: `number` — Delta x since last position
+
+@*param* `dy`: `number` — Delta y since last position
+
+@*param* `i`: `number` — Touch finger/pointer index
+
+---
+
+### owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
+
+---
+
+### release_mouse
+
+```lua
+(method) widget:release_mouse(skip_cancel?: boolean)
+```
+
+Release this widget's capture and clear capture state on its ancestors.
+
+@*param* `skip_cancel?`: `boolean` — Skip the cancellation callback when already handling capture loss
+
+---
+
+### remove_child
+
+```lua
+(method) widget:remove_child(child: widget)
+```
+
+Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+---
+
+### run_animations
+
+```lua
+(method) widget:run_animations()
+```
+
+Runs all registered animations removing duplicated and finished ones.
+
+---
+
+### schedule_update
+
+```lua
+(method) widget:schedule_update(delayed: any)
+```
+
+Schedule a core update and redraw. Since widgets try to not fire updates
+and draws to child widgets to reduce cpu consumption this function can be
+used when a re-update and re-draw is strictly needed.
+
+---
+
+### scrollbar_dragging
+
+```lua
+(method) core.view:scrollbar_dragging()
+  -> dragging: boolean
+```
+
+Check if user is currently dragging either scrollbar.
+
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
+
+---
+
+### scrollbar_hovering
+
+```lua
+(method) core.view:scrollbar_hovering()
+  -> hovering: boolean
+```
+
+Check if mouse is hovering over either scrollbar track.
+
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
+
+---
+
+### scrollbar_overlaps_point
+
+```lua
+(method) core.view:scrollbar_overlaps_point(x: number, y: number)
+  -> overlaps: boolean
+```
+
+Check if a screen point overlaps either scrollbar.
+Useful for determining cursor style or handling clicks.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
+
+---
+
+### set_border_width
+
+```lua
+(method) widget:set_border_width(width: integer)
+```
+
+Set the widget border size and appropriately re-set the widget size.
+
+---
+
+### set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### set_floating_bounds
+
+```lua
+(method) widget.dialog:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Keep the dialog chrome inside bounds constrained by the floating layout.
+Oversized panel contents remain accessible through the panel's scrollbars.
+
+@*param* `x`: `number` — Outer screen x coordinate
+
+@*param* `y`: `number` — Outer screen y coordinate
+
+@*param* `w`: `number` — Width including the border
+
+@*param* `h`: `number` — Height including the border
+
+---
+
+### set_label
+
+```lua
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
+```
+
+A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+### set_position
+
+```lua
+(method) widget:set_position(x?: integer, y?: integer)
+```
+
+Set the position of the widget and updates the child absolute coordinates
+
+---
+
+### set_size
+
+```lua
+(method) widget:set_size(width?: integer, height?: integer)
+```
+
+---
+
+### set_target_size
+
+```lua
+(method) widget:set_target_size(axis: string|'x'|'y', value: number)
+  -> boolean
+```
+
+Called by pragtical node system to properly resize the widget.
+
+```lua
+axis:
+    | 'x'
+    | 'y'
+```
+
+---
+
+### set_title
+
+```lua
+(method) widget.dialog:set_title(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
+```
+
+Change the dialog title.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+### set_tooltip
+
+```lua
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
+```
+
+Text displayed when the widget is hovered.
+If a command name is also given its associated binding will be displayed
+as part of the tooltip.
+
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+### show
+
+```lua
+(method) widget.dialog:show()
+```
+
+Calculate the dialog size, centers it relative to screen and shows it.
+
+---
+
+### show_animated
+
+```lua
+(method) widget:show_animated(lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Perform an animated show.
+
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
+
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+### show_floating
+
+```lua
+(method) core.view:show_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Show or raise the view in RootView's floating layer and apply its focus policy.
+Requires a view detached from its node and parent container.
+Reopening cancels a pending close and its completion callback.
+Disabled transitions apply placement and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+### supports_text_input
+
+```lua
+(method) core.view:supports_text_input()
+  -> boolean
+```
+
+Whether this view accepts text input (enables IME).
+Override and return true for text editors and input fields.
+
+---
+
+### swap_active_child
+
+```lua
+(method) widget:swap_active_child(child?: widget)
+```
+
+Replaces current active child with a new one and calls the
+activate/deactivate events of the child. This is especially
+used to send text input events to widgets with input_text support.
+
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
+
+---
+
+### toggle_background
+
+```lua
+(method) widget:toggle_background(enable?: boolean)
+```
+
+When set to false the background rendering is disabled.
+
+---
+
+### toggle_visible
+
+```lua
+(method) widget:toggle_visible(animated?: boolean, lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Toggle visibility of widget.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+### try_close
+
+```lua
+(method) core.view:try_close(do_close: function)
+```
+
+Called when view is requested to close (e.g., tab close button).
+Override to show confirmation dialogs for unsaved changes.
+Example: `core.command_view:enter("Save?", \{submit = do_close\})`
+
+@*param* `do_close`: `function` — Call this function to actually close the view
+
+---
+
+### update
+
+```lua
+(method) widget:update()
+  -> boolean
+```
+
+If visible execute the widget calculations and returns true.
+
+---
+
+### update_floating
+
+```lua
+(method) core.view:update_floating()
+```
+
+Update anchor placement or advance an opening or closing slide.
+RootView calls this before update() for each shown floating view.
+Completes removal and invokes the transition callback when a slide finishes.
+
+---
+
+### update_if_scaled
+
+```lua
+(method) widget:update_if_scaled()
+```
+
+Explicitly call the widget update procedure when the scale change even if
+the widget is not visible.
+
+---
+
+### update_position
+
+```lua
+(method) widget:update_position(recursive?: boolean)
+```
+
+Called on the update function to be able to scroll the child widgets.
+
+@*param* `recursive?`: `boolean` — Update descendants; defaults to true.
+
+---
+
+### update_scrollbar
+
+```lua
+(method) core.view:update_scrollbar()
+```
+
+Update scrollbar positions and sizes.
+Called automatically by update(). Rarely needs to be called manually.
+
+---
+
+### update_size_position
+
+```lua
+(method) core.aboutview.dialog:update_size_position()
+```
+
+Lay out the dialog header and panel without resizing its outer bounds.
+Widget sizes exclude borders; set_size() expects sizes including borders.
+
+---
+
+## from_state
+
+```lua
+function core.view.from_state(state: table)
+  -> view: (core.view)?
+```
+
+Create and initialize a new view instance from a previously saved state.
+
+This function is called when restoring workspace/session state.
+Implementations are responsible for:
+  * creating the view instance
+  * applying any persisted state
+
+If loading the instance failed nil will be returned.
+
+@*return* `view`: `(`[`core.view`](/docs/api/core.view)`)?`
+
+---
+
+## show_dialog
+
+```lua
+function core.aboutview.show_dialog()
+  -> dialog: core.aboutview.dialog
+```
+
+Show or raise the modal About dialog, fitting it to the editor window.
+Escape and the title-bar close button restore the previous editor focus.
+
+@*return* `dialog`: [`core.aboutview.dialog`](/docs/api/core.aboutview#coreaboutviewdialog) — Shown dialog, reused on subsequent calls
+
+---
+
+## __call
+
+```lua
+(method) core.object:__call(...any)
+  -> obj: core.object
+```
+
+Metamethod allowing class to be called like a constructor.
+Enables syntax: `local obj = MyClass(args)` instead of `MyClass:new(args)`
+Automatically creates instance and calls new() with provided arguments.
+
+@*return* `obj`: [`core.object`](/docs/api/core.object) — The new instance of the class
+
+---
+
+## __tostring
+
+```lua
+(method) widget:__tostring()
+  -> string
+```
+
+Useful for debugging.
+
+---
+
+## activate
+
+```lua
+(method) widget:activate()
+```
+
+Emitted to input_text widgets when clicked.
+
+---
+
+## add_child
+
+```lua
+(method) widget:add_child(child: widget)
+```
+
+Add a child widget, automatically assign a zindex if non set and sorts
+them in reverse order for better events matching.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+---
+
+## animate
+
+```lua
+(method) widget:animate(target?: table, properties: table<string, number>, options?: widget.animation.options)
+```
+
+Registers a new animation to be ran on the update cycle.
+
+@*param* `target?`: `table` — If nil assumes properties belong to widget it self.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## capture_mouse
+
+```lua
+(method) widget:capture_mouse(scrolling?: boolean, button?: 'left'|'right')
+```
+
+All mouse events will be directly sent to the widget even if mouse moves
+outside the widget region.
+
+```lua
+button:
+    | 'left'
+    | 'right'
+```
+
+@*param* `scrolling?`: `boolean` — Capture for scrolling
+
+@*param* `button?`: `'left'|'right'` — Defaults to left
+
+---
+
+## centered
+
+```lua
+(method) widget:centered()
+```
+
+Center the widget horizontally and vertically to the screen or parent widget.
+
+---
+
+## clamp_scroll_position
+
+```lua
+(method) core.view:clamp_scroll_position()
+```
+
+Clamp scroll position to valid range (0 to max scrollable size).
+Called automatically by update(). Override get_scrollable_size() to customize.
+
+---
+
+## deactivate
+
+```lua
+(method) widget:deactivate()
+```
+
+Emitted to input_text widgets on lost focus.
+
+---
+
+## destroy
+
+```lua
+(method) widget:destroy()
+```
+
+Hide the widget, release its floating placement, and recursively destroy its children.
+
+---
+
+## destroy_childs
+
+```lua
+(method) widget:destroy_childs()
+```
+
+Recursively destroy all childs from the widget.
+
+---
+
+## drag
+
+```lua
+(method) widget:drag(x: number, y: number)
+```
+
+Used internally when dragging is activated.
+
+---
+
+## draw
+
+```lua
+(method) widget:draw()
+  -> boolean
+```
+
+If visible draw the widget and returns true.
+
+---
+
+## draw_background
+
+```lua
+(method) core.view:draw_background(color: renderer.color)
+```
+
+Draw a solid background color for the entire view.
+Commonly called at the start of draw() methods.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+---
+
+## draw_border
+
+```lua
+(method) widget:draw_border(x?: number, y?: number, w?: number, h?: number)
+```
+
+Draw the widget configured border or custom one.
+
+---
+
+## draw_scrollbar
+
+```lua
+(method) widget:draw_scrollbar()
+```
+
+---
+
+## draw_styled_text
+
+```lua
+(method) widget:draw_styled_text(text: table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, x: integer, y: integer, only_calc?: boolean, start_idx?: integer, end_idx?: integer)
+  -> width: integer
+  2. height: integer
+```
+
+Render or calculate the size of the specified range of elements
+in a styled text elemet.
+
+@*param* `text`: `table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
+---
+
+## draw_text_multiline
+
+```lua
+(method) widget:draw_text_multiline(font: string|renderer.font|widget.fontreference, text: string, x: integer, y: integer, color: renderer.color, only_calc: boolean)
+  -> resx: integer
+  2. resy: integer
+  3. width: integer
+  4. height: integer
+```
+
+Taken from the logview and modified it a tiny bit.
+TODO: something similar should be on pragtical core.
+
+@*param* `font`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*param* `color`: [`renderer.color`](/docs/api/renderer#renderercolor) — Array of bytes that represents a color used by the rendering functions.
+
+@*return* `resx`: `integer`
+
+@*return* `resy`: `integer`
+
+@*return* `width`: `integer`
+
+@*return* `height`: `integer`
+
+---
+
+## extend
+
+```lua
+(method) core.object:extend()
+  -> cls: core.object
+```
+
+Create a new class that inherits from this one.
+Returns a new class with this class as its parent.
+Example: `local MyClass = Object:extend()`
+
+@*return* `cls`: [`core.object`](/docs/api/core.object) — The new class table
+
+---
+
+## extends
+
+```lua
+(method) core.object:extends(T: any)
+  -> extends: boolean
+```
+
+Check if object inherits from the given type (inheritance-aware).
+Use this to check class hierarchy.
+Example: `view:extends(View)` returns true for View and all subclasses
+
+@*param* `T`: `any` — Class to check inheritance from
+
+@*return* `extends`: `boolean` — True if object is T or inherits from T
+
+---
+
+## get_bottom
+
+```lua
+(method) widget:get_bottom()
+  -> number
+```
+
+Get the bottom y coordinate relative to parent
+
+---
+
+## get_content_bounds
+
+```lua
+(method) core.view:get_content_bounds()
+  -> x1: number
+  2. y1: number
+  3. x2: number
+  4. y2: number
+```
+
+Get the content bounds in content coordinates (accounting for scroll).
+
+@*return* `x1`: `number` — Left edge
+
+@*return* `y1`: `number` — Top edge
+
+@*return* `x2`: `number` — Right edge
+
+@*return* `y2`: `number` — Bottom edge
+
+---
+
+## get_content_offset
+
+```lua
+(method) widget:get_content_offset()
+  -> x: number
+  2. y: number
+```
+
+Get the content origin while preserving fractional layout coordinates.
+Snap only the scroll displacement so descendants move by whole pixels
+together without shifting their borders relative to the parent's viewport.
+
+@*return* `x`: `number` — Screen x coordinate after horizontal scrolling
+
+@*return* `y`: `number` — Screen y coordinate after vertical scrolling
+
+---
+
+## get_floating_bounds
+
+```lua
+(method) widget:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the widget's outer screen rectangle, including its border.
+
+@*return* `x`: `number` — Outer screen x coordinate
+
+@*return* `y`: `number` — Outer screen y coordinate
+
+@*return* `w`: `number` — Width including the border
+
+@*return* `h`: `number` — Height including the border
+
+---
+
+## get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+## get_focus_target
+
+```lua
+(method) widget:get_focus_target()
+  -> target: core.view
+```
+
+Focus the active child or its TextView, falling back to this widget's input or itself.
+
+@*return* `target`: [`core.view`](/docs/api/core.view) — View that should receive keyboard focus
+
+---
+
+## get_font
+
+```lua
+(method) widget:get_font(font?: string|renderer.font|widget.fontreference)
+  -> renderer.font
+```
+
+Get the real renderer.font associated with a widget.font.
+
+@*param* `font?`: `string|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.fontreference`](/docs/api/widget#widgetfontreference) — Represents a reference to a font stored elsewhere.
+
+@*return*: [`renderer.font`](/docs/api/renderer#rendererfont)
+
+---
+
+## get_h_scrollable_size
+
+```lua
+(method) widget:get_h_scrollable_size()
+  -> number
+```
+
+Calculates the x scrollable size taking into account the right most
+widget or the size of the widget it self if greater.
+
+---
+
+## get_height
+
+```lua
+(method) widget:get_height()
+  -> number
+```
+
+Get height including borders.
+
+---
+
+## get_module
+
+```lua
+(method) core.view:get_module()
+  -> path: string?
+```
+
+Returns the module path of this view.
+
+This method resolves the Lua module name that loaded the concrete view
+class (for example `"core.view"`).
+
+If the view class cannot be associated with any loaded module, `nil`
+is returned.
+
+@*return* `path`: `string?`
+
+---
+
+## get_name
+
+```lua
+(method) widget:get_name()
+  -> string
+```
+
+The name that is displayed on pragtical tabs.
+
+---
+
+## get_position
+
+```lua
+(method) widget:get_position()
+  -> widget.position
+```
+
+Get the relative position in relation to parent
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
+---
+
+## get_real_height
+
+```lua
+(method) widget:get_real_height()
+  -> number
+```
+
+Overall height of the widget accounting all visible child widgets.
+
+---
+
+## get_real_width
+
+```lua
+(method) widget:get_real_width()
+  -> number
+```
+
+Overall width of the widget accounting all visible child widgets.
+
+---
+
+## get_right
+
+```lua
+(method) widget:get_right()
+  -> number
+```
+
+Get the right x coordinate relative to parent
+
+---
+
+## get_scrollable_size
+
+```lua
+(method) widget:get_scrollable_size()
+  -> number
+```
+
+Calculates the y scrollable size taking into account the bottom most
+widget or the size of the widget it self if greater.
+
+---
+
+## get_size
+
+```lua
+(method) widget:get_size()
+  -> widget.position
+```
+
+@*return*: [`widget.position`](/docs/api/widget#widgetposition)
+
+---
+
+## get_state
+
+```lua
+(method) core.view:get_state()
+  -> state: table?
+```
+
+Serialize this view into a persistable state table.
+
+This method is called when the editor is saving workspace/session state.
+The returned table must contain only plain Lua data (no functions,
+userdata, metatables, or cyclic references).
+
+Returning `nil` indicates that this view should NOT be restored when
+reloading the workspace.
+
+@*return* `state`: `table?`
+
+---
+
+## get_width
+
+```lua
+(method) widget:get_width()
+  -> number
+```
+
+Get width including borders.
+
+---
+
+## hide
+
+```lua
+(method) widget:hide()
+```
+
+Hide the widget.
+
+---
+
+## hide_animated
+
+```lua
+(method) widget:hide_animated(lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Perform an animated hide.
+
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
+
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## hit_test
+
+```lua
+(method) widget:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Reuse widget hit testing for RootView's floating pointer routing.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the point lies over the widget
+
+---
+
+## is
+
+```lua
+(method) core.object:is(T: any)
+  -> is_exact: boolean
+```
+
+Check if object is exactly of the given type (no inheritance check).
+Use this for strict type matching.
+Example: `view:is(DocView)` returns true only if view is a DocView, not a subclass
+
+@*param* `T`: `any` — Class to check against
+
+@*return* `is_exact`: `boolean` — True if object is exactly type T
+
+---
+
+## is_class_of
+
+```lua
+(method) core.object:is_class_of(T: any)
+  -> is_instance: boolean
+```
+
+Check if the given object is exactly an instance of this class.
+Inverse of is() - checks if T is an instance of self.
+Example: `DocView:is_class_of(obj)` checks if obj is exactly a DocView
+
+@*param* `T`: `any` — Object to check
+
+@*return* `is_instance`: `boolean` — True if T is exactly an instance of this class
+
+---
+
+## is_extended_by
+
+```lua
+(method) core.object:is_extended_by(T: any)
+  -> is_extended: boolean
+```
+
+Check if the given object/class inherits from this class.
+Inverse of extends() - checks if T is a subclass of self.
+Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
+
+@*param* `T`: `any` — Object or class to check
+
+@*return* `is_extended`: `boolean` — True if T inherits from this class
+
+---
+
+## is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
+
+---
+
+## is_visible
+
+```lua
+(method) widget:is_visible()
+  -> boolean
+```
+
+Check if the widget is visible also recursing to the parent visibility.
+
+---
+
+## mouse_on_top
+
+```lua
+(method) widget:mouse_on_top(x: number, y: number)
+  -> boolean
+```
+
+Check if the given mouse coordinate is hovering the widget
+
+---
+
+## move_towards
+
+```lua
+(method) core.view:move_towards(t: table, k: string|number, dest: number, rate?: number, name?: string)
+```
+
+Smoothly animate a value towards a destination.
+Use this for animations instead of direct assignment.
+
+@*param* `t`: `table` — Table containing the value
+
+@*param* `k`: `string|number` — Key in table
+
+@*param* `dest`: `number` — Target value
+
+@*param* `rate?`: `number` — Animation speed (0-1, default 0.5, higher = faster)
+
+@*param* `name?`: `string` — Transition name (for config.disabled_transitions)
+
+---
+
+## new
+
+```lua
+(method) core.aboutview:new(parent: widget)
+```
+
+Create the About contents inside an existing pane or dialog panel.
+
+@*param* `parent`: [`widget`](/docs/api/widget) — Container that provides the available width and height
+
+---
+
+## on_change
+
+```lua
+(method) widget:on_change(value: any)
+```
+
+Event emitted when the value of the widget changes.
+If applicable, child widgets should call this method
+when its value changes.
+
+---
+
+## on_click
+
+```lua
+(method) widget:on_click(button: "left"|"right", x: number, y: number)
+```
+
+Click event emitted on a succesful on_mouse_pressed
+and on_mouse_released events combo.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+---
+
+## on_file_dropped
+
+```lua
+(method) widget:on_file_dropped(filename: string, x: number, y: number)
+  -> processed: boolean
+```
+
+Send file drop event to hovered child.
+
+@*return* `processed`: `boolean`
+
+---
+
+## on_floating_dismiss
+
+```lua
+(method) widget:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Dismiss through the widget's normal hide lifecycle and subclass hooks.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Event requesting dismissal
+
+---
+
+## on_floating_visibility_changed
+
+```lua
+(method) widget:on_floating_visibility_changed(visible: boolean)
+```
+
+Synchronize widget visibility with RootView, including owner-driven popup removal.
+
+@*param* `visible`: `boolean` — Whether the floating widget remains shown
+
+---
+
+## on_ime_text_editing
+
+```lua
+(method) core.view:on_ime_text_editing(text: string, start: number, length: number)
+```
+
+Handle IME (Input Method Editor) text composition events.
+Override for IME support in text editors. Called during composition.
+
+@*param* `text`: `string` — Composition text being edited
+
+@*param* `start`: `number` — Start position of selection within composition
+
+@*param* `length`: `number` — Length of selection within composition
+
+---
+
+## on_key_pressed
+
+```lua
+(method) core.view:on_key_pressed(stroke: string, ...any)
+  -> consumed: boolean?
+```
+
+Handle a floating view's keyboard input before command dispatch.
+Override and return true to consume the normalized key binding.
+
+@*param* `stroke`: `string` — Normalized key binding, such as "ctrl+return"
+
+@*param*: `any` — Additional arguments forwarded by the keyboard handler
+
+@*return* `consumed`: `boolean?` — Whether the event was handled
+
+---
+
+## on_mouse_capture_lost
+
+```lua
+(method) widget:on_mouse_capture_lost()
+```
+
+End a pointer gesture without emitting a click. Override to clear drag state.
+
+---
+
+## on_mouse_enter
+
+```lua
+(method) widget:on_mouse_enter(x: any, y: any, dx: any, dy: any)
+```
+
+Emitted once when the mouse hovers the widget.
+
+---
+
+## on_mouse_leave
+
+```lua
+(method) widget:on_mouse_leave(x: any, y: any, dx: any, dy: any)
+```
+
+Emitted once when the mouse leaves the widget.
+
+---
+
+## on_mouse_left
+
+```lua
+(method) widget:on_mouse_left()
+```
+
+---
+
+## on_mouse_moved
+
+```lua
+(method) widget:on_mouse_moved(x: number, y: number, dx: number, dy: number)
+  -> boolean
+```
+
+Besides the on_mouse_moved this event emits on_mouse_enter
+and on_mouse_leave for easy hover effects. Also, if the
+widget is scrollable and pressed this will drag it unless
+there is an active input_text child active.
+
+---
+
+## on_mouse_pressed
+
+```lua
+(method) widget:on_mouse_pressed(button: "left"|"right", x: number, y: number, clicks: integer)
+  -> processed: boolean
+```
+
+Send mouse pressed events to hovered child or starts dragging if enabled.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+@*return* `processed`: `boolean`
+
+---
+
+## on_mouse_released
+
+```lua
+(method) widget:on_mouse_released(button: "left"|"right", x: number, y: number)
+  -> processed: boolean
+```
+
+Send release to the pressed target, even outside its bounds.
+
+```lua
+button:
+    | "left"
+    | "right"
+```
+
+@*return* `processed`: `boolean`
+
+---
+
+## on_mouse_wheel
+
+```lua
+(method) widget:on_mouse_wheel(y: number, x: number)
+  -> boolean
+```
+
+---
+
+## on_scale_change
+
+```lua
+(method) widget:on_scale_change(new_scale: number, prev_scale: number)
+```
+
+Can be overriden by widgets to listen for scale change events to apply
+any neccesary changes in sizes, padding, etc...
+
+---
+
+## on_text_input
+
+```lua
+(method) widget:on_text_input(text: string)
+  -> processed: boolean
+```
+
+Redirects any text input to active child with the input_text flag.
+
+@*return* `processed`: `boolean`
+
+---
+
+## on_touch_moved
+
+```lua
+(method) core.view:on_touch_moved(x: number, y: number, dx: number, dy: number, i: number)
+```
+
+Handle touch move events (touchscreen/trackpad gestures).
+Override for touch-specific behavior. Base implementation handles scrolling.
+
+@*param* `x`: `number` — Current touch x coordinate
+
+@*param* `y`: `number` — Current touch y coordinate
+
+@*param* `dx`: `number` — Delta x since last position
+
+@*param* `dy`: `number` — Delta y since last position
+
+@*param* `i`: `number` — Touch finger/pointer index
+
+---
+
+## owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
+
+---
+
+## release_mouse
+
+```lua
+(method) widget:release_mouse(skip_cancel?: boolean)
+```
+
+Release this widget's capture and clear capture state on its ancestors.
+
+@*param* `skip_cancel?`: `boolean` — Skip the cancellation callback when already handling capture loss
+
+---
+
+## remove_child
+
+```lua
+(method) widget:remove_child(child: widget)
+```
+
+Remove a child widget.
+
+@*param* `child`: [`widget`](/docs/api/widget) — A base widget
+
+---
+
+## run_animations
+
+```lua
+(method) widget:run_animations()
+```
+
+Runs all registered animations removing duplicated and finished ones.
+
+---
+
+## schedule_update
+
+```lua
+(method) widget:schedule_update(delayed: any)
+```
+
+Schedule a core update and redraw. Since widgets try to not fire updates
+and draws to child widgets to reduce cpu consumption this function can be
+used when a re-update and re-draw is strictly needed.
+
+---
+
+## scrollbar_dragging
+
+```lua
+(method) core.view:scrollbar_dragging()
+  -> dragging: boolean
+```
+
+Check if user is currently dragging either scrollbar.
+
+@*return* `dragging`: `boolean` — True if scrollbar drag is in progress
+
+---
+
+## scrollbar_hovering
+
+```lua
+(method) core.view:scrollbar_hovering()
+  -> hovering: boolean
+```
+
+Check if mouse is hovering over either scrollbar track.
+
+@*return* `hovering`: `boolean` — True if mouse is over scrollbar
+
+---
+
+## scrollbar_overlaps_point
+
+```lua
+(method) core.view:scrollbar_overlaps_point(x: number, y: number)
+  -> overlaps: boolean
+```
+
+Check if a screen point overlaps either scrollbar.
+Useful for determining cursor style or handling clicks.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `overlaps`: `boolean` — True if point is over vertical or horizontal scrollbar
+
+---
+
+## set_border_width
+
+```lua
+(method) widget:set_border_width(width: integer)
+```
+
+Set the widget border size and appropriately re-set the widget size.
+
+---
+
+## set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## set_floating_bounds
+
+```lua
+(method) widget:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Apply outer popup bounds using the widget's border-aware size and position setters.
+Pass dimensions unchanged: set_size() already accounts for the border.
+
+@*param* `x`: `number` — Outer screen x coordinate
+
+@*param* `y`: `number` — Outer screen y coordinate
+
+@*param* `w`: `number` — Width including the border
+
+@*param* `h`: `number` — Height including the border
+
+---
+
+## set_label
+
+```lua
+(method) widget:set_label(text: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>)
+```
+
+A text label for the widget, not all widgets support this.
+
+@*param* `text`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+## set_position
+
+```lua
+(method) widget:set_position(x?: integer, y?: integer)
+```
+
+Set the position of the widget and updates the child absolute coordinates
+
+---
+
+## set_size
+
+```lua
+(method) widget:set_size(width?: integer, height?: integer)
+```
+
+---
+
+## set_target_size
+
+```lua
+(method) widget:set_target_size(axis: string|'x'|'y', value: number)
+  -> boolean
+```
+
+Called by pragtical node system to properly resize the widget.
+
+```lua
+axis:
+    | 'x'
+    | 'y'
+```
+
+---
+
+## set_tooltip
+
+```lua
+(method) widget:set_tooltip(tooltip?: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, command?: string)
+```
+
+Text displayed when the widget is hovered.
+If a command name is also given its associated binding will be displayed
+as part of the tooltip.
+
+@*param* `tooltip?`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
+
+---
+
+## show
+
+```lua
+(method) widget:show()
+```
+
+Show the widget.
+
+---
+
+## show_animated
+
+```lua
+(method) widget:show_animated(lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Perform an animated show.
+
+@*param* `lock_x?`: `boolean` — Do not resize width while animating
+
+@*param* `lock_y?`: `boolean` — Do not resize height while animating
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## show_floating
+
+```lua
+(method) core.view:show_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Show or raise the view in RootView's floating layer and apply its focus policy.
+Requires a view detached from its node and parent container.
+Reopening cancels a pending close and its completion callback.
+Disabled transitions apply placement and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## supports_text_input
+
+```lua
+(method) core.view:supports_text_input()
+  -> boolean
+```
+
+Whether this view accepts text input (enables IME).
+Override and return true for text editors and input fields.
+
+---
+
+## swap_active_child
+
+```lua
+(method) widget:swap_active_child(child?: widget)
+```
+
+Replaces current active child with a new one and calls the
+activate/deactivate events of the child. This is especially
+used to send text input events to widgets with input_text support.
+
+@*param* `child?`: [`widget`](/docs/api/widget) — If nil deactivates current child
+
+---
+
+## toggle_background
+
+```lua
+(method) widget:toggle_background(enable?: boolean)
+```
+
+When set to false the background rendering is disabled.
+
+---
+
+## toggle_visible
+
+```lua
+(method) widget:toggle_visible(animated?: boolean, lock_x?: boolean, lock_y?: boolean, options?: widget.animation.options)
+```
+
+Toggle visibility of widget.
+
+@*param* `options?`: [`widget.animation.options`](/docs/api/widget#widgetanimationoptions)
+
+---
+
+## try_close
+
+```lua
+(method) core.view:try_close(do_close: function)
+```
+
+Called when view is requested to close (e.g., tab close button).
+Override to show confirmation dialogs for unsaved changes.
+Example: `core.command_view:enter("Save?", \{submit = do_close\})`
+
+@*param* `do_close`: `function` — Call this function to actually close the view
+
+---
+
+## update
+
+```lua
+(method) core.aboutview:update()
+  -> updated: boolean
+```
+
+Fill the parent panel and refresh layout after labels have updated their wrapping.
+
+@*return* `updated`: `boolean` — Whether this visible view was updated
+
+---
+
+## update_floating
+
+```lua
+(method) core.view:update_floating()
+```
+
+Update anchor placement or advance an opening or closing slide.
+RootView calls this before update() for each shown floating view.
+Completes removal and invokes the transition callback when a slide finishes.
+
+---
+
+## update_if_scaled
+
+```lua
+(method) widget:update_if_scaled()
+```
+
+Explicitly call the widget update procedure when the scale change even if
+the widget is not visible.
+
+---
+
+## update_position
+
+```lua
+(method) widget:update_position(recursive?: boolean)
+```
+
+Called on the update function to be able to scroll the child widgets.
+
+@*param* `recursive?`: `boolean` — Update descendants; defaults to true.
+
+---
+
+## update_positions
+
+```lua
+(method) core.aboutview:update_positions()
+```
+
+Center the information and reserve the remaining panel space for the tabs.
+Keep usable tab contents in short windows so the parent panel can scroll.
+
+---
+
+## update_scrollbar
+
+```lua
+(method) core.view:update_scrollbar()
+```
+
+Update scrollbar positions and sizes.
+Called automatically by update(). Rarely needs to be called manually.
+
+---
+
+## update_size_position
+
+```lua
+(method) widget:update_size_position()
+```
+
+Similar to update, but here you should perform expensive calculations that
+will get executed for a predefined period of time when a widget is
+initialized, scale has changed or a widget switched from hidden to visible.
+
+---
+

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 52
+sidebar_position: 54
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -18,6 +18,16 @@ local titleview = require "core.titleview"
 
 Base class providing OOP functionality for Lua.
 All classes in Pragtical inherit from Object.
+
+---
+
+## capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
 
 ---
 
@@ -40,8 +50,98 @@ All classes in Pragtical inherit from Object.
 ## cursor
 
 ```lua
-(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizev'
+(field) cursor: 'arrow'|'hand'|'ibeam'|'sizeh'|'sizenesw'...(+2)
 ```
+
+---
+
+## floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+## floating_closing
+
+```lua
+(field) floating_closing: boolean?
+```
+
+Whether input is disabled while a closing slide runs
+
+---
+
+## floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+## floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+## floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+## floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+## floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+## floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+## floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
 
 ---
 
@@ -58,6 +158,26 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ---
 
+## hit_test_bounds
+
+```lua
+(field) hit_test_bounds: table<string, number>?
+```
+
+Last supplied native geometry, including the interactive rectangle
+
+---
+
+## hit_test_enabled
+
+```lua
+(field) hit_test_enabled: boolean?
+```
+
+Whether native window hit testing is installed
+
+---
+
 ## hovered_item
 
 ```lua
@@ -70,6 +190,14 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 
 ```lua
 (field) hovered_scrollbar: boolean
+```
+
+---
+
+## mouse_selecting
+
+```lua
+(field) mouse_selecting: unknown
 ```
 
 ---
@@ -135,6 +263,8 @@ vertical-end-aligned, then transforms to the actual orientation/alignment.
 (field) visible: boolean
 ```
 
+Whether built-in window decorations are shown
+
 ---
 
 ## from_state
@@ -181,6 +311,19 @@ Automatically creates instance and calls new() with provided arguments.
 
 ---
 
+## bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
 ## clamp_scroll_position
 
 ```lua
@@ -195,8 +338,13 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 ## configure_hit_test
 
 ```lua
-(method) core.titleview:configure_hit_test(borderless: any)
+(method) core.titleview:configure_hit_test(borderless: boolean)
 ```
+
+Install native drag/resize regions, excluding the embedded menu from dragging.
+Unchanged geometry does not reinstall the native callback.
+
+@*param* `borderless`: `boolean` — Whether built-in decorations are active
 
 ---
 
@@ -205,6 +353,8 @@ Called automatically by update(). Override get_scrollable_size() to customize.
 ```lua
 (method) core.titleview:draw()
 ```
+
+Draw the shared title/menu row and synchronize its final laid-out native bounds.
 
 ---
 
@@ -238,6 +388,8 @@ Commonly called at the end of draw() methods.
 (method) core.titleview:draw_window_controls()
 ```
 
+Draw the minimize, maximize/restore, and close controls.
+
 ---
 
 ## draw_window_title
@@ -246,14 +398,20 @@ Commonly called at the end of draw() methods.
 (method) core.titleview:draw_window_title()
 ```
 
+Draw the logo, separate the embedded menu, and clip the remaining title space.
+
 ---
 
 ## each_control_item
 
 ```lua
 (method) core.titleview:each_control_item()
-  -> function
+  -> iterator: fun():table, number, number, number, number
 ```
+
+Iterate window controls with their glyph rectangles in screen coordinates.
+
+@*return* `iterator`: `fun():table, number, number, number, number` — Control, x, y, width, height
 
 ---
 
@@ -328,6 +486,65 @@ Accounts for scroll offset. Use for drawing content at correct position.
 
 ---
 
+## get_floating_bounds
+
+```lua
+(method) core.view:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the popup's outer rectangle in screen coordinates, including borders.
+Override together with set_floating_bounds() for composite views.
+
+@*return* `x`: `number` — Screen x coordinate
+
+@*return* `y`: `number` — Screen y coordinate
+
+@*return* `w`: `number` — Outer width in pixels
+
+@*return* `h`: `number` — Outer height in pixels
+
+---
+
+## get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+## get_focus_target
+
+```lua
+(method) core.titleview:get_focus_target()
+  -> target: nil
+```
+
+Preserve document focus when interacting with title controls or embedded menus.
+
+@*return* `target`: `nil` — Title chrome never takes keyboard focus
+
+---
+
 ## get_h_scrollable_size
 
 ```lua
@@ -339,6 +556,28 @@ Get the total scrollable width of the view's content.
 Used by horizontal scrollbar.
 
 @*return* `width`: `number` — Width in pixels (default: 0, no horizontal scroll)
+
+---
+
+## get_menu_bounds
+
+```lua
+(method) core.titleview:get_menu_bounds()
+  -> x: number
+  2. y: number
+  3. width: number
+  4. height: number
+```
+
+Get the menu/title area between the application logo and window controls.
+
+@*return* `x`: `number` — Screen x coordinate after the logo
+
+@*return* `y`: `number` — Screen y coordinate at the title bar's top
+
+@*return* `width`: `number` — Available width before the controls
+
+@*return* `height`: `number` — Title bar height
 
 ---
 
@@ -409,6 +648,41 @@ reloading the workspace.
 
 ---
 
+## hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## hit_test
+
+```lua
+(method) core.view:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Check whether a screen point lies inside the view's outer rectangle.
+Override for custom shapes or composites with additional hit regions.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the view contains the point
+
+---
+
 ## is
 
 ```lua
@@ -460,6 +734,21 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
 ---
 
+## is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
+
+---
+
 ## move_towards
 
 ```lua
@@ -487,6 +776,8 @@ Use this for animations instead of direct assignment.
 (method) core.titleview:new()
 ```
 
+Initialize built-in window decorations.
+
 ---
 
 ## on_file_dropped
@@ -509,6 +800,39 @@ Override to handle dropped files. Return true to consume event.
 
 ---
 
+## on_floating_dismiss
+
+```lua
+(method) core.view:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Handle a dismissal requested by Escape, an outside click, or window focus loss.
+The default implementation hides the view immediately; override for custom handling.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Event that requested dismissal
+
+---
+
+## on_floating_visibility_changed
+
+```lua
+(method) core.view:on_floating_visibility_changed(visible: boolean)
+```
+
+Called when showing a floating view or completing its removal.
+Override to synchronize widget visibility or clear popup controller state.
+
+@*param* `visible`: `boolean` — True on show, false when removal completes
+
+---
+
 ## on_ime_text_editing
 
 ```lua
@@ -526,11 +850,43 @@ Override for IME support in text editors. Called during composition.
 
 ---
 
+## on_key_pressed
+
+```lua
+(method) core.view:on_key_pressed(stroke: string, ...any)
+  -> consumed: boolean?
+```
+
+Handle a floating view's keyboard input before command dispatch.
+Override and return true to consume the normalized key binding.
+
+@*param* `stroke`: `string` — Normalized key binding, such as "ctrl+return"
+
+@*param*: `any` — Additional arguments forwarded by the keyboard handler
+
+@*return* `consumed`: `boolean?` — Whether the event was handled
+
+---
+
+## on_mouse_capture_lost
+
+```lua
+(method) core.view:on_mouse_capture_lost()
+```
+
+Cancel pointer gestures when RootView releases mouse capture without a click.
+Clears floating dragging, text selection, scrollbar dragging, and hover state.
+Override to clear any additional subclass gesture state.
+
+---
+
 ## on_mouse_left
 
 ```lua
 (method) core.titleview:on_mouse_left()
 ```
+
+Clear window-control and embedded-menu hover when leaving the title bar.
 
 ---
 
@@ -540,18 +896,24 @@ Override for IME support in text editors. Called during composition.
 (method) core.titleview:on_mouse_moved(px: number, py: number, ...any)
 ```
 
+Update embedded-menu hover and window-control hover without taking focus.
+
+@*param* `px`: `number` — Screen x coordinate
+
+@*param* `py`: `number` — Screen y coordinate
+
+@*param*: `any` — Pointer movement deltas
+
 ---
 
 ## on_mouse_pressed
 
 ```lua
-(method) core.view:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
+(method) core.titleview:on_mouse_pressed(button: 'left'|'right', x: number, y: number, clicks: integer)
   -> consumed: boolean?
 ```
 
-Handle mouse button press events.
-Override to handle clicks. Return true to consume event and prevent propagation.
-Base implementation handles scrollbar clicks.
+Route clicks on embedded labels to the application menu.
 
 ```lua
 button:
@@ -559,13 +921,15 @@ button:
     | 'right'
 ```
 
+@*param* `button`: `'left'|'right'` — Pressed button
+
 @*param* `x`: `number` — Screen x coordinate
 
 @*param* `y`: `number` — Screen y coordinate
 
-@*param* `clicks`: `integer` — Number of consecutive clicks (configurable with config.max_clicks)
+@*param* `clicks`: `integer` — Consecutive click count
 
-@*return* `consumed`: `boolean?` — True to consume event, false/nil to propagate
+@*return* `consumed`: `boolean?` — Whether an embedded menu consumed the press
 
 ---
 
@@ -574,6 +938,20 @@ button:
 ```lua
 (method) core.titleview:on_mouse_released(button: 'left'|'right', x: number, y: number)
 ```
+
+Complete a menu interaction or activate the hovered window control.
+
+```lua
+button:
+    | 'left'
+    | 'right'
+```
+
+@*param* `button`: `'left'|'right'` — Released button
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
 
 ---
 
@@ -600,6 +978,8 @@ Override for custom scroll behavior. Base implementation does nothing.
 ```lua
 (method) core.titleview:on_scale_change()
 ```
+
+Refresh the native title geometry after an interface scale change.
 
 ---
 
@@ -634,6 +1014,22 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 @*param* `dy`: `number` — Delta y since last position
 
 @*param* `i`: `number` — Touch finger/pointer index
+
+---
+
+## owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
 
 ---
 
@@ -681,6 +1077,62 @@ Useful for determining cursor style or handling clicks.
 
 ---
 
+## set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## set_floating_bounds
+
+```lua
+(method) core.view:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Set the popup's outer rectangle when RootView places, drags, or resizes it.
+Override for composites that need to update child layout or account for borders.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `w`: `number` — Outer width in pixels
+
+@*param* `h`: `number` — Outer height in pixels
+
+---
+
+## show_floating
+
+```lua
+(method) core.view:show_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Show or raise the view in RootView's floating layer and apply its focus policy.
+Requires a view detached from its node and parent container.
+Reopening cancels a pending close and its completion callback.
+Disabled transitions apply placement and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
 ## supports_text_input
 
 ```lua
@@ -712,6 +1164,31 @@ Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 ```lua
 (method) core.titleview:update()
 ```
+
+Keep the title height and maximize/restore button synchronized with the window.
+
+---
+
+## update_floating
+
+```lua
+(method) core.view:update_floating()
+```
+
+Update anchor placement or advance an opening or closing slide.
+RootView calls this before update() for each shown floating view.
+Completes removal and invokes the transition callback when a slide finishes.
+
+---
+
+## update_menu_bounds
+
+```lua
+(method) core.titleview:update_menu_bounds()
+```
+
+Supply application-menu placement while built-in decorations are visible.
+MenuView's node remains responsible for updating its animation once per frame.
 
 ---
 

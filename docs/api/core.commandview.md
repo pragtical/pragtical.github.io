@@ -1,5 +1,5 @@
 ---
-sidebar_position: 24
+sidebar_position: 25
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -48,6 +48,26 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## capture_text_input
+
+```lua
+(field) capture_text_input: boolean?
+```
+
+Receive text input while floating without taking focus
+
+---
+
+## center_height
+
+```lua
+(field) center_height: number
+```
+
+Maximum panel height reserved for stable centered placement
+
+---
+
 ## context
 
 ```lua
@@ -72,11 +92,129 @@ All classes in Pragtical inherit from Object.
 
 ---
 
+## disable_save
+
+```lua
+(field) disable_save: boolean?
+```
+
+Disable the Save and Save As commands when true.
+
+---
+
+## display_position
+
+```lua
+(field) display_position: "bottom"|"center"|"top"
+```
+
+Placement retained for the current prompt
+
+---
+
 ## doc
 
 ```lua
 (field) doc: core.doc
 ```
+
+---
+
+## dock_node
+
+```lua
+(field) dock_node: (core.node)?
+```
+
+Detached input node reused when returning to a bar placement
+
+---
+
+## floating
+
+```lua
+(field) floating: boolean
+```
+
+Whether the view uses floating placement
+
+---
+
+## floating_closing
+
+```lua
+(field) floating_closing: boolean
+```
+
+---
+
+## floating_destination
+
+```lua
+(field) floating_destination: (core.view.position)?
+```
+
+Settled position retained during a slide
+
+---
+
+## floating_gesture
+
+```lua
+(field) floating_gesture: (core.view.floating_gesture)?
+```
+
+Active pointer drag or resize
+
+---
+
+## floating_options
+
+```lua
+(field) floating_options: (core.view.floating_options)?
+```
+
+Placement ownership and input policy
+
+---
+
+## floating_position
+
+```lua
+(field) floating_position: (core.view.position)?
+```
+
+Persistent interpolation state for a slide
+
+---
+
+## floating_previous_focus
+
+```lua
+(field) floating_previous_focus: (core.view)?
+```
+
+Focus target to restore when hiding
+
+---
+
+## floating_transition
+
+```lua
+(field) floating_transition: (core.view.floating_transition)?
+```
+
+Active slide and callback
+
+---
+
+## floating_visible
+
+```lua
+(field) floating_visible: boolean?
+```
+
+Whether the view is registered, including closing slides
 
 ---
 
@@ -251,6 +389,36 @@ Mouse coordinates \{x, y\}
 
 ---
 
+## reset_suggestion_scroll
+
+```lua
+(field) reset_suggestion_scroll: boolean?
+```
+
+Reset scrolling to the first result after new results
+
+---
+
+## restore_suggestion_scroll
+
+```lua
+(field) restore_suggestion_scroll: { offset: number, target_offset: number }?
+```
+
+Pending restoration in logical rows
+
+---
+
+## reveal_suggestion
+
+```lua
+(field) reveal_suggestion: boolean?
+```
+
+Reveal keyboard selection on the next companion update
+
+---
+
 ## save_suggestion
 
 ```lua
@@ -315,6 +483,16 @@ List of suggestion items
 
 ---
 
+## suggestions_change_id
+
+```lua
+(field) suggestions_change_id: integer
+```
+
+Input revision represented by the results or completion
+
+---
+
 ## suggestions_first
 
 ```lua
@@ -352,6 +530,26 @@ Last visible suggestion index
 ```
 
 Scroll offset for suggestions list
+
+---
+
+## suggestions_query
+
+```lua
+(field) suggestions_query: string
+```
+
+Query used to generate the current results
+
+---
+
+## suggestions_view
+
+```lua
+(field) suggestions_view: core.view
+```
+
+Floating companion for suggestion input and scrolling
 
 ---
 
@@ -1364,6 +1562,111 @@ A leading period is optional. Empty or path-like values clear the hint.
 
 ---
 
+## core.commandview.snapshot
+
+Reusable prompt data, independent of callbacks, results, documents and animation.
+Offsets count rows from the first result, regardless of the prompt's placement.
+
+### last_selection
+
+```lua
+(field) last_selection: integer?
+```
+
+Active input selection index
+
+---
+
+### last_text
+
+```lua
+(field) last_text: string?
+```
+
+Previous input used for typeahead; defaults to text
+
+---
+
+### query
+
+```lua
+(field) query: string?
+```
+
+Query used to regenerate results; defaults to text
+
+---
+
+### save_suggestion
+
+```lua
+(field) save_suggestion: string?
+```
+
+Original input retained while browsing hidden history
+
+---
+
+### selections
+
+```lua
+(field) selections: integer[]?
+```
+
+Copied flat input selections: line1, col1, line2, col2
+
+---
+
+### suggestion_id
+
+```lua
+(field) suggestion_id: (string|number)?
+```
+
+Stable identity supplied by get_suggestion_id; missing results restore only the query
+
+---
+
+### suggestion_idx
+
+```lua
+(field) suggestion_idx: integer?
+```
+
+Selected result index; defaults to the first result
+
+---
+
+### suggestions_offset
+
+```lua
+(field) suggestions_offset: number?
+```
+
+Current list offset in logical rows; defaults to zero
+
+---
+
+### suggestions_target_offset
+
+```lua
+(field) suggestions_target_offset: number?
+```
+
+Target list offset in logical rows; defaults to current
+
+---
+
+### text
+
+```lua
+(field) text: string
+```
+
+Displayed input text
+
+---
+
 ## core.commandview.state
 
 Configuration state for a command prompt session.
@@ -1384,7 +1687,37 @@ Callback when command is cancelled
 (field) draw_text: fun(item: table, font: renderer.font, color: renderer.color, x: number, y: number, w: number, h: number)?
 ```
 
-Custom suggestion renderer
+Custom suggestion renderer; w excludes info, spacing and scrollbar, and output is clipped
+
+---
+
+### get_suggestion_id
+
+```lua
+(field) get_suggestion_id: (fun(item: table):string|number)?
+```
+
+Stable result identity for restoring a selection after reordering
+
+---
+
+### on_save_state
+
+```lua
+(field) on_save_state: fun(snapshot: core.commandview.snapshot, submitted: boolean)?
+```
+
+Called after cleanup and before submit/cancel; submitted means validation passed
+
+---
+
+### restore_state
+
+```lua
+(field) restore_state: (core.commandview.snapshot)?
+```
+
+Snapshot to restore with this prompt's callbacks
 
 ---
 
@@ -1503,6 +1836,30 @@ Automatically creates instance and calls new() with provided arguments.
 
 ---
 
+## apply_position
+
+```lua
+(method) core.commandview:apply_position()
+```
+
+Apply the configured placement once before opening a prompt.
+Reparent only the input node, preserving document panes and their divider state.
+
+---
+
+## bring_to_front
+
+```lua
+(method) core.view:bring_to_front()
+  -> view: core.view
+```
+
+Raise a shown floating view and its owned popups above the other floating views.
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
 ## clamp_scroll_position
 
 ```lua
@@ -1531,8 +1888,7 @@ Sets the input text to the selected suggestion's text.
 (method) core.commandview:draw()
 ```
 
-Draw the command view.
-Renders input text and defers suggestions box drawing.
+Draw the clipped prompt input and a border enclosing the floating palette.
 
 ---
 
@@ -1707,6 +2063,27 @@ Plugins that hide lines can override this to reveal the requested line.
 
 Enter command mode with a prompt.
 Activates the command view with specified label and options.
+Ignored while another prompt is already open.
+State recall is opt-in and session-only; callers own snapshots and their context rules.
+To highlight an initial result without filtering, pass restore_state with empty text
+and its suggestion_id, and provide get_suggestion_id to identify the results.
+
+---
+
+```lua
+local saved
+local function open_picker(items)
+  core.command_view:enter("Pick", \{
+    suggest = function(query) return common.fuzzy_match(items, query) end,
+    get_suggestion_id = function(item) return item.text end,
+    restore_state = saved,
+    on_save_state = function(snapshot, submitted)
+      saved = not submitted and snapshot or nil
+    end,
+    submit = function(text, item) --\[\[ use the selected item \]\] end,
+  \})
+end
+```
 
 @*param* `label`: `string` — Label text to display (": " will be appended)
 
@@ -1715,7 +2092,7 @@ Activates the command view with specified label and options.
 ## exit
 
 ```lua
-(method) core.commandview:exit(submitted?: boolean, inexplicit?: boolean)
+(method) core.commandview:exit(submitted?: boolean, inexplicit?: boolean, do_close?: fun())
 ```
 
 Exit command mode.
@@ -1724,6 +2101,8 @@ Restores previous view and calls cancel callback if not submitted.
 @*param* `submitted?`: `boolean` — True if command was submitted, false if cancelled
 
 @*param* `inexplicit?`: `boolean` — True if exit was automatic (e.g., focus lost)
+
+@*param* `do_close?`: `fun()` — Optional placement removal performed before session callbacks
 
 ---
 
@@ -1826,6 +2205,65 @@ Accounts for scroll offset. Use for drawing content at correct position.
 Get the full filename path for display (with home directory encoded).
 
 @*return* `filename`: `string` — Full path or name with asterisk if modified
+
+---
+
+## get_floating_bounds
+
+```lua
+(method) core.commandview:get_floating_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Include suggestions in the centered popup's outer bounds for shared placement.
+
+@*return* `x`: `number` — Screen x coordinate
+
+@*return* `y`: `number` — Screen y coordinate
+
+@*return* `w`: `number` — Panel width
+
+@*return* `h`: `number` — Combined input and suggestions height, including the border
+
+---
+
+## get_floating_drag_region
+
+```lua
+(method) core.view:get_floating_drag_region()
+  -> x: number?
+  2. y: number?
+  3. w: number?
+  4. h: number?
+```
+
+Get the screen rectangle where a floating view can be dragged.
+Override to restrict dragging to a header; defaults to the full popup bounds.
+
+@*return* `x`: `number?` — Screen x coordinate, or nil to disable dragging
+
+@*return* `y`: `number?` — Screen y coordinate
+
+@*return* `w`: `number?` — Region width
+
+@*return* `h`: `number?` — Region height
+
+---
+
+## get_focus_target
+
+```lua
+(method) core.view:get_focus_target()
+  -> target: (core.view)?
+```
+
+Get the view that should receive focus when this view is shown or clicked.
+Override for composites whose keyboard focus belongs to a descendant.
+
+@*return* `target`: `(`[`core.view`](/docs/api/core.view)`)?` — View to focus, or nil to preserve the current focus
 
 ---
 
@@ -2023,6 +2461,95 @@ Get line height for suggestion items.
 
 ---
 
+## get_suggestion_range
+
+```lua
+(method) core.commandview:get_suggestion_range(scroll: number, height: number)
+  -> first: integer
+  2. last: integer
+  3. offset: number
+```
+
+Find visible indexes from the current results instead of a previous prompt's cache.
+
+@*param* `scroll`: `number` — Effective vertical scroll offset in pixels
+
+@*param* `height`: `number` — Current suggestions viewport height
+
+@*return* `first`: `integer` — First visible suggestion index
+
+@*return* `last`: `integer` — Last visible suggestion index, less than first for an empty range
+
+@*return* `offset`: `number` — Visible range's fractional starting offset
+
+---
+
+## get_suggestion_row
+
+```lua
+(method) core.commandview:get_suggestion_row(index: integer)
+  -> y: number
+```
+
+Get a result's top offset in the scrollable list in its visual ordering.
+
+@*param* `index`: `integer` — Suggestion index
+
+@*return* `y`: `number` — Top offset in pixels before scrolling
+
+---
+
+## get_suggestion_scroll
+
+```lua
+(method) core.commandview:get_suggestion_scroll(height: number)
+  -> scroll: number
+```
+
+Get the current list's scroll offset, including a pending reset for new results.
+Drawing and input may run before a reopened companion receives its next update.
+
+@*param* `height`: `number` — Current suggestions viewport height
+
+@*return* `scroll`: `number` — Effective vertical scroll offset in pixels
+
+---
+
+## get_suggestions_bounds
+
+```lua
+(method) core.commandview:get_suggestions_bounds()
+  -> x: number
+  2. y: number
+  3. w: number
+  4. h: number
+```
+
+Get the animated suggestions rectangle, clipped to the editor viewport.
+
+@*return* `x`: `number` — Screen x coordinate
+
+@*return* `y`: `number` — Screen y coordinate
+
+@*return* `w`: `number` — Suggestions viewport width
+
+@*return* `h`: `number` — Animated viewport height
+
+---
+
+## get_suggestions_height
+
+```lua
+(method) core.commandview:get_suggestions_height()
+  -> height: number
+```
+
+Get the settled suggestions height before clipping to the available viewport.
+
+@*return* `height`: `number` — Requested height in pixels
+
+---
+
 ## get_text
 
 ```lua
@@ -2138,6 +2665,41 @@ Views with wraps or other row expansions should override this.
 
 ---
 
+## hide_floating
+
+```lua
+(method) core.view:hide_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Hide the floating view, close owned popups, cancel input, and restore focus.
+A closing slide delays removal while the view immediately stops receiving input.
+Disabled transitions remove the view and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional closing slide (to) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## hit_test
+
+```lua
+(method) core.view:hit_test(x: number, y: number)
+  -> inside: boolean
+```
+
+Check whether a screen point lies inside the view's outer rectangle.
+Override for custom shapes or composites with additional hit regions.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*return* `inside`: `boolean` — Whether the view contains the point
+
+---
+
 ## invalidate_visual_lines
 
 ```lua
@@ -2201,6 +2763,21 @@ Example: `View:is_extended_by(DocView)` checks if DocView inherits from View
 
 ---
 
+## is_floating_owner_visible
+
+```lua
+(method) core.view:is_floating_owner_visible()
+  -> visible: boolean?
+```
+
+Check whether floating popups owned by this view should remain visible.
+Docked owners must be active in their node; container children follow their parent.
+Override for composites with their own visibility rules.
+
+@*return* `visible`: `boolean?` — Falsy when the owner is hidden or its tab is inactive
+
+---
+
 ## is_line_visible
 
 ```lua
@@ -2222,6 +2799,19 @@ Return whether a document line contributes visual rows.
 Check if the mouse is hovering the suggestions box.
 
 @*return* `hovering`: `boolean` — True if mouse is over suggestions box
+
+---
+
+## is_open
+
+```lua
+(method) core.commandview:is_open()
+  -> open: boolean
+```
+
+Check whether a prompt is open, including one that has not received focus yet.
+
+@*return* `open`: `boolean` — True until the current prompt exits
 
 ---
 
@@ -2268,7 +2858,7 @@ Adjust selection based on snap type (word, line).
 Move suggestion selection by offset (for arrow keys/wheel).
 Handles wrapping, history cycling, and updates the input text.
 
-@*param* `dir`: `integer` — Direction to move (-1 for up/previous, 1 for down/next)
+@*param* `dir`: `integer` — Direction to move (1 for Up, -1 for Down)
 
 ---
 
@@ -2340,6 +2930,38 @@ Override to handle dropped files. Return true to consume event.
 
 ---
 
+## on_floating_dismiss
+
+```lua
+(method) core.view:on_floating_dismiss(reason: "escape"|"focuslost"|"outside")
+```
+
+Handle a dismissal requested by Escape, an outside click, or window focus loss.
+The default implementation hides the view immediately; override for custom handling.
+
+```lua
+reason:
+    | "escape"
+    | "outside"
+    | "focuslost"
+```
+
+@*param* `reason`: `"escape"|"focuslost"|"outside"` — Event that requested dismissal
+
+---
+
+## on_floating_visibility_changed
+
+```lua
+(method) core.commandview:on_floating_visibility_changed(visible: boolean)
+```
+
+Cancel a prompt removed through the floating lifecycle, including owner dismissal.
+
+@*param* `visible`: `boolean` — Whether the centered prompt is shown
+
+---
+
 ## on_ime_text_editing
 
 ```lua
@@ -2354,6 +2976,36 @@ Updates IME decoration and scrolls to keep composition visible.
 @*param* `start`: `integer` — Selection start within composition
 
 @*param* `length`: `integer` — Selection length within composition
+
+---
+
+## on_key_pressed
+
+```lua
+(method) core.view:on_key_pressed(stroke: string, ...any)
+  -> consumed: boolean?
+```
+
+Handle a floating view's keyboard input before command dispatch.
+Override and return true to consume the normalized key binding.
+
+@*param* `stroke`: `string` — Normalized key binding, such as "ctrl+return"
+
+@*param*: `any` — Additional arguments forwarded by the keyboard handler
+
+@*return* `consumed`: `boolean?` — Whether the event was handled
+
+---
+
+## on_mouse_capture_lost
+
+```lua
+(method) core.view:on_mouse_capture_lost()
+```
+
+Cancel pointer gestures when RootView releases mouse capture without a click.
+Clears floating dragging, text selection, scrollbar dragging, and hover state.
+Override to clear any additional subclass gesture state.
 
 ---
 
@@ -2491,6 +3143,22 @@ Override for touch-specific behavior. Base implementation handles scrolling.
 
 ---
 
+## owns_view
+
+```lua
+(method) core.view:owns_view(view?: core.view)
+  -> owned: boolean
+```
+
+Check whether a view is this view or belongs to it through a container or owner.
+Follows parent, subparent, and floating owner links while guarding against cycles.
+
+@*param* `view?`: [`core.view`](/docs/api/core.view) — Candidate view
+
+@*return* `owned`: `boolean` — Whether the candidate belongs to this view
+
+---
+
 ## position_from_offset
 
 ```lua
@@ -2540,6 +3208,39 @@ Convert screen coordinates to document line/column.
 @*return* `line`: `integer` — Line number
 
 @*return* `col`: `integer` — Column number
+
+---
+
+## restore_state
+
+```lua
+(method) core.commandview:restore_state(snapshot: core.commandview.snapshot)
+  -> restored: boolean
+```
+
+Restore an open prompt using its current provider exactly once, then restore the input.
+Result indexes and row offsets are clamped to the regenerated list and current viewport.
+A snapshot containing only text/query starts with the first result and initial scrolling.
+With get_suggestion_id, reordered results follow their identity and are revealed.
+If that result is gone, only the query is restored, discarding stale completion text.
+
+@*param* `snapshot`: [`core.commandview.snapshot`](/docs/api/core.commandview#corecommandviewsnapshot) — Prompt data, never modified by restoration
+
+@*return* `restored`: `boolean` — False when no prompt is open
+
+---
+
+## save_state
+
+```lua
+(method) core.commandview:save_state()
+  -> snapshot: (core.commandview.snapshot)?
+```
+
+Capture an open prompt without retaining its callbacks, results or input undo history.
+Pending edits are saved as a fresh query without invoking the suggestion provider.
+
+@*return* `snapshot`: `(`[`core.commandview.snapshot`](/docs/api/core.commandview#corecommandviewsnapshot)`)?` — Nil when no prompt is open
 
 ---
 
@@ -2613,6 +3314,43 @@ Useful for determining cursor style or handling clicks.
 
 ---
 
+## set_floating
+
+```lua
+(method) core.view:set_floating(enabled: boolean, options?: core.view.floating_options)
+  -> view: core.view
+```
+
+Enable or disable floating placement and configure popup input and ownership.
+Call show_floating() to show the view after enabling this mode.
+Detach it from its node or parent container before showing. Disabling hides it.
+
+@*param* `enabled`: `boolean` — Whether the view should use floating placement
+
+@*param* `options?`: [`core.view.floating_options`](/docs/api/core.view#coreviewfloating_options) — Options merged with existing ones when enabling
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## set_floating_bounds
+
+```lua
+(method) core.commandview:set_floating_bounds(x: number, y: number, w: number, h: number)
+```
+
+Apply composite popup placement without assigning the list's height to the input.
+
+@*param* `x`: `number` — Screen x coordinate
+
+@*param* `y`: `number` — Screen y coordinate
+
+@*param* `w`: `number` — Outer panel width
+
+@*param* `h`: `number` — Outer panel height
+
+---
+
 ## set_hidden_suggestions
 
 ```lua
@@ -2634,6 +3372,24 @@ Set the input text and optionally select it.
 @*param* `text`: `string` — Text to set
 
 @*param* `select?`: `boolean` — If true, select all text
+
+---
+
+## show_floating
+
+```lua
+(method) core.view:show_floating(options?: core.view.floating_transition)
+  -> view: core.view
+```
+
+Show or raise the view in RootView's floating layer and apply its focus policy.
+Requires a view detached from its node and parent container.
+Reopening cancels a pending close and its completion callback.
+Disabled transitions apply placement and run the completion callback immediately.
+
+@*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
+
+@*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
 
 ---
 
@@ -2664,13 +3420,13 @@ Check if this view accepts text input.
 ## try_close
 
 ```lua
-(method) core.docview:try_close(do_close: function)
+(method) core.commandview:try_close(do_close: fun())
 ```
 
-Attempt to close the view, prompting to save if document is dirty.
-Shows "Unsaved Changes" dialog if this is the last view of a dirty document.
+Close a prompt without treating its temporary input as an unsaved document.
+Run cancellation after removal so its callback can open a replacement prompt.
 
-@*param* `do_close`: `function` — Callback to execute when close is confirmed
+@*param* `do_close`: `fun()` — Continuation that removes the floating prompt
 
 ---
 
@@ -2682,6 +3438,17 @@ Shows "Unsaved Changes" dialog if this is the last view of a dirty document.
 
 Update the command view state each frame.
 Handles typeahead, animations, and auto-exit on focus loss.
+
+---
+
+## update_floating
+
+```lua
+(method) core.commandview:update_floating()
+```
+
+Center using the maximum visible result count so filtering keeps the top fixed.
+Recompute scale and window limits while retaining the closing panel's anchor.
 
 ---
 
@@ -2710,11 +3477,13 @@ Called automatically by update(). Rarely needs to be called manually.
 ## update_suggestions
 
 ```lua
-(method) core.commandview:update_suggestions()
+(method) core.commandview:update_suggestions(query?: string)
 ```
 
 Update suggestions list by calling suggest callback.
 Normalizes string suggestions to table format \{text = string\}.
+
+@*param* `query?`: `string` — Query to regenerate instead of the displayed input
 
 ---
 

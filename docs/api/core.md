@@ -23,8 +23,10 @@ local core = require "core"
 ## active_view
 
 ```lua
-(field) active_view: any
+(field) active_view: core.view
 ```
+
+Base view.
 
 ---
 
@@ -161,8 +163,10 @@ The actual maximum frames per second that can be rendered.
 ## last_active_view
 
 ```lua
-(field) last_active_view: any
+(field) last_active_view: core.view
 ```
+
+Base view.
 
 ---
 
@@ -173,6 +177,16 @@ The actual maximum frames per second that can be rendered.
 ```
 
 log functions depend on config so initialize after loading config
+
+---
+
+## menu_view
+
+```lua
+(field) menu_view: core.menuview
+```
+
+Responsive menu bar with an instance-owned registry and optional explicit bounds.
 
 ---
 
@@ -191,8 +205,10 @@ Multiple dialogs queue automatically.
 ## next_active_view
 
 ```lua
-(field) next_active_view: any
+(field) next_active_view: core.view
 ```
+
+Base view.
 
 ---
 
@@ -587,9 +603,16 @@ function core.get_view_title(view: any)
 ## get_views_referencing_doc
 
 ```lua
-function core.get_views_referencing_doc(doc: any)
-  -> table
+function core.get_views_referencing_doc(doc: core.doc)
+  -> views: core.view[]
 ```
+
+Find docked and shown floating views retaining a document, including closing popups.
+Floating views keep their documents alive until removal from RootView's registry.
+
+@*param* `doc`: [`core.doc`](/docs/api/core.doc) — Document to find
+
+@*return* `views`: [`core.view`](/docs/api/core.view)`[]` — Views referencing the document
 
 ---
 
@@ -888,6 +911,7 @@ loop by calling core.run_step() on every frame.
 ```lua
 function core.run_step()
   -> true: boolean
+  2. wait: number?
 ```
 
 Execute one frame of the main loop.
@@ -895,6 +919,8 @@ Execute one frame of the main loop.
 Called by C's SDL_AppIterate on every frame.
 
 @*return* `true`: `boolean` — to keep running, false to quit or restart.
+
+@*return* `wait`: `number?` — Seconds until the next iteration; infinity waits for an event.
 
 ---
 
@@ -918,8 +944,13 @@ The callback will be called with the result.
 ## set_active_view
 
 ```lua
-function core.set_active_view(view: any)
+function core.set_active_view(view: core.view)
 ```
+
+Set keyboard focus, deferring requests blocked by a modal popup or force_focus.
+Accepted requests reset IME state and update native text input for the target view.
+
+@*param* `view`: [`core.view`](/docs/api/core.view) — Requested focus target
 
 ---
 

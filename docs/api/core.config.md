@@ -1,5 +1,5 @@
 ---
-sidebar_position: 26
+sidebar_position: 27
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -107,7 +107,7 @@ Disables system-drawn window borders.
 When set to true, Pragtical draws its own window decorations,
 which can be useful for certain setups.
 
-Defaults to false.
+Defaults to true.
 
 ---
 
@@ -124,6 +124,20 @@ from the start of the line (UTF-8 aware).
 When set to `"byte"`, the column is based on the raw byte offset.
 
 Defaults to `"char"`.
+
+---
+
+## commandview_position
+
+```lua
+(field) commandview_position: "bottom"|"center"|"top"
+```
+
+Placement of command prompts and the command palette.
+Changes apply the next time a prompt opens. Bottom and top reserve an input
+bar; center floats the input and suggestions without resizing editor panes.
+
+The default is "bottom".
 
 ---
 
@@ -613,6 +627,18 @@ The default is false.
 Show or hide the line numbers.
 
 The default is true
+
+---
+
+## show_menubar
+
+```lua
+(field) show_menubar: boolean
+```
+
+Visibility of the responsive application menu bar.
+
+Defaults to true.
 
 ---
 

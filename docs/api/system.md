@@ -945,7 +945,7 @@ Set the content of the clipboard.
 ## set_cursor
 
 ```lua
-function system.set_cursor(type: string|"arrow"|"hand"|"ibeam"|"sizeh"...(+1))
+function system.set_cursor(type: string|"arrow"|"hand"|"ibeam"|"sizeh"...(+3))
 ```
 
 Change the cursor type displayed on screen.
@@ -957,6 +957,8 @@ type:
     | "ibeam"
     | "sizeh"
     | "sizev"
+    | "sizenwse"
+    | "sizenesw"
     | "hand"
 ```
 
@@ -999,14 +1001,16 @@ Toggle between bordered and borderless.
 ## set_window_hit_test
 
 ```lua
-function system.set_window_hit_test(window: renwindow, title_height?: number, controls_width?: number, resize_border?: number)
+function system.set_window_hit_test(window: renwindow, title_height?: number, controls_width?: number, resize_border?: number, interactive_rect?: { x: number, y: number, w: number, h: number })
 ```
 
-When then window is run borderless (without system decorations), this
+When the window is run borderless (without system decorations), this
 function allows to set the size of the different regions that allow
 for custom window management.
-To disable custom window management, call this function without any
-arguments
+All dimensions use renderer coordinates. The interactive rectangle receives
+normal pointer input instead of window dragging; omit it to clear the region.
+Resize regions are inactive while maximized or fullscreen.
+To disable custom window management, call this function with only the window.
 
 @*param* `window`: [`renwindow`](/docs/api/renwindow) — Target window
 
@@ -1015,6 +1019,8 @@ arguments
 @*param* `controls_width?`: `number` — Width of window controls (maximize,minimize and close buttons, etc).
 
 @*param* `resize_border?`: `number` — The amount of pixels reserved for resizing
+
+@*param* `interactive_rect?`: `{ x: number, y: number, w: number, h: number }` — Normal-input region within the title bar
 
 ---
 

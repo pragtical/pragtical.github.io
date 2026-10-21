@@ -1,5 +1,5 @@
 ---
-sidebar_position: 30
+sidebar_position: 31
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -79,12 +79,14 @@ Get the list of encodings associated to a region.
 ## select_encoding
 
 ```lua
-function core.doc.encodings.select_encoding(title_label: string, callback: fun(charset: string))
+function core.doc.encodings.select_encoding(title_label: string, callback: fun(charset: string), current_charset?: string)
 ```
 
 Open a commandview to select a charset and executes the given callback,
 
 @*param* `title_label`: `string` — Title displayed on the commandview
+
+@*param* `current_charset?`: `string` — Encoding to highlight and reveal in the unfiltered list
 
 ---
 

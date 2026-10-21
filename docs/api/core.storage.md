@@ -1,5 +1,5 @@
 ---
-sidebar_position: 49
+sidebar_position: 51
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -64,6 +64,7 @@ Loads data from a persistent storage file.
 
 ```lua
 function storage.save(module: string, key: string, value: string|number|table)
+  -> saved: boolean
 ```
 
 Saves data to a persistent storage file.
@@ -73,6 +74,8 @@ Saves data to a persistent storage file.
 @*param* `key`: `string` — The key under which the data is stored.
 
 @*param* `value`: `string|number|table` — The value to store.
+
+@*return* `saved`: `boolean` — Whether the file was written and closed successfully.
 
 ---
 

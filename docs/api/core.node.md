@@ -1,5 +1,5 @@
 ---
-sidebar_position: 41
+sidebar_position: 43
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -318,6 +318,7 @@ Used during split/merge operations to restructure the tree.
 Draw this node and its children.
 For leaf nodes: draws tabs (if shown) and active view.
 For split nodes: draws divider and recursively draws children.
+Skip collapsed branches, including their nested dividers.
 
 ---
 
@@ -498,6 +499,7 @@ Recursively gathers views from the entire subtree.
 
 Check if a point overlaps any resizable divider in the tree.
 Recursively searches for dividers that can be dragged.
+Collapsed branches cannot receive divider hits.
 
 @*param* `px`: `number` — Screen x coordinate
 
@@ -518,6 +520,7 @@ Recursively searches for dividers that can be dragged.
 ```
 
 Get the rectangle for this node's divider (for split nodes).
+Use the allocated gap so collapsed panes do not paint into neighboring nodes.
 
 @*return* `x`: `number?` — Screen x coordinate, or nil for leaf nodes
 
