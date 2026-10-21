@@ -158,6 +158,9 @@ interface for both documents and project search/replace.
 markers, keyboard shortcuts, persisted fold state, and settings for how folded
 regions are displayed.
 
+* **[Source Control Management]** - Review Git and Fossil changes, prepare
+commits, and manage branches, tags, and remotes from a repository workbench.
+
 * **Built-in [Diff Viewer]** - A file or strings diff viewer that lets
 easily navigate and synchronize the differences. The functionality is
 expanded by the [Source Control Management] where it will let you compare
@@ -187,10 +190,10 @@ local or remote images.
 [Markdown Preview]:          /docs/user-guide/markdown-preview
 [SDL]:                       https://www.libsdl.org/
 [SDL_Image]:                 https://github.com/libsdl-org/SDL_image/
-[LSP]:                       /plugins?plugin=lsp
+[LSP]:                       /docs/plugins/lsp
 [EditorConfig]:              /plugins?plugin=editorconfig
 [Integrated Terminal]:       /plugins?plugin=terminal
 [Code Formatters]:           /plugins?plugin=formatter
-[Source Control Management]: /plugins?plugin=scm
+[Source Control Management]: /docs/plugins/scm
 [Lite XL]:                   https://github.com/lite-xl/lite-xl
 [lite]:                      https://github.com/rxi/lite

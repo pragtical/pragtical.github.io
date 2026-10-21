@@ -18,6 +18,16 @@ plugins repository.
 :::note These plugins are contributed by the community.
 :::
 
+## Plugin Manuals
+
+The [Plugins documentation](/docs/category/plugins) section contains
+workflow guides for individual plugins. Start with the
+[Source Control Management manual](../plugins/scm/index.md) for Git and Fossil
+integration, including changes review, commits, branches, and synchronization.
+
+The [Language Server Protocol manual](../plugins/lsp/index.md) covers
+language-server setup, completion, navigation, diagnostics, and refactoring.
+
 ## Location
 
 ### Bundled Plugins

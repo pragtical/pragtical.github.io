@@ -1,0 +1,8 @@
+{
+  "label": "Language Server Protocol",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "index"
+  }
+}

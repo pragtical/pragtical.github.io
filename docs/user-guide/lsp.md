@@ -8,6 +8,11 @@ import TabItem from '@theme/TabItem';
 
 # Language Server Support
 
+For the current plugin manual, see
+[Language Server Protocol](../plugins/lsp/index.md). It covers server setup,
+completion, navigation, diagnostics, code actions, formatting, and rename
+previews, with a complete command reference.
+
 Many text editors come equipped with "Intellisense" features such as error
 reporting, smart autocompletion, formatting, and linting—thanks to a language
 server client. The [Language Server Protocol] (LSP), developed by Microsoft,

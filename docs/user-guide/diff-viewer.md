@@ -156,4 +156,4 @@ to the C backend and [diffviewer api docs].
 [2]:                         /img/user-guide/diff-viewer/settings.png
 [diff api docs]:             /docs/api/diff
 [diffviewer api docs]:       /docs/api/plugins.diffview
-[Source Control Management]: /plugins?plugin=scm
+[Source Control Management]: /docs/plugins/scm
