@@ -4,10 +4,245 @@
         <title>Pragtical Blog</title>
         <link>https://pragtical.dev/blog</link>
         <description>Pragtical Blog</description>
-        <lastBuildDate>Fri, 02 Oct 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Pragtical v3.14.0 Release]]></title>
+            <link>https://pragtical.dev/blog/pragtical-v3140-release</link>
+            <guid>https://pragtical.dev/blog/pragtical-v3140-release</guid>
+            <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Before getting into the changes, here is a look at how Pragtical has been]]></description>
+            <content:encoded><![CDATA[<p>Before getting into the changes, here is a look at how Pragtical has been
+evolving, including some of the new interface improvements in this release.</p>
+<div style="position:relative;width:100%;aspect-ratio:16 / 9"><iframe src="https://www.youtube.com/embed/SO20_6zegAA" title="Pragtical Code Editor - A History of Improvements" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%"></iframe></div>
+<p>Pragtical v3.14.0 brings application menus, more flexible placement of command
+prompts and project search, workspace session management, a refreshed Plugin
+Manager, and lower idle CPU usage. The changes below cover the work since
+v3.13.1.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="application-menus-and-toolbar">Application Menus And Toolbar<a href="https://pragtical.dev/blog/pragtical-v3140-release#application-menus-and-toolbar" class="hash-link" aria-label="Direct link to Application Menus And Toolbar" title="Direct link to Application Menus And Toolbar">​</a></h2>
+<p>Many editor commands can now be found under the File, Edit, Search, View,
+Tools and Help menus. This makes it easier to discover commands without
+knowing their names or remembering every keybinding. Plugins can also add
+their own entries, with shortcuts and enabled states following the registered
+commands.</p>
+<p>Borderless mode and the menu bar are now enabled by default. In borderless
+mode, the menu sits beside the logo in the title bar, leaving the rest of the
+title area available for dragging the window. Thanks to Tocal on Discord for
+suggesting this placement!</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/96f3b1a8-a521-40b1-97fd-f22101b901f5" alt="Application menu embedded in the borderless title bar, with the Tools menu open" class="img_ev3q"></p>
+<p>Both <strong>Borderless</strong> and <strong>Show Menu Bar</strong> can be changed under
+<strong>Settings &gt; Core &gt; User Interface</strong>. The borderless resize area is now a thin
+strip on all four edges, so it no longer steals clicks from status bar items.
+Resizing is disabled while maximized or fullscreen.</p>
+<p>Here is the menu demonstration from <a href="https://github.com/pragtical/pragtical/pull/630" target="_blank" rel="noopener noreferrer">PR #630</a>:</p>
+<video controls="" playsinline="" preload="metadata" aria-label="Application menus and editor commands" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/7ab84511-72e8-4b49-80b2-05c38b706fe2" type="video/mp4"></video>
+<p>The toolbar can also move. <strong>Settings &gt; Plugins &gt; Treeview &gt; Toolbar Position</strong>
+offers Left, Bottom, Top and Right: place it beside, above or below the file
+tree, or at the editor's right edge. This screenshot from the initial menu and
+toolbar PR shows the right-hand layout:</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/01ec1ceb-9412-4b8f-80d6-806b652804cc" alt="Application menu and toolbar placed at the editor's right edge" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="command-prompts-and-floating-views">Command Prompts And Floating Views<a href="https://pragtical.dev/blog/pragtical-v3140-release#command-prompts-and-floating-views" class="hash-link" aria-label="Direct link to Command Prompts And Floating Views" title="Direct link to Command Prompts And Floating Views">​</a></h2>
+<p>Command prompts are no longer limited to the bottom of the window. The
+<strong>Command Palette Position</strong> setting under <strong>Core &gt; User Interface</strong> offers
+Bottom, Top and Center. Center floats the input and its suggestions over the
+editor instead of resizing the document panes. Bottom remains the default.</p>
+<p>The same option can be set in your user module:</p>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token keyword" style="color:rgb(189, 147, 249);font-style:italic">local</span><span class="token plain"> config </span><span class="token operator">=</span><span class="token plain"> require </span><span class="token string" style="color:rgb(255, 121, 198)">"core.config"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">commandview_position </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"center"</span><br></span></code></pre></div></div>
+<p>The next prompt uses the new placement. Centered prompts keep their top edge
+steady while filtering results, instead of moving around as the list gets
+shorter.</p>
+<video controls="" playsinline="" preload="metadata" aria-label="Changing command palette placement in Settings" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/33fa7c02-e084-4336-8fda-b394eaa8db4b" type="video/mp4"></video>
+<p>Underneath these changes is a shared floating-view API. Menus, completion
+popups and dialogs can use the same placement, focus and mouse handling,
+instead of each plugin having to intercept editor events on its own. Plugin
+authors can find more details in the <a href="https://pragtical.dev/docs/developer-guide/floating-views">floating views guide</a>.</p>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>More floating-view demos from PR #630</summary><div><div class="collapsibleContent_i85q"><p>Command prompts and the floating About dialog:</p><video controls="" playsinline="" preload="none" aria-label="Command prompts and the floating About dialog" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/20701c48-523e-4151-900b-152c64c131fa" type="video/mp4"></video><p>Completion and documentation popups with the optional LSP plugin:</p><video controls="" playsinline="" preload="none" aria-label="LSP completion and documentation using floating views" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/774e073a-c152-45d7-9a03-7eacef58ad24" type="video/mp4"></video></div></div></details>
+<p>Prompts can also remember where you left them. CommandView now supports
+optional snapshots of input, selection and result scrolling. Core commands
+use this to resume repeated searches and commands, with context checks so a
+Go To Line search does not accidentally follow you into a different document.
+The video from <a href="https://github.com/pragtical/pragtical/pull/631" target="_blank" rel="noopener noreferrer">PR #631</a> shows
+returning to a previous Go To Line search:</p>
+<video controls="" playsinline="" preload="metadata" aria-label="Resuming a Go To Line search with its previous input and selection" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/6aeb454b-77e9-4eb9-b2e1-7881f1b5be4f" type="video/mp4"></video>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-search-placement">Project Search Placement<a href="https://pragtical.dev/blog/pragtical-v3140-release#project-search-placement" class="hash-link" aria-label="Direct link to Project Search Placement" title="Direct link to Project Search Placement">​</a></h2>
+<p>Global project search can now stay on the left, move to the right, or open as
+a centered popup. Choose <strong>Settings &gt; Plugins &gt; Project Search &gt; Position</strong>
+to change it. Keyboard result navigation remains available, and the centered
+view stays open while a live search updates its matches.</p>
+<video controls="" playsinline="" preload="metadata" aria-label="Choosing centered project search and navigating live search results" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/e501691e-9f80-4423-aa91-4097c4750ff2" type="video/mp4"></video>
+<p>Project search transitions were restored too, and centered search and About
+can slide into view. The shared floating API respects the transition settings,
+so disabling animations works consistently for these popups.</p>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Search and About animation preview from PR #635</summary><div><div class="collapsibleContent_i85q"><video controls="" playsinline="" preload="none" aria-label="Project search and About sliding animations and transition settings" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/c9de1b80-b0e7-4cd4-bd76-98862c05a05e" type="video/mp4"></video></div></div></details>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="workspace-sessions">Workspace Sessions<a href="https://pragtical.dev/blog/pragtical-v3140-release#workspace-sessions" class="hash-link" aria-label="Direct link to Workspace Sessions" title="Direct link to Workspace Sessions">​</a></h2>
+<p>The previous release fixed automatic session restoration. This release adds a
+way to choose which saved session to load and remove sessions you no longer
+need. Open <strong>File &gt; Sessions</strong>, or use the <code>workspace:load-session</code>,
+<code>workspace:remove-session</code> and <code>workspace:clear-sessions</code> commands.</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/ddb2d271-744b-4ebf-a9b9-c09a40f11aaa" alt="File menu showing saved workspace sessions and load, remove and clear actions" class="img_ev3q"></p>
+<p>Before loading another session, Pragtical backs up the current workspace,
+including unsaved text. Loading replaces the current document layout, while
+removing saved sessions leaves the open tabs alone. These operations apply to
+the current project, without clearing sessions belonging to other projects.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="treeview-file-counts">TreeView File Counts<a href="https://pragtical.dev/blog/pragtical-v3140-release#treeview-file-counts" class="hash-link" aria-label="Direct link to TreeView File Counts" title="Direct link to TreeView File Counts">​</a></h2>
+<p>Thanks to <a href="https://github.com/Vinfall" target="_blank" rel="noopener noreferrer">Vinfall</a>, the file tree can show how many
+files are inside a collapsed directory. Counts follow the tree's hidden and
+ignored-file settings. Here is the preview from the original contribution:</p>
+<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/6eaa7b45-b876-4c64-91a2-543f3491569f" alt="Directory file counts beside collapsed folders in TreeView" class="img_ev3q"></p>
+<p>The follow-up work moved counting into its own bundled plugin and made the
+scans yield while traversing directories, keeping the editor usable during
+large counts. Enable it under <strong>Settings &gt; Plugins &gt; Treeview File Counts</strong>;
+it is off by default. TreeView also has separate row drawing hooks for plugins
+that need to add gutter content or information beside a filename.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="plugin-manager">Plugin Manager<a href="https://pragtical.dev/blog/pragtical-v3140-release#plugin-manager" class="hash-link" aria-label="Direct link to Plugin Manager" title="Direct link to Plugin Manager">​</a></h2>
+<p>The Plugin Manager has a refreshed interface with search, category and status
+filters, sorting, a details pane, and checkboxes for selecting several plugins.
+Install, upgrade or uninstall the selected entries without having to repeat
+the operation for every row. Filters and selection state are retained through
+the view's workspace restoration.</p>
+<video controls="" playsinline="" preload="metadata" aria-label="Plugin Manager filtering, details and batch plugin installation" style="width:100%;aspect-ratio:16 / 9"><source src="https://github.com/user-attachments/assets/681d0b39-eb52-4b1d-9886-790f9946e1c6" type="video/mp4"></video>
+<p>The package manager now uses <code>core.json</code>, and the old standalone JSON library
+copies have been removed from local runs, packages and AppImages. The plugins
+pin also includes the latest LSP and Ghostty updates, the Center Doc menu-bar
+toggle for Zen mode, and Emoji fixes.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lower-idle-cpu-and-ui-fixes">Lower Idle CPU And UI Fixes<a href="https://pragtical.dev/blog/pragtical-v3140-release#lower-idle-cpu-and-ui-fixes" class="hash-link" aria-label="Direct link to Lower Idle CPU And UI Fixes" title="Direct link to Lower Idle CPU And UI Fixes">​</a></h2>
+<p>The main loop now uses SDL events for long waits and precise sleeps for short
+frame delays. The unfocused grace period is renewed only when there is actual
+activity. In the idle check shared with
+<a href="https://github.com/pragtical/pragtical/pull/645" target="_blank" rel="noopener noreferrer">PR #645</a>, unfocused CPU usage
+fell from 1.6% to about 0.24% of one core; the result depends on the workload
+and enabled plugins.</p>
+<p>Widget updates do less work, and collapsed panes no longer receive negative
+dimensions that could keep hidden content animating and redrawing. Animations
+also snap to their exact destination, allowing floating views to finish
+closing instead of leaving a border behind.</p>
+<p>There are fixes for layout invalidation after scaling, stray dividers from
+hidden panes, nested list scrollbars, and selecting long TextBox input with
+the mouse. TextBox inputs can no longer accidentally open a Save dialog when
+using document save commands. SDL GPU also preserves color emoji RGB values,
+applying text opacity without tinting the glyphs with the current text color.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-updates">Build Updates<a href="https://pragtical.dev/blog/pragtical-v3140-release#build-updates" class="hash-link" aria-label="Direct link to Build Updates" title="Direct link to Build Updates">​</a></h2>
+<p>Bundled dependencies were refreshed to SDL3 3.4.18, SDL3_image 3.4.8,
+FreeType 2.15.0, PCRE2 10.49 and libpng 1.6.59, alongside updated Widget,
+Plugin Manager, colors and plugins revisions. CI actions and macOS runners
+were updated too.</p>
+<p>Vinfall is now included in the About dialog's contributors list. Thanks to
+everybody who reported issues, tested the rolling builds and helped improve
+the editor!</p>
+<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.14.0" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v3140-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v3140-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
+<ul>
+<li>
+<p>Add application menus, floating views, command palette placement and toolbar docking
+(<a href="https://github.com/pragtical/pragtical/pull/630" target="_blank" rel="noopener noreferrer">#630</a>)</p>
+</li>
+<li>
+<p>Add optional command prompt state recall
+(<a href="https://github.com/pragtical/pragtical/pull/631" target="_blank" rel="noopener noreferrer">#631</a>)</p>
+</li>
+<li>
+<p>Add configurable project search placement
+(<a href="https://github.com/pragtical/pragtical/pull/632" target="_blank" rel="noopener noreferrer">#632</a>)</p>
+</li>
+<li>
+<p>Add workspace session management
+(<a href="https://github.com/pragtical/pragtical/pull/633" target="_blank" rel="noopener noreferrer">#633</a>)</p>
+</li>
+<li>
+<p>Add optional directory file counts to TreeView
+(<a href="https://github.com/pragtical/pragtical/pull/623" target="_blank" rel="noopener noreferrer">#623</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v3140-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
+<ul>
+<li>
+<p>Enable borderless mode and the application menu by default
+(<a href="https://github.com/pragtical/pragtical/pull/643" target="_blank" rel="noopener noreferrer">#643</a>)</p>
+</li>
+<li>
+<p>Embed the application menu in the borderless title bar
+(<a href="https://github.com/pragtical/pragtical/pull/637" target="_blank" rel="noopener noreferrer">#637</a>)</p>
+</li>
+<li>
+<p>Make more editor commands accessible from the application menus
+(<a href="https://github.com/pragtical/pragtical/pull/640" target="_blank" rel="noopener noreferrer">#640</a>)</p>
+</li>
+<li>
+<p>Add TreeView drawing hooks and asynchronous file counting
+(<a href="https://github.com/pragtical/pragtical/pull/641" target="_blank" rel="noopener noreferrer">#641</a>)</p>
+</li>
+<li>
+<p>Lower idle CPU usage
+(<a href="https://github.com/pragtical/pragtical/pull/645" target="_blank" rel="noopener noreferrer">#645</a>)</p>
+</li>
+<li>
+<p>Update Widget to reduce CPU usage
+(<a href="https://github.com/pragtical/pragtical/pull/646" target="_blank" rel="noopener noreferrer">#646</a>)</p>
+</li>
+<li>
+<p>Integrate the updated Plugin Manager and remove obsolete JSON library copies
+(<a href="https://github.com/pragtical/pragtical/pull/624" target="_blank" rel="noopener noreferrer">#624</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v3140-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
+<ul>
+<li>
+<p>Allow disabling save commands for embedded document views
+(<a href="https://github.com/pragtical/pragtical/pull/626" target="_blank" rel="noopener noreferrer">#626</a>)</p>
+</li>
+<li>
+<p>Fix mouse selection and scrolling in TextBox inputs
+(<a href="https://github.com/pragtical/pragtical/pull/628" target="_blank" rel="noopener noreferrer">#628</a>)</p>
+</li>
+<li>
+<p>Fix Widget list layout and nested scrollbar input
+(<a href="https://github.com/pragtical/pragtical/pull/629" target="_blank" rel="noopener noreferrer">#629</a>)</p>
+</li>
+<li>
+<p>Fix UI scaling, hidden pane drawing and Widget integration
+(<a href="https://github.com/pragtical/pragtical/pull/634" target="_blank" rel="noopener noreferrer">#634</a>)</p>
+</li>
+<li>
+<p>Fix project search and floating view sliding animations
+(<a href="https://github.com/pragtical/pragtical/pull/635" target="_blank" rel="noopener noreferrer">#635</a>)</p>
+</li>
+<li>
+<p>Preserve color emoji colors in SDL GPU text rendering
+(<a href="https://github.com/pragtical/pragtical/pull/636" target="_blank" rel="noopener noreferrer">#636</a>)</p>
+</li>
+<li>
+<p>Keep centered command prompts stable while filtering
+(<a href="https://github.com/pragtical/pragtical/pull/638" target="_blank" rel="noopener noreferrer">#638</a>)</p>
+</li>
+<li>
+<p>Finish animations at their exact destination
+(<a href="https://github.com/pragtical/pragtical/pull/639" target="_blank" rel="noopener noreferrer">#639</a>)</p>
+</li>
+<li>
+<p>Keep split nodes and tab content within nonnegative bounds
+(<a href="https://github.com/pragtical/pragtical/pull/647" target="_blank" rel="noopener noreferrer">#647</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v3140-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
+<ul>
+<li>
+<p>Update CI actions, macOS runners and bundled dependencies
+(<a href="https://github.com/pragtical/pragtical/pull/644" target="_blank" rel="noopener noreferrer">#644</a>)</p>
+</li>
+<li>
+<p>Update plugins subproject
+(<a href="https://github.com/pragtical/plugins/commit/a8f3b1a0" target="_blank" rel="noopener noreferrer">a8f3b1a0</a>)</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="other-changes">Other Changes<a href="https://pragtical.dev/blog/pragtical-v3140-release#other-changes" class="hash-link" aria-label="Direct link to Other Changes" title="Direct link to Other Changes">​</a></h3>
+<ul>
+<li>Add Vinfall to the About dialog contributors
+(<a href="https://github.com/pragtical/pragtical/pull/642" target="_blank" rel="noopener noreferrer">#642</a>)</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Pragtical v3.13.1 Release]]></title>
             <link>https://pragtical.dev/blog/pragtical-v3131-release</link>
@@ -1620,129 +1855,6 @@ changes but they deserved an immediate release. Enjoy!</p>
 <ul>
 <li>Update sdl3 wrap to v3.4.2
 (<a href="https://github.com/pragtical/pragtical/pull/440" target="_blank" rel="noopener noreferrer">#440</a>)</li>
-</ul>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Pragtical v3.8.3 Release]]></title>
-            <link>https://pragtical.dev/blog/pragtical-v383-release</link>
-            <guid>https://pragtical.dev/blog/pragtical-v383-release</guid>
-            <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[A long overdue release given the important fixes, while minimal, the]]></description>
-            <content:encoded><![CDATA[<p>A long overdue release given the important fixes, while minimal, the
-assortment of bug fixes do make a difference. Also, included are some
-enhancements and new features.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="open-file-at-line">Open File at Line<a href="https://pragtical.dev/blog/pragtical-v383-release#open-file-at-line" class="hash-link" aria-label="Direct link to Open File at Line" title="Direct link to Open File at Line">​</a></h2>
-<p>Thanks to <a href="https://github.com/detomastah" target="_blank" rel="noopener noreferrer">detomastah</a> it is now possible to
-open a file at a specific line when using the find file plugin:</p>
-<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/fdfbf3c9-6d70-4b07-933b-26a4aad7cc7e" alt="open file at line" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="show-column-position-in-characters">Show Column Position in Characters<a href="https://pragtical.dev/blog/pragtical-v383-release#show-column-position-in-characters" class="hash-link" aria-label="Direct link to Show Column Position in Characters" title="Direct link to Show Column Position in Characters">​</a></h2>
-<p>As reported by <a href="https://github.com/2trvl" target="_blank" rel="noopener noreferrer">2trvl</a> when viewing a text document
-the caret position on the status bar was displayed in bytes instead of
-codepoints. This behavior was changed to display it by default in characters
-but it is configurable to display bytes if desired as shown below:</p>
-<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)">---Controls how the caret column is displayed in the status bar.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---When set to `"char"`, the column is based on the number of characters</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---from the start of the line (UTF-8 aware).</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---When set to `"byte"`, the column is based on the raw byte offset.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---Defaults to `"char"`.</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token comment" style="color:rgb(98, 114, 164)">---@type "char" | "byte"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">config</span><span class="token punctuation" style="color:rgb(248, 248, 242)">.</span><span class="token plain">caret_column_mode </span><span class="token operator">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"char"</span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/4420cc61-c5dc-4543-89b5-53fb07c06ac4" alt="configure caret column dispaly" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="imageview-zoom-using-mouse-position">ImageView Zoom Using Mouse Position<a href="https://pragtical.dev/blog/pragtical-v383-release#imageview-zoom-using-mouse-position" class="hash-link" aria-label="Direct link to ImageView Zoom Using Mouse Position" title="Direct link to ImageView Zoom Using Mouse Position">​</a></h2>
-<p>When zooming an image the current mouse position is used as an indicator of
-where to position the scaled image by moving the scroll bars. With this
-enhancement also comes support for a bigger scale size of 8k when possible.</p>
-<p><strong>Before</strong></p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/a8eec86a-accb-4223-9629-e59f8165f484"></video>
-<p><strong>After</strong></p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/01ef3797-b2d7-4fb1-8f3b-eb7e1658d248"></video>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="root-color-picker-preview-always-visible">Root Color Picker Preview Always Visible<a href="https://pragtical.dev/blog/pragtical-v383-release#root-color-picker-preview-always-visible" class="hash-link" aria-label="Direct link to Root Color Picker Preview Always Visible" title="Direct link to Root Color Picker Preview Always Visible">​</a></h2>
-<p>Now, when moving the mouse to the window edges the color picker preview is
-dynamically repositioned to keep it visible.</p>
-<video muted="" style="width:100%" controls=""><source src="https://github.com/user-attachments/assets/05a6027e-3aae-483b-b3f8-66ee3da8bc78"></video>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="bug-fixes">Bug Fixes<a href="https://pragtical.dev/blog/pragtical-v383-release#bug-fixes" class="hash-link" aria-label="Direct link to Bug Fixes" title="Direct link to Bug Fixes">​</a></h2>
-<p>The most important bug fix on this release was a crash on the project search
-when syntax highlighting was enabled on the search results. It was caused from
-invalid utf-8 text been feed into the tokenizer. Thanks to
-<a href="https://github.com/0riginaln0" target="_blank" rel="noopener noreferrer">0riginaln0</a> who reported this bug it is
-now resolved.</p>
-<p><strong>Other fixes include:</strong></p>
-<ul>
-<li>
-<p>Better compatibility in open_in_system for AmigaOS 4 thanks to
-<a href="https://github.com/walkero-gr" target="_blank" rel="noopener noreferrer">Walkero</a></p>
-</li>
-<li>
-<p>Corrected hover state management on the Widget library. (This was a known
-annoyance but it seems was waiting for it to be reported in order to fix it 😀)</p>
-</li>
-<li>
-<p>Temporary fix for borderless decoration not getting drawn on maximized window
-under Microsoft Windows.</p>
-</li>
-</ul>
-<p>Special thanks to <a href="https://github.com/2trvl" target="_blank" rel="noopener noreferrer">2trvl</a> who opened various issues
-for many of the bug fixes on this release.</p>
-<p>Other fixes and improvements on the changes log below, enjoy!</p>
-<p>Downloads on <a href="https://github.com/pragtical/pragtical/releases/tag/v3.8.3" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="changes-log">Changes Log<a href="https://pragtical.dev/blog/pragtical-v383-release#changes-log" class="hash-link" aria-label="Direct link to Changes Log" title="Direct link to Changes Log">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://pragtical.dev/blog/pragtical-v383-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h3>
-<ul>
-<li>
-<p>Open file at line
-(<a href="https://github.com/pragtical/pragtical/pull/428" target="_blank" rel="noopener noreferrer">#428</a>)</p>
-</li>
-<li>
-<p>StatusView doc<!-- -->:position<!-- --> show col in characters
-(<a href="https://github.com/pragtical/pragtical/pull/432" target="_blank" rel="noopener noreferrer">#432</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhancements">Enhancements<a href="https://pragtical.dev/blog/pragtical-v383-release#enhancements" class="hash-link" aria-label="Direct link to Enhancements" title="Direct link to Enhancements">​</a></h3>
-<ul>
-<li>
-<p>ImageView: zoom using mouse position
-(<a href="https://github.com/pragtical/pragtical/pull/420" target="_blank" rel="noopener noreferrer">#420</a>)</p>
-</li>
-<li>
-<p>rootpickcolor: keep color preview always visible
-(<a href="https://github.com/pragtical/pragtical/pull/421" target="_blank" rel="noopener noreferrer">#421</a>)</p>
-</li>
-<li>
-<p>Allow loading namespaced native lua libraries
-(<a href="https://github.com/pragtical/pragtical/pull/436" target="_blank" rel="noopener noreferrer">#436</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixes">Fixes<a href="https://pragtical.dev/blog/pragtical-v383-release#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes">​</a></h3>
-<ul>
-<li>
-<p>Fixes in open_in_system() for AmigaOS 4
-(<a href="https://github.com/pragtical/pragtical/pull/416" target="_blank" rel="noopener noreferrer">#416</a>)</p>
-</li>
-<li>
-<p>Widgets: update for SearchReplaceList crash fix
-(<a href="https://github.com/pragtical/pragtical/pull/418" target="_blank" rel="noopener noreferrer">#418</a>)</p>
-</li>
-<li>
-<p>Update widget for latest hover fix
-(<a href="https://github.com/pragtical/pragtical/pull/433" target="_blank" rel="noopener noreferrer">#433</a>)</p>
-</li>
-<li>
-<p>Check node hovered_scroll_button is set on rootview
-(<a href="https://github.com/pragtical/pragtical/pull/434" target="_blank" rel="noopener noreferrer">#434</a>)</p>
-</li>
-<li>
-<p>Defer startup file loading after plugins loaded
-(<a href="https://github.com/pragtical/pragtical/pull/430" target="_blank" rel="noopener noreferrer">#430</a>)</p>
-</li>
-<li>
-<p>Fix borderless on maximized window (Windows)
-(<a href="https://github.com/pragtical/pragtical/pull/435" target="_blank" rel="noopener noreferrer">#435</a>)</p>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="build-system">Build System<a href="https://pragtical.dev/blog/pragtical-v383-release#build-system" class="hash-link" aria-label="Direct link to Build System" title="Direct link to Build System">​</a></h3>
-<ul>
-<li>
-<p>CI: disable polyfill_glibc - issues with linenoise
-(<a href="https://github.com/pragtical/pragtical/pull/419" target="_blank" rel="noopener noreferrer">#419</a>)</p>
-</li>
-<li>
-<p>ppm subproject: don't use lua bytecode
-(<a href="https://github.com/pragtical/pragtical/pull/438" target="_blank" rel="noopener noreferrer">#438</a>)</p>
-</li>
 </ul>]]></content:encoded>
         </item>
     </channel>
