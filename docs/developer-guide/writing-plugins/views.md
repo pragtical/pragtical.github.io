@@ -266,13 +266,17 @@ event is handled and should not be propagated further.
 
 ### Periodic updates
 
-The `update` event is sent right before Pragtical redraws its UI.
-You can use this event to perform some state management among other
-things.
-The handler is called without arguments and should return nothing.
+The `update` method runs when input, a scheduled deadline, or rendering work
+requires a view update. It can run without drawing, and it does not run
+continuously while the editor is idle. Use it to update view state; the handler
+is called without arguments and should return nothing.
 
-In our example, let's extend `HelloView` by displaying the number of seconds
-elapsed since Pragtical started.
+Use `core.request_update(delay)` for timed work and set `core.redraw = true`
+when visible content changes. See [Efficient Updates and Rendering](updates-and-rendering.md)
+for deadline renewal, asynchronous results, and animations.
+
+In our example, let's extend `HelloView` with a counter based on
+`system.get_time()`, displaying whole seconds.
 
 ```lua
 -- mod-version:3
@@ -313,10 +317,15 @@ end
 function HelloView:update()
   -- Update some important View states.
   HelloView.super.update(self)
-  -- system.get_time() returns the number of seconds since Pragtical started.
-  self.caption = string.format("Time elapsed: %.2f", system.get_time())
-  -- This tells Pragtical that we want to constantly redraw.
-  core.redraw = true
+  local now = system.get_time()
+  local second = math.floor(now)
+  local caption = string.format("Timer: %d", second)
+  if self.caption ~= caption then
+    self.caption = caption
+    core.redraw = true
+  end
+  -- Renew the next second's update, including after earlier input events.
+  core.request_update(second + 1 - now)
 end
 
 function HelloView:draw()
@@ -346,10 +355,12 @@ command.add(nil, {
 })
 ```
 
-:::tip Try commenting out `core.redraw = true` in the update method.
-This will cause the timer to freeze as soon as there's no input.
-`View:update()` is only called when Pragtical wants to update the content;
-it will not be called when nothing is changed.
+:::tip
+The clock schedules its next timed update at the next second boundary and
+redraws only when its caption changes. An earlier input event also calls
+`update()`, which renews the remaining delay. Removing `core.request_update`
+leaves the timer dependent on unrelated events; removing `core.redraw` lets the
+caption change without requesting drawing.
 :::
 
 ### Mouse
@@ -489,10 +500,14 @@ end
 function HelloView:update()
   -- Update some important View states.
   HelloView.super.update(self)
-  -- system.get_time() returns the number of seconds since Pragtical started.
-  self:set_caption(string.format("Time elapsed: %.2f", system.get_time()))
-  -- This tells Pragtical that we want to constantly redraw.
-  core.redraw = true
+  local now = system.get_time()
+  local second = math.floor(now)
+  local caption = string.format("Timer: %d", second)
+  if self.caption ~= caption then
+    self:set_caption(caption)
+    core.redraw = true
+  end
+  core.request_update(second + 1 - now)
 end
 
 function HelloView:draw()

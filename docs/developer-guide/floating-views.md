@@ -189,6 +189,12 @@ need to override RootView or arrange their own deferred drawing. Keep normal
 using inherited scrolling or other View behavior. RootView calls
 `update_floating()` before the view's regular update.
 
+Floating placement does not make `update()` run continuously. Use
+`core.request_update(delay)` for a pending timer and `core.redraw = true` when
+its displayed state changes. Hidden popups do not receive regular view updates;
+stop animation deadlines when they are no longer needed. See
+[Efficient Updates and Rendering](writing-plugins/updates-and-rendering.md).
+
 Call `bring_to_front()` to raise an already shown view and its owned popups
 together. Input is routed from the top of the stack down; `interactive = false`
 skips the overlay entirely. `pass_through_unhandled` forwards unconsumed press,

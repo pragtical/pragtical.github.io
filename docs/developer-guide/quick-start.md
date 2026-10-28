@@ -496,7 +496,8 @@ style.selection             -- Selection color
 2. **Call super methods** in constructors and overrides
 3. **Use config.plugins.yourname** for configuration
 4. **Test predicates** to ensure commands appear correctly
-5. **Keep draw() fast** - it's called every frame
+5. **Keep draw() fast** - paint cached content when called; request updates and
+   redraws only as needed ([guide](writing-plugins/updates-and-rendering.md))
 6. **Return true from event handlers** to consume events
 
 ## Next Steps

@@ -37,6 +37,18 @@ as possible. If the timeout isn't specified, a timeout will be automatically
 assigned by the coroutine scheduler depending on the time the function takes
 to run.
 
+## Updating the interface from a coroutine
+
+A coroutine waking, yielding, or finishing does not automatically redraw the
+editor. When it publishes a visible change, set `core.redraw = true`. If it
+starts a view timer, store its due time and call `core.request_update(delay)`;
+renew the remaining delay from the view's `update()` until the work is due.
+
+A view that only needs a deadline, such as a clock or debounced filter, can use
+`core.request_update` without a recurring coroutine. See
+[Efficient Updates and Rendering](updates-and-rendering.md) for examples and
+background-work guidance.
+
 ## Basic Example
 
 ```lua

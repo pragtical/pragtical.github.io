@@ -70,7 +70,7 @@ Base class for all UI components. Handles position, size, scrolling, events, and
 ### Lifecycle Methods
 
 - `View:new()` - Constructor
-- `View:update()` - Called each time a keyboard, mouse, resize event, etc... occurs, or core.redraw is set to true and the frames per second has not been exceeded
+- `View:update()` - Update state when input, a scheduled deadline, or rendering work requires it; it does not run continuously while idle.
 - `View:draw()` - Render the view
 - `View:try_close(do_close)` - Handle close request
 
@@ -238,19 +238,30 @@ Node Tree (layout):
 
 ## Update/Draw Cycle
 
-Every frame (typically 60 FPS):
+Updates and drawing run when needed. Input events, scheduled view deadlines,
+and redraw requests wake the UI; a configured frame rate limits drawing rather
+than requiring a permanent frame loop.
 
 ```
-1. Update Phase:
+1. Update Phase (when needed):
    RootView:update()
      └─ Node:update() (recursive)
          └─ View:update()
 
-2. Draw Phase:
+2. Draw Phase (when requested and the frame limit permits):
    RootView:draw()
      └─ Node:draw() (recursive)
          └─ View:draw()
 ```
+
+`core.request_update(delay)` requests a view update without requesting drawing.
+`core.redraw = true` invalidates visible content for drawing. Update requests
+are global and coalesce to the earliest deadline; an earlier update consumes
+the request, so pending work must renew its remaining delay. Only active tabs
+and shown floating views take part in the normal update traversal.
+
+For practical timer, asynchronous-result, and animation examples, see
+[Efficient Updates and Rendering](writing-plugins/updates-and-rendering.md).
 
 ## Context System
 
