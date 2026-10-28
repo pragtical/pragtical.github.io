@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">Floating Views | Pragtical</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://pragtical.dev/img/pragtical-social-card.jpg"><meta data-rh="true" property="og:url" content="https://pragtical.dev/docs/developer-guide/floating-views"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Floating Views | Pragtical"><meta data-rh="true" name="description" content="Build floating popups, tooltips, and notifications with the View API."><meta data-rh="true" property="og:description" content="Build floating popups, tooltips, and notifications with the View API."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://pragtical.dev/docs/developer-guide/floating-views"><link data-rh="true" rel="alternate" href="https://pragtical.dev/docs/developer-guide/floating-views" hreflang="en"><link data-rh="true" rel="alternate" href="https://pragtical.dev/docs/developer-guide/floating-views" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Developer Guide","item":"https://pragtical.dev/docs/category/developer-guide"},{"@type":"ListItem","position":2,"name":"Floating Views","item":"https://pragtical.dev/docs/developer-guide/floating-views"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Pragtical RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Pragtical Atom Feed"><link rel="stylesheet" href="/assets/css/styles.13f8d358.css">
-<script src="/assets/js/runtime~main.61f66b23.js" defer="defer"></script>
-<script src="/assets/js/main.02407301.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f485fcc8.js" defer="defer"></script>
+<script src="/assets/js/main.bd16a21b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -86,6 +86,11 @@ need to override RootView or arrange their own deferred drawing. Keep normal
 <code>update()</code> and <code>draw()</code> methods on the view; call their superclass methods when
 using inherited scrolling or other View behavior. RootView calls
 <code>update_floating()</code> before the view&#x27;s regular update.</p>
+<p>Floating placement does not make <code>update()</code> run continuously. Use
+<code>core.request_update(delay)</code> for a pending timer and <code>core.redraw = true</code> when
+its displayed state changes. Hidden popups do not receive regular view updates;
+stop animation deadlines when they are no longer needed. See
+<a href="/docs/developer-guide/writing-plugins/updates-and-rendering">Efficient Updates and Rendering</a>.</p>
 <p>Call <code>bring_to_front()</code> to raise an already shown view and its owned popups
 together. Input is routed from the top of the stack down; <code>interactive = false</code>
 skips the overlay entirely. <code>pass_through_unhandled</code> forwards unconsumed press,
