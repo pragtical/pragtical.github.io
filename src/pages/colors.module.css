@@ -1,0 +1,52 @@
+.page:global(.container) { max-width: 1120px; padding-top: 2rem; padding-bottom: 4rem; }
+.heading, .previewToolbar, .filters { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.heading { justify-content: space-between; margin-bottom: 1.5rem; }
+.heading h1 { font-size: 2rem; margin: 0; }
+.heading a, .previewToolbar a { display: inline-flex; align-items: center; gap: .35rem; }
+.page a svg, .page button svg, .search svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+.preview { border: 1px solid var(--ifm-color-emphasis-300); border-radius: 6px; overflow: hidden; }
+.previewToolbar { min-height: 76px; padding: .8rem 1.2rem; background: var(--ifm-background-surface-color); }
+.previewToolbar h2 { font-size: 1.1rem; margin: 0; overflow-wrap: anywhere; }
+.previewToolbar a { margin-left: auto; font-size: .9rem; }
+.metadata { color: var(--ifm-color-emphasis-700); font-size: .8rem; }
+.selectedPalette { width: 160px; height: 16px; object-fit: fill; margin-left: 1rem; }
+.previewCanvas { aspect-ratio: 16 / 9; display: grid; }
+.editor { width: 100%; height: auto; display: block; }
+.previewState { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; text-align: center; }
+.previewState button { display: inline-flex; align-items: center; }
+.catalog { margin-top: 2rem; }
+.filters { margin-bottom: 1.25rem; }
+.search { display: flex; align-items: center; border: 1px solid var(--ifm-color-emphasis-400); border-radius: 4px; padding: 0 .8rem; gap: .6rem; min-width: 220px; flex: 1; margin: 0; }
+.search:focus-within { outline: 2px solid var(--ifm-color-primary); outline-offset: 2px; }
+.search input { width: 100%; height: 42px; padding: 0; border: 0; outline: 0; background: transparent; color: var(--ifm-font-color-base); font: inherit; }
+.categories { display: flex; }
+.categories button { border: 1px solid var(--ifm-color-emphasis-400); padding: .5rem 1rem; min-height: 42px; background: transparent; color: var(--ifm-font-color-base); font: inherit; cursor: pointer; }
+.categories button + button { border-left: 0; }
+.categories button:first-child { border-radius: 4px 0 0 4px; }
+.categories button:last-child { border-radius: 0 4px 4px 0; }
+.categories button[aria-pressed='true'] { background: var(--ifm-color-primary); color: #fff; }
+.count { color: var(--ifm-color-emphasis-700); font-size: .9rem; min-width: 72px; text-align: right; }
+.colors { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; list-style: none; padding: 0; margin: 0; }
+.colors li { min-width: 0; margin: 0; }
+.color { display: flex; flex-direction: column; gap: .8rem; width: 100%; height: 132px; padding: 1rem; text-align: left; border: 1px solid var(--ifm-color-emphasis-300); border-radius: 4px; color: var(--ifm-font-color-base); background: var(--ifm-background-surface-color); font: inherit; cursor: pointer; }
+.color:hover { border-color: var(--ifm-color-primary); background: var(--ifm-color-emphasis-100); }
+.color[aria-pressed='true'] { border-color: var(--ifm-color-primary); box-shadow: inset 0 0 0 1px var(--ifm-color-primary); }
+.colorTitle { display: flex; align-items: center; justify-content: space-between; gap: .4rem; width: 100%; font-size: .9rem; line-height: 1.2; min-height: 2.4em; overflow-wrap: anywhere; }
+.colorTitle svg { color: var(--ifm-color-primary); }
+.color img { width: 100%; height: 16px; object-fit: fill; }
+.color .metadata { line-height: 1; }
+.empty { text-align: center; padding: 2rem; }
+@media (max-width: 600px) {
+  .page { padding-top: 1.25rem; }
+  .heading h1 { font-size: 1.65rem; }
+  .heading a { font-size: .85rem; }
+  .previewToolbar { padding: .75rem; gap: .6rem; }
+  .selectedPalette { width: 100px; margin-left: auto; }
+  .previewToolbar a { margin-left: 0; }
+  .previewToolbar > div { max-width: calc(100% - 115px); }
+  .search { flex-basis: 100%; }
+  .categories { flex: 1; }
+  .categories button { flex: 1; padding: .5rem .6rem; }
+  .colors { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .color { padding: .75rem; }
+}

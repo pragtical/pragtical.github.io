@@ -95,6 +95,11 @@ const config = {
             position: 'left'
           },
           {
+            to: '/colors',
+            label: 'Colors',
+            position: 'left'
+          },
+          {
             to: '/download',
             label: 'Get',
             position: 'left'
@@ -145,7 +150,7 @@ const config = {
             items: [
               {
                 label: 'Themes',
-                href: 'https://github.com/pragtical/colors',
+                to: '/colors',
               },
               {
                 label: 'Plugins',
