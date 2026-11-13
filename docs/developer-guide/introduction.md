@@ -53,7 +53,7 @@ Pragtical has a built-in [REPL][9] that you can access directly from the
 terminal. It becomes really handy when you want to test bits of code, it has
 back history and completion support to make it more convenient.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="https://github.com/user-attachments/assets/ec9491b9-3f80-4d14-9f1e-29544942e2b0"/>
 </video>
 

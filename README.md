@@ -1,7 +1,9 @@
 # Website for Pragtical Code Editor
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern
+This website is built using [Docusaurus 3.10.2](https://docusaurus.io/), a modern
 static website generator.
+
+Requires Node.js 20 or newer. The deployment workflow uses Node.js 22.
 
 ### Installation
 

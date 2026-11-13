@@ -151,7 +151,7 @@ A handy feature of the LSP plugin is the symbols tree, which allows for quick
 navigation within a file while reducing the cognitive load needed to comprehend
 the structure of the source code.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/symbols-tree.mp4"/>
 </video>
 
@@ -161,7 +161,7 @@ When installed with [lsp_snippets], the LSP plugin is able to provide snippets
 from language servers. The snippets are also integrated with the [autocomplete]
 plugin.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/snippets.mp4"/>
 </video>
 
@@ -179,11 +179,11 @@ To view all symbols in a file, you can use `lsp:view-document-symbols`
 (<kbd>alt+s</kbd>). You can use `lsp:find-workspace-symbol`
 (<kbd>shift+alt+s</kbd>) to find a symbol in the current workspace.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/view-symbol.mp4"/>
 </video>
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/search-symbol.mp4"/>
 </video>
 
@@ -202,7 +202,7 @@ Tooltips will also appear when entering function arguments.
 Select the symbol to refactor, press <kbd>alt+r</kbd> to enter new name,
 confirm changes and apply.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/rename.mp4"/>
 </video>
 
@@ -210,7 +210,7 @@ confirm changes and apply.
 
 Press <kbd>alt+d</kbd> to jump to definition.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/goto-definitions.mp4"/>
 </video>
 
@@ -218,7 +218,7 @@ Press <kbd>alt+d</kbd> to jump to definition.
 
 Press <kbd>alt+f</kbd> to find references to a symbol.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/find-references.mp4"/>
 </video>
 
@@ -226,7 +226,7 @@ Press <kbd>alt+f</kbd> to find references to a symbol.
 
 Press <kbd>alt+shift+f</kbd> to format the current document.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/format.mp4"/>
 </video>
 
@@ -235,11 +235,11 @@ Press <kbd>alt+shift+f</kbd> to format the current document.
 Press <kbd>alt+e</kbd> to view diagnostics messages for the current document.
 Press <kbd>ctrl+alt+e</kbd> to view diagnostics messages for the workspace.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/view-doc-diagnostics.mp4"/>
 </video>
 
-<video autoplay muted loop style={{width: '100%'}} controls>
+<video autoPlay muted loop style={{width: '100%'}} controls>
   <source src="/videos/user-guide/lsp/view-all-diagnostics.mp4"/>
 </video>
 

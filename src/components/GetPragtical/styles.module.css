@@ -15,6 +15,11 @@
   list-style: none;
 }
 
+.downloadLinks {
+  margin: 0 0 var(--ifm-paragraph-margin-bottom);
+  padding: 0;
+}
+
 .tableWrapper {
   margin: 2rem auto 0;
   max-width: 800px;

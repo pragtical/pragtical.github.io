@@ -18,7 +18,7 @@ function GetDownloadsMap(version) {
       title: 'Linux',
       Svg: require('@mdi/svg/svg/linux.svg').default,
       description: (
-        <nav>
+        <ul className={styles.downloadLinks}>
           <li className={styles.li}>
             <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-x86_64.AppImage`}>
               AppImage
@@ -47,14 +47,14 @@ function GetDownloadsMap(version) {
             &nbsp;
             <code>AArch64</code>
           </li>
-        </nav>
+        </ul>
       ),
     },
     {
       title: 'Windows',
       Svg: require('@mdi/svg/svg/microsoft-windows.svg').default,
       description: (
-        <nav>
+        <ul className={styles.downloadLinks}>
           <li className={styles.li}>
             <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/Pragtical-${version}-x86_64-setup.exe`}>
               Installer
@@ -69,14 +69,14 @@ function GetDownloadsMap(version) {
             &nbsp;
             <code>64 bit</code>
           </li>
-        </nav>
+        </ul>
       ),
     },
     {
       title: 'macOS',
       Svg: require('@mdi/svg/svg/apple.svg').default,
       description: (
-        <nav>
+        <ul className={styles.downloadLinks}>
           <li className={styles.li}>
             <a href={`https://github.com/pragtical/pragtical/releases/download/${version}/pragtical-${version}-macos-arm64.dmg`}>
               DMG
@@ -91,7 +91,7 @@ function GetDownloadsMap(version) {
             &nbsp;
             <code>Intel</code>
           </li>
-        </nav>
+        </ul>
       ),
     },
   ];
@@ -105,7 +105,7 @@ function Download({Svg, title, description}) {
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
-        <p>{description}</p>
+        {description}
       </div>
     </div>
   );

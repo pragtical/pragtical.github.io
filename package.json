@@ -14,12 +14,13 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.1",
-    "@docusaurus/preset-classic": "^3.8.1",
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
     "@mdi/svg": "^7.4.47",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.6.0",
+    "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "npm": "^11.5.2",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
@@ -30,8 +31,8 @@
     "showdown": "^2.1.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.8.1",
-    "@docusaurus/types": "^3.8.1"
+    "@docusaurus/module-type-aliases": "^3.10.2",
+    "@docusaurus/types": "^3.10.2"
   },
   "browserslist": {
     "production": [
@@ -46,6 +47,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }
