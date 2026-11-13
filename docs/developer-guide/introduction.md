@@ -39,6 +39,14 @@ and the `style` table respectively.
 
 Here are some tips for plugin developers.
 
+### Automated tests
+
+Use the built-in `core.test` framework to test plugins and editor behavior
+against Pragtical's Lua and native APIs. Run a test file or directory with
+`pragtical test path/to/tests`. See [Writing and Running Tests](testing.md) for
+test cases, assertions, setup and cleanup hooks, asynchronous tests, and
+headless runs.
+
 ### The repl and run commands
 
 Pragtical has a built-in [REPL][9] that you can access directly from the
@@ -79,27 +87,41 @@ In this case, the stack trace in `error.txt` is more complete and
 should be referred.
 This is a bug and will be fixed in future versions of Pragtical.
 
-### `print()` function many not work in Windows
+### Console output on Windows
 
-:::note Since v3.2.0, console output works on Windows without the instructions below.
-:::
+Official Windows builds include two executables in the installation directory:
 
-On Windows, we compile Pragtical using the GUI subsystem by default.
-This causes Pragtical to close the stdout.
-To work around this behavior, you can force Pragtical to keep
-stdout open by redirecting its output in a terminal.
+- `pragtical.exe` launches the editor as a GUI application.
+- `pragtical.com` is the console executable for terminal use, with standard
+  input, output, and error streams.
+
+Use `pragtical.com` when you need to see Lua `print()` output, use the REPL,
+run scripts or tests, or access the command-line plugin manager. No output
+redirection workaround is needed.
+
+With the default `PATHEXT` order (`.COM` before `.EXE`), both `cmd.exe` and
+PowerShell automatically select `pragtical.com` when both executables are in
+the same directory. You can therefore omit the extension:
 
 On PowerShell:
 
 ```powershell
-./pragtical | tee -variable null
+.\pragtical repl
+.\pragtical run -e "print('hello world!')"
 ```
 
 On `cmd.exe`:
 
 ```batch
-./pragtical > NUL
+pragtical run my_lua_file.lua
+pragtical pm --help
 ```
+
+These examples assume you are in Pragtical's installation directory. PowerShell
+requires the `.\` prefix for executables in the current directory. If that
+directory is on your `PATH`, use `pragtical` without the prefix in either shell.
+If you have customized `PATHEXT`, specify `pragtical.com` explicitly to ensure
+you run the console executable.
 
 
 [1]: https://www.lua.org/manual/5.4/

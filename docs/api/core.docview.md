@@ -1618,16 +1618,20 @@ Convert screen coordinates to document line/column.
 ## scroll_to_line
 
 ```lua
-(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean)
+(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean, col?: integer)
 ```
 
 Scroll to center a line in the viewport.
+When `col` is given, the visual row containing that column is centered,
+which matters when a line is wrapped across multiple rows.
 
 @*param* `line`: `integer` — Line number to scroll to
 
 @*param* `ignore_if_visible?`: `boolean` — Don't scroll if line already visible
 
 @*param* `instant?`: `boolean` — Jump immediately without animation
+
+@*param* `col?`: `integer` — Column whose visual row should be centered (default 1)
 
 ---
 

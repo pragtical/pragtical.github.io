@@ -319,14 +319,6 @@ Array of bytes that represents a color used by the rendering functions.
 
 ---
 
-## hover_back
-
-```lua
-(field) hover_back: unknown
-```
-
----
-
 ## hover_text
 
 ```lua
@@ -382,6 +374,46 @@ Child that last received hover motion
 ```lua
 (field) label_lines: table
 ```
+
+---
+
+## last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+## last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+## last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+## last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
 
 ---
 
@@ -954,11 +986,21 @@ Get the bottom y coordinate relative to parent
 
 ```lua
 (method) widget.checkbox:get_box_rect()
-  -> number
-  2. number
-  3. number
-  4. number
+  -> x: number
+  2. y: number
+  3. width: number
+  4. height: number
 ```
+
+Get the icon bounds used for drawing and label layout.
+
+@*return* `x`: `number`
+
+@*return* `y`: `number`
+
+@*return* `width`: `number`
+
+@*return* `height`: `number`
 
 ---
 

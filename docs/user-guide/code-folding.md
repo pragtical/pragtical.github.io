@@ -15,6 +15,8 @@ structure and indentation, then shown with fold markers in the gutter.
 Collapsed regions keep large files easier to scan while preserving normal
 editing, navigation, and scrolling behavior.
 
+![A collapsed Lua function with a fold marker in the gutter](/img/user-guide/code-folding/folded.png)
+
 ## Features
 
 - **Gutter Fold Markers**
@@ -57,7 +59,8 @@ There are different ways to use Code Folding:
 
 | Name | Description |
 | ---- | ----------- |
-| `code-folding:toggle` | Toggle the fold region at, or containing, the active line |
+| `code-folding:toggle` | Enable or disable code folding |
+| `code-folding:toggle-fold` | Toggle the fold region at, or containing, the active line |
 | `code-folding:fold-all` | Collapse all foldable regions in the active document |
 | `code-folding:unfold-all` | Expand all folded regions in the active document |
 
@@ -73,13 +76,24 @@ There are different ways to use Code Folding:
 
 The following configuration options are available:
 
+**Use Whitelist** restricts folding to selected syntax names or literal filename
+extensions. Enable it under **Settings > Plugins > Code Folding**, then filter
+the **Languages** list or add entries to **Extensions**. With it disabled,
+folding is available without that language filter.
+
 <Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
 
 ```lua
+local config = require "core.config"
 ---Whether code folding is enabled.
 ---@type boolean
 config.plugins.codefold.enabled = true
+
+---Optionally restrict folding to selected languages or extensions.
+config.plugins.codefold.use_whitelist = false
+config.plugins.codefold.languages = { Lua = true }
+config.plugins.codefold.extensions = { ".lua" }
 
 ---Collapse all foldable regions when opening a file.
 ---@type boolean

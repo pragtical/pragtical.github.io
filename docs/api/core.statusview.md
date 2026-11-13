@@ -2964,17 +2964,6 @@ Follows parent, subparent, and floating owner links while guarding against cycle
 
 ---
 
-## register_command_items
-
-```lua
-(method) core.statusview:register_command_items()
-```
-
-Register default status bar items for command views.
-Shows file count icon.
-
----
-
 ## register_docview_items
 
 ```lua

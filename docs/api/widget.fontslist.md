@@ -351,6 +351,46 @@ Child that last received hover motion
 
 ---
 
+## last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+## last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+## last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+## last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
+
+---
+
 ## list
 
 ```lua
@@ -961,6 +1001,46 @@ Child that last received hover motion
 ```lua
 (field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
+
+---
+
+### last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+### last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+### last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+### last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
 
 ---
 

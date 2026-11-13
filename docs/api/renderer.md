@@ -382,6 +382,16 @@ Represent options that affect a font's rendering.
 
 ---
 
+### system_fallback
+
+```lua
+(field) system_fallback: boolean
+```
+
+Automatically use installed fonts for missing graphemes (default: true). The first font controls this for groups; configured fonts retain priority.
+
+---
+
 ### underline
 
 ```lua
@@ -539,14 +549,6 @@ function renderer.end_frame()
 ```
 
 Tell the rendering system that we finished building the frame.
-
----
-
-## end_frame_lua
-
-```lua
-function
-```
 
 ---
 

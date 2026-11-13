@@ -111,6 +111,28 @@ Defaults to true.
 
 ---
 
+## borderless_outline
+
+```lua
+(field) borderless_outline: boolean
+```
+
+Draws an outline around restored borderless windows on all platforms.
+Hidden when maximized or fullscreen. Defaults to true.
+
+---
+
+## borderless_unfocused_overlay
+
+```lua
+(field) borderless_unfocused_overlay: renderer.color
+```
+
+Overlay covering the built-in title bar while the application is unfocused.
+The fourth component sets opacity from 0 to 255; use 0 to disable it.
+
+---
+
 ## caret_column_mode
 
 ```lua
@@ -360,7 +382,7 @@ The default is 120% of the height of the text (1.2).
 (field) line_limit: number
 ```
 
-Maximum number of characters per-line for the line guide.
+Column limit used by line guides and optional soft wrapping.
 
 Defaults to 80.
 
@@ -538,6 +560,28 @@ Defaults to "configured".
 A list of characters that delimits a word.
 
 The default is ``" \t\n/\\()\"':,.;\<\>~!@#$%^&*|+=\[\]\{\}`?-"``
+
+---
+
+## outline_focused
+
+```lua
+(field) outline_focused: (renderer.color)?
+```
+
+Borderless outline color while the application has keyboard focus.
+Leave unset to use the current theme's style.caret color.
+
+---
+
+## outline_unfocused
+
+```lua
+(field) outline_unfocused: (renderer.color)?
+```
+
+Borderless outline color while the application is unfocused.
+Leave unset to use the current theme's style.dim color.
 
 ---
 

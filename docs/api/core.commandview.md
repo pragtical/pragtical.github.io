@@ -345,6 +345,16 @@ Last document change ID (for detecting updates)
 
 ---
 
+## last_selected_suggestion
+
+```lua
+(field) last_selected_suggestion: table?
+```
+
+Last result delivered to the prompt's on_select callback
+
+---
+
 ## last_text
 
 ```lua
@@ -916,8 +926,16 @@ Automatically creates instance and calls new() with provided arguments.
 ### clear_cache
 
 ```lua
-(method) core.doc:clear_cache(l: any, n: any)
+(method) core.doc:clear_cache(l: integer, n: integer, keep_graphemes?: boolean)
 ```
+
+Invalidate line caches, optionally retaining text-matched grapheme bounds.
+
+@*param* `l`: `integer` — First line
+
+@*param* `n`: `integer` — Number of additional lines
+
+@*param* `keep_graphemes?`: `boolean` — Used for syntax-only updates
 
 ---
 
@@ -1003,6 +1021,23 @@ for a different edit after undoing back past a saved state.
 (method) core.doc:get_char(line: any, col: any)
   -> string
 ```
+
+---
+
+### get_grapheme_bounds
+
+```lua
+(method) core.doc:get_grapheme_bounds(line: integer, col: integer)
+  -> first: integer
+  2. after: integer
+```
+
+Get the byte boundaries of the displayed character containing a column.
+The end is exclusive; document positions remain byte offsets.
+
+@*return* `first`: `integer`
+
+@*return* `after`: `integer`
 
 ---
 
@@ -1708,6 +1743,16 @@ Stable result identity for restoring a selection after reordering
 ```
 
 Called after cleanup and before submit/cancel; submitted means validation passed
+
+---
+
+### on_select
+
+```lua
+(field) on_select: fun(suggestion?: table)?
+```
+
+Called when the highlighted result changes; nil when results become empty. Runs during update, never during drawing
 
 ---
 
@@ -3247,16 +3292,20 @@ Pending edits are saved as a fresh query without invoking the suggestion provide
 ## scroll_to_line
 
 ```lua
-(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean)
+(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean, col?: integer)
 ```
 
 Scroll to center a line in the viewport.
+When `col` is given, the visual row containing that column is centered,
+which matters when a line is wrapped across multiple rows.
 
 @*param* `line`: `integer` — Line number to scroll to
 
 @*param* `ignore_if_visible?`: `boolean` — Don't scroll if line already visible
 
 @*param* `instant?`: `boolean` — Jump immediately without animation
+
+@*param* `col?`: `integer` — Column whose visual row should be centered (default 1)
 
 ---
 

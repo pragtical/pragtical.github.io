@@ -7,7 +7,7 @@ description: Welcome to Pragtical!
 
 **Pragtical** - The practical and pragmatic code editor.
 
-![screenshot](/img/gallery/1.png)
+![Pragtical editing a Lua project in the One Dark theme](/img/user-guide/editor.png)
 
 Pragtical is a cross-platform code editor with a modern graphical interface,
 developed using C and Lua(JIT), powered by [SDL] for rendering and input
@@ -32,7 +32,7 @@ Examples of functionality added as plugins:
 
 - [LSP] (implementing Language Server Protocol support for intellisense)
 - [EditorConfig]
-- [Integrated Terminal]
+- [Ghostty Terminal] (integrated terminal tabs and bottom drawer)
 - [Code Formatters]
 - [Source Control Management] (Git and Fossil)
 - and more (https://github.com/pragtical/plugins)...
@@ -99,9 +99,13 @@ evident.
 to perform different types of task, the way these tasks are scheduled has been
 improved on Pragtical to provide better editor responsiveness.
 
-* **Native Tokenizer** - in order to perform faster syntax highlighting we
-ported the Lua tokenizer into a native Lua module with optimizations that
-provide a 20X to 30X performance improvement.
+* **Native Tokenizer** - syntax highlighting can use a native module with
+compiled syntax rules, reusable states and optimized matching. Speedups vary
+with the language, rules and document; the Lua tokenizer remains available.
+
+* **Idle Updates** - views request work when their state changes, and the main
+loop can wait between events. Hidden panes, settled animations and unchanged
+widgets avoid unnecessary updates and redraws.
 
 ### More Features
 
@@ -132,11 +136,20 @@ graphical interface to adjust your preferences out of the box. But don't
 worry, configuring the editor through Lua will keep working because it is also
 pragtical 😉
 
+Settings includes searchable Core, Colors, Plugins and Keybindings tabs,
+individual reset actions, and live previews while choosing fonts.
+
 * **[Font Ligatures]** - enable ligatures on compatible fonts to render operators
 like `!=`, `=>` and `>=` as joined symbols, while keeping the original text intact.
 
-* **[Color Emoji]** - display emoji in full color by adding an emoji font to your
-font fallbacks, both for code and interface text.
+* **[Automatic Font Fallback]** - use installed system fonts for missing writing
+systems and symbols while retaining explicit font priorities.
+
+* **[Color Emoji]** - display supported emoji sequences in full color using
+installed fonts or an explicit emoji fallback, for both code and interface text.
+
+* **Unicode Editing** - move, select, delete and wrap by displayed graphemes,
+keeping combining marks, variation selectors and composed emoji together.
 
 * **Encoding** - while UTF-8 has overtaken as the preferred encoding for text
 documents for its convenience, we can sometimes encounter a document in another
@@ -151,8 +164,14 @@ opened instances.
 * **[CLI]** - Integrated command line interface API that can be extended by
 plugins to provide new CLI flags.
 
-* **Search/Replace** - Project-wide search and replace support, better user
-interface for both documents and project search/replace.
+* **[Project Search]** - search and replace across project directories, open
+results in splits, and dock results on either side or use a centered popup.
+
+* **[Workspace Sessions]** - restore project layouts and unsaved buffers,
+choose saved sessions, and remove obsolete sessions from the File menu.
+
+* **[Line Wrapping]** - wrap at the configured column limit or viewport width,
+with word/letter modes, continuation indentation and a wrapping guide.
 
 * **[Code Folding]** - Built-in support for folding code regions, with gutter
 markers, keyboard shortcuts, persisted fold state, and settings for how folded
@@ -184,6 +203,10 @@ local or remote images.
 [Code Folding]:              /docs/user-guide/code-folding
 [Font Ligatures]:            /docs/user-guide/font-ligatures
 [Color Emoji]:               /docs/user-guide/color-emoji
+[Automatic Font Fallback]:   /docs/user-guide/configuration#automatic-font-fallback
+[Project Search]:            /docs/user-guide/project-search
+[Workspace Sessions]:        /docs/user-guide/workspace-sessions
+[Line Wrapping]:             /docs/user-guide/line-wrapping
 [Diff Viewer]:               /docs/user-guide/diff-viewer
 [Image Viewer]:              /docs/user-guide/image-viewer
 [Audio Player]:              /docs/user-guide/audio-player
@@ -192,7 +215,7 @@ local or remote images.
 [SDL_Image]:                 https://github.com/libsdl-org/SDL_image/
 [LSP]:                       /docs/plugins/lsp
 [EditorConfig]:              /plugins?plugin=editorconfig
-[Integrated Terminal]:       /plugins?plugin=terminal
+[Ghostty Terminal]:          /plugins?plugin=ghostty
 [Code Formatters]:           /plugins?plugin=formatter
 [Source Control Management]: /docs/plugins/scm
 [Lite XL]:                   https://github.com/lite-xl/lite-xl

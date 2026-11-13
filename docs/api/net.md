@@ -162,6 +162,7 @@ A network server that can accept connections.
 ```
 
 Check for new client connections and if found return it.
+Returns nil without an error when no client is waiting.
 
 @*return* `client`: `(`[`net.tcp`](/docs/api/net#nettcp)`)?`
 

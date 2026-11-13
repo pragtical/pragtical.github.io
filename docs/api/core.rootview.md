@@ -1049,8 +1049,8 @@ A modal popup receives points outside its bounds; points outside RootView return
   -> view: (core.view)?
 ```
 
-Find the topmost shown floating view containing a keyboard focus target.
-Includes container descendants; excludes popups whose closing slide has started.
+Find the shown floating container of a keyboard focus target.
+Includes container descendants; stops at hidden or closing floating containers.
 
 @*param* `target?`: [`core.view`](/docs/api/core.view) — Focused view or one of its container descendants
 

@@ -10,17 +10,15 @@ description: Learn about basic operations in Pragtical.
 Pragtical comes with a file browser by default.
 You can open, rename, move and delete files with it.
 
-With a single left-click, documents will instantly open and [images][Image Viewer]
-will be previewed in a new tab.
+With a single left-click, documents open in a tab. Supported [images][Image Viewer]
+and [audio files](audio-player.md) open in their built-in viewers.
 
 Right-clicking on a file or folder will show more options.
 
 Other than that, you can also open files with <kbd>ctrl+p</kbd>.
 This opens a fuzzy finder with a list of project files.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
-  <source src="/videos/user-guide/opening-files.mp4"/>
-</video>
+![The editor and project file tree in the One Dark theme](/img/user-guide/editor.png)
 
 ## Commands
 
@@ -35,9 +33,10 @@ type `new doc` and the correct command `Core: New Doc` will show up as
 the first choice. You can press <kbd>up</kbd> or <kbd>down</kbd> to select other commands.
 If a command is bound to a key shortcut, it will be shown on the right.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
-  <source src="/videos/user-guide/command-palette.mp4"/>
-</video>
+![The command palette with matching commands and shortcuts](/img/user-guide/command-palette/command-palette.png)
+
+The [application menus](application-menus.md) provide another way to find
+commands. **Tools > Settings** opens the searchable configuration interface.
 
 ## Keyboard shortcuts
 
@@ -55,7 +54,7 @@ local keymap = require "core.keymap"
 keymap.add { ["ctrl+q"] = "core:quit" }
 ```
 
-A list of default mappings can be viewed [here][1].
+A list of default mappings can be viewed in [Keymap](keymap.md).
 
 ## Multiple selections (multiple cursors)
 
@@ -64,9 +63,11 @@ You insert more cursors by <kbd>ctrl+left-button</kbd>.
 To insert cursors upwards or downwards, use <kbd>ctrl+shift+up</kbd>
 or <kbd>ctrl+shift+down</kbd>.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
-  <source src="/videos/user-guide/multi-cursor.mp4"/>
-</video>
+![Editing several selections at once](/img/user-guide/multi-cursor.png)
+
+Cursor movement, deletion, selection, and wrapping keep displayed characters
+together, including combining marks and multi-codepoint emoji. Press
+<kbd>alt+v</kbd> to center the active cursor vertically.
 
 ## Find and replace
 
@@ -80,15 +81,14 @@ The following features are supported:
 * Replace in selection (<kbd>ctrl+alt+i</kbd>)
 
 To find a certain word, you can use <kbd>ctrl+f</kbd>.
-This will open a prompt where you can find text in the document.
+This opens the search panel for the current document.
 After entering the text, you can press enter to find the first
 match. The matched text will be selected. To find the next match,
 press <kbd>f3</kbd> or <kbd>enter</kbd>, going to the previous match can
 be performed by pressing <kbd>shift+f3</kbd> or <kbd>shift+enter</kbd>.
 
 To find and replace text on currently opened text document, press
-<kbd>ctrl+r</kbd>. Pragtical will prompt you for text to replace and the
-replacement text.
+<kbd>ctrl+r</kbd>. Enter the search and replacement text in the panel.
 
 ![The find text prompt][1]
 
@@ -96,18 +96,16 @@ replacement text.
 
 Finding text across multiple files can be useful.
 To do this in Pragtical, press <kbd>ctrl+shift+f</kbd>.
-Pragtical will open a new tab to display all the search results.
+Pragtical opens the project search panel, docked at the left by default.
 To open the file containing the match, you can click the entries or navigate
 them using the keyboard keys: <kbd>up</kbd>, <kbd>down</kbd>,
 <kbd>left</kbd>, <kbd>right</kbd> and <kbd>enter</kbd>.
 
-You can optionally specify a subproject path to limit the search scope.
-
-In contrast to it's ancestors that do not support project-wide search and
-replace, Pragtical does supports it and is accessible by also pressing
-<kbd>ctrl+shift+f</kbd>. You will be able to select the results that will
-be replaced by toggling the checkbox next to them using the mouse or pressing
-the <kbd>space</kbd> key.
+With no explicit path, the search includes all open project directories.
+Choose a path to restrict its scope. Plain text and regular expressions are
+supported. Select replacement targets using the result checkboxes and review
+them before replacing. See [Project Search](project-search.md) for filters,
+split opening, and centered or tabbed layouts.
 
 ![Project search result tab][2]
 
@@ -115,8 +113,7 @@ the <kbd>space</kbd> key.
 
 Some application may require a specific type of line ending.
 To change the line ending of a file, you can use the command
-`doc:toggle-line-ending` or press the rightmost entry on
-the StatusView.
+`doc:toggle-line-ending` or click the **LF** / **CRLF** entry on the status bar.
 This should toggle between LF and CRLF which corresponds to
 Unix and Windows style line endings.
 
@@ -127,7 +124,7 @@ Unix and Windows style line endings.
 Pragtical should automatically detect the indentation
 of the current file and apply it when pressing <kbd>tab</kbd>.
 However, you can change the indentation size by left-clicking
-the 4th entry on the right of the StatusView.
+the **Spaces** / **Tabs** entry on the status bar.
 You can also change the type of the indentation by right-clicking
 the entry.
 The settings will not apply to existing text.
@@ -158,8 +155,9 @@ you can use the command `core:add-directory`.
 Once the directory is added to the project, you can browse its file on the
 file browser and fuzzy finder.
 
-Pragtical will automatically save opened files and directories and restore them
-when you restart the editor.
+Pragtical automatically saves the workspace layout and restores it when you
+return to the project. [Workspace Sessions](workspace-sessions.md) explains
+saved sessions and backups of unsaved documents.
 
 
 [1]: /img/user-guide/find.png

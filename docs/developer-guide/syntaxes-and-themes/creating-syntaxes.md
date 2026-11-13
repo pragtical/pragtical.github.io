@@ -29,6 +29,10 @@ The supported syntax token types, defined by `pragtical/core/style.lua`, are:
 - `operator`
 - `function`
 
+The bundled extended categories include `character.special` for escape
+sequences. It falls back to `operator` when a theme does not supply a specific
+color. A theme can assign `style.syntax["character.special"]` directly.
+
 In your syntax highlighting plugin,
 you write patterns to match parts of the language syntax,
 assigning these token types to matches.
@@ -186,6 +190,27 @@ A `string` can have escape sequences prefixed with `\`.
 
 Given the input `"\"Hello John\""`, the entire input will be assigned the type
 `string`.
+
+### First-Line Rules
+
+Set `first_line = true` on a pattern or regex rule when its opening match is
+valid only on the document's first line. A multi-line region opened there can
+continue and close later; the same opener cannot start another region halfway
+through the file. This is useful for Markdown frontmatter:
+
+```lua
+{
+  pattern = { "^%-%-%-%s*\n", "^%-%-%-%s*$" },
+  type = "string",
+  syntax = ".yaml",
+  first_line = true,
+}
+```
+
+The Lua and native tokenizers use the same rule definitions and document-line
+context. The native tokenizer optimizes rule matching and state reuse without
+requiring a separate syntax format. See the
+[Syntax API](/docs/api/core.syntax) and [Tokenizer API](/docs/api/core.tokenizer).
 
 ### Symbols
 

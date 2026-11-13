@@ -89,6 +89,18 @@ and the icon set can be overridden by specifying an icon font that has the corre
 | `style.icon_font`     | The font containing icons that are displayed in the UI.
 | `style.icon_big_font` | Larger version of `style.icon_font`.
 
+Text fonts enable native system fallback by default. Explicit fallback fonts
+still take priority; the first font in a group controls automatic fallback.
+See [Color Emoji](../../user-guide/color-emoji.md) and
+[Font Ligatures](../../user-guide/font-ligatures.md) for font-group examples.
+Keep `system_fallback = false` on custom icon fonts so missing icon codepoints
+are not substituted with unrelated system glyphs.
+
+Borderless window outlines and inactive title overlays are controlled by
+`config.borderless_outline`, `config.outline_focused`,
+`config.outline_unfocused`, and
+`config.borderless_unfocused_overlay`. These are configuration values,
+not `style` keys; see [Configuration](../../user-guide/configuration.md).
 
 ### Base Colors
 
@@ -216,7 +228,7 @@ your syntax for more flexibility and customization.
 | `style.syntax["annotation.literal"]`    | Used for doc comments literals.
 | `style.syntax["boolean"]`               | Used for keywords like: true or false.
 | `style.syntax["character"]`             | Used for single quote sequences like: `'a'`.
-| `style.syntax["character.special"]`     | Used for escape sequences like: `\t`, `\r`, `\n`.
+| `style.syntax["character.special"]`     | Used for escape sequences like: `\t`, `\r`, `\n`; falls back to the operator color unless overridden.
 | `style.syntax["conditional"]`           | Used for keywords like: if, else, elseif.
 | `style.syntax["conditional.ternary"]`   | Used for conditional ternary as: `condition ? value1 : value2`.
 | `style.syntax["constant"]`              | Used for keywords like: `nil`, `null`.

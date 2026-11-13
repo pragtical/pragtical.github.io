@@ -67,10 +67,20 @@ Requires tokenization
 ### width_override
 
 ```lua
-(field) width_override: (number|function)?
+(field) width_override: (number|fun(view: core.docview):number)?
 ```
 
-():number
+Override the automatic pixel width with a number or a function of the DocView.
+
+---
+
+### wrap_at_line_limit
+
+```lua
+(field) wrap_at_line_limit: boolean
+```
+
+Limit automatic wrapping to config.line_limit columns, or the viewport if narrower.
 
 ---
 

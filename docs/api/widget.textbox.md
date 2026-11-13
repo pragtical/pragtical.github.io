@@ -115,6 +115,36 @@ A base widget
 
 ---
 
+## clear_pressed
+
+```lua
+(field) clear_pressed: boolean
+```
+
+Whether the current gesture began on the clear icon
+
+---
+
+## clear_width
+
+```lua
+(field) clear_width: number
+```
+
+Reserved width inside the input, in pixels
+
+---
+
+## clearable
+
+```lua
+(field) clearable: boolean
+```
+
+Whether the internal clear action is enabled
+
+---
+
 ## clickable
 
 ```lua
@@ -354,6 +384,46 @@ this widget is for text input
 ```lua
 (field) label: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>
 ```
+
+---
+
+## last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+## last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+## last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+## last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
 
 ---
 
@@ -905,8 +975,16 @@ Automatically creates instance and calls new() with provided arguments.
 ### clear_cache
 
 ```lua
-(method) core.doc:clear_cache(l: any, n: any)
+(method) core.doc:clear_cache(l: integer, n: integer, keep_graphemes?: boolean)
 ```
+
+Invalidate line caches, optionally retaining text-matched grapheme bounds.
+
+@*param* `l`: `integer` — First line
+
+@*param* `n`: `integer` — Number of additional lines
+
+@*param* `keep_graphemes?`: `boolean` — Used for syntax-only updates
 
 ---
 
@@ -992,6 +1070,23 @@ for a different edit after undoing back past a saved state.
 (method) core.doc:get_char(line: any, col: any)
   -> string
 ```
+
+---
+
+### get_grapheme_bounds
+
+```lua
+(method) core.doc:get_grapheme_bounds(line: integer, col: integer)
+  -> first: integer
+  2. after: integer
+```
+
+Get the byte boundaries of the displayed character containing a column.
+The end is exclusive; document positions remain byte offsets.
+
+@*return* `first`: `integer`
+
+@*return* `after`: `integer`
 
 ---
 
@@ -3138,16 +3233,20 @@ Convert screen coordinates to document line/column.
 ### scroll_to_line
 
 ```lua
-(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean)
+(method) core.docview:scroll_to_line(line: integer, ignore_if_visible?: boolean, instant?: boolean, col?: integer)
 ```
 
 Scroll to center a line in the viewport.
+When `col` is given, the visual row containing that column is centered,
+which matters when a line is wrapped across multiple rows.
 
 @*param* `line`: `integer` — Line number to scroll to
 
 @*param* `ignore_if_visible?`: `boolean` — Don't scroll if line already visible
 
 @*param* `instant?`: `boolean` — Jump immediately without animation
+
+@*param* `col?`: `integer` — Column whose visual row should be centered (default 1)
 
 ---
 
@@ -3399,6 +3498,30 @@ Get the first visual row and row count for a real document line.
 @*return* `first_row`: `integer?`
 
 @*return* `row_count`: `integer`
+
+---
+
+## widget.textbox.options
+
+Optional TextBox behaviors, disabled by default.
+
+### clearable
+
+```lua
+(field) clearable: boolean?
+```
+
+Show an internal clear icon when the input is nonempty
+
+---
+
+### password
+
+```lua
+(field) password: boolean?
+```
+
+Mask the displayed text
 
 ---
 
@@ -3702,6 +3825,28 @@ Example: `view:extends(View)` returns true for View and all subclasses
 ```
 
 Get the bottom y coordinate relative to parent
+
+---
+
+## get_clear_button_bounds
+
+```lua
+(method) widget.textbox:get_clear_button_bounds()
+  -> x: number?
+  2. y: number?
+  3. width: number?
+  4. height: number?
+```
+
+Return the visible clear action's bounds inside the input border.
+
+@*return* `x`: `number?` — Screen x, or nil when empty or disabled
+
+@*return* `y`: `number?` — Screen y
+
+@*return* `width`: `number?` — Hit area width
+
+@*return* `height`: `number?` — Hit area height
 
 ---
 
@@ -4165,10 +4310,14 @@ Use this for animations instead of direct assignment.
 ## new
 
 ```lua
-(method) widget.textbox:new(parent: widget, text: boolean, placeholder: any, options: any)
+(method) widget.textbox:new(parent?: widget, text?: string, placeholder?: string, options?: widget.textbox.options)
 ```
 
-@*param* `parent`: [`widget`](/docs/api/widget) — A base widget
+Create a single-line input with optional password and clear-button behavior.
+
+@*param* `parent?`: [`widget`](/docs/api/widget) — A base widget
+
+@*param* `options?`: [`widget.textbox.options`](/docs/api/widget.textbox#widgettextboxoptions) — Optional TextBox behaviors, disabled by default.
 
 ---
 
@@ -4522,6 +4671,16 @@ Useful for determining cursor style or handling clicks.
 ```
 
 Set the widget border size and appropriately re-set the widget size.
+
+---
+
+## set_clearable
+
+```lua
+(method) widget.textbox:set_clearable(enabled: boolean)
+```
+
+Enable or disable the clear icon, preserving a stable text viewport while enabled.
 
 ---
 

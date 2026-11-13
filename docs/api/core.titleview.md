@@ -145,6 +145,16 @@ Whether the view is registered, including closing slides
 
 ---
 
+## focused
+
+```lua
+(field) focused: boolean
+```
+
+Whether the application window has keyboard focus
+
+---
+
 ## h_scrollbar
 
 ```lua
@@ -354,7 +364,8 @@ Unchanged geometry does not reinstall the native callback.
 (method) core.titleview:draw()
 ```
 
-Draw the shared title/menu row and synchronize its final laid-out native bounds.
+Draw the title/menu row, controls, and the inactive overlay over them.
+Synchronize the final laid-out native hit regions too.
 
 ---
 
@@ -1165,7 +1176,7 @@ Example: `core.command_view:enter("Save?", \{submit = do_close\})`
 (method) core.titleview:update()
 ```
 
-Keep the title height and maximize/restore button synchronized with the window.
+Keep title geometry, focus state, and window controls synchronized.
 
 ---
 

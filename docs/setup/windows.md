@@ -50,8 +50,25 @@ Make sure to check the [plugins -> troubleshooting] section for an
 explanation and solution to this issue.
 :::
 
+### MSYS2
+
+[MSYS2][5] provides [Pragtical packages][6] for the UCRT64, CLANG64, and
+CLANGARM64 environments.
+
+For x86_64 Windows, open the **MSYS2 UCRT64** terminal and install Pragtical:
+
+```sh
+pacman -S mingw-w64-ucrt-x86_64-pragtical
+```
+
+Launch it by running `pragtical` from the same terminal. If you use CLANG64 or
+CLANGARM64 instead, choose the corresponding package from the package listing;
+each package page includes its installation command.
+
 [plugins -> troubleshooting]: /docs/user-guide/plugins#ppm-installed-from-scoop-fails-to-install-plugins
 [1]: https://github.com/pragtical/pragtical/releases
 [2]: https://github.com/pragtical/pragtical/releases/download/rolling/Pragtical-rolling-x86_64-setup.exe
 [3]: https://github.com/pragtical/pragtical/releases/download/rolling/pragtical-rolling-windows-x86_64.zip
 [4]: https://scoop.sh/
+[5]: https://www.msys2.org/
+[6]: https://packages.msys2.org/base/mingw-w64-pragtical

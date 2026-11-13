@@ -417,6 +417,46 @@ Child that last received hover motion
 
 ---
 
+## last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+## last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+## last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+## last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
+
+---
+
 ## ligatures
 
 ```lua
@@ -665,6 +705,14 @@ manually intercepting ctrl+wheel.
 
 ---
 
+## system_fallback
+
+```lua
+(field) system_fallback: widget.checkbox
+```
+
+---
+
 ## textview
 
 ```lua
@@ -810,6 +858,16 @@ A base widget
 ```lua
 (field) strikethrough: boolean
 ```
+
+---
+
+### system_fallback
+
+```lua
+(field) system_fallback: boolean
+```
+
+Automatically use installed fonts for missing graphemes (default: true). The first font controls this for groups; configured fonts retain priority.
 
 ---
 
@@ -2056,6 +2114,8 @@ A text label for the widget, not all widgets support this.
 (method) widget.fontdialog:set_options(options: widget.fontdialog.fontoptions)
 ```
 
+Apply the rendering options and refresh the font preview.
+
 @*param* `options`: [`widget.fontdialog.fontoptions`](/docs/api/widget.fontdialog#widgetfontdialogfontoptions)
 
 ---
@@ -2162,6 +2222,18 @@ Disabled transitions apply placement and run the completion callback immediately
 @*param* `options?`: [`core.view.floating_transition`](/docs/api/core.view#coreviewfloating_transition) — Optional opening slide (from) and callback
 
 @*return* `view`: [`core.view`](/docs/api/core.view) — This view, for chaining
+
+---
+
+## show_font_picker
+
+```lua
+(method) widget.fontdialog:show_font_picker(monospaced: boolean)
+```
+
+Browse fonts with a temporary sample, keeping the chosen font until confirmation.
+
+@*param* `monospaced`: `boolean` — Only list monospaced fonts
 
 ---
 
@@ -2276,8 +2348,12 @@ Called on the update function to be able to scroll the child widgets.
 ## update_preview
 
 ```lua
-(method) widget.fontdialog:update_preview()
+(method) widget.fontdialog:update_preview(font?: widget.fontslist.font)
 ```
+
+Update the sample using the selected font or a temporary font from the picker.
+
+@*param* `font?`: [`widget.fontslist.font`](/docs/api/widget.fontslist#widgetfontslistfont) — Temporary preview; does not change the selected font
 
 ---
 

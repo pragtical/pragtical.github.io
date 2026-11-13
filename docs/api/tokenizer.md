@@ -99,6 +99,9 @@ True when the opener pattern has unknown start bytes.
 
 Resume information returned by `tokenizer.tokenize()` when tokenization
 does not finish within the current frame budget.
+Pass this table back intact to reuse native text indexing and token progress.
+Legacy tables containing only `res`, `i` and `state` remain supported.
+The accumulated token table may be updated in place when resuming.
 
 ### i
 

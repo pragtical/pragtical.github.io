@@ -37,7 +37,7 @@ and intuitive interface to understand code changes.
   Merge changes across views or apply edits manually based on comparison.
 
 - **Source Control Integration**
-  Extended functionality when used with the built-in [Source Control Management]
+  Extended functionality when used with the optional [Source Control Management] plugin
   - Compare the current file to a previous version in your commit history.
   - View unstaged vs. working changes before committing.
 
@@ -77,6 +77,13 @@ There are different ways to open the Diff Viewer:
   <source src="https://github.com/user-attachments/assets/f5856c26-be2b-44f4-8d68-73b472fb90e9"/>
 </video>
 
+### Wrap Long Lines
+
+Press <kbd>F10</kbd> from either comparison pane to toggle wrapping on both
+sides. Changed lines, gap rows, synchronization arrows, and scrollbar markers
+stay aligned even when one side needs more screen rows. The boundary follows
+the [Line Wrapping](line-wrapping.md) settings, including **Wrap at Line Limit**.
+
 ## Available Commands:
 
 | Name                                   | Description
@@ -103,13 +110,15 @@ There are different ways to open the Diff Viewer:
 
 The following configuration options are available:
 
-<Tabs>
+<Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
 
 ```lua
+local config = require "core.config"
+local common = require "core.common"
 ---Logs the amount of time taken to recompute differences.
 ---@type boolean
-config.plugins.diffview.log_items = false
+config.plugins.diffview.log_times = false
 
 ---Disable syntax coloring on changed lines to improve visibility.
 ---@type boolean

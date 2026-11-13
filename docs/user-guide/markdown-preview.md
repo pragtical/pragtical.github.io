@@ -66,6 +66,11 @@ documentation and README files:
 Block HTML comments are hidden. The preview implements this supported Markdown
 subset rather than acting as a general HTML renderer.
 
+Link labels can span Markdown source lines, including reference labels and
+linked images. Inline code follows the code font's natural width without
+extra side padding, so code within a paragraph wraps consistently with its
+surrounding text.
+
 ## Links and Images
 
 Clicking a link handles its destination according to its type:

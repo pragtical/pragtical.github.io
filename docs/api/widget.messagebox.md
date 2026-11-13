@@ -433,6 +433,46 @@ Child that last received hover motion
 
 ---
 
+## last_update_height
+
+```lua
+(field) last_update_height: number?
+```
+
+Viewport height at the last update
+
+---
+
+## last_update_width
+
+```lua
+(field) last_update_width: number?
+```
+
+Viewport width at the last update
+
+---
+
+## last_update_x
+
+```lua
+(field) last_update_x: number?
+```
+
+Screen x at the last update
+
+---
+
+## last_update_y
+
+```lua
+(field) last_update_y: number?
+```
+
+Screen y at the last update
+
+---
+
 ## message
 
 ```lua
@@ -731,7 +771,7 @@ widget.messagebox.icontype:
 ## alert
 
 ```lua
-function widget.messagebox.alert(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color?: renderer.color, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.alert(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, icon: `MessageBox.ICON_ERROR`|`MessageBox.ICON_INFO`|`MessageBox.ICON_WARNING`, icon_color?: renderer.color, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`, owner?: core.view)
 ```
 
 Wrapper to easily show a message box.
@@ -757,12 +797,14 @@ buttons:
 
 @*param* `on_close?`: `fun(self: `[`widget.messagebox`](/docs/api/widget.messagebox)`, button_id: integer, button: `[`widget.button`](/docs/api/widget.button)`)`
 
+@*param* `owner?`: [`core.view`](/docs/api/core.view) — Originating view; shares its floating lifetime and stacking
+
 ---
 
 ## error
 
 ```lua
-function widget.messagebox.error(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.error(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`, owner?: core.view)
 ```
 
 Wrapper to easily show an error message box.
@@ -780,6 +822,8 @@ buttons:
 @*param* `message`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 @*param* `on_close?`: `fun(self: `[`widget.messagebox`](/docs/api/widget.messagebox)`, button_id: integer, button: `[`widget.button`](/docs/api/widget.button)`)`
+
+@*param* `owner?`: [`core.view`](/docs/api/core.view) — Originating view; shares its floating lifetime and stacking
 
 ---
 
@@ -806,7 +850,7 @@ If loading the instance failed nil will be returned.
 ## info
 
 ```lua
-function widget.messagebox.info(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.info(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`, owner?: core.view)
 ```
 
 Wrapper to easily show a info message box.
@@ -825,12 +869,14 @@ buttons:
 
 @*param* `on_close?`: `fun(self: `[`widget.messagebox`](/docs/api/widget.messagebox)`, button_id: integer, button: `[`widget.button`](/docs/api/widget.button)`)`
 
+@*param* `owner?`: [`core.view`](/docs/api/core.view) — Originating view; shares its floating lifetime and stacking
+
 ---
 
 ## warning
 
 ```lua
-function widget.messagebox.warning(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`)
+function widget.messagebox.warning(title: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, message: string|table<integer, string|integer|renderer.color|renderer.font|widget.colorreference...(+1)>, on_close?: fun(self: widget.messagebox, button_id: integer, button: widget.button), buttons?: `MessageBox.BUTTONS_OK_CANCEL`|`MessageBox.BUTTONS_OK`|`MessageBox.BUTTONS_YES_NO_CANCEL`|`MessageBox.BUTTONS_YES_NO`, owner?: core.view)
 ```
 
 Wrapper to easily show a warning message box.
@@ -848,6 +894,8 @@ buttons:
 @*param* `message`: `string|table<integer, string|integer|`[`renderer.color`](/docs/api/renderer#renderercolor)`|`[`renderer.font`](/docs/api/renderer#rendererfont)`|`[`widget.colorreference`](/docs/api/widget#widgetcolorreference)`...(+1)>`
 
 @*param* `on_close?`: `fun(self: `[`widget.messagebox`](/docs/api/widget.messagebox)`, button_id: integer, button: `[`widget.button`](/docs/api/widget.button)`)`
+
+@*param* `owner?`: [`core.view`](/docs/api/core.view) — Originating view; shares its floating lifetime and stacking
 
 ---
 

@@ -592,6 +592,20 @@ that are relative to the root directory.
 
 ---
 
+## path_to_uri
+
+```lua
+function core.common.path_to_uri(path: string)
+  -> string
+```
+
+Converts an absolute filesystem path to a `file://` URI.
+
+On Windows, backslashes are converted to slashes and a drive-letter path
+becomes `file:///C:/...`. The path is expected to be absolute.
+
+---
+
 ## relative_path
 
 ```lua
@@ -695,6 +709,39 @@ This function mutates the original table.
 
 ---
 
+## uri_list_to_paths
+
+```lua
+function core.common.uri_list_to_paths(text: string)
+  -> string[]
+```
+
+Converts a `text/uri-list` clipboard payload into local paths.
+
+Non-empty, non-comment lines are converted. `file://` and `file:` URIs
+become local filesystem paths with percent escapes decoded. Other URIs
+are kept unchanged.
+
+---
+
+## uri_to_path
+
+```lua
+function core.common.uri_to_path(uri: string)
+  -> string
+```
+
+Converts a `text/uri-list` entry or file URI to a local filesystem path.
+
+`file://`, `file://localhost`, and `file:` URIs are converted and percent
+escapes are decoded. Non-file URIs and remote file URIs are returned
+unchanged. An empty `file://` URI returns an empty string.
+
+On Windows, a leading `/` before a drive letter is removed and `/` is
+converted to `\`.
+
+---
+
 ## utf8_chars
 
 ```lua
@@ -703,6 +750,17 @@ function core.common.utf8_chars(text: string)
 ```
 
 Returns an iterator that yields a UTF-8 character on each iteration.
+
+---
+
+## utf8_graphemes
+
+```lua
+function core.common.utf8_graphemes(text: string)
+  -> fun():string?
+```
+
+Iterate displayed characters, keeping combining and emoji sequences together.
 
 ---
 

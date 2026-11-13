@@ -11,9 +11,14 @@ Check out the [lsp] plugin.
 
 #### Where is the integrated terminal?
 
-Work is being done on the [terminal] plugin which is the most feature complete
-terminal plugin at the moment. You can install it directly from within
-the plugin manager of the editor.
+We recommend [Ghostty Terminal][ghostty] over the older [terminal] plugin for
+better compatibility with terminal applications. It uses libghostty-vt and
+provides terminal tabs and a bottom drawer. Install `ghostty` from **Tools >
+Plugin Manager**, then restart Pragtical.
+
+Ghostty requires Pragtical built with LuaJIT and SDL3. See the
+[IDE setup guide](/docs/user-guide/ide-setup#integrated-terminal) for installation
+and usage.
 
 #### Tabs and indent size?
 
@@ -64,6 +69,7 @@ You need the [vibe] plugin.
 
 
 [lsp]:                  https://github.com/pragtical/lsp
+[ghostty]:              https://github.com/pragtical/ghostty
 [terminal]:             https://github.com/pragtical/terminal
 [autowrap]:             https://github.com/pragtical/plugins/blob/master/plugins/autowrap.lua?raw=1
 [vibe]:                 https://github.com/pragtical/vibe

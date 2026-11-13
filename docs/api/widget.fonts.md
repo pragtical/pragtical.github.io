@@ -39,10 +39,14 @@ Remove current fonts cache file and regenerates a fresh one.
 ## show_picker
 
 ```lua
-function widget.fonts.show_picker(callback: fun(name: string, path: string), monospaced: boolean)
+function widget.fonts.show_picker(callback: fun(name: string, path: string), monospaced: boolean, on_select?: fun(name?: string, path?: string), cancel?: fun())
 ```
 
 Launch the commandview and let the user select a font.
+
+@*param* `on_select?`: `fun(name?: string, path?: string)` — Called when the highlighted font changes; nil values mean no results
+
+@*param* `cancel?`: `fun()` — Called when the picker closes without confirmation
 
 ---
 

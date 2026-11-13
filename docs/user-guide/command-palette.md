@@ -26,6 +26,11 @@ Assigned keyboard shortcuts appear beside the command names.
 When there are more results than fit, scroll with the mouse wheel or scrollbar.
 Keyboard navigation keeps the selected result visible.
 
+Prompts can retain their previous input, selected result and scroll position
+when their caller opts into state recall. Go To Line keeps its search with
+the document it belongs to. Font selection previews the highlighted font
+before confirmation; cancelling the picker restores the previous choice.
+
 ## Palette position
 
 | Position | Placement |
@@ -80,6 +85,7 @@ Disabling all transitions also disables this animation.
 | `core:find-command` | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | Open the command palette. |
 | `command:submit` | <kbd>Enter</kbd> | Submit the current prompt or selected result. |
 | `command:escape` | <kbd>Escape</kbd> | Cancel the current prompt. |
+| `doc:center-cursor` | <kbd>Alt</kbd>+<kbd>V</kbd> | Center the current caret's line in the document viewport. |
 
 For mouse-accessible actions, see [Application Menus](application-menus.md).
 Plugin authors can read about palette placement and custom result rendering

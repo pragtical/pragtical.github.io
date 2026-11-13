@@ -457,11 +457,27 @@ of the haystack, eg: with a haystack "/my/path/to/file" and a needle
 ## get_clipboard
 
 ```lua
-function system.get_clipboard()
+function system.get_clipboard(mime_type?: string)
   -> string?
 ```
 
 Retrieve the text currently stored on the clipboard.
+
+When `mime_type` is provided, retrieves the raw clipboard data for that
+MIME type instead. The returned string preserves the exact byte length.
+
+---
+
+## get_clipboard_mime_types
+
+```lua
+function system.get_clipboard_mime_types()
+  -> string[]?
+```
+
+Retrieve the MIME types available in the clipboard.
+
+Returns `nil` when the clipboard has no MIME types.
 
 ---
 
@@ -846,6 +862,7 @@ Window events:
  * "enterfullscreen"
  * "leavefullscreen"
  * "focuslost"
+ * "focusgained"
 
 File events:
  * "filedropped" -\> filename, x, y
@@ -935,10 +952,15 @@ containing the results.
 ## set_clipboard
 
 ```lua
-function system.set_clipboard(text: string)
+function system.set_clipboard(text: string, mime_type?: string|string[])
 ```
 
 Set the content of the clipboard.
+
+When `mime_type` is provided, offers the data under that MIME type instead
+of setting plain text. A table of MIME types offers the same data under
+every listed type. Support for arbitrary MIME types depends on the
+platform's clipboard backend.
 
 ---
 

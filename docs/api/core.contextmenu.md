@@ -396,7 +396,7 @@ Menu entry or submenu definition; use ContextMenu.DIVIDER for separators.
 (field) checked: (boolean|fun():boolean)?
 ```
 
-Checked state evaluated when opening or navigating
+Toggle state evaluated when opening or navigating; false shows an empty checkbox
 
 ---
 

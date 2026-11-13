@@ -18,24 +18,38 @@ As such, we'll ignore them here and only document the useful ones.
 
 ### Clipboard
 
-`system.set_clipboard()` sets the clipboard content,
-while `system.get_clipboard()` retrieves the clipboard content.
-
-The functions do not support rich content such as images and files.
+`system.set_clipboard(text)` offers plain text, and `system.get_clipboard()`
+reads text or returns `nil` when none is available:
 
 ```lua
-function system.set_clipboard(text: string): () end
-function system.get_clipboard(text: string): string end
+system.set_clipboard("Copied from Pragtical")
+local text = system.get_clipboard()
 ```
 
-**Examples:**
+For other formats, inspect `system.get_clipboard_mime_types()` and pass a MIME
+type to `get_clipboard`. Raw reads preserve binary bytes and their length.
+`set_clipboard(data, mime_type)` offers data under one type; a table of MIME
+types offers the same payload under each type. Arbitrary format support depends
+on the operating system and SDL clipboard backend.
 
 ```lua
-system.set_clipboard("wow magic")
--- prints:
--- wow magic
-print(system.get_clipboard("wow magic"))
+for _, mime in ipairs(system.get_clipboard_mime_types() or {}) do
+  print(mime)
+end
+
+system.set_clipboard('{"kind":"example"}', "application/json")
+local data = system.get_clipboard("application/json")
 ```
+
+The API transfers bytes; it does not encode an image or convert file formats
+for you. For `text/uri-list`, use `common.uri_list_to_paths()` rather than
+splitting or percent-decoding the payload by hand. The matching helpers
+`common.path_to_uri()` and `common.uri_to_path()` convert individual paths and
+file URIs. Plain document paste uses URI-list paths when no text payload is
+available; this is not a universal native file-list API.
+
+See the [System API](/docs/api/system#get_clipboard) and
+[Common API](/docs/api/core.common#uri_list_to_paths) for format details.
 
 ### File / Directory operations
 
@@ -156,58 +170,36 @@ print(system.get_time())
 
 ## Window manipulation
 
-These functions deal with Pragtical window.
+Window helpers take a `renwindow` as their first argument. Use `core.window`
+for the editor window; do not omit it or pass a width in its place.
 
 ```lua
--- Sets the window opacity from 0 to 1.
-function system.set_window_opacity(opacity: number): boolean end
--- Sets the window title.
-function system.set_window_title(title: string): () end
-
-local enum WindowMode
-  "normal"
-  "maximized"
-  "minimized"
-  "fullscreen"
-end
-
--- Sets the window mode.
-function system.set_window_mode(mode: WindowMode): () end
-
--- Enables/disables window borders (decoration).
-function system.set_window_bordered(enable: boolean): () end
--- Sets the window hit test region.
-function system.set_window_hit_test(height?: number,
-                                    control_width?: number,
-                                    resize_border?: number): ()
-end
--- Gets the window dimension and position.
-function system.get_window_size(): {number, number, number, number} end
--- Sets the window dimension and position.
-function system.set_window_size(width:  number,
-                                height: number,
-                                x:      number,
-                                y:      number): ()
-end
--- Checks whether windows has input focus.
-function system.window_has_focus(): boolean end
--- Shows a message box with an error message.
-function system.show_fatal_error(title: string, msg: string): () end
+local core = require "core"
+system.set_window_mode(core.window, "normal")
+system.set_window_size(core.window, 1280, 800, 80, 80)
+local width, height, x, y = system.get_window_size(core.window)
+local focused = system.window_has_focus(core.window)
 ```
 
-The `height` parameter in `system.set_window_hit_test()` refers to the height
-of the top decoration. Users can drag this part of the window to move it.
-`control_width` specifies the width of various window controls
-(minimize, maximize and close) buttons in the top right corner of the window.
-`resize_border` specifies the width of a "border region" where users can
-drag the window to resize it.
-This value does not overlap with the `height` parameter.
+Modes are `"normal"`, `"maximized"`, `"minimized"`, and `"fullscreen"`.
+`get_window_size` returns logical width, height, x and y as separate results.
+For renderer-pixel dimensions, use `core.window:get_size()`. This distinction
+matters on scaled displays and when capturing a window with `renderer.to_canvas`.
 
-`system.get_window_size()` returns the width, height, x-coordinate
-and y-coordinate of the window respectively.
+`system.set_window_opacity(core.window, opacity)` accepts a value from 0 to 1
+and returns whether the platform accepted it. `set_window_title` and
+`set_window_bordered` also take the target window first. The editor manages
+its own title and borderless decorations, so normal plugins should leave
+those policies to core and configuration.
 
-`system.set_window_opacity()` will return `false` if the operation failed.
-Otherwise, it returns `true`.
+`system.set_window_hit_test(window, title_height, controls_width, resize_border,
+interactive_rect)` defines custom decoration regions in renderer coordinates.
+The optional `{ x, y, w, h }` rectangle keeps interactive title-bar contents
+out of the drag region. Resize regions are inactive while maximized or
+fullscreen. Calling it with only the window disables custom hit testing.
+
+See the [System API](/docs/api/system) and [Window API](/docs/api/renwindow)
+for complete signatures, native file dialogs, and renderer information.
 
 ## Miscellaneous
 

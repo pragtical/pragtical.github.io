@@ -57,6 +57,10 @@ ligatures. The [color emoji guide](color-emoji.md) includes a fallback example.
 The size and font options apply to every font in this list. To configure
 ligatures separately for individual fallback fonts, use the User Module.
 
+The dialog also has a **System Fallback** checkbox. It controls automatic use
+of installed fonts for missing characters, separately from programming
+ligatures. See [automatic font fallback](configuration.md#automatic-font-fallback).
+
   </TabItem>
 </Tabs>
 
@@ -69,6 +73,11 @@ font boundary can keep a sequence from joining.
 
 For interface text, configure **Core > User Interface > Font** instead of
 **Code Font**, or assign the font to `style.font` in Lua.
+
+Combining marks, complex-script text and supported emoji sequences are shaped
+even when optional programming ligatures are disabled. Caret movement follows
+displayed graphemes; enabling an operator ligature does not change the original
+characters in the document.
 
 See the [renderer font options] for the complete API.
 

@@ -58,7 +58,7 @@ setting, so the dropdown may differ from the renderer actually running.
 
 ### Check the Active Backend
 
-Open **Settings > About** and look for **Renderer**. This reports the active
+Open **Help > About** and look for **Renderer**. This reports the active
 backend, including any fallback, rather than just the saved preference. SDL GPU
 also reports its power preference and device information when available.
 
@@ -66,6 +66,11 @@ also reports its power preference and device information when available.
 
 Plugins and scripts can read the same information through
 [`core.window:get_renderer_info()`](/docs/api/renwindow#get_renderer_info).
+
+All backends share the editor's font and grapheme handling, including automatic
+system-font fallback. SDL GPU also preserves color glyphs rather than tinting
+them with the current text color. Its pixel upload path avoids an intermediate
+full-frame CPU staging copy; the effect depends on the drawing workload.
 
 ## Switch with Environment Variables
 

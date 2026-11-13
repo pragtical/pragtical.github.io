@@ -39,6 +39,10 @@ The following libraries are required when not using Meson fallbacks:
 - PCRE2
 - uchardet
 
+Automatic system-font fallback uses DirectWrite on Windows, CoreText on macOS,
+and a dynamically loaded Fontconfig library on Linux. Linux builds still run
+without Fontconfig, but then missing characters need explicit font fallbacks.
+
 Networking support is enabled by default and also needs:
 
 - SDL3_net
@@ -156,7 +160,7 @@ packages:
 
 ```bash
 bash scripts/package.sh --builddir build --binary --release \
-  --version v3.13.0
+  --version v3.14.0
 ```
 
 It can also create source archives, AppImages, DMGs, and Windows InnoSetup
@@ -167,7 +171,7 @@ packages when the platform supports them.
 Linux AppImages can be built directly with:
 
 ```bash
-bash scripts/appimage.sh --static --release --version v3.13.0
+bash scripts/appimage.sh --static --release --version v3.14.0
 ```
 
 The script downloads the AppImage tools it needs, builds Pragtical, installs it
@@ -300,6 +304,7 @@ current project options can be passed to `meson setup` with
 | `extra_languages` | boolean | `true` | Include additional language plugins |
 | `ppm` | boolean | `true` | Include the plugin manager |
 | `jit` | boolean | `true` | Use LuaJIT |
+| `msvc_pgo` | combo | `off` | MSVC link-time profile-guided optimization: `off`, `generate`, or `use`; requires `b_lto` |
 | `export_all_symbols` | boolean | `false` | Export all executable symbols for LuaJIT FFI access on Linux |
 | `repl_history` | boolean | `true` | Enable history and completion support in the REPL |
 | `net` | boolean | `true` | Enable networking support through SDL3_net and mbedtls |
@@ -383,11 +388,43 @@ brew install cmake meson ninja pkg-config freetype harfbuzz luajit pcre2 sdl3 \
 Homebrew provides [sdl3_mixer]. You can also skip system library dependencies
 and use `--wrap-mode=forcefallback`, keeping the build tools installed.
 
+### Windows MSVC
+
+Official Windows packages use the x64 MSVC toolchain. The repository also
+supports the MSYS2 route below for GCC builds.
+
+Install Visual Studio Build Tools with the C++ workload and Windows SDK,
+PowerShell 7.3 or newer, Meson 1.12 or newer, Ninja, CMake, Git, and Inno Setup 6.
+Open an **x64 MSVC developer PowerShell** and run:
+
+```powershell
+pwsh -File scripts/build-windows.ps1 -Configuration pr
+```
+
+The helper configures a force-fallback build, builds the editor, stages its
+data and pinned Plugin Manager, runs the native Lua tests, and produces
+Windows packages under `artifacts/windows`. It builds the required GNU
+libiconv support for legacy encodings as part of the dependency setup.
+The script recreates its configured editor build directory when rerun.
+
+Use `-Configuration rolling` or `-Configuration release` for the helper's
+LTO and PGO workflow. `-Version` sets the package version, and `-BuildDir`,
+`-OutputDir` and `-TestInstaller` control the build/staging paths and installer
+checks. Review the script's parameter block before changing these paths.
+
+For manual Meson builds, `-Dmsvc_pgo=generate` and `-Dmsvc_pgo=use` select the
+MSVC profiling stages, with `-Db_lto=true` and `-Db_pgo=off`. The helper trains
+both the GUI executable and console launcher before rebuilding with profile
+use. GCC/Clang builds use Meson's `b_pgo` instead.
+
+MSVC packages include `pragtical.exe` for the GUI and `pragtical.com` for
+console commands and their output. Keep both alongside the installed data.
+
 ### Windows MSYS2
 
-The supported Windows build environment is [MSYS2][2].
+GCC builds can use [MSYS2][2].
 
-- Open a `MinGW 64-bit` or `MinGW 32-bit` shell from the start menu.
+- Open a **UCRT64** shell from the start menu for an x86_64 build.
 - Update MSYS2 with `pacman -Syu`.
 - Restart the shell.
 - Install the build tools and dependencies:
@@ -411,7 +448,21 @@ pacman -S \
 ```
 
 `${MINGW_PACKAGE_PREFIX}` expands to the package prefix for the current MSYS2
-shell, such as `mingw-w64-x86_64` or `mingw-w64-i686`.
+shell: `mingw-w64-ucrt-x86_64` in UCRT64. Use the compiler and dependencies from
+the same environment.
+
+Then build directly with Meson:
+
+```bash
+meson setup --buildtype=release --wrap-mode=forcefallback -Dppm=false build-ucrt64
+meson compile -C build-ucrt64
+meson install -C build-ucrt64 --destdir ../pragtical-ucrt64
+```
+
+`-Dppm=false` omits the bundled Plugin Manager in this example. Leave it out
+when you also want to build that subproject with the same toolchain. You can
+instead use system dependencies by omitting `forcefallback`, provided every
+required library meets the project's requirements.
 
 You also need SDL3_mixer 3.2.4 or newer. If your MSYS2 repository does not
 provide it, use the mixer fallback shown under [Audio Support](#audio-support),

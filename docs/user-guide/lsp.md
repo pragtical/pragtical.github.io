@@ -35,30 +35,12 @@ manually, you may also install these plugins as well.
 <Tabs groupId="package-manager">
   <TabItem value="ppm" label="ppm" default>
 
-To install PPM via the command line, run:
+To install LSP with PPM via the command line, run:
 ```sh
 $ ppm plugin install lsp
 # or
 $ pragtical pm plugin install lsp
 ```
-
-  </TabItem>
-  <TabItem value="miq" label="Miq">
-
-To install LSP via Miq, add `pragtical/lsp` into your `config.plugins.miq.plugins`:
-
-```lua
-local config = require "core.config"
-config.plugins.miq.plugins = {
--- this allows Miq to manage itself
-'TorchedSammy/Miq',
-
--- install lsp
-'pragtical/lsp',
-}
-```
-
-Afterwards, run the command `miq:install` to begin installation.
 
   </TabItem>
   <TabItem value="manual" label="Manual Installation">
@@ -379,12 +361,12 @@ Python at all.
 [nvim-lspconfig]:             https://github.com/neovim/nvim-lspconfig
 [typescript-language-server]: https://github.com/typescript-language-server/typescript-language-server
 [autocomplete]:               https://github.com/pragtical/pragtical/blob/master/data/plugins/autocomplete.lua
-[lsp-autocomplete]:           /img/user-guide/lsp/autocomplete.png
-[lsp-symbolstree]:            /img/user-guide/lsp/symbols-tree.png
+[lsp-autocomplete]:           /img/plugins/lsp/completion.png
+[lsp-symbolstree]:            /img/plugins/lsp/symbols-tree.png
 [lsp-snippets]:               /img/user-guide/lsp/snippets.gif
-[lsp-inline-diagnostics]:     /img/user-guide/lsp/inline-diagnostics.png
-[lsp-hover]:                  /img/user-guide/lsp/hover.png
-[lsp-args]:                   /img/user-guide/lsp/args.png
+[lsp-inline-diagnostics]:     /img/plugins/lsp/diagnostics.png
+[lsp-hover]:                  /img/plugins/lsp/hover.png
+[lsp-args]:                   /img/plugins/lsp/signature.png
 [lsp-view-symbol]:            /img/user-guide/lsp/view-symbol.gif
 [lsp-search-symbol]:          /img/user-guide/lsp/search-symbol.gif
 [lsp-goto-definition]:        /img/user-guide/lsp/goto-definitions.gif

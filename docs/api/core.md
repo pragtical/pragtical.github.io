@@ -875,6 +875,22 @@ function core.request_cursor(value: any)
 
 ---
 
+## request_update
+
+```lua
+function core.request_update(delay?: number)
+```
+
+Request a view update within a delay without keeping the frame loop awake.
+Forces view update() calls when due, just as core.redraw = true forces
+draw() calls. An update request does not itself request a redraw.
+Earlier updates consume the request. Renew it from update() while waiting.
+Multiple requests coalesce to the earliest deadline.
+
+@*param* `delay?`: `number` — Seconds until the update; defaults to zero
+
+---
+
 ## restart
 
 ```lua
@@ -902,7 +918,7 @@ function core.run()
 
 Set up the run-loop state.  Called once from C (SDL_AppInit → init_lua_state)
 via the init_code that also calls core.init().  SDL_AppIterate then drives the
-loop by calling core.run_step() on every frame.
+loop by calling core.run_step() when an event or deadline wakes it.
 
 ---
 
@@ -916,7 +932,7 @@ function core.run_step()
 
 Execute one frame of the main loop.
 
-Called by C's SDL_AppIterate on every frame.
+Called by C's SDL_AppIterate when input or a scheduled deadline wakes the loop.
 
 @*return* `true`: `boolean` — to keep running, false to quit or restart.
 

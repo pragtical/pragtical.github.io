@@ -132,11 +132,23 @@ Settings → Colors tab → Select theme
 Settings → Core → Editor → Code Font
 
 ### Adjust font size
-Settings → Core → Editor → Font Size
+Open **Settings > Core > Editor > Code Font**, select a font, and change its
+size. Use **View > Zoom** to scale the whole interface or only the code font.
+
+### Find or reset a setting
+Search Settings by its label, description, or configuration key. Core and
+plugin searches match all the words you enter. Use the option's **Reset**
+action to remove its saved GUI override.
+
+### Enable ligatures or color emoji
+See [Font Ligatures](font-ligatures.md) for the optional programming ligatures
+checkbox. [Color Emoji](color-emoji.md) explains automatic system fallback and
+explicit fallback fonts.
 
 ### Disable a plugin
-Add to your `init.lua`:
+Use **Settings > Plugins > Installed**, or add to your `init.lua` and restart:
 ```lua
+local config = require "core.config"
 config.plugins.plugin_name = false
 ```
 
@@ -158,18 +170,24 @@ Add to your `init.lua`:
 local keymap = require "core.keymap"
 keymap.add {
   ["ctrl+k"] = "doc:delete-to-end-of-line",
-  ["f5"] = "core:reload-module"
+  ["f5"] = "core:restart"
 }
 ```
 
-### Bind multiple commands to one key
-Commands will execute in order:
+### Run several commands from one key
+A list of command names chooses the **first eligible command**, not a sequence.
+Register a wrapper when several actions must run:
 ```lua
+local command = require "core.command"
+local keymap = require "core.keymap"
+command.add("core.docview", {
+  ["user:select-word-and-find-next"] = function()
+    command.perform("doc:select-word")
+    command.perform("find-replace:select-add-next")
+  end
+})
 keymap.add {
-  ["ctrl+d"] = {
-    "doc:select-word",
-    "find-replace:select-next"
-  }
+  ["ctrl+alt+d"] = "user:select-word-and-find-next"
 }
 ```
 
@@ -181,7 +199,7 @@ keymap.unbind("ctrl+d", "doc:select-word")
 
 Or unbind all commands from a key:
 ```lua
-keymap.unbind("ctrl+d")  -- Removes all commands
+keymap.add({ ["ctrl+d"] = {} }, true)
 ```
 
 ### Override a keybinding completely
@@ -201,6 +219,8 @@ Open command palette (`Ctrl+Shift+P`) and look for the keybinding shown on the r
 
 ### Save workspace
 Your workspace (open files, layout) saves automatically per project.
+Use **File > Sessions** to revisit saved layouts; see
+[Workspace Sessions](workspace-sessions.md).
 
 ### Open recent project
 Open command palette with `Ctrl+Shift+P`, type "Open Recent Project", then press Enter
@@ -225,7 +245,12 @@ Select text → open command palette with `Ctrl+Shift+P`, type "Uppercase/Lowerc
 Disabled by default. To configure: Settings → Plugins → Trim Whitespace
 
 ### Wrap long lines
-Settings → Plugins → Line Wrapping → Enable
+Press `F10` or choose **View > Word Wrap**. Configure the wrap boundary and
+continuation indentation under **Settings > Plugins > Line Wrapping**.
+See [Line Wrapping](line-wrapping.md).
+
+### Center the cursor vertically
+Press `Alt+V` or run `doc:center-cursor`.
 
 ### Diff view
 Open command palette with `Ctrl+Shift+P`, type "Diff View: Start Files Comparison", then press Enter to compare two files side-by-side

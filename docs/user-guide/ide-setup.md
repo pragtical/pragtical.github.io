@@ -59,7 +59,29 @@ Snippets can easily be added by following the [official guide][4].
 
 ## Integrated Terminal
 
-`terminal` provides an integrated terminal.
+[Ghostty Terminal](/plugins?plugin=ghostty) is preferred over the older
+[terminal plugin](/plugins?plugin=terminal) for better compatibility with terminal
+applications. Powered by libghostty-vt, it provides terminal tabs and a bottom
+drawer that follow the editor's color theme.
+
+Install `ghostty` from **Tools > Plugin Manager**, or use the bundled command-line
+plugin manager:
+
+```sh
+pragtical pm install ghostty
+```
+
+Restart Pragtical after installation. Press <kbd>Alt</kbd>+<kbd>T</kbd> to show or
+hide the drawer, or run **Ghostty: Open Tab** from the command palette to open a
+terminal tab. New sessions start in the current project directory; hiding the
+drawer keeps its shell running.
+
+Open **Settings > Plugins > Ghostty Terminal** to choose your shell and configure
+the drawer, scrollback, and other options.
+
+Ghostty requires Pragtical built with LuaJIT and SDL3. See the
+[plugin documentation](https://github.com/pragtical/ghostty#readme) for supported
+platforms, additional shortcuts, and configuration options.
 
 ## Version Control
 
@@ -74,33 +96,40 @@ track of flagged comments (TODO, WIP, FIX, ...) for better workflow organization
 
 ## Build Integration
 
-`build` provides a build system, messages window, and easily clickable errors.
-
-At the moment it only supports `make`, but it can be extended to any build system.
+The `build` plugin from [Pragtical IDE][1] provides build targets, captured output,
+and clickable compiler diagnostics. It supports Make, CMake, Meson, Gradle
+wrappers, direct commands, shell scripts, and an internal GCC/Clang backend.
 
 ## Debug Integration
 
-`debugger` provides debugger integration, with pluggable backends.
-
-At the moment it only supports `gdb`.
+The `debugger` plugin from [Pragtical IDE][1] provides GDB MI and DAP backends,
+with source breakpoints, stepping, stack navigation, and watch expressions.
+Install GDB separately; DAP mode requires GDB built with DAP support.
 
 ## Automatic Setup
 
-The following examples are configurations and scripts that bundle together the
-essential components of a minimal IDE:
+[Pragtical IDE][1] provides metapackages that install a collection of plugins
+for common language toolchains. Install `ide` for the common editor tooling, or
+choose a language metapackage such as `ide_c`, `ide_java`, `ide_python`, or
+`ide_web`.
+
+For example, install the C/C++ package with the bundled plugin manager:
+
+```sh
+pragtical pm install ide_c --no-install-optional
+```
+
+This includes the build plugin, debugger, and C/C++ language server setup.
+Restart Pragtical after installation. Build and debugger can also be installed
+separately. See the [repository's documentation][1] for the full metapackage list
+and configuration instructions.
 
 :::warning
-Build and debugger plugins haven't been properly tested with Pragtical.
+The build and debugger plugins remain experimental. They have been tested on
+Linux; native compiler and debugger execution on Windows and macOS remains
+unverified.
 :::
 
-- [Adam's configuration][1] contains the `build` and `debugger` plugins,
-  as well as several IDE meta-packages (e.g. `ide_c`, `ide_java`, `ide_python`)
-  that add IDE-like functionalities for many popular programming languages.
-- [PerilousBooklet's configuration][2] contains documentation about IDE support
-  progress status.
-
-
-[1]: https://github.com/adamharrison/lite-xl-ide
-[2]: https://github.com/PerilousBooklet/lite-xl-ide
+[1]: https://github.com/pragtical/ide
 [3]: /docs/user-guide/lsp
 [4]: https://github.com/vqns/lite-xl-snippets?tab=readme-ov-file#usage

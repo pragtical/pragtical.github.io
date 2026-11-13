@@ -177,7 +177,7 @@ const config = {
       prism: {
         theme: darkCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['bash', 'diff', 'json', 'lua'],
+        additionalLanguages: ['bash', 'diff', 'json', 'lua', 'nix'],
       },
 
       imageZoom: {

@@ -17,10 +17,11 @@ Configuration options for `lineguide` plugin.
 ### custom_color
 
 ```lua
-(field) custom_color: renderer.color
+(field) custom_color: (renderer.color)?
 ```
 
 Applied when `use_custom_color` is enabled.
+When unset, use the current theme's selection color.
 
 ---
 

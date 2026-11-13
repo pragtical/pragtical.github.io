@@ -34,7 +34,8 @@ functions to interact with it.
 The filename is stored in `Doc.filename`
 while the absolute path is stored in `Doc.abs_filename`.
 If a Doc doesn't have a name (created by pressing ++ctrl+n++),
-`Doc.filename` is set to `"unsaved"` and `Doc.abs_filename` is nil.
+`Doc.filename` and `Doc.abs_filename` are both `nil`. Use `doc:get_name()` for
+the display name rather than treating an untitled buffer as a named file.
 
 ## Changes
 
@@ -57,6 +58,16 @@ To redo an operation, call `Doc:redo()`.
 
 A position within a Doc is represented with two numbers —
 the row and column number.
+
+Both are one-based. Columns are UTF-8 byte offsets, not Unicode scalar or
+grapheme indexes. Preserve that representation in search results, edits and
+plugin state.
+
+Normal character movement, deletion, mouse placement and wrapping follow
+displayed graphemes. Combining marks, variation selectors and composed emoji
+therefore stay together. Use `core.doc.translate.next_char` and `previous_char`
+for editor character navigation, and `common.utf8_graphemes(text)` when iterating
+displayed characters. `common.utf8_chars(text)` remains a scalar iterator.
 
 To ensure that a position is correct (valid for the current Doc),
 you can call `Doc:sanitize_position()`.
@@ -89,14 +100,8 @@ local x, y = doc:position_offset(1, 1, 2)
 -- returns 3, 5
 local x, y = doc:position_offset(1, 2, 2, 3)
 
----Taken from core/doc/translate.lua
----This function jumps to the next UTF-8 character.
-local function next_char(doc, line, col)
-    repeat
-        line, col = doc:position_offset(line, col, -1)
-    until not common.is_utf8_cont(doc:get_char(line, col))
-    return line, col
-end
+local translate = require "core.doc.translate"
+local line, col = translate.next_char(doc, 1, 1)
 
 -- assuming the line contains 1 wide character (2 bytes per character),
 -- the function will return 1, 3

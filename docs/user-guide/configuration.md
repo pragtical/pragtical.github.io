@@ -53,6 +53,35 @@ The settings plugin provides a GUI to configure Pragtical.
 
 ![Settings User Interface][14]
 
+Open it from **Tools > Settings**, the toolbar, or the `ui:settings` command.
+Changes apply immediately and are saved in `USERDIR/user_settings.lua`.
+That file holds GUI overrides; keep hand-written configuration in your user
+module. An explicit GUI value takes precedence over the corresponding user
+module setting.
+
+### Search Settings
+
+The **Core**, **Colors**, **Plugins**, and **Keybindings** tabs each have a
+search field. Core and Plugins match all the words you enter against setting
+names, descriptions, paths, and section names. For example, search for
+`system fallback`, `line limit`, or `renderer` instead of opening every section.
+The Plugins search also filters the Installed plugin list.
+
+![Settings filtered by renderer-related options](/img/user-guide/settings/search.png)
+
+Clear the field with its **X** button to return to the previous section
+expansion state. Searching does not change any setting.
+
+### Reset an Option
+
+A **Reset** button appears beside an option when a GUI override has been
+saved. Reset removes that override and reapplies the option's default or
+configured default provider. The button disappears after resetting. This also
+works for fonts, colors, lists, and optional values; it does not require
+resetting an entire section or deleting your configuration file.
+
+![A saved setting with its individual Reset action](/img/user-guide/settings/reset.png)
+
 ## Fonts
 
 Pragtical comes with JetBrains Mono and Fira Sans by default.
@@ -72,14 +101,22 @@ it is supported by FreeType.
 The function takes in the path to the font file and
 the pixel size of the font.
 
-When displaying text with multiple languages, multiple
-fonts are often required.
-Pragtical supports fallback fonts by using the function
-`renderer.font.group()`.
-This function takes in a table of fonts loaded by
-`renderer.font.load()`.
-Pragtical will attempt to render fonts based on the order
-the fonts are added to the table.
+### Automatic Font Fallback
+
+Missing characters are looked up in fonts installed on your operating system
+by default. This includes other writing systems and color emoji when a
+suitable font is installed. Windows uses DirectWrite, macOS uses CoreText,
+and Linux uses Fontconfig when available. A font still needs to contain the
+characters or complete sequence being displayed.
+
+The Font Selector's **System Fallback** checkbox controls this behavior.
+In Lua, pass `{ system_fallback = false }` to `renderer.font.load()` to use only
+your configured fonts. In a font group, the first font controls this option.
+
+Explicit fallback fonts remain useful when you want a particular appearance
+or want to bundle a font without installing it system-wide. Use
+`renderer.font.group()` with separately loaded fonts, in priority order;
+automatic system fallbacks are considered after the explicit group.
 
 <Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
@@ -91,7 +128,7 @@ and set it as our code font.
 ```lua
 local style = require "core.style"
 -- SCALE is the pixel scaling required for the current DPI setup.
--- This converts the font size from points to pixels.
+-- Font sizes are in pixels; SCALE follows the interface scale.
 style.code_font = renderer.font.load("/usr/share/fonts/noto/NotoSansMono-Regular.ttf", 15 * SCALE)
 ```
 
@@ -110,9 +147,9 @@ style.code_font = renderer.font.group {
 }
 ```
 
-:::warning No .ttc fonts support
-Pragtical does not support using a specfific face in a TrueType collection
-(.ttc) file. Only the first face can be used.
+:::note Font collections
+Explicit file loading uses the default face of a font collection. Automatic
+system fallback can resolve the appropriate face inside an installed collection.
 :::
 
   </TabItem>
@@ -140,8 +177,15 @@ to the right.
 The changes will be reflected automatically on the preview window.
 Press "Save" to add the font or "Cancel" to go back.
 
+Moving through the font picker's results also previews the highlighted font.
+Confirming chooses it; cancelling returns to the font that was selected before
+opening the picker.
+
 To edit an existing font, double-click its entry in the list.
-The "Ligatures" checkbox enables shaping for fonts that support it.
+The **Ligatures** checkbox enables optional programming ligatures for fonts
+that support them. **System Fallback** enables installed-font discovery.
+Combining characters and supported emoji sequences are shaped independently
+of the programming-ligature setting.
 The size and font options in this dialog apply to all fonts in the list.
 
 If you have more than one fonts set up, you can change
@@ -170,24 +214,22 @@ To add keyboard shortcuts, you can use `keymap.add()`.
 <Tabs groupId="configuration">
   <TabItem value="user-module" label="User Module" default>
 
-For example, to bind <kbd>ctrl+m</kbd> to move the cursor backwards
-and then upwards, do:
+For example, bind <kbd>ctrl+m</kbd> to move to the previous character:
 
 ```lua
 local keymap = require "core.keymap"
 keymap.add {
   ["ctrl+m"] = "doc:move-to-previous-char"
 }
-keymap.add {
-  ["ctrl+m"] = "doc:move-to-previous-line"
-}
 ```
 
-Pragtical will automatically execute both commands in the order that
-they're added.
+When a shortcut names several commands, Pragtical tries their predicates in
+order and runs the first eligible command. It does not run every command as
+a sequence. To perform several actions, register a command that calls those
+actions and bind that command instead.
 
 Alternatively, to override a keyboard shortcut completely,
-add `true` on the second parameter of `keybind.add()`.
+pass `true` as the second parameter of `keymap.add()`.
 
 ```lua
 local keymap = require "core.keymap"
@@ -200,7 +242,7 @@ keymap.add({
 ```
 
 This will cause Pragtical to only run
-`core:move-to-previous-line` when <kbd>ctrl+m</kbd> is pressed.
+`doc:move-to-previous-line` when <kbd>ctrl+m</kbd> is pressed.
 
   </TabItem>
   <TabItem value="settings-ui" label="Settings UI">
@@ -249,13 +291,12 @@ keymap.unbind("ctrl+m", "doc:move-to-previous-char")
 
 This will unbind the two commands from <kbd>ctrl+m</kbd>.
 
-Alternatively, to unbind all commands from <kbd>ctrl+m</kbd>,
-you can omit the second parameter to `keymap.unbind()`.
+Alternatively, replace the mapping with an empty command list to unbind all
+commands from <kbd>ctrl+m</kbd>:
 
 ```lua
 local keymap = require "core.keymap"
-keymap.unbind("ctrl+m", "doc:move-to-previous-line")
-keymap.unbind("ctrl+m", "doc:move-to-previous-char")
+keymap.add({ ["ctrl+m"] = {} }, true)
 ```
 
   </TabItem>
@@ -293,7 +334,8 @@ the appropriate theme file.
 To load the theme `summer`, add `core.reload_module "colors.summer"`.
 
 ```lua
-core.reload_module "color.summer"
+local core = require "core"
+core.reload_module "colors.summer"
 ```
 
   </TabItem>
@@ -323,36 +365,27 @@ and `config.tab_type` respectively.
 ```lua
 local config = require "core.config"
 config.indent_size = 4 -- set indentation to 4
-config.tab_type =      -- "soft" for spaces, "hard" for tabs
+config.tab_type = "soft" -- "soft" for spaces, "hard" for tabs
 ```
 
 ### Window decoration
 
-If you're on platforms such as Wayland where window decoration may be
-client drawn, you can set `config.borderless` to `true`.
-This will let Pragtical draw its own window decoration.
+Pragtical draws its own title bar by default. The application menu shares that
+bar, and restored windows have a thin outline. The outline disappears when
+maximized or fullscreen. Disable **Core > User Interface > Borderless** to
+use your operating system's decorations instead.
+
+![Borderless decoration and focused outline controls](/img/user-guide/settings/borderless.png)
 
 ```lua
 local config = require "core.config"
--- enable custom window borders
 config.borderless = true
-```
-
-### Project files limit
-
-When opening large directories, Pragtical will often complain about reaching
-the project file limit.
-This is because Pragtical becomes slower when it needs to index these files
-on startup.
-
-If your filesystem has good performance, you can increase this limit
-by setting `config.max_project_files` to something else.
-The default value is 2000.
-
-```lua
-local config = require "core.config"
--- set max project files to 5000
-config.max_project_files = 5000
+config.borderless_outline = true
+-- Optional: override theme-derived outline colors.
+config.outline_focused = { 97, 175, 239, 255 }
+config.outline_unfocused = { 92, 99, 112, 255 }
+-- Title-bar overlay on focus loss; alpha 0 disables the dimming.
+config.borderless_unfocused_overlay = { 0, 0, 0, 64 }
 ```
 
 ### Ignoring files
@@ -382,12 +415,14 @@ config.blink_period = 0.4 -- change caret blink rate
 
 ### FPS (Frame rate)
 
-The default frame rate is set to 60.
-If this causes an issue, you can set it via `config.fps`.
+**Auto FPS** uses the display's refresh rate when available. Disable it to
+use a manual limit. See [Renderer Backends](renderer-backends.md#frame-rate-and-vsync)
+for presentation and vsync behavior.
 
 ```lua
 local config = require "core.config"
 -- set FPS to 30
+config.auto_fps = false
 config.fps = 30
 ```
 
@@ -444,7 +479,7 @@ config.animation_rate = 0.5
 | `scroll_context_lines`    | integer                       | 10                                             | Minimum number of lines to keep visible above and below the cursor when scrolling the document.
 | `show_line_numbers`       | boolean                       | true                                           | Show or hide the line numbers.
 | `keep_newline_whitespace` | boolean                       | false                                          | If true, removes any line that only contains whitespace (space, tabs, etc.)
-| `line_limit`              | integer                       | 80                                             | An **advisory** limit for characters per line.
+| `line_limit`              | integer                       | 80                                             | Column boundary for the line guide and optional [soft wrapping](line-wrapping.md).
 | `tab_close_button`        | boolean                       | true                                           | Shows or hides the tab close button for each tab.
 | `max_clicks`              | integer                       | 3                                              | Maximum number of clicks you can perform in the editor.
 | `dirmonitor_backend`      | string,nil                    | nil                                            | Specifies the dirmonitor backend to be used or nil to use the first available one.
@@ -475,6 +510,7 @@ and set it to only draw whitespaces in the selected text.
 ```lua
 local config = require "core.config"
 config.plugins.drawwhitespace = {
+  enabled = true,
   show_selected_only = true
 }
 ```

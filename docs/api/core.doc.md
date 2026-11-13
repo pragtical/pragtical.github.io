@@ -298,8 +298,16 @@ Automatically creates instance and calls new() with provided arguments.
 ## clear_cache
 
 ```lua
-(method) core.doc:clear_cache(l: any, n: any)
+(method) core.doc:clear_cache(l: integer, n: integer, keep_graphemes?: boolean)
 ```
+
+Invalidate line caches, optionally retaining text-matched grapheme bounds.
+
+@*param* `l`: `integer` — First line
+
+@*param* `n`: `integer` — Number of additional lines
+
+@*param* `keep_graphemes?`: `boolean` — Used for syntax-only updates
 
 ---
 
@@ -385,6 +393,23 @@ for a different edit after undoing back past a saved state.
 (method) core.doc:get_char(line: any, col: any)
   -> string
 ```
+
+---
+
+## get_grapheme_bounds
+
+```lua
+(method) core.doc:get_grapheme_bounds(line: integer, col: integer)
+  -> first: integer
+  2. after: integer
+```
+
+Get the byte boundaries of the displayed character containing a column.
+The end is exclusive; document positions remain byte offsets.
+
+@*return* `first`: `integer`
+
+@*return* `after`: `integer`
 
 ---
 

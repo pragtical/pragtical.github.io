@@ -75,22 +75,6 @@ function
 
 ---
 
-## renderer.end_frame
-
-```lua
-function renderer.end_frame()
-```
-
----
-
-## renderer.end_frame_lua
-
-```lua
-function
-```
-
----
-
 ## renderer.set_clip_rect
 
 ```lua

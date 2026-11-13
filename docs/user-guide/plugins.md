@@ -3,9 +3,6 @@ sidebar_position: 3
 description: Learn to manage plugins manually or via a plugin manager.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Plugins
 
 Pragtical implements many features as plugins. By default, official releases
@@ -48,39 +45,31 @@ Otherwise, `DATADIR` will be `<path-to-exe>/data`.
 
 User plugins should be installed into `USERDIR/plugins`.
 
-On Linux, `DATADIR` uses the XDG Base Directory Specification. Pragtical first
+On Linux, `USERDIR` uses the XDG Base Directory Specification. Pragtical first
 checks the `$XDG_CONFIG_HOME` environment variable and falls back to
 `~/.config` otherwise.
 
 ## Plugin managers
 
-Recently, we've standardized various aspects of the plugin repository so that
-plugin managers can be built to install and manage plugins.
-
-Currently, there are two plugin managers made for Pragtical. These two plugin
-managers use vastly different ways of plugin management, so make sure to
-consult the main page on each of them for exact instructions.
-
-:::caution The Miq project was archived in 2025 and is not being maintained.
-:::
+Use [ppm] to install, update, and remove plugins, themes, and libraries.
+It is the supported plugin manager for Pragtical.
 
 ### PPM
 
 [ppm] is more akin to distro package managers such as `apt` and `dnf`.
 
-ppm is part of the official Pragtical distribution. A GUI for installing
-plugins is available from the main toolbar and via the various `Plugin Manager`
-commands in the command palette. It is also accessible from the command
-line interface by invoking `pragtical pm`.
+PPM is already included in official Pragtical builds, so you do not need to
+install it separately. Run the bundled command-line manager with `pragtical pm`;
+this does not require a standalone `ppm` command on your `PATH`.
 
-<video autoplay muted loop style={{width: '100%'}} controls>
-  <source src="/videos/user-guide/plugin-manager.mp4"/>
-</video>
+A GUI for installing plugins is available from **Tools > Plugin Manager**,
+the toolbar, and the `Plugin Manager` commands in the command palette.
 
-### Miq
+![The Plugin Manager with searchable available plugins](/img/user-guide/plugins/manager.png)
 
-[Miq] is a declarative plugin manager that allows user to declare plugins and
-install/update them all at once.
+To enable or disable an installed plugin, use **Settings > Plugins > Installed**.
+The search field also filters this list. Restart the editor after changing
+which plugins should load.
 
 ## Installing plugins
 
@@ -93,45 +82,19 @@ types of plugins. Old plugins may not have a `init.lua` file, which is used by
 Lua to find a plugin. In this case, you need to follow their install instructions.
 :::
 
-<Tabs groupId="package-manager">
-  <TabItem value="ppm" label="ppm" default>
-
 To install a plugin with ppm, use `ppm plugin install`.
 For example, to install lsp, run:
 
 ```bash
-$ ppm plugin install lsp
-or
-$ pragtical pm plugin install lsp
+ppm plugin install lsp
+# Or use the editor's CLI:
+pragtical pm plugin install lsp
 ```
 
 This will install/update the lsp plugin.
 
 To install themes or libraries, you can use
 `ppm color install` and `ppm library install` respectively.
-
-  </TabItem>
-  <TabItem value="miq" label="Miq">
-
-To install a plugin with Miq, you need to specify the list
-of plugins to install in `config.plugins.miq.plugins`.
-
-```lua
-local config = require "core.config"
-config.plugins.miq.plugins = {
-  -- this allows Miq to manage itself
-  'TorchedSammy/Miq',
-
-  -- install lsp
-  'pragtical/lsp',
-}
-```
-
-Afterwards, you can run the command `miq:install` to install
-the plugins.
-
-  </TabItem>
-</Tabs>
 
 ## Updating plugins
 
@@ -142,53 +105,31 @@ pull new updates.
 If you have a plugin manager installed, updating plugins should
 be easier.
 
-<Tabs groupId="package-manager">
-  <TabItem value="ppm" label="ppm" default>
-
 To update plugins with ppm, run `ppm upgrade`.
 
 ```bash
-$ ppm upgrade
-or
-$ pragtical pm upgrade
+ppm upgrade
+# Or use the editor's CLI:
+pragtical pm upgrade
 ```
 
 This will update all the plugins to their latest versions.
-
-  </TabItem>
-  <TabItem value="miq" label="Miq">
-
-To update plugins with Miq, run "miq:update".
-
-  </TabItem>
-</Tabs>
 
 ## Uninstalling plugins
 
 To remove a plugin, simply delete the associated file/directory.
 
-<Tabs groupId="package-manager">
-  <TabItem value="ppm" label="ppm" default>
-
 To uninstall a plugin, run `ppm plugin uninstall`.
 For instance, to uninstall lsp, run:
 
 ```bash
-$ ppm plugin uninstall lsp
-or
-$ pragtical pm plugin uninstall lsp
+ppm plugin uninstall lsp
+# Or use the editor's CLI:
+pragtical pm plugin uninstall lsp
 ```
 
 Uninstalling themes and libraries can be done with
 `ppm color uninstall` and `ppm library uninstall` respectively.
-
-  </TabItem>
-  <TabItem value="miq" label="Miq">
-
-**Uninstalling plugins in Miq is currently not supported.**
-
-  </TabItem>
-</Tabs>
 
 ## Troubleshooting
 
@@ -245,4 +186,3 @@ so you won't need to specify `--datadir` each time you call `ppm`.
 [plugins repository]: https://github.com/pragtical/plugins
 [Plugins]:            /plugins
 [ppm]:                https://github.com/pragtical/plugin-manager
-[Miq]:                https://github.com/TorchedSammy/Miq
