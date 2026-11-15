@@ -12,23 +12,13 @@ local workspace = require "plugins.workspace"
 
 ## plugins.workspace.session
 
-### count
+### active
 
 ```lua
-(field) count: integer
+(field) active: boolean
 ```
 
-Number of saved tabs
-
----
-
-### id
-
-```lua
-(field) id: integer
-```
-
-Numeric suffix shared by projects with the same basename
+Whether this is the current session
 
 ---
 
@@ -38,7 +28,7 @@ Numeric suffix shared by projects with the same basename
 (field) key: string
 ```
 
-Original storage key, used to load or remove the session
+Filename within this project's storage directory
 
 ---
 
@@ -48,7 +38,7 @@ Original storage key, used to load or remove the session
 (field) name: string
 ```
 
-User name or automatically assigned session label
+Display name derived from the filename
 
 ---
 
@@ -58,7 +48,7 @@ User name or automatically assigned session label
 (field) saved_at: integer?
 ```
 
-Unix time at which the snapshot was saved
+File modification timestamp
 
 ---
 
@@ -66,13 +56,10 @@ Unix time at which the snapshot was saved
 
 ```lua
 function plugins.workspace.clear_sessions()
-  -> count: integer
+  -> integer
 ```
 
-Remove every saved session for the current project, preserving other projects.
-The active workspace remains open and is still saved normally on exit.
-
-@*return* `count`: `integer` — Number of saved sessions removed
+Clear this project's saved sessions and recovery file, preserving open tabs.
 
 ---
 
@@ -80,13 +67,10 @@ The active workspace remains open and is still saved normally on exit.
 
 ```lua
 function plugins.workspace.get_sessions()
-  -> sessions: plugins.workspace.session[]
+  -> table
 ```
 
-List saved sessions for the current root project's full path.
-Read storage once per request; callers can filter the returned metadata in memory.
-
-@*return* `sessions`: [`plugins.workspace.session`](/docs/api/plugins.workspace#pluginsworkspacesession)`[]` — In numeric session order
+List only this project's filenames and timestamps, without loading buffers.
 
 ---
 
@@ -98,7 +82,7 @@ function plugins.workspace.load_session(key: string)
 ```
 
 Replace the current document layout with a saved session and back up the outgoing one.
-Consume the selected file only after restoration succeeds, as automatic restore does.
+Subsequent saves and checkpoints belong to the selected session.
 A failed backup or restore leaves the current layout and selected session intact.
 
 @*param* `key`: `string` — Original key from get_sessions()
@@ -110,29 +94,26 @@ A failed backup or restore leaves the current layout and selected session intact
 ## remove_session
 
 ```lua
-function plugins.workspace.remove_session(key: string)
-  -> removed: boolean
+function plugins.workspace.remove_session(key: any)
+  -> boolean
 ```
 
-Remove one saved session belonging to the current project.
-This does not close any tabs or modify sessions belonging to another project.
-
-@*param* `key`: `string` — Original key from get_sessions()
-
-@*return* `removed`: `boolean` — Whether a matching session was found and removed
+Remove one saved session, returning to main if it was active.
 
 ---
 
 ## save_session
 
 ```lua
-function plugins.workspace.save_session()
+function plugins.workspace.save_session(name?: string)
   -> key: string?
 ```
 
-Save the current workspace, including unsaved buffers, to a new session file.
+Save the current workspace. A name saves and activates an additional session.
 
-@*return* `key`: `string?` — New storage key, or nil if saving is pending or failed
+@*param* `name?`: `string` — Label for a new saved session; omit to update the active session.
+
+@*return* `key`: `string?` — Storage key, or nil if saving is pending or failed.
 
 ---
 

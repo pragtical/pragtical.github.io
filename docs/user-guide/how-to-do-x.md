@@ -219,7 +219,8 @@ Open command palette (`Ctrl+Shift+P`) and look for the keybinding shown on the r
 
 ### Save workspace
 Your workspace (open files, layout) saves automatically per project.
-Use **File > Sessions** to revisit saved layouts; see
+Use **File > Sessions > Save Session As** to create a named session, or
+**Load Session** to switch layouts. For optional periodic recovery, see
 [Workspace Sessions](workspace-sessions.md).
 
 ### Open recent project

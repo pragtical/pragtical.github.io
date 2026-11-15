@@ -167,8 +167,8 @@ plugins to provide new CLI flags.
 * **[Project Search]** - search and replace across project directories, open
 results in splits, and dock results on either side or use a centered popup.
 
-* **[Workspace Sessions]** - restore project layouts and unsaved buffers,
-choose saved sessions, and remove obsolete sessions from the File menu.
+* **[Workspace Sessions]** - keep named project layouts and optionally save
+recovery snapshots of unsaved work, without saving document files.
 
 * **[Line Wrapping]** - wrap at the configured column limit or viewport width,
 with word/letter modes, continuation indentation and a wrapping guide.

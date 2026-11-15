@@ -157,7 +157,7 @@ file browser and fuzzy finder.
 
 Pragtical automatically saves the workspace layout and restores it when you
 return to the project. [Workspace Sessions](workspace-sessions.md) explains
-saved sessions and backups of unsaved documents.
+named sessions and optional recovery snapshots of unsaved documents.
 
 
 [1]: /img/user-guide/find.png
