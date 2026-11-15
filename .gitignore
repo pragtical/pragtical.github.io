@@ -7,6 +7,24 @@
 # Generated files
 .docusaurus
 .cache-loader
+/test-results/
+/playwright-report/
+__pycache__/
+
+# Maintainer-only tests and browser configuration.
+/tests/
+/playwright.config.cjs
+
+# Browser runtimes are downloaded from the wasm-demo release or built locally.
+/static/try/pragtical.js
+/static/try/pragtical.wasm
+/static/try/pragtical.data
+/static/try/pragtical.worker.js
+/static/try/threaded/pragtical.js
+/static/try/threaded/pragtical.wasm
+/static/try/threaded/pragtical.data
+/static/try/threaded/pragtical.worker.js
+/pragtical-wasm-demo.tar.gz
 
 # Misc
 /AGENTS.md

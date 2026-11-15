@@ -28,3 +28,13 @@
   --ifm-color-primary-lightest: #528bff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+@media (min-width: 997px) and (max-width: 1200px) {
+  .navbar .navbar__brand { flex-shrink: 0; }
+  .navbar .navbar__item {
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+    white-space: nowrap;
+  }
+  .navbar .navbar__search-input { width: 9rem; }
+}

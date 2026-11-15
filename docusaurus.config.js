@@ -100,6 +100,11 @@ const config = {
             position: 'left'
           },
           {
+            to: '/try-it',
+            label: 'Try It',
+            position: 'left'
+          },
+          {
             to: '/download',
             label: 'Get',
             position: 'left'
