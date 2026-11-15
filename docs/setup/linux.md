@@ -61,6 +61,12 @@ makepkg -si
 
 Alternatively, install it via an AUR helper such as [yay][6].
 
+### Arch Linux (via binary repository)
+
+For Arch Linux and derivative distributions <code>pragtical</code> can be installed directly from [Arch Linux package repository enhancedX11](https://wiki.archlinux.org/title/Unofficial_user_repositories#enhancedX11).
+
+The repository setup instructions are documented in [https://dinosaur.homelinuxserver.org/#chapter2](https://dinosaur.homelinuxserver.org/#chapter2).
+
 ### Fedora (via Copr)
 
 The community [`sentry/pragtical` Copr][7] lists release and nightly packages
