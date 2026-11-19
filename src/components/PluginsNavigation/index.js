@@ -623,7 +623,7 @@ class Plugins {
     if (plugin.remote) {
       var ele = document.createElement("a");
       ele.href = plugin.remote;
-      repo = ele.pathname.replace(/:.+$/, "");
+      repo = ele.pathname.replace(/:.+$/, "").replace(/\/+$/, "").replace(/\.git$/, "");
 
       var branch_result = ele.pathname.match(/:(.+)$/);
       if (branch_result) {
