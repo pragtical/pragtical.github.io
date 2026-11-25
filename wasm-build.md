@@ -74,17 +74,21 @@ building, so a mismatched directory fails rather than silently shipping the
 wrong mode. Changing the SDK or cross-file configuration may require a fresh
 build directory.
 
-The browser port was fast-forwarded to upstream master `06885870` (v3.15.0)
-before the current rebuild. Upstream now includes the workspace changes and
-the exact-deadline and pending-animation scheduler fixes. Preserve the remaining
+The browser port was fast-forwarded to upstream master `862c173c` (v3.16.0)
+before the current rebuild. The web changes reapplied without conflicts, and
+Widget and plugins were updated to their pinned revisions. Upstream includes
+the workspace changes and the exact-deadline and pending-animation scheduler
+fixes. Preserve the remaining
 web-specific changes when pulling future versions; inspect Git status in the
 editor checkout separately from the website. The pre-update web-port stash
 was retained as a local safety copy, not published.
 
-### Widget Revision
+### Subproject Revisions
 
-The helper downloads Widget if needed, verifies its Git HEAD against
-`../prag/subprojects/widget.wrap`, and reapplies the Meson packagefile overlay.
+The helper downloads Widget and plugins if needed, verifies their Git HEADs
+against `../prag/subprojects/widget.wrap` and `plugins.wrap`, and reapplies both
+Meson packagefile overlays. Updating a subproject can stash its generated
+`meson.build`; restoring these overlays avoids a missing-build-file error.
 Meson can merely warn about an existing outdated checkout; that is not enough
 to establish runtime compatibility.
 
@@ -92,7 +96,8 @@ If this check fails, inspect the subproject before updating it:
 
 ```sh
 git -C ../prag/subprojects/widget status --short
-meson subprojects update --sourcedir ../prag widget
+git -C ../prag/subprojects/plugins status --short
+meson subprojects update --sourcedir ../prag widget plugins
 ```
 
 Do not discard local subproject changes. An old Widget checkout previously
@@ -131,7 +136,7 @@ meson setup \
 meson compile -C build-web-threaded -j 8
 ```
 
-These commands configure and compile; they do not perform the helper's Widget
+These commands configure and compile; they do not perform the helper's subproject
 verification, forced preload refresh, or copying into the website.
 
 ### Base Configuration

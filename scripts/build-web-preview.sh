@@ -13,7 +13,7 @@ if ! command -v emcc >/dev/null && [[ -x /usr/lib/emscripten/emcc ]]; then
   export PATH="$PATH:/usr/lib/emscripten"
 fi
 command -v emcc >/dev/null
-meson subprojects download --sourcedir "$editor" widget
+meson subprojects download --sourcedir "$editor" widget plugins
 
 # Meson only warns about an already-present checkout at an old wrap revision.
 python3 - "$editor" <<'PY'
@@ -22,14 +22,15 @@ import pathlib
 import subprocess
 import sys
 source = pathlib.Path(sys.argv[1]).resolve()
-wrap = configparser.ConfigParser()
-wrap.read(source / 'subprojects/widget.wrap')
-expected = wrap['wrap-git']['revision']
-actual = subprocess.check_output(['git', '-C', str(source / 'subprojects/widget'), 'rev-parse', 'HEAD'], text=True).strip()
-if actual != expected:
-    raise SystemExit('Widget does not match widget.wrap. Review its Git status, then run: meson subprojects update --sourcedir ' + str(source) + ' widget')
+for name in ('widget', 'plugins'):
+    wrap = configparser.ConfigParser()
+    wrap.read(source / 'subprojects' / (name + '.wrap'))
+    expected = wrap['wrap-git']['revision']
+    actual = subprocess.check_output(['git', '-C', str(source / 'subprojects' / name), 'rev-parse', 'HEAD'], text=True).strip()
+    if actual != expected:
+        raise SystemExit(name + ' does not match its wrap. Review its Git status, then run: meson subprojects update --sourcedir ' + str(source) + ' ' + name)
 PY
-meson subprojects packagefiles --sourcedir "$editor" --apply widget
+meson subprojects packagefiles --sourcedir "$editor" --apply widget plugins
 
 if [[ -f "$build/meson-private/coredata.dat" ]]; then
   configure=()
