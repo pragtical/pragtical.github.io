@@ -80,6 +80,7 @@ Loads data from a persistent storage file.
 ```lua
 function storage.save(module: string, key: string, value: boolean|string|number|table|nil, project?: string|core.project)
   -> saved: boolean
+  2. error: string?
 ```
 
 Saves data to a persistent storage file.
@@ -93,6 +94,8 @@ Saves data to a persistent storage file.
 @*param* `project?`: `string|`[`core.project`](/docs/api/core.project) — Project object, or an explicit storage directory.
 
 @*return* `saved`: `boolean` — Whether the file was written and closed successfully.
+
+@*return* `error`: `string?`
 
 ---
 

@@ -25,6 +25,10 @@ The default `auto` mode tries the low-power GPU first, then high-performance
 GPU before falling back to the software surface backend. `low` and `high`
 are strict single-preference modes.
 
+`PRAGTICAL_SDLGPU_*` options are read once when the backend is first selected,
+before its first font, canvas, or window is created. Changing them requires
+closing and reopening Pragtical; an in-process restart does not reread them.
+
 ## renderer.color
 
 Array of bytes that represents a color used by the rendering functions.

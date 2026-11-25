@@ -230,6 +230,10 @@ The remaining renderer-specific variables are intended for troubleshooting and
 development. Leave them unset for normal use. They can change performance,
 force slower paths, or add validation drawing and readback.
 
+`PRAGTICAL_SDLGPU_*` options are read once when the backend is first selected.
+Close and reopen Pragtical after changing them; an in-process **Restart** does
+not reread these options.
+
 For the boolean flags, `0`, `false`, `no`, and `off` disable the flag
 (case-insensitive); other nonempty values enable it. Unset or empty values use
 the defaults below. Use `0` and `1` to avoid ambiguity.

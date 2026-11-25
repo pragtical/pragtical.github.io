@@ -1,5 +1,5 @@
 ---
-sidebar_position: 72
+sidebar_position: 73
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -2731,6 +2731,16 @@ Represents the position of a widget.
 
 ---
 
+### padding
+
+```lua
+(field) padding: { left: number, right: number }
+```
+
+Content insets in logical pixels
+
+---
+
 ### panes
 
 ```lua
@@ -3148,13 +3158,11 @@ Used internally when dragging is activated.
 ### draw
 
 ```lua
-(method) plugins.settings.sections:draw()
-  -> drawn: boolean
+(method) widget:draw()
+  -> boolean
 ```
 
-Keep section separators inside the scrolling viewport below the search field.
-
-@*return* `drawn`: `boolean`
+If visible draw the widget and returns true.
 
 ---
 
@@ -3184,8 +3192,10 @@ Draw the widget configured border or custom one.
 ### draw_scrollbar
 
 ```lua
-(method) widget:draw_scrollbar()
+(method) widget.foldingbook:draw_scrollbar()
 ```
+
+Draw section separators inside the viewport before painting the scrollbars.
 
 ---
 

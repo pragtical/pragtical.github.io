@@ -1,5 +1,5 @@
 ---
-sidebar_position: 86
+sidebar_position: 87
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -432,6 +432,16 @@ Represents the position of a widget.
 ```lua
 (field) next_zindex: integer
 ```
+
+---
+
+## padding
+
+```lua
+(field) padding: { left: number, right: number }
+```
+
+Content insets in logical pixels
 
 ---
 
@@ -881,11 +891,11 @@ Used internally when dragging is activated.
 ## draw
 
 ```lua
-(method) widget.foldingbook:draw()
+(method) widget:draw()
   -> boolean
 ```
 
-Here we draw the bottom line on each tab.
+If visible draw the widget and returns true.
 
 ---
 
@@ -915,8 +925,10 @@ Draw the widget configured border or custom one.
 ## draw_scrollbar
 
 ```lua
-(method) widget:draw_scrollbar()
+(method) widget.foldingbook:draw_scrollbar()
 ```
+
+Draw section separators inside the viewport before painting the scrollbars.
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 66
+sidebar_position: 67
 ---
 
 <!-- DO NOT EDIT: file generated with `pragtical gendocs` -->
@@ -386,6 +386,22 @@ plugins.ipc.messagetype:
 ## plugins.ipc.onreply
 
 ## plugins.ipc.onreplyread
+
+## plugins.ipc.openoptions
+
+-----------------------------------------------------------------------------
+ Register methods for opening files and directories.
+-----------------------------------------------------------------------------
+
+### env
+
+```lua
+(field) env: table<string, string>?
+```
+
+Environment variables applied before raising the window.
+
+---
 
 ## plugins.ipc.reply
 

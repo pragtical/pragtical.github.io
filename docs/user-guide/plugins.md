@@ -71,6 +71,20 @@ To enable or disable an installed plugin, use **Settings > Plugins > Installed**
 The search field also filters this list. Restart the editor after changing
 which plugins should load.
 
+#### Windows: Pending Changes
+
+On Windows, Plugin Manager queues installs, upgrades, and removals for the
+next full launch so loaded fonts, native libraries, and language servers do
+not block file replacement. Use the **Pending restart** filter to review or
+undo selections, or **Cancel Pending Changes** to clear the queue. Selecting
+an action does not download anything until the next launch.
+
+Close all Pragtical instances and reopen the editor to apply the batch. An
+in-process **Restart** is not enough. The startup window shows preparation
+and download progress before plugins load. If another process holds a file
+open, close the named program and relaunch to retry when the update remains
+queued. Linux and macOS apply operations directly in Plugin Manager.
+
 ## Installing plugins
 
 To install a plugin, simply drag the related plugin file into

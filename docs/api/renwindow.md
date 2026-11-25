@@ -69,6 +69,22 @@ Returns nil if it cannot be determined.
 
 ---
 
+## get_relative_mouse_mode
+
+```lua
+function renwindow.get_relative_mouse_mode(window: renwindow)
+  -> enabled: boolean
+```
+
+Check whether relative mouse mode is enabled for this window.
+The mode may be enabled even while the window is not focused.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*return* `enabled`: `boolean`
+
+---
+
 ## get_renderer_info
 
 ```lua
@@ -99,6 +115,29 @@ Get width and height of a window
 @*return* `width`: `number`
 
 @*return* `height`: `number`
+
+---
+
+## set_relative_mouse_mode
+
+```lua
+function renwindow.set_relative_mouse_mode(window: renwindow, enabled: boolean)
+  -> success: boolean?
+  2. error: string?
+```
+
+Enable or disable relative mouse mode for this window.
+While focused, relative mode hides the cursor, constrains it to the window,
+and reports continuous motion through mouse events' `dx` and `dy` values,
+even at window edges. Do not use absolute mouse coordinates in this mode.
+Plugins must disable the mode when paused, closed, or losing focus.
+This does not change which Lua view receives mouse events.
+
+@*param* `window`: [`renwindow`](/docs/api/renwindow) — Functionality to create and manage windows.
+
+@*return* `success`: `boolean?` — True on success, nil if the video driver rejects the request.
+
+@*return* `error`: `string?` — SDL error message on failure.
 
 ---
 

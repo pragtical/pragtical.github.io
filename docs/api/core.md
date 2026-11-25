@@ -302,6 +302,14 @@ We load core views before plugins that may need them.
 
 ---
 
+## startup_transaction_tick
+
+```lua
+(field) startup_transaction_tick: unknown
+```
+
+---
+
 ## status_view
 
 ```lua
